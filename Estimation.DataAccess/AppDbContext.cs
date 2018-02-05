@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Estimation.DataAccess
 {
-    class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MiniWing.DataAccess.MiniWingDbContext"/> class.

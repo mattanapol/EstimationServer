@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Estimation.DataAccess\Estimation.DataAccess.csproj" />
+    <ProjectReference Include="..\Estimation.Domain\Estimation.Domain.csproj" />
     <ProjectReference Include="..\Estimation.Services\Estimation.Services.csproj" />
     <ProjectReference Include="..\Kaewsai.Utilities.WebApi\Kaewsai.Utilities.WebApi.csproj" />
   </ItemGroup>
