@@ -12,14 +12,33 @@ namespace Estimation.WebApi
 {
     public class Program
     {
+        /// <summary>
+        /// The entry point of the program, where the program control starts and ends.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        /// <summary>
+        /// Builds the web host.
+        /// </summary>
+        /// <returns>The web host.</returns>
+        /// <param name="args">Arguments.</param>
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var host = WebHost.CreateDefaultBuilder(args)
+                   .UseKestrel()
+#if DEBUG || CLOUD
+                   .UseEnvironment("Development")
+#endif
+                   .UseContentRoot(Directory.GetCurrentDirectory())
+                   .UseUrls("http://*:5050")
+                   .UseStartup<Startup>()
+                   .Build();
+
+            return host;
+        }
     }
 }
