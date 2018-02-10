@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Estimation.WebApi.Infrastructure
 {
+    /// <summary>
+    /// Validate model
+    /// </summary>
     public class ValidateModelAttribute : ActionFilterAttribute
     {
+        /// <summary>
+        /// On action executing
+        /// </summary>
+        /// <param name="context"></param>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (!context.ModelState.IsValid)

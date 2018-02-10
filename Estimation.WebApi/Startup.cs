@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Estimation.Services.Logger;
+using Estimation.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,13 +18,21 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Estimation.WebApi
 {
+    /// <summary>
+    /// Startup
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Startup
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             CurrentPath = env.ContentRootPath;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-UK");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
         /// <summary>
@@ -34,7 +45,10 @@ namespace Estimation.WebApi
         /// </summary>
         public string CurrentPath { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Config services
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options =>
@@ -66,7 +80,7 @@ namespace Estimation.WebApi
             {
                 c.SwaggerDoc("v1", new Info { Title = "Estimation WebApi", Version = "V0.1" });
                 c.DescribeAllEnumsAsStrings();
-                c.IncludeXmlComments(Path.Combine(CurrentPath, @"MiniWing.WebApi.xml"));
+                c.IncludeXmlComments(Path.Combine(CurrentPath, @"Estimation.WebApi.xml"));
             });
 #endif
         }
@@ -76,6 +90,7 @@ namespace Estimation.WebApi
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
+        /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             ConfigureLog(loggerFactory);
@@ -120,6 +135,11 @@ namespace Estimation.WebApi
             loggerFactory.AddDebug();
             loggerFactory.AddFile(Path.Combine(CurrentPath, @"Logs/ts-{Date}.txt"));
             AppLogger.LoggerFactory = loggerFactory;
+        }
+
+        private void DependenciesInject(IServiceCollection services)
+        {
+
         }
     }
 }

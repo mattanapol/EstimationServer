@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Estimation.WebApi
 {
+    /// <summary>
+    /// Program
+    /// </summary>
     public class Program
     {
         /// <summary>
@@ -34,7 +37,7 @@ namespace Estimation.WebApi
                    .UseEnvironment("Development")
 #endif
                    .UseContentRoot(Directory.GetCurrentDirectory())
-                   .UseUrls("http://*:5050")
+                   .UseUrls("http://*:8989")
                    .UseStartup<Startup>()
                    .Build();
 

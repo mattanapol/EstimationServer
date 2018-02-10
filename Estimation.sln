@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.WebApi", "Estimation.WebApi\Estimation.WebApi.csproj", "{CB79B5EA-A349-4213-BF07-3885168765F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.DataAccess", "Estimation.DataAccess\Estimation.DataAccess.csproj", "{2D8F7405-9E72-45A8-AA52-364220FB47AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Services", "Estimation.Services\Estimation.Services.csproj", "{B27CF998-9BBD-4FF6-81FB-0869C1F9D261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Services", "Estimation.Services\Estimation.Services.csproj", "{B27CF998-9BBD-4FF6-81FB-0869C1F9D261}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Domain", "Estimation.Domain\Estimation.Domain.csproj", "{DF52DD66-E08B-4422-ABF9-18E466F2B17D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Domain", "Estimation.Domain\Estimation.Domain.csproj", "{DF52DD66-E08B-4422-ABF9-18E466F2B17D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.Utilities.WebApi", "Kaewsai.Utilities.WebApi\Kaewsai.Utilities.WebApi.csproj", "{090D8152-69B0-4D78-851A-5E30D4B1E98E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.Utilities.WebApi", "Kaewsai.Utilities.WebApi\Kaewsai.Utilities.WebApi.csproj", "{090D8152-69B0-4D78-851A-5E30D4B1E98E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Common", "Estimation.Common\Estimation.Common.csproj", "{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{090D8152-69B0-4D78-851A-5E30D4B1E98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{090D8152-69B0-4D78-851A-5E30D4B1E98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{090D8152-69B0-4D78-851A-5E30D4B1E98E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

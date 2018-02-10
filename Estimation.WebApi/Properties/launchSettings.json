@@ -19,11 +19,11 @@
     "Estimation.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:8398/"
+      "applicationUrl": "http://localhost:8989/"
     }
   }
 }

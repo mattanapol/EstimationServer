@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace Estimation.WebApi.Infrastructure
 {
+    /// <summary>
+    /// Design time database context
+    /// </summary>
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
         private readonly IConfiguration _configuration;
+
+        /// <summary>
+        /// Design time database context factory
+        /// </summary>
+        /// <param name="configuration"></param>
         public DesignTimeDbContextFactory(IConfiguration configuration)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));

@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Estimation.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Estimation.WebApi.Controllers.ProjectsController">
+            <summary>
+            Project controller
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject">
+            <summary>
+            Get All Available Projects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.CreateProject(Estimation.Domain.Dtos.ProjectInfoIncommingDto)">
+            <summary>
+            Create new project.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.EditProject(System.Int32,Estimation.Domain.Dtos.ProjectInfoIncommingDto)">
+            <summary>
+            Edit project information by id.
+            </summary>
+            <param name="id"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.Delete(System.Int32)">
+            <summary>
+            Delete project by id
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory">
+            <summary>
+            Design time database context
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Design time database context factory
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.CreateDbContext(System.String[])">
+            <summary>
+            Creates the db context.
+            </summary>
+            <returns>The db context.</returns>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="T:Estimation.WebApi.Infrastructure.ErrorHandlingMiddleware">
+            <summary>
+            Error handling middleware.
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.ErrorHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MiniWing.WebApi.ErrorHandlingMiddleware"/> class.
+            </summary>
+            <param name="next">Next.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.ErrorHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke the specified context.
+            </summary>
+            <returns>The invoke.</returns>
+            <param name="context">Context.</param>
+        </member>
+        <member name="T:Estimation.WebApi.Infrastructure.ValidateModelAttribute">
+            <summary>
+            Validate model
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.ValidateModelAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            On action executing
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Estimation.WebApi.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Program.Main(System.String[])">
+            <summary>
+            The entry point of the program, where the program control starts and ends.
+            </summary>
+            <param name="args">The command-line arguments.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Program.BuildWebHost(System.String[])">
+            <summary>
+            Builds the web host.
+            </summary>
+            <returns>The web host.</returns>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="T:Estimation.WebApi.Startup">
+            <summary>
+            Startup
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Startup
+            </summary>
+            <param name="configuration"></param>
+            <param name="env"></param>
+        </member>
+        <member name="P:Estimation.WebApi.Startup.Configuration">
+            <summary>
+            Gets configuration.
+            </summary>
+        </member>
+        <member name="P:Estimation.WebApi.Startup.CurrentPath">
+            <summary>
+            Get current path
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Config services
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Startup.EnableCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Enables cors policies.
+            </summary>
+            <param name="app">App.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Startup.ConfigureLog(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Configure log
+            </summary>
+            <param name="loggerFactory"></param>
+        </member>
+    </members>
+</doc>
