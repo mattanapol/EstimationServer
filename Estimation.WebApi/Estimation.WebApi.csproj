@@ -31,4 +31,10 @@
     <ProjectReference Include="..\Kaewsai.Utilities.WebApi\Kaewsai.Utilities.WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Estimation.WebApi.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

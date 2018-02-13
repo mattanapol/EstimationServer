@@ -15,14 +15,26 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.GetMaterial(System.Int32)">
+            <summary>
+            Get material by ID
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectsController">
             <summary>
             Project controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject">
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject(Estimation.Domain.Models.Type)">
             <summary>
             Get All Available Projects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetProject(System.Int32)">
+            <summary>
+            Get Project by ID
             </summary>
             <returns></returns>
         </member>
