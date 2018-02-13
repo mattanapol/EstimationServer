@@ -22,7 +22,7 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Project type
         /// </summary>
-        public ProjectType ProjectType { get; set; }
+        public Type ProjectType { get; set; }
 
         /// <summary>
         /// Created Date

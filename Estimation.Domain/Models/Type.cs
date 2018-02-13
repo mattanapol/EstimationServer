@@ -5,9 +5,9 @@ using System.Text;
 namespace Estimation.Domain.Models
 {
     /// <summary>
-    /// Project type
+    /// Type of project and material that belong to the project
     /// </summary>
-    public enum  ProjectType
+    public enum Type
     {
         Mechanic,
         Electronic,

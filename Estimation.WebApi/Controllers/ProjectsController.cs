@@ -26,8 +26,8 @@ namespace Estimation.WebApi.Controllers
         {
             IList<ProjectInfo> projects = new List<ProjectInfo>
             {
-                new ProjectInfo(){Id = 1, Name = "Example Project", CreatedDate = DateTime.Now, ProjectType = ProjectType.Mechanic },
-                new ProjectInfo(){Id = 2, Name = "Example Project2", CreatedDate = DateTime.Now, ProjectType = ProjectType.Mechanic }
+                new ProjectInfo(){Id = 1, Name = "Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Mechanic },
+                new ProjectInfo(){Id = 2, Name = "Example Project2", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Mechanic }
             };
             return Ok(OutgoingResult<IList<ProjectInfo>>.SuccessResponse(projects));
         }
