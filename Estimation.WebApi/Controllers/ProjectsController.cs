@@ -21,13 +21,14 @@ namespace Estimation.WebApi.Controllers
         /// Get All Available Projects
         /// </summary>
         /// <returns></returns>
-        [HttpGet("list/{projectType}")]
-        public async Task<IActionResult> GetAllProject(Domain.Models.Type projectType)
+        [HttpGet]
+        public async Task<IActionResult> GetAllProject()
         {
             IList<ProjectInfo> projects = new List<ProjectInfo>
             {
-                new ProjectInfo(){Id = 1, Name = "Example Project", CreatedDate = DateTime.Now, ProjectType = projectType },
-                new ProjectInfo(){Id = 2, Name = "Example Project2", CreatedDate = DateTime.Now, ProjectType = projectType }
+                new ProjectInfo(){Id = 1, Name = "Computer Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Computer },
+                new ProjectInfo(){Id = 2, Name = "Electronic Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Electronic },
+                new ProjectInfo(){Id = 3, Name = "Mechanic Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Mechanic }
             };
             return Ok(OutgoingResult<IList<ProjectInfo>>.SuccessResponse(projects));
         }

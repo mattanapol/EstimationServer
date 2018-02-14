@@ -9,7 +9,7 @@
             Material controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.GetAllMaterialList(Estimation.Domain.Models.Type)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.GetAllMaterialList">
             <summary>
             Get all materials list
             </summary>
@@ -26,7 +26,7 @@
             Project controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject(Estimation.Domain.Models.Type)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject">
             <summary>
             Get All Available Projects
             </summary>

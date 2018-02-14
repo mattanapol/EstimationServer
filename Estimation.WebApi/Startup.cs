@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Estimation.DataAccess;
 using Estimation.Services.Logger;
 using Estimation.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -139,7 +140,11 @@ namespace Estimation.WebApi
 
         private void DependenciesInject(IServiceCollection services)
         {
-
+            // Data Layer
+            // Set connection string
+            services.AddScoped<MaterialDbContext>((arg) => {
+                return new MaterialDbContext(Configuration.GetConnectionString("MaterialDb"));
+            });
         }
     }
 }
