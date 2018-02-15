@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Estimation.DataAccess;
+using Estimation.Ioc;
 using Estimation.Services.Logger;
 using Estimation.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -74,7 +74,9 @@ namespace Estimation.WebApi
             services.AddCors();
 
             // Dependencies Injection
-            DependenciesInject(services);
+            DependenciesInjector dependenciesInjector = new DependenciesInjector(services, Configuration);
+            dependenciesInjector.Inject();
+
 #if DEBUG || CLOUD
             // Swagger
             services.AddSwaggerGen(c =>
@@ -138,13 +140,13 @@ namespace Estimation.WebApi
             AppLogger.LoggerFactory = loggerFactory;
         }
 
-        private void DependenciesInject(IServiceCollection services)
-        {
-            // Data Layer
-            // Set connection string
-            services.AddScoped<MaterialDbContext>((arg) => {
-                return new MaterialDbContext(Configuration.GetConnectionString("MaterialDb"));
-            });
-        }
+        //private void DependenciesInject(IServiceCollection services)
+        //{
+        //    // Data Layer
+        //    // Set connection string
+        //    services.AddScoped<MaterialDbContext>((arg) => {
+        //        return new MaterialDbContext(Configuration.GetConnectionString("MaterialDb"));
+        //    });
+        //}
     }
 }

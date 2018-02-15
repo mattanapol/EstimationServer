@@ -11,7 +11,7 @@ namespace Estimation.WebApi.Infrastructure
     /// <summary>
     /// Design time database context
     /// </summary>
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MaterialDbContext>
     {
         private readonly IConfiguration _configuration;
 
@@ -29,9 +29,9 @@ namespace Estimation.WebApi.Infrastructure
         /// </summary>
         /// <returns>The db context.</returns>
         /// <param name="args">Arguments.</param>
-        public AppDbContext CreateDbContext(string[] args)
+        public MaterialDbContext CreateDbContext(string[] args)
         {
-            return new AppDbContext(_configuration.GetConnectionString("DefaultConnection"));
+            return new MaterialDbContext(_configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }

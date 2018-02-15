@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Estimation.Domain.Dtos;
 using Estimation.Domain.Models;
+using Estimation.Services.Interfaces;
+using Estimation.Services.Interfaces.Repositories;
 using Kaewsai.Utilities.WebApi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +17,16 @@ namespace Estimation.WebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/material")]
-    public class MaterialController : Controller
+    public class MaterialController : EstimationBaseController
     {
+        IMaterialRepository _materialRepository;
+
+
+        public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository): base(typeMappingService)
+        {
+            _materialRepository = materialRepository ?? throw new ArgumentNullException(nameof(materialRepository));
+        }
+
         /// <summary>
         /// Get all materials list
         /// </summary>
@@ -72,6 +82,32 @@ namespace Estimation.WebApi.Controllers
             };
 
             return Ok(OutgoingResult<Material>.SuccessResponse(material));
+        }
+
+        ///// <summary>
+        ///// Add material to specific main material
+        ///// </summary>
+        ///// <param name="mainMaterialId"></param>
+        ///// <param name="material"></param>
+        ///// <returns></returns>
+        //[HttpPost("sub/{mainMaterialId}")]
+        //public async Task<IActionResult> AddMaterialToMainMaterial(int mainMaterialId, [FromBody]MaterialIncommingDto material)
+        //{
+        //    var result = _materialRepository.CreateMaterial()
+        //    return Ok(OutgoingResult<Material>.SuccessResponse(result));
+        //}
+
+        /// <summary>
+        /// Add material to specific main material
+        /// </summary>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        [HttpPost("main")]
+        public async Task<IActionResult> CreateMainMaterial([FromBody]MainMaterialIncommingDto material)
+        {
+            MaterialInfo materialInfo = TypeMappingService.Map<MainMaterialIncommingDto, MaterialInfo>(material);
+            var result = await _materialRepository.CreateMainMaterial(materialInfo);
+            return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
         }
     }
 }

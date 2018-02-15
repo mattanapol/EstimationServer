@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Estimation.DataAccess
 {
-    public class AppDbContext : DbContext
+    public abstract class AppDbContext : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MiniWing.DataAccess.MiniWingDbContext"/> class.
@@ -41,10 +41,6 @@ namespace Estimation.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.ApplyConfiguration(new InvoiceRunningNumberConfiguration());
-            //modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            //modelBuilder.ApplyConfiguration(new OldGoldSupplierConfiguration());
         }
 
         /// <summary>

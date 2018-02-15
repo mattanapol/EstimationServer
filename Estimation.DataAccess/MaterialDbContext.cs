@@ -1,4 +1,5 @@
-﻿using Estimation.DataAccess.Models;
+﻿using Estimation.DataAccess.Configurations;
+using Estimation.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,18 @@ namespace Estimation.DataAccess
         /// <param name="connectionString"></param>
         public MaterialDbContext(string connectionString):base(connectionString)
         {
+        }
+
+        /// <summary>
+        /// On the model creating.
+        /// </summary>
+        /// <param name="modelBuilder">Builder.</param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new MainMaterialEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialEntityTypeConfiguration());
         }
     }
 }

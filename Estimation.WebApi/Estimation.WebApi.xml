@@ -4,6 +4,22 @@
         <name>Estimation.WebApi</name>
     </assembly>
     <members>
+        <member name="T:Estimation.WebApi.Controllers.EstimationBaseController">
+            <summary>
+            Estimation base controller
+            </summary>
+        </member>
+        <member name="F:Estimation.WebApi.Controllers.EstimationBaseController.TypeMappingService">
+            <summary>
+            Type Mapping service
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.EstimationBaseController.#ctor(Estimation.Services.Interfaces.ITypeMappingService)">
+            <summary>
+            Constructor of estimation base controller
+            </summary>
+            <param name="typeMappingService"></param>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.MaterialController">
             <summary>
             Material controller
@@ -19,6 +35,13 @@
             <summary>
             Get material by ID
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
+            <summary>
+            Add material to specific main material
+            </summary>
+            <param name="material"></param>
             <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectsController">

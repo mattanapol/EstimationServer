@@ -7,6 +7,22 @@ namespace Estimation.Domain.Models
     public class Material: MaterialInfo
     {
         /// <summary>
+        /// Material type
+        /// </summary>
+        public override Type MaterialType
+        {
+            get => MainMaterial.MaterialType;
+        }
+
+        private string _code;
+
+        public override string Code
+        {
+            get => $"{MainMaterial.Code}-{_code}";
+            set => _code = value;
+        }
+
+        /// <summary>
         /// List Price
         /// </summary>
         public decimal ListPrice { get; set; }
@@ -45,5 +61,10 @@ namespace Estimation.Domain.Models
         /// Remarks
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// Parent material(Main material of this submaterial)
+        /// </summary>
+        public MaterialInfo MainMaterial { get; set; }
     }
 }

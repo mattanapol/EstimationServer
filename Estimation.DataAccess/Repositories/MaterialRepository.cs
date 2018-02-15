@@ -16,7 +16,13 @@ namespace Estimation.DataAccess.Repositories
         {
         }
 
-        public Task<Material> CreateMaterial(Material material)
+        public async Task<MaterialInfo> CreateMainMaterial(MaterialInfo material)
+        {
+            material.Id = 1;
+            return material;
+        }
+
+        public Task<Material> CreateSubMaterial(int mainMaterialId, Material material)
         {
             throw new NotImplementedException();
         }

@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.DataAccess.Models
+namespace Estimation.Domain.Dtos
 {
-    public class MaterialDb : MaterialInfoDb
+    public class MaterialIncommingDto
     {
+        /// <summary>
+        /// Material Name
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Material Code
+        /// </summary>
+        public int Code { get; set; }
+
         /// <summary>
         /// List Price
         /// </summary>
@@ -45,15 +55,5 @@ namespace Estimation.DataAccess.Models
         /// Remarks
         /// </summary>
         public string Remark { get; set; }
-
-        /// <summary>
-        /// Parent material(Main material of this submaterial)
-        /// </summary>
-        public MainMaterialDb MainMaterial { get; set; }
-
-        /// <summary>
-        /// ForeignKey for main material
-        /// </summary>
-        public int MainMaterialId { get; set; }
     }
 }

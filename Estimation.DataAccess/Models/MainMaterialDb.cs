@@ -12,6 +12,6 @@ namespace Estimation.DataAccess.Models
         /// <summary>
         /// Submaterial
         /// </summary>
-        public IList<MaterialInfoDb> SubMaterials { get; set; }
+        public IEnumerable<MaterialDb> SubMaterials { get; set; }
     }
 }

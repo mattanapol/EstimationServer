@@ -8,7 +8,9 @@ namespace Estimation.Services.Interfaces.Repositories
 {
     public interface IMaterialRepository
     {
-        Task<Material> CreateMaterial(Material material);
+        Task<MaterialInfo> CreateMainMaterial(MaterialInfo material);
+
+        Task<Material> CreateSubMaterial(int mainMaterialId, Material material);
 
         Task<Material> GetMaterial(int id);
     }

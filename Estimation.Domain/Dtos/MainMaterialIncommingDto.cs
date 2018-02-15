@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Domain.Models
+namespace Estimation.Domain.Dtos
 {
     /// <summary>
-    /// Material Information model
+    /// Main material incomming dto
     /// </summary>
-    public class MaterialInfo
+    public class MainMaterialIncommingDto
     {
-        /// <summary>
-        /// Material Id
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Material Name
         /// </summary>
@@ -22,11 +17,11 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Material Code
         /// </summary>
-        public virtual string Code { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
         /// Material type
         /// </summary>
-        public virtual Type MaterialType { get; set; }
+        public Estimation.Domain.Models.Type MaterialType { get; set; }
     }
 }
