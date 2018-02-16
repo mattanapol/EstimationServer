@@ -9,7 +9,8 @@ namespace Estimation.Domain.Models
     /// </summary>
     public enum Type
     {
-        Mechanic,
+        Unknown = -1,
+        Mechanic = 0,
         Electronic,
         Computer
     }

@@ -37,11 +37,25 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.AddMaterialToMainMaterial(System.Int32,Estimation.Domain.Dtos.MaterialIncommingDto)">
+            <summary>
+            Add material to specific main material
+            </summary>
+            <param name="mainMaterialId"></param>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
             <summary>
             Add material to specific main material
             </summary>
             <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialDatabaseController.Migrate">
+            <summary>
+            Migrate material database
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectsController">
@@ -85,11 +99,10 @@
             Design time database context
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.#ctor">
             <summary>
             Design time database context factory
             </summary>
-            <param name="configuration"></param>
         </member>
         <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.CreateDbContext(System.String[])">
             <summary>

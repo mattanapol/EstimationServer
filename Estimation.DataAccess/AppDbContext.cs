@@ -10,14 +10,17 @@ using System.Threading.Tasks;
 
 namespace Estimation.DataAccess
 {
-    public abstract class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
+        private readonly string _connectionString;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MiniWing.DataAccess.MiniWingDbContext"/> class.
         /// </summary>
         /// <param name="connectionString">Connection string.</param>
-        public AppDbContext(string connectionString) : base(CreateSqliteOptions(connectionString))
+        public AppDbContext(string connectionString) : base()
         {
+            _connectionString = connectionString;
         }
 
         /// <summary>
@@ -54,6 +57,12 @@ namespace Estimation.DataAccess
             dbContextOptionBuilder.UseSqlite(connectionString);
             dbContextOptionBuilder.EnableSensitiveDataLogging();
             return dbContextOptionBuilder.Options;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(_connectionString);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         /// <summary>

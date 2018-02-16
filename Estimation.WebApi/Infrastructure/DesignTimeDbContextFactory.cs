@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,15 +14,14 @@ namespace Estimation.WebApi.Infrastructure
     /// </summary>
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MaterialDbContext>
     {
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
 
         /// <summary>
         /// Design time database context factory
         /// </summary>
-        /// <param name="configuration"></param>
-        public DesignTimeDbContextFactory(IConfiguration configuration)
+        public DesignTimeDbContextFactory()
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            //_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         /// <summary>
@@ -31,7 +31,11 @@ namespace Estimation.WebApi.Infrastructure
         /// <param name="args">Arguments.</param>
         public MaterialDbContext CreateDbContext(string[] args)
         {
-            return new MaterialDbContext(_configuration.GetConnectionString("DefaultConnection"));
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+            return new MaterialDbContext(configuration.GetConnectionString("MaterialDb"));
         }
     }
 }

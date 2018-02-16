@@ -12,6 +12,8 @@ namespace Estimation.Services.Interfaces.Repositories
 
         Task<Material> CreateSubMaterial(int mainMaterialId, Material material);
 
-        Task<Material> GetMaterial(int id);
+        Task<MaterialInfo> GetMainMaterial(int id);
+
+        Task<IEnumerable<MainMaterial>> GetMaterialList();
     }
 }

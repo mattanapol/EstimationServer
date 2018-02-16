@@ -22,11 +22,11 @@ namespace Estimation.DataAccess.Models
         /// <summary>
         /// Material Code
         /// </summary>
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// Material type
         /// </summary>
-        public Type MaterialType { get; set; }
+        public Estimation.Domain.Models.Type MaterialType { get; set; }
     }
 }

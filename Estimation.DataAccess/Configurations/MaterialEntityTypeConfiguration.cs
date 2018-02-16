@@ -11,11 +11,15 @@ namespace Estimation.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<MaterialDb> builder)
         {
-            builder.HasKey(t => new { t.Id });
-            builder.ToTable("Materials");
+            builder.HasKey(t => t.Id);
+            builder.Property(m => m.MainMaterialId).IsRequired();
+            builder.Property(m => m.Name).IsRequired();
+            builder.Property(m => m.Code).IsRequired();
             builder.HasOne(m => m.MainMaterial)
                 .WithMany(m => m.SubMaterials)
-                .HasForeignKey(m => m.MainMaterialId);
+                .HasForeignKey(m => m.MainMaterialId)
+                .HasPrincipalKey(m => m.Id);
+            builder.ToTable("Materials");
         }
     }
 }

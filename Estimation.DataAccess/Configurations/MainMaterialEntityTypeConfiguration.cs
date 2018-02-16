@@ -11,7 +11,9 @@ namespace Estimation.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<MainMaterialDb> builder)
         {
-            builder.HasKey(t => new { t.Id });
+            builder.HasKey(t => t.Id);
+            builder.Property(m => m.Name).IsRequired();
+            builder.Property(m => m.Code).IsRequired();
             builder.ToTable("MainMaterials");
         }
     }

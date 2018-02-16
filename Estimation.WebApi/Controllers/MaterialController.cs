@@ -34,29 +34,10 @@ namespace Estimation.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllMaterialList()
         {
-            IList<MainMaterial> materials = new List<MainMaterial>()
-            {
-                new MainMaterial{ Id = 1, Code = "401", Name = "Refrigerating System", MaterialType = Domain.Models.Type.Computer,
-                    SubMaterials = new List<MaterialInfo>(){
-                        new MaterialInfo { Id = 1, Code = "401-01", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Computer },
-                        new MaterialInfo { Id = 2, Code = "401-02", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Computer }
-                    }
-                },
-                new MainMaterial{ Id = 2, Code = "402", Name = "Refrigerating System", MaterialType = Domain.Models.Type.Electronic,
-                    SubMaterials = new List<MaterialInfo>(){
-                        new MaterialInfo { Id = 3, Code = "402-01", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Electronic },
-                        new MaterialInfo { Id = 4, Code = "402-02", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Electronic }
-                    }
-                },
-                new MainMaterial{ Id = 3, Code = "403", Name = "Refrigerating System", MaterialType = Domain.Models.Type.Mechanic,
-                    SubMaterials = new List<MaterialInfo>(){
-                        new MaterialInfo { Id = 5, Code = "403-01", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Mechanic },
-                        new MaterialInfo { Id = 6, Code = "403-02", Name = "Water-Cooled Chiller", MaterialType = Domain.Models.Type.Mechanic }
-                    }
-                }
-            };
-            
-            return Ok(OutgoingResult<IList<MainMaterial>>.SuccessResponse(materials));
+            var materials = await _materialRepository.GetMaterialList();
+
+
+            return Ok(OutgoingResult<IEnumerable<MainMaterial>>.SuccessResponse(materials));
         }
 
         /// <summary>
@@ -70,7 +51,7 @@ namespace Estimation.WebApi.Controllers
             {
                 Id = id,
                 Name = "Water-Cooled Chiller",
-                Code = "401-01",
+                Code = 1,
                 ListPrice = 10,
                 NetPrice = 10,
                 OfferPrice = 12,
@@ -84,18 +65,19 @@ namespace Estimation.WebApi.Controllers
             return Ok(OutgoingResult<Material>.SuccessResponse(material));
         }
 
-        ///// <summary>
-        ///// Add material to specific main material
-        ///// </summary>
-        ///// <param name="mainMaterialId"></param>
-        ///// <param name="material"></param>
-        ///// <returns></returns>
-        //[HttpPost("sub/{mainMaterialId}")]
-        //public async Task<IActionResult> AddMaterialToMainMaterial(int mainMaterialId, [FromBody]MaterialIncommingDto material)
-        //{
-        //    var result = _materialRepository.CreateMaterial()
-        //    return Ok(OutgoingResult<Material>.SuccessResponse(result));
-        //}
+        /// <summary>
+        /// Add material to specific main material
+        /// </summary>
+        /// <param name="mainMaterialId"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        [HttpPost("sub/{mainMaterialId}")]
+        public async Task<IActionResult> AddMaterialToMainMaterial(int mainMaterialId, [FromBody]MaterialIncommingDto material)
+        {
+            Material materialModel = TypeMappingService.Map<MaterialIncommingDto, Material>(material);
+            var result = await _materialRepository.CreateSubMaterial(mainMaterialId, materialModel);
+            return Ok(OutgoingResult<Material>.SuccessResponse(result));
+        }
 
         /// <summary>
         /// Add material to specific main material

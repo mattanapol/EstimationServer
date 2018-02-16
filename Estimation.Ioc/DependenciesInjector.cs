@@ -28,6 +28,8 @@ namespace Estimation.Ioc
                 return new MaterialDbContext(_configuration.GetConnectionString("MaterialDb"));
             });
 
+            _services.AddScoped<IMaterialDbMigrationService, MaterialDbMigrationService>();
+
             RepositoriesInjector.Inject(_services);
         }
     }
