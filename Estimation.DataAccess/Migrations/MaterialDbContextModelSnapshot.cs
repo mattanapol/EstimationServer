@@ -24,8 +24,7 @@ namespace Estimation.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Code")
-                        .IsRequired();
+                    b.Property<int>("Code");
 
                     b.Property<int>("MaterialType");
 
@@ -42,14 +41,11 @@ namespace Estimation.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Code")
-                        .IsRequired();
+                    b.Property<int>("Code");
 
                     b.Property<decimal>("Fittings");
 
                     b.Property<decimal>("ListPrice");
-
-                    b.Property<int>("MainMaterialId");
 
                     b.Property<decimal>("Manpower");
 
@@ -66,16 +62,46 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<string>("Remark");
 
+                    b.Property<int>("SubMaterialId");
+
                     b.Property<decimal>("Supporting");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubMaterialId");
+
+                    b.ToTable("Materials");
+                });
+
+            modelBuilder.Entity("Estimation.DataAccess.Models.SubMaterialDb", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<int>("MainMaterialId");
+
+                    b.Property<int>("MaterialType");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MainMaterialId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("SubMaterials");
                 });
 
             modelBuilder.Entity("Estimation.DataAccess.Models.MaterialDb", b =>
+                {
+                    b.HasOne("Estimation.DataAccess.Models.SubMaterialDb", "SubMaterial")
+                        .WithMany("Materials")
+                        .HasForeignKey("SubMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Estimation.DataAccess.Models.SubMaterialDb", b =>
                 {
                     b.HasOne("Estimation.DataAccess.Models.MainMaterialDb", "MainMaterial")
                         .WithMany("SubMaterials")

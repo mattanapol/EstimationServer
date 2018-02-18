@@ -18,6 +18,11 @@ namespace Estimation.DataAccess
         public DbSet<MainMaterialDb> MainMaterials { get; set; }
 
         /// <summary>
+        /// Sub material database set
+        /// </summary>
+        public DbSet<SubMaterialDb> SubMaterials { get; set; }
+
+        /// <summary>
         /// Material detail database set
         /// </summary>
         public DbSet<MaterialDb> Materials { get; set; }

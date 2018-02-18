@@ -26,9 +26,9 @@ namespace Estimation.WebApi.Controllers
         {
             IList<ProjectInfo> projects = new List<ProjectInfo>
             {
-                new ProjectInfo(){Id = 1, Name = "Computer Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Computer },
-                new ProjectInfo(){Id = 2, Name = "Electronic Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Electronic },
-                new ProjectInfo(){Id = 3, Name = "Mechanic Example Project", CreatedDate = DateTime.Now, ProjectType = Domain.Models.Type.Mechanic }
+                new ProjectInfo(){Id = 1, Name = "Computer Example Project", CreatedDate = DateTime.Now, ProjectType = "Computer" },
+                new ProjectInfo(){Id = 2, Name = "Electronic Example Project", CreatedDate = DateTime.Now, ProjectType = "Electronic" },
+                new ProjectInfo(){Id = 3, Name = "Mechanic Example Project", CreatedDate = DateTime.Now, ProjectType = "Mechanic" }
             };
             return Ok(OutgoingResult<IList<ProjectInfo>>.SuccessResponse(projects));
         }
@@ -45,7 +45,7 @@ namespace Estimation.WebApi.Controllers
                 Id = id,
                 Name = "Example Project",
                 CreatedDate = DateTime.Now,
-                ProjectType = Domain.Models.Type.Mechanic
+                ProjectType = "Mechanic"
             };
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(project));
         }

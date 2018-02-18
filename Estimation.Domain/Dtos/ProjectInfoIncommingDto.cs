@@ -15,6 +15,6 @@ namespace Estimation.Domain.Dtos
         /// <summary>
         /// Project type
         /// </summary>
-        public Models.Type ProjectType { get; set; }
+        public string ProjectType { get; set; }
     }
 }

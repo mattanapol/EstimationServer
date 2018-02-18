@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Domain.Models
+namespace Estimation.Domain.Dtos
 {
-    /// <summary>
-    /// Material Information model
-    /// </summary>
-    public class MaterialInfo
+    public class SubMaterialOutgoingDto
     {
         /// <summary>
         /// Material Id
@@ -22,11 +19,16 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Material Code
         /// </summary>
-        public int Code { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
         /// Material type
         /// </summary>
         public string MaterialType { get; set; }
+
+        /// <summary>
+        /// Submaterial
+        /// </summary>
+        public IEnumerable<MaterialOutgoingDto> Materials { get; set; }
     }
 }

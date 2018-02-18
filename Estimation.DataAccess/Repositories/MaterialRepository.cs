@@ -34,12 +34,25 @@ namespace Estimation.DataAccess.Repositories
 
 
 
-        public async Task<Material> CreateSubMaterial(int mainMaterialId, Material material)
+        public async Task<MaterialInfo> CreateSubMaterial(int mainMaterialId, MaterialInfo subMaterial)
         {
             var mainMaterial = await GetMainMaterial(mainMaterialId);
             
+            var subMaterialDb = TypeMappingService.Map<MaterialInfo, SubMaterialDb>(subMaterial);
+            subMaterialDb.MainMaterialId = mainMaterialId;
+            DbContext.SubMaterials.Add(subMaterialDb);
+
+            await DbContext.SaveChangesAsync();
+
+            return TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
+        }
+
+        public async Task<Material> CreateMaterial(int subMaterialId, Material material)
+        {
+            var subMaterial = await GetSubMaterial(subMaterialId);
+
             var materialDb = TypeMappingService.Map<Material, MaterialDb>(material);
-            materialDb.MainMaterialId = mainMaterialId;
+            materialDb.SubMaterialId = subMaterialId;
             DbContext.Materials.Add(materialDb);
 
             await DbContext.SaveChangesAsync();
@@ -56,13 +69,26 @@ namespace Estimation.DataAccess.Repositories
             return TypeMappingService.Map<MainMaterialDb, MaterialInfo>(mainMaterialDb);
         }
 
+        public async Task<MaterialInfo> GetSubMaterial(int id)
+        {
+            SubMaterialDb subMaterialDb = await DbContext.SubMaterials.FirstOrDefaultAsync(m => m.Id == id);
+            if (subMaterialDb == null)
+                throw new KeyNotFoundException($"Sub material id = {id} is not exist.");
+
+            return TypeMappingService.Map<SubMaterialDb, MaterialInfo>(subMaterialDb);
+        }
+
         public async Task<IEnumerable<MainMaterial>> GetMaterialList()
         {
             IQueryable<MainMaterial> queryable = DbContext.MainMaterials
                 .Include(c => c.SubMaterials)
+                .ThenInclude(c => c.Materials)
                 .Select(m => new MainMaterial
                 { Id = m.Id, Code = m.Code, Name = m.Name, MaterialType = m.MaterialType,
-                    SubMaterials = m.SubMaterials.Select(s => new MaterialInfo { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType }) })
+                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType,
+                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType })
+                    })
+                })
                 .AsNoTracking();
 
             var results = queryable.ToArray();

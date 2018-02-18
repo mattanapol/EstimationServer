@@ -22,6 +22,6 @@ namespace Estimation.Domain.Dtos
         /// <summary>
         /// Material type
         /// </summary>
-        public Estimation.Domain.Models.Type MaterialType { get; set; }
+        public string MaterialType { get; set; }
     }
 }

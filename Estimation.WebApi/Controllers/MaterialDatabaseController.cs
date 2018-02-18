@@ -9,11 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Estimation.WebApi.Controllers
 {
+    /// <summary>
+    /// Material database constroller class
+    /// </summary>
     [Produces("application/json")]
     [Route("api/database/material/")]
     public class MaterialDatabaseController : Controller
     {
         private readonly IMaterialDbMigrationService _materialDbMigrationService;
+        /// <summary>
+        /// Constructor of material database controller
+        /// </summary>
+        /// <param name="materialDbMigrationService"></param>
         public MaterialDatabaseController(IMaterialDbMigrationService materialDbMigrationService)
         {
             _materialDbMigrationService = materialDbMigrationService ?? throw new ArgumentNullException(nameof(materialDbMigrationService));

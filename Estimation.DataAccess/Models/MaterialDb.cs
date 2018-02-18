@@ -49,11 +49,11 @@ namespace Estimation.DataAccess.Models
         /// <summary>
         /// Parent material(Main material of this submaterial)
         /// </summary>
-        public MainMaterialDb MainMaterial { get; set; }
+        public SubMaterialDb SubMaterial { get; set; }
 
         /// <summary>
         /// ForeignKey for main material
         /// </summary>
-        public int MainMaterialId { get; set; }
+        public int SubMaterialId { get; set; }
     }
 }

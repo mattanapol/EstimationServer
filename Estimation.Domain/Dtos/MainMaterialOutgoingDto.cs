@@ -24,11 +24,11 @@ namespace Estimation.Domain.Dtos
         /// <summary>
         /// Material type
         /// </summary>
-        public Models.Type MaterialType { get; set; }
+        public string MaterialType { get; set; }
 
         /// <summary>
         /// Submaterial
         /// </summary>
-        public IEnumerable<MaterialOutgoingDto> SubMaterials { get; set; }
+        public IEnumerable<SubMaterialOutgoingDto> SubMaterials { get; set; }
     }
 }

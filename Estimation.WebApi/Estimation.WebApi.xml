@@ -25,6 +25,13 @@
             Material controller
             </summary>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository)">
+            <summary>
+            Constructor of material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="materialRepository"></param>
+        </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialController.GetAllMaterialList">
             <summary>
             Get all materials list
@@ -37,12 +44,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.AddMaterialToMainMaterial(System.Int32,Estimation.Domain.Dtos.MaterialIncommingDto)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.AddSubMaterialToMainMaterial(System.Int32,Estimation.Domain.Dtos.SubMaterialIncommingDto)">
             <summary>
-            Add material to specific main material
+            Add sub material to specific main material id
             </summary>
             <param name="mainMaterialId"></param>
-            <param name="material"></param>
+            <param name="subMaterial"></param>
             <returns></returns>
         </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
@@ -51,6 +58,17 @@
             </summary>
             <param name="material"></param>
             <returns></returns>
+        </member>
+        <member name="T:Estimation.WebApi.Controllers.MaterialDatabaseController">
+            <summary>
+            Material database constroller class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialDatabaseController.#ctor(Estimation.Services.Interfaces.IMaterialDbMigrationService)">
+            <summary>
+            Constructor of material database controller
+            </summary>
+            <param name="materialDbMigrationService"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialDatabaseController.Migrate">
             <summary>

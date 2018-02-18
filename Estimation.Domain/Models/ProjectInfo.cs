@@ -22,7 +22,7 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Project type
         /// </summary>
-        public Type ProjectType { get; set; }
+        public string ProjectType { get; set; }
 
         /// <summary>
         /// Created Date
@@ -82,7 +82,7 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Currency Unit
         /// </summary>
-        public CurrencyUnit CurrencyUnit { get; set; }
+        public string CurrencyUnit { get; set; }
 
         /// <summary>
         /// Miscellaneous cost

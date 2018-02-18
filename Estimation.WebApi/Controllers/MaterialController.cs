@@ -19,9 +19,13 @@ namespace Estimation.WebApi.Controllers
     [Route("api/material")]
     public class MaterialController : EstimationBaseController
     {
-        IMaterialRepository _materialRepository;
+        private readonly IMaterialRepository _materialRepository;
 
-
+        /// <summary>
+        /// Constructor of material controller
+        /// </summary>
+        /// <param name="typeMappingService"></param>
+        /// <param name="materialRepository"></param>
         public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository): base(typeMappingService)
         {
             _materialRepository = materialRepository ?? throw new ArgumentNullException(nameof(materialRepository));
@@ -35,7 +39,6 @@ namespace Estimation.WebApi.Controllers
         public async Task<IActionResult> GetAllMaterialList()
         {
             var materials = await _materialRepository.GetMaterialList();
-
 
             return Ok(OutgoingResult<IEnumerable<MainMaterial>>.SuccessResponse(materials));
         }
@@ -66,17 +69,17 @@ namespace Estimation.WebApi.Controllers
         }
 
         /// <summary>
-        /// Add material to specific main material
+        /// Add sub material to specific main material id
         /// </summary>
         /// <param name="mainMaterialId"></param>
-        /// <param name="material"></param>
+        /// <param name="subMaterial"></param>
         /// <returns></returns>
         [HttpPost("sub/{mainMaterialId}")]
-        public async Task<IActionResult> AddMaterialToMainMaterial(int mainMaterialId, [FromBody]MaterialIncommingDto material)
+        public async Task<IActionResult> AddSubMaterialToMainMaterial(int mainMaterialId, [FromBody]SubMaterialIncommingDto subMaterial)
         {
-            Material materialModel = TypeMappingService.Map<MaterialIncommingDto, Material>(material);
-            var result = await _materialRepository.CreateSubMaterial(mainMaterialId, materialModel);
-            return Ok(OutgoingResult<Material>.SuccessResponse(result));
+            MaterialInfo subMaterialModel = TypeMappingService.Map<SubMaterialIncommingDto, MaterialInfo>(subMaterial);
+            var result = await _materialRepository.CreateSubMaterial(mainMaterialId, subMaterialModel);
+            return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
         }
 
         /// <summary>

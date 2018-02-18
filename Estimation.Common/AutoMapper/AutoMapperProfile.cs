@@ -12,6 +12,8 @@ namespace Estimation.Common.AutoMapper
     {
         public AutoMapperProfile()
         {
+            MapMainMaterials();
+            MapSubMaterials();
             MapMaterials();
         }
 
@@ -19,7 +21,13 @@ namespace Estimation.Common.AutoMapper
         {
             CreateMap<MaterialIncommingDto, Material>();
                 //.ForMember(dest => dest.Code, opts => opts.MapFrom(src => src.Code.ToString()));
+                
+            CreateMap<Material, MaterialDb>();
+            CreateMap<MaterialDb, Material>();
+        }
 
+        private void MapMainMaterials()
+        {
             CreateMap<MainMaterialIncommingDto, MaterialInfo>();
 
             CreateMap<MaterialInfo, MainMaterialDb>();
@@ -27,9 +35,17 @@ namespace Estimation.Common.AutoMapper
 
             CreateMap<MainMaterial, MainMaterialDb>();
             CreateMap<MainMaterialDb, MainMaterial>();
+        }
 
-            CreateMap<Material, MaterialDb>();
-            CreateMap<MaterialDb, Material>();
+        private void MapSubMaterials()
+        {
+            CreateMap<SubMaterialIncommingDto, MaterialInfo>();
+
+            CreateMap<MaterialInfo, SubMaterialDb>();
+            CreateMap<SubMaterialDb, MaterialInfo>();
+
+            CreateMap<SubMaterial, SubMaterialDb>();
+            CreateMap<SubMaterialDb, SubMaterial>();
         }
     }
 }

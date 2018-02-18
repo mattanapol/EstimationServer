@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Estimation.DataAccess.Migrations
 {
-    public partial class MaterialInitialDb : Migration
+    public partial class InitialMaterialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace Estimation.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(nullable: false),
+                    Code = table.Column<int>(nullable: false),
                     MaterialType = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false)
                 },
@@ -24,15 +24,36 @@ namespace Estimation.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SubMaterials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Code = table.Column<int>(nullable: false),
+                    MainMaterialId = table.Column<int>(nullable: false),
+                    MaterialType = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubMaterials", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubMaterials_MainMaterials_MainMaterialId",
+                        column: x => x.MainMaterialId,
+                        principalTable: "MainMaterials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(nullable: false),
+                    Code = table.Column<int>(nullable: false),
                     Fittings = table.Column<decimal>(nullable: false),
                     ListPrice = table.Column<decimal>(nullable: false),
-                    MainMaterialId = table.Column<int>(nullable: false),
                     Manpower = table.Column<decimal>(nullable: false),
                     MaterialType = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
@@ -40,22 +61,28 @@ namespace Estimation.DataAccess.Migrations
                     OfferPrice = table.Column<decimal>(nullable: false),
                     Painting = table.Column<decimal>(nullable: false),
                     Remark = table.Column<string>(nullable: true),
+                    SubMaterialId = table.Column<int>(nullable: false),
                     Supporting = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Materials", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Materials_MainMaterials_MainMaterialId",
-                        column: x => x.MainMaterialId,
-                        principalTable: "MainMaterials",
+                        name: "FK_Materials_SubMaterials_SubMaterialId",
+                        column: x => x.SubMaterialId,
+                        principalTable: "SubMaterials",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Materials_MainMaterialId",
+                name: "IX_Materials_SubMaterialId",
                 table: "Materials",
+                column: "SubMaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubMaterials_MainMaterialId",
+                table: "SubMaterials",
                 column: "MainMaterialId");
         }
 
@@ -63,6 +90,9 @@ namespace Estimation.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Materials");
+
+            migrationBuilder.DropTable(
+                name: "SubMaterials");
 
             migrationBuilder.DropTable(
                 name: "MainMaterials");
