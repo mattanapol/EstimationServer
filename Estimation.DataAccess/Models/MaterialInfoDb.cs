@@ -7,7 +7,7 @@ namespace Estimation.DataAccess.Models
     /// <summary>
     /// Material Information model
     /// </summary>
-    public class MaterialInfoDb
+    public class MaterialInfoDb: BaseEntity
     {
         /// <summary>
         /// Material Id

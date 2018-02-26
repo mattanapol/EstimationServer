@@ -15,10 +15,5 @@ namespace Estimation.Domain.Dtos
         /// Material Code
         /// </summary>
         public int Code { get; set; }
-
-        /// <summary>
-        /// Material type
-        /// </summary>
-        public string MaterialType { get; set; }
     }
 }

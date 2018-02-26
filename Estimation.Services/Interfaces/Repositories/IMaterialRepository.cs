@@ -8,21 +8,7 @@ namespace Estimation.Services.Interfaces.Repositories
 {
     public interface IMaterialRepository
     {
-        /// <summary>
-        /// Create main material
-        /// </summary>
-        /// <param name="material"></param>
-        /// <returns></returns>
-        Task<MaterialInfo> CreateMainMaterial(MaterialInfo material);
-
-        /// <summary>
-        /// Create sub material
-        /// </summary>
-        /// <param name="mainMaterialId"></param>
-        /// <param name="subMaterial"></param>
-        /// <returns></returns>
-        Task<MaterialInfo> CreateSubMaterial(int mainMaterialId, MaterialInfo subMaterial);
-
+        
         /// <summary>
         /// Create material
         /// </summary>
@@ -32,23 +18,31 @@ namespace Estimation.Services.Interfaces.Repositories
         Task<Material> CreateMaterial(int subMaterialId, Material material);
 
         /// <summary>
-        /// Get main material by id
+        /// Get material by material id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="materialId"></param>
         /// <returns></returns>
-        Task<MaterialInfo> GetMainMaterial(int id);
-
-        /// <summary>
-        /// Get sub material by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<MaterialInfo> GetSubMaterial(int id);
+        Task<Material> GetMaterial(int materialId);
 
         /// <summary>
         /// Get all material list not include material details
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<MainMaterial>> GetMaterialList();
+
+        /// <summary>
+        /// Update material
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        Task<Material> UpdateMaterial(int materialId, Material material);
+
+        /// <summary>
+        /// Delete material
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <returns></returns>
+        Task DeleteMaterial(int materialId);
     }
 }

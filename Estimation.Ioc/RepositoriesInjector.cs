@@ -12,6 +12,8 @@ namespace Estimation.Ioc
         internal static void Inject(IServiceCollection services)
         {
             services.AddScoped<IMaterialRepository, MaterialRepository>();
+            services.AddScoped<ISubMaterialRepository, SubMaterialRepository>();
+            services.AddScoped<IMainMaterialRepository, MainMaterialRepository>();
         }
     }
 }

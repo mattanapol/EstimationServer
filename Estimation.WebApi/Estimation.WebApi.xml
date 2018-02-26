@@ -20,17 +20,35 @@
             </summary>
             <param name="typeMappingService"></param>
         </member>
-        <member name="T:Estimation.WebApi.Controllers.MaterialController">
-            <summary>
-            Material controller
-            </summary>
-        </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
             <param name="typeMappingService"></param>
             <param name="materialRepository"></param>
+            <param name="mainMaterialRepository"></param>
+            <param name="subMaterialRepository"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
+            <summary>
+            Add material to specific main material
+            </summary>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Estimation.WebApi.Controllers.MaterialController">
+            <summary>
+            Material controller
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
+            <summary>
+            Constructor of material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="materialRepository"></param>
+            <param name="mainMaterialRepository"></param>
+            <param name="subMaterialRepository"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialController.GetAllMaterialList">
             <summary>
@@ -44,19 +62,26 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.AddSubMaterialToMainMaterial(System.Int32,Estimation.Domain.Dtos.SubMaterialIncommingDto)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.AddMaterialToSubMaterial(System.Int32,Estimation.Domain.Dtos.MaterialIncommingDto)">
             <summary>
-            Add sub material to specific main material id
+            Add product to specific sub material id
             </summary>
-            <param name="mainMaterialId"></param>
-            <param name="subMaterial"></param>
+            <param name="subMaterialId"></param>
+            <param name="product"></param>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.EditMaterial(System.Int32,Estimation.Domain.Dtos.MaterialIncommingDto)">
             <summary>
-            Add material to specific main material
+            Edit material
             </summary>
-            <param name="material"></param>
+            <param name="materialId"></param>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.DeleteMaterial(System.Int32)">
+            <summary>
+            Delete material by ID
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Controllers.MaterialDatabaseController">
@@ -111,6 +136,23 @@
             Delete project by id
             </summary>
             <param name="id"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.SubMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
+            <summary>
+            Constructor of material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="materialRepository"></param>
+            <param name="mainMaterialRepository"></param>
+            <param name="subMaterialRepository"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.SubMaterialController.AddSubMaterialToMainMaterial(System.Int32,Estimation.Domain.Dtos.SubMaterialIncommingDto)">
+            <summary>
+            Add sub material to specific main material id
+            </summary>
+            <param name="mainMaterialId"></param>
+            <param name="subMaterial"></param>
+            <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory">
             <summary>

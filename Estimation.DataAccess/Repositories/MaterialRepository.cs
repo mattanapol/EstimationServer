@@ -13,46 +13,28 @@ namespace Estimation.DataAccess.Repositories
 {
     public class MaterialRepository: BaseMaterialRepository, IMaterialRepository
     {
+        private readonly ISubMaterialRepository _subMaterialRepository;
         public MaterialRepository(MaterialDbContext materialDbContext,
-                                  ITypeMappingService typeMappingService) 
+                                  ITypeMappingService typeMappingService,
+                                  ISubMaterialRepository subMaterialRepository) 
             : base(materialDbContext, typeMappingService)
         {
+            _subMaterialRepository = subMaterialRepository ?? throw new ArgumentNullException(nameof(subMaterialRepository));
         }
 
-        public async Task<MaterialInfo> CreateMainMaterial(MaterialInfo material)
-        {
-            // Need to check for material duplicate code
-
-            // Add main material record
-            var mainMaterialDb = TypeMappingService.Map<MaterialInfo, MainMaterialDb>(material);
-            DbContext.MainMaterials.Add(mainMaterialDb);
-
-            await DbContext.SaveChangesAsync();
-
-            return TypeMappingService.Map<MainMaterialDb, MaterialInfo>(mainMaterialDb);
-        }
-
-
-
-        public async Task<MaterialInfo> CreateSubMaterial(int mainMaterialId, MaterialInfo subMaterial)
-        {
-            var mainMaterial = await GetMainMaterial(mainMaterialId);
-            
-            var subMaterialDb = TypeMappingService.Map<MaterialInfo, SubMaterialDb>(subMaterial);
-            subMaterialDb.MainMaterialId = mainMaterialId;
-            DbContext.SubMaterials.Add(subMaterialDb);
-
-            await DbContext.SaveChangesAsync();
-
-            return TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
-        }
-
+        /// <summary>
+        /// Create material
+        /// </summary>
+        /// <param name="subMaterialId"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
         public async Task<Material> CreateMaterial(int subMaterialId, Material material)
         {
-            var subMaterial = await GetSubMaterial(subMaterialId);
+            var subMaterial = await _subMaterialRepository.GetSubMaterial(subMaterialId);
 
             var materialDb = TypeMappingService.Map<Material, MaterialDb>(material);
             materialDb.SubMaterialId = subMaterialId;
+            materialDb.MaterialType = subMaterial.MaterialType;
             DbContext.Materials.Add(materialDb);
 
             await DbContext.SaveChangesAsync();
@@ -60,24 +42,23 @@ namespace Estimation.DataAccess.Repositories
             return TypeMappingService.Map<MaterialDb, Material>(materialDb);
         }
 
-        public async Task<MaterialInfo> GetMainMaterial(int id)
+        /// <summary>
+        /// Get material
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <returns></returns>
+        public async Task<Material> GetMaterial(int materialId)
         {
-            MainMaterialDb mainMaterialDb = await DbContext.MainMaterials.FirstOrDefaultAsync(m => m.Id == id);
-            if (mainMaterialDb == null)
-                throw new KeyNotFoundException($"Main material id = {id} is not exist.");
-
-            return TypeMappingService.Map<MainMaterialDb, MaterialInfo>(mainMaterialDb);
+            var material = await DbContext.Materials
+                                          .AsNoTracking()
+                                          .SingleOrDefaultAsync(m => m.Id == materialId);
+            return TypeMappingService.Map<MaterialDb, Material>(material);
         }
 
-        public async Task<MaterialInfo> GetSubMaterial(int id)
-        {
-            SubMaterialDb subMaterialDb = await DbContext.SubMaterials.FirstOrDefaultAsync(m => m.Id == id);
-            if (subMaterialDb == null)
-                throw new KeyNotFoundException($"Sub material id = {id} is not exist.");
-
-            return TypeMappingService.Map<SubMaterialDb, MaterialInfo>(subMaterialDb);
-        }
-
+        /// <summary>
+        /// Get material list
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<MainMaterial>> GetMaterialList()
         {
             IQueryable<MainMaterial> queryable = DbContext.MainMaterials
@@ -91,9 +72,57 @@ namespace Estimation.DataAccess.Repositories
                 })
                 .AsNoTracking();
 
-            var results = queryable.ToArray();
+            var results = await Task.Run(() => queryable.ToArray());
 
             return results;
+        }
+
+        /// <summary>
+        /// Update material
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        public async Task<Material> UpdateMaterial(int materialId, Material material)
+        {
+            var materialDb = await DbContext.Materials
+                                            .AsNoTracking()
+                                            .SingleOrDefaultAsync(e => e.Id == materialId);
+            if (materialDb == null)
+                throw new ArgumentOutOfRangeException(nameof(materialId), $"Material id = { materialId } does not exist.");
+
+            materialDb.ListPrice = material.ListPrice;
+            materialDb.Manpower = material.Manpower;
+            materialDb.Name = material.Name;
+            materialDb.NetPrice = material.NetPrice;
+            materialDb.OfferPrice = material.OfferPrice;
+            materialDb.Painting = material.Painting;
+            materialDb.Remark = material.Remark;
+            materialDb.Supporting = material.Supporting;
+            materialDb.Fittings = material.Fittings;
+            materialDb.Code = material.Code;
+            DbContext.Entry(materialDb).State = EntityState.Modified;
+            DbContext.Entry(materialDb).Property(e => e.CreatedDate).IsModified = false;
+            DbContext.Entry(materialDb).Property(e => e.Id).IsModified = false;
+
+            await DbContext.SaveChangesAsync();
+
+            return TypeMappingService.Map<MaterialDb, Material>(materialDb);
+        }
+
+        /// <summary>
+        /// Delete material
+        /// </summary>
+        /// <param name="materialId"></param>
+        /// <returns></returns>
+        public async Task DeleteMaterial(int materialId)
+        {
+            var materialDb = await DbContext.Materials
+                                             .AsNoTracking()
+                                             .SingleOrDefaultAsync(s => s.Id == materialId);
+            DbContext.Materials.Remove(materialDb);
+
+            await DbContext.SaveChangesAsync();
         }
     }
 }

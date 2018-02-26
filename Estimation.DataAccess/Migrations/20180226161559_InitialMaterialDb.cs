@@ -15,7 +15,9 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
-                    MaterialType = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    MaterialType = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +32,10 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MainMaterialId = table.Column<int>(nullable: false),
-                    MaterialType = table.Column<int>(nullable: false),
+                    MaterialType = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -52,10 +56,12 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
                     Fittings = table.Column<decimal>(nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
                     ListPrice = table.Column<decimal>(nullable: false),
                     Manpower = table.Column<decimal>(nullable: false),
-                    MaterialType = table.Column<int>(nullable: false),
+                    MaterialType = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     NetPrice = table.Column<decimal>(nullable: false),
                     OfferPrice = table.Column<decimal>(nullable: false),

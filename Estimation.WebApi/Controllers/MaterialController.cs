@@ -26,7 +26,10 @@ namespace Estimation.WebApi.Controllers
         /// </summary>
         /// <param name="typeMappingService"></param>
         /// <param name="materialRepository"></param>
-        public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository): base(typeMappingService)
+        /// <param name="mainMaterialRepository"></param>
+        /// <param name="subMaterialRepository"></param>
+        public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository, 
+            IMainMaterialRepository mainMaterialRepository, ISubMaterialRepository subMaterialRepository): base(typeMappingService)
         {
             _materialRepository = materialRepository ?? throw new ArgumentNullException(nameof(materialRepository));
         }
@@ -47,52 +50,52 @@ namespace Estimation.WebApi.Controllers
         /// Get material by ID
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("product/{id}")]
         public async Task<IActionResult> GetMaterial(int id)
         {
-            Material material = new Material
-            {
-                Id = id,
-                Name = "Water-Cooled Chiller",
-                Code = 1,
-                ListPrice = 10,
-                NetPrice = 10,
-                OfferPrice = 12,
-                Manpower = 100,
-                Fittings = 10,
-                Supporting = 10,
-                Painting = 10,
-                Remark = "Noted as remarks"
-            };
+            Material material = await _materialRepository.GetMaterial(id);
 
             return Ok(OutgoingResult<Material>.SuccessResponse(material));
         }
 
         /// <summary>
-        /// Add sub material to specific main material id
+        /// Add product to specific sub material id
         /// </summary>
-        /// <param name="mainMaterialId"></param>
-        /// <param name="subMaterial"></param>
+        /// <param name="subMaterialId"></param>
+        /// <param name="product"></param>
         /// <returns></returns>
-        [HttpPost("sub/{mainMaterialId}")]
-        public async Task<IActionResult> AddSubMaterialToMainMaterial(int mainMaterialId, [FromBody]SubMaterialIncommingDto subMaterial)
+        [HttpPost("product/{subMaterialId}")]
+        public async Task<IActionResult> AddMaterialToSubMaterial(int subMaterialId, [FromBody]MaterialIncommingDto product)
         {
-            MaterialInfo subMaterialModel = TypeMappingService.Map<SubMaterialIncommingDto, MaterialInfo>(subMaterial);
-            var result = await _materialRepository.CreateSubMaterial(mainMaterialId, subMaterialModel);
+            Material materialModel = TypeMappingService.Map<MaterialIncommingDto, Material>(product);
+            var result = await _materialRepository.CreateMaterial(subMaterialId, materialModel);
             return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
         }
 
         /// <summary>
-        /// Add material to specific main material
+        /// Edit material
         /// </summary>
-        /// <param name="material"></param>
+        /// <param name="materialId"></param>
+        /// <param name="product"></param>
         /// <returns></returns>
-        [HttpPost("main")]
-        public async Task<IActionResult> CreateMainMaterial([FromBody]MainMaterialIncommingDto material)
+        [HttpPut("product/{subMaterialId}")]
+        public async Task<IActionResult> EditMaterial(int materialId, [FromBody]MaterialIncommingDto product)
         {
-            MaterialInfo materialInfo = TypeMappingService.Map<MainMaterialIncommingDto, MaterialInfo>(material);
-            var result = await _materialRepository.CreateMainMaterial(materialInfo);
+            Material materialModel = TypeMappingService.Map<MaterialIncommingDto, Material>(product);
+            var result = await _materialRepository.UpdateMaterial(materialId, materialModel);
             return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Delete material by ID
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("product/{id}")]
+        public async Task<IActionResult> DeleteMaterial(int id)
+        {
+            await _materialRepository.DeleteMaterial(id);
+
+            return Ok();
         }
     }
 }
