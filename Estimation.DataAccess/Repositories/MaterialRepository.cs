@@ -31,7 +31,11 @@ namespace Estimation.DataAccess.Repositories
         public async Task<Material> CreateMaterial(int subMaterialId, Material material)
         {
             var subMaterial = await _subMaterialRepository.GetSubMaterial(subMaterialId);
+            if (subMaterial == null)
+                throw new KeyNotFoundException($"Sub material id = {subMaterialId} is not exist.");
 
+            if (material.Code <= 0)
+                material.Code = await GetNextCode(subMaterialId);
             var materialDb = TypeMappingService.Map<Material, MaterialDb>(material);
             materialDb.SubMaterialId = subMaterialId;
             materialDb.MaterialType = subMaterial.MaterialType;
@@ -120,9 +124,25 @@ namespace Estimation.DataAccess.Repositories
             var materialDb = await DbContext.Materials
                                              .AsNoTracking()
                                              .SingleOrDefaultAsync(s => s.Id == materialId);
+            if (materialDb == null)
+                return;
             DbContext.Materials.Remove(materialDb);
 
             await DbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get next material code
+        /// </summary>
+        /// <returns></returns>
+        private async Task<int> GetNextCode(int subMaterialId)
+        {
+            var queryable = DbContext.Materials
+                .AsNoTracking()
+                .Where(s => s.SubMaterialId == subMaterialId);
+
+            int maxCode = await queryable.AnyAsync() ? await queryable.MaxAsync(m => m.Code) : 0;
+            return maxCode + 1;
         }
     }
 }

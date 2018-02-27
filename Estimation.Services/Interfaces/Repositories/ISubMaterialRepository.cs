@@ -21,6 +21,21 @@ namespace Estimation.Services.Interfaces.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<MaterialInfo> GetSubMaterial(int id);
+        Task<SubMaterial> GetSubMaterial(int id);
+
+        /// <summary>
+        /// Update sub material
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="subMaterial"></param>
+        /// <returns></returns>
+        Task<MaterialInfo> UpdateSubMaterial(int id, MaterialInfo subMaterial);
+
+        /// <summary>
+        /// Delete sub material by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task DeleteSubMaterial(int id);
     }
 }

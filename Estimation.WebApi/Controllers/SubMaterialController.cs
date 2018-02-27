@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Estimation.WebApi.Controllers
 {
+    /// <summary>
+    /// Sub material controller class
+    /// </summary>
     [Produces("application/json")]
     [Route("api/material/sub")]
     public class SubMaterialController : EstimationBaseController
@@ -43,6 +46,44 @@ namespace Estimation.WebApi.Controllers
             MaterialInfo subMaterialModel = TypeMappingService.Map<SubMaterialIncommingDto, MaterialInfo>(subMaterial);
             var result = await _subMaterialRepository.CreateSubMaterial(mainMaterialId, subMaterialModel);
             return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Update sub material
+        /// </summary>
+        /// <param name="subMaterialId"></param>
+        /// <param name="subMaterial"></param>
+        /// <returns></returns>
+        [HttpPut("{subMaterialId}")]
+        public async Task<IActionResult> UpdateMaterial(int subMaterialId, [FromBody]SubMaterialIncommingDto subMaterial)
+        {
+            MaterialInfo subMaterialModel = TypeMappingService.Map<SubMaterialIncommingDto, MaterialInfo>(subMaterial);
+            var result = await _subMaterialRepository.UpdateSubMaterial(subMaterialId, subMaterialModel);
+            return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Delete sub material by ID
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMaterial(int id)
+        {
+            await _subMaterialRepository.DeleteSubMaterial(id);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Get sub material by ID
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSubMaterial(int id)
+        {
+            SubMaterial material = await _subMaterialRepository.GetSubMaterial(id);
+
+            return Ok(OutgoingResult<SubMaterial>.SuccessResponse(material));
         }
     }
 }

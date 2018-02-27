@@ -20,6 +20,21 @@ namespace Estimation.Services.Interfaces.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<MaterialInfo> GetMainMaterial(int id);
+        Task<MainMaterial> GetMainMaterial(int id);
+
+        /// <summary>
+        /// Update main material
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="mainMaterial"></param>
+        /// <returns></returns>
+        Task<MaterialInfo> UpdateMainMaterial(int id, MaterialInfo mainMaterial);
+
+        /// <summary>
+        /// Delete main material by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task DeleteMainMaterial(int id);
     }
 }
