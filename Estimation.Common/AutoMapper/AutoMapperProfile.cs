@@ -20,8 +20,12 @@ namespace Estimation.Common.AutoMapper
         private void MapMaterials()
         {
             CreateMap<MaterialIncommingDto, Material>();
-                //.ForMember(dest => dest.Code, opts => opts.MapFrom(src => src.Code.ToString()));
-                
+            //.ForMember(dest => dest.Code, opts => opts.MapFrom(src => src.Code.ToString()));
+
+            CreateMap<MaterialInfo, MaterialDb>();
+            CreateMap<MaterialDb, MaterialInfo>()
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"));
+
             CreateMap<Material, MaterialDb>();
             CreateMap<MaterialDb, Material>()
                 .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"));

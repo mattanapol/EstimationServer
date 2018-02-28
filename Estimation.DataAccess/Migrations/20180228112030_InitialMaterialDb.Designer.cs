@@ -11,7 +11,7 @@ using System;
 namespace Estimation.DataAccess.Migrations
 {
     [DbContext(typeof(MaterialDbContext))]
-    [Migration("20180228073050_InitialMaterialDb")]
+    [Migration("20180228112030_InitialMaterialDb")]
     partial class InitialMaterialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,8 +26,6 @@ namespace Estimation.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Code");
-
-                    b.Property<string>("CodeAsString");
 
                     b.Property<DateTime?>("CreatedDate");
 
@@ -49,8 +47,6 @@ namespace Estimation.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Code");
-
-                    b.Property<string>("CodeAsString");
 
                     b.Property<DateTime?>("CreatedDate");
 
@@ -92,8 +88,6 @@ namespace Estimation.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Code");
-
-                    b.Property<string>("CodeAsString");
 
                     b.Property<DateTime?>("CreatedDate");
 

@@ -43,7 +43,7 @@ namespace Estimation.DataAccess.Repositories
 
             await DbContext.SaveChangesAsync();
 
-            return TypeMappingService.Map<MaterialDb, Material>(materialDb);
+            return await GetMaterial(materialDb.Id);
         }
 
         /// <summary>
