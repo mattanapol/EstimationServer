@@ -53,10 +53,13 @@ namespace Estimation.DataAccess.Repositories
         /// <returns></returns>
         public async Task<Material> GetMaterial(int materialId)
         {
-            var material = await DbContext.Materials
-                                          .AsNoTracking()
-                                          .SingleOrDefaultAsync(m => m.Id == materialId);
-            return TypeMappingService.Map<MaterialDb, Material>(material);
+            var materialDb = await DbContext.Materials
+                                        .Include(m => m.SubMaterial)
+                                        .ThenInclude(s=> s.MainMaterial)
+                                        .AsNoTracking()
+                                        .SingleOrDefaultAsync(m => m.Id == materialId);
+            var material = TypeMappingService.Map<MaterialDb, Material>(materialDb);
+            return material;
         }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace Estimation.DataAccess.Repositories
                 .Include(c => c.SubMaterials)
                 .ThenInclude(c => c.Materials)
                 .Select(m => new MainMaterial
-                { Id = m.Id, Code = m.Code, Name = m.Name, MaterialType = m.MaterialType,
-                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType,
-                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType })
+                { Id = m.Id, Code = m.Code, Name = m.Name, MaterialType = m.MaterialType, CodeAsString = m.Code.ToString(),
+                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}",
+                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}-{c.Code.ToString("D2")}" })
                     })
                 })
                 .AsNoTracking();
@@ -90,6 +93,8 @@ namespace Estimation.DataAccess.Repositories
         public async Task<Material> UpdateMaterial(int materialId, Material material)
         {
             var materialDb = await DbContext.Materials
+                                            .Include(m => m.SubMaterial)
+                                            .ThenInclude(s => s.MainMaterial)
                                             .AsNoTracking()
                                             .SingleOrDefaultAsync(e => e.Id == materialId);
             if (materialDb == null)

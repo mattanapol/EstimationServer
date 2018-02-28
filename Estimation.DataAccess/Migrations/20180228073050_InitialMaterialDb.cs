@@ -15,6 +15,7 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
+                    CodeAsString = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MaterialType = table.Column<string>(nullable: true),
@@ -32,6 +33,7 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
+                    CodeAsString = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MainMaterialId = table.Column<int>(nullable: false),
@@ -56,6 +58,7 @@ namespace Estimation.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<int>(nullable: false),
+                    CodeAsString = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     Fittings = table.Column<decimal>(nullable: false),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),

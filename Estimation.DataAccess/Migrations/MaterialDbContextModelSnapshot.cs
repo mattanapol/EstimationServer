@@ -26,6 +26,8 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<int>("Code");
 
+                    b.Property<string>("CodeAsString");
+
                     b.Property<DateTime?>("CreatedDate");
 
                     b.Property<DateTime?>("LastModifiedDate");
@@ -46,6 +48,8 @@ namespace Estimation.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Code");
+
+                    b.Property<string>("CodeAsString");
 
                     b.Property<DateTime?>("CreatedDate");
 
@@ -87,6 +91,8 @@ namespace Estimation.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Code");
+
+                    b.Property<string>("CodeAsString");
 
                     b.Property<DateTime?>("CreatedDate");
 

@@ -75,14 +75,14 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Update material
         /// </summary>
-        /// <param name="materialId"></param>
+        /// <param name="subMaterialId"></param>
         /// <param name="product"></param>
         /// <returns></returns>
         [HttpPut("product/{subMaterialId}")]
-        public async Task<IActionResult> UpdateMaterial(int materialId, [FromBody]MaterialIncommingDto product)
+        public async Task<IActionResult> UpdateMaterial(int subMaterialId, [FromBody]MaterialIncommingDto product)
         {
             Material materialModel = TypeMappingService.Map<MaterialIncommingDto, Material>(product);
-            var result = await _materialRepository.UpdateMaterial(materialId, materialModel);
+            var result = await _materialRepository.UpdateMaterial(subMaterialId, materialModel);
             return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
         }
 

@@ -39,7 +39,8 @@ namespace Estimation.DataAccess.Repositories
             if (material.Code <= 0)
                 material.Code = await GetNextCode();
             var mainMaterialDb = TypeMappingService.Map<MaterialInfo, MainMaterialDb>(material);
-            
+            //mainMaterialDb.CodeAsString = mainMaterialDb.Code.ToString();
+
             DbContext.MainMaterials.Add(mainMaterialDb);
 
             await DbContext.SaveChangesAsync();
@@ -79,7 +80,9 @@ namespace Estimation.DataAccess.Repositories
             if (mainMaterialDb == null)
                 throw new KeyNotFoundException($"Main material id = {id} is not exist.");
 
-            return TypeMappingService.Map<MainMaterialDb, MainMaterial>(mainMaterialDb);
+            var mainMaterial = TypeMappingService.Map<MainMaterialDb, MainMaterial>(mainMaterialDb);
+            //mainMaterial.CodeAsString = mainMaterialDb.Code.ToString();
+            return mainMaterial;
         }
 
         /// <summary>

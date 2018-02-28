@@ -25,6 +25,11 @@ namespace Estimation.Domain.Models
         public int Code { get; set; }
 
         /// <summary>
+        /// Material code as string
+        /// </summary>
+        public string CodeAsString { get; set; }
+
+        /// <summary>
         /// Material type
         /// </summary>
         public string MaterialType { get; set; }

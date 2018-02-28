@@ -99,7 +99,7 @@
             <summary>
             Update material
             </summary>
-            <param name="materialId"></param>
+            <param name="subMaterialId"></param>
             <param name="product"></param>
             <returns></returns>
         </member>

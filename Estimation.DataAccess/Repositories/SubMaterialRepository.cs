@@ -42,6 +42,7 @@ namespace Estimation.DataAccess.Repositories
             DbContext.SubMaterials.Add(subMaterialDb);
 
             await DbContext.SaveChangesAsync();
+            subMaterialDb.MainMaterial = TypeMappingService.Map<MainMaterial,MainMaterialDb> (mainMaterial);
 
             return TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
         }
@@ -71,13 +72,15 @@ namespace Estimation.DataAccess.Repositories
         public async Task<SubMaterial> GetSubMaterial(int id)
         {
             SubMaterialDb subMaterialDb = await DbContext.SubMaterials
+                .Include(s => s.MainMaterial)
                 .Include(s => s.Materials)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (subMaterialDb == null)
                 throw new KeyNotFoundException($"Sub material id = {id} is not exist.");
 
-            return TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
+            var subMaterial = TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
+            return subMaterial;
         }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace Estimation.DataAccess.Repositories
         public async Task<MaterialInfo> UpdateSubMaterial(int id, MaterialInfo subMaterial)
         {
             var subMaterialDb = await DbContext.SubMaterials
+                                            .Include(s => s.MainMaterial)
                                             .AsNoTracking()
                                             .SingleOrDefaultAsync(e => e.Id == id);
             if (subMaterialDb == null)

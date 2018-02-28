@@ -45,10 +45,5 @@ namespace Estimation.Domain.Models
         /// Remarks
         /// </summary>
         public string Remark { get; set; }
-
-        /// <summary>
-        /// Parent material(Main material of this submaterial)
-        /// </summary>
-        public MaterialInfo MainMaterial { get; set; }
     }
 }
