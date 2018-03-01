@@ -74,6 +74,8 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<decimal>("Supporting");
 
+                    b.Property<string>("Unit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SubMaterialId");
@@ -96,7 +98,8 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<string>("MaterialType");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

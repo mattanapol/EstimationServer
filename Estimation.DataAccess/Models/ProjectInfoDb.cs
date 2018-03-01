@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Domain.Models
+namespace Estimation.DataAccess.Models
 {
-    /// <summary>
-    /// Project information model
-    /// </summary>
-    public class ProjectInfo
+    public class ProjectInfoDb: BaseEntity
     {
         /// <summary>
         /// Project id
@@ -28,16 +25,6 @@ namespace Estimation.Domain.Models
         /// Project type
         /// </summary>
         public string ProjectType { get; set; }
-
-        /// <summary>
-        /// Created Date
-        /// </summary>
-        public DateTime CreatedDate { get; set; }
-
-        /// <summary>
-        /// Last Modified date
-        /// </summary>
-        public DateTime LastModifiedDate { get; set; }
 
         /// <summary>
         /// Remark
@@ -90,13 +77,38 @@ namespace Estimation.Domain.Models
         public string CurrencyUnit { get; set; }
 
         /// <summary>
-        /// Miscellaneous cost
+        /// Miscellaneous manual cost
         /// </summary>
-        public Cost Miscellaneous { get; set; }
+        public decimal MiscellaneousManual { get; set; }
 
         /// <summary>
-        /// Transportation cost
+        /// Miscellaneous percentage cost
         /// </summary>
-        public Cost Transportation { get; set; }
+        public decimal MiscellaneousPercentage { get; set; }
+
+        /// <summary>
+        /// Is Miscellaneous currently using percentage
+        /// </summary>
+        public bool MiscellaneousIsUsePercentage { get; set; }
+
+        /// <summary>
+        /// Transportation manual cost
+        /// </summary>
+        public decimal TransportationManual { get; set; }
+
+        /// <summary>
+        /// Transportation percentage cost
+        /// </summary>
+        public decimal TransportationPercentage { get; set; }
+
+        /// <summary>
+        /// Is Transportation currently using percentage
+        /// </summary>
+        public bool TransportationIsUsePercentage { get; set; }
+
+        /// <summary>
+        /// Material groups
+        /// </summary>
+        public IEnumerable<MaterialGroupDb> MaterialGroups { get; set; }
     }
 }

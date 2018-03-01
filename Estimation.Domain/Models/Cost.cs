@@ -10,6 +10,11 @@ namespace Estimation.Domain.Models
     public class Cost
     {
         /// <summary>
+        /// Is using percentage
+        /// </summary>
+        public bool IsUsePercentage { get; set; }
+
+        /// <summary>
         /// Manual cost
         /// </summary>
         public decimal Manual { get; set; }

@@ -10,6 +10,10 @@ namespace Estimation.DataAccess
     /// <summary>
     /// Material database context class
     /// </summary>
+    /// <remarks>
+    /// dotnet ef migrations remove -c MaterialDbContext -s ..\Estimation.WebApi
+    /// dotnet ef migrations add InitialMaterialDb -c MaterialDbContext -s ..\Estimation.WebApi
+    /// </remarks>
     public class MaterialDbContext: AppDbContext
     {
         /// <summary>
@@ -44,6 +48,7 @@ namespace Estimation.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new MainMaterialEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SubMaterialEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialEntityTypeConfiguration());
         }
     }

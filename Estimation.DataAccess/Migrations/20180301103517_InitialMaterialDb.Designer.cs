@@ -11,7 +11,7 @@ using System;
 namespace Estimation.DataAccess.Migrations
 {
     [DbContext(typeof(MaterialDbContext))]
-    [Migration("20180228112030_InitialMaterialDb")]
+    [Migration("20180301103517_InitialMaterialDb")]
     partial class InitialMaterialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,8 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<decimal>("Supporting");
 
+                    b.Property<string>("Unit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SubMaterialId");
@@ -97,7 +99,8 @@ namespace Estimation.DataAccess.Migrations
 
                     b.Property<string>("MaterialType");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

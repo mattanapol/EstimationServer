@@ -12,14 +12,14 @@ namespace Estimation.WebApi.Infrastructure
     /// <summary>
     /// Design time database context
     /// </summary>
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MaterialDbContext>
+    public class DesignTimeMaterialDbContextFactory : IDesignTimeDbContextFactory<MaterialDbContext>
     {
         //private readonly IConfiguration _configuration;
 
         /// <summary>
         /// Design time database context factory
         /// </summary>
-        public DesignTimeDbContextFactory()
+        public DesignTimeMaterialDbContextFactory()
         {
             //_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }

@@ -55,5 +55,10 @@ namespace Estimation.Domain.Dtos
         /// Remarks
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// Unit of material
+        /// </summary>
+        public string Unit { get; set; }
     }
 }

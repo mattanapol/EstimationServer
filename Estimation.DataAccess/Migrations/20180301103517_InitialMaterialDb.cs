@@ -36,7 +36,7 @@ namespace Estimation.DataAccess.Migrations
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MainMaterialId = table.Column<int>(nullable: false),
                     MaterialType = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,8 @@ namespace Estimation.DataAccess.Migrations
                     Painting = table.Column<decimal>(nullable: false),
                     Remark = table.Column<string>(nullable: true),
                     SubMaterialId = table.Column<int>(nullable: false),
-                    Supporting = table.Column<decimal>(nullable: false)
+                    Supporting = table.Column<decimal>(nullable: false),
+                    Unit = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

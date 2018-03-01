@@ -204,17 +204,34 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory">
+        <member name="T:Estimation.WebApi.Infrastructure.DesignTimeMaterialDbContextFactory">
             <summary>
             Design time database context
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.#ctor">
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeMaterialDbContextFactory.#ctor">
             <summary>
             Design time database context factory
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeDbContextFactory.CreateDbContext(System.String[])">
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeMaterialDbContextFactory.CreateDbContext(System.String[])">
+            <summary>
+            Creates the db context.
+            </summary>
+            <returns>The db context.</returns>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="T:Estimation.WebApi.Infrastructure.DesignTimeProjectDbContextFactory">
+            <summary>
+            Design time database context
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeProjectDbContextFactory.#ctor">
+            <summary>
+            Design time database context factory
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeProjectDbContextFactory.CreateDbContext(System.String[])">
             <summary>
             Creates the db context.
             </summary>

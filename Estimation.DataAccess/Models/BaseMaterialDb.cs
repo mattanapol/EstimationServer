@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Domain.Models
+namespace Estimation.DataAccess.Models
 {
-    public class Material: MaterialInfo
+    public class BaseMaterialDb: MaterialInfoDb
     {
         /// <summary>
         /// List Price
