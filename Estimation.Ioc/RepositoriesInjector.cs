@@ -14,6 +14,7 @@ namespace Estimation.Ioc
             services.AddScoped<IMaterialRepository, MaterialRepository>();
             services.AddScoped<ISubMaterialRepository, SubMaterialRepository>();
             services.AddScoped<IMainMaterialRepository, MainMaterialRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
         }
     }
 }

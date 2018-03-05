@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Estimation.Domain.Dtos;
 using Estimation.Domain.Models;
+using Estimation.Services.Interfaces;
+using Estimation.Services.Interfaces.Repositories;
 using Kaewsai.Utilities.WebApi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,8 +17,20 @@ namespace Estimation.WebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/projects")]
-    public class ProjectsController : Controller
+    public class ProjectsController : EstimationBaseController
     {
+        private readonly IProjectRepository _projectRepository;
+
+        /// <summary>
+        /// Constructor of material controller
+        /// </summary>
+        /// <param name="typeMappingService"></param>
+        /// <param name="projectRepository"></param>
+        public ProjectsController(ITypeMappingService typeMappingService, IProjectRepository projectRepository) : base(typeMappingService)
+        {
+            _projectRepository = projectRepository ?? throw new ArgumentNullException(nameof(projectRepository));
+        }
+
         /// <summary>
         /// Get All Available Projects
         /// </summary>
@@ -53,11 +67,12 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Create new project.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="project"></param>
         [HttpPost]
-        public async Task<IActionResult> CreateProject([FromBody]ProjectInfoIncommingDto value)
+        public async Task<IActionResult> CreateProject([FromBody]ProjectInfoIncommingDto project)
         {
-            var result = new ProjectInfo() { Id = 1, Name = value.Name, CreatedDate = DateTime.Now, ProjectType = value.ProjectType };
+            ProjectInfo projectInfo = TypeMappingService.Map<ProjectInfoIncommingDto, ProjectInfo>(project);
+            var result = await _projectRepository.CreateProjectInfo(projectInfo);
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
         }
         

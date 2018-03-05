@@ -42,7 +42,6 @@ namespace Estimation.Common.AutoMapper
             CreateMap<MainMaterial, MainMaterialDb>();
             CreateMap<MainMaterialDb, MainMaterial>()
                 .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.Code.ToString()}"));
-                //.ForMember(dest => dest.SubMaterials, opts => opts.MapFrom(src => src.SubMaterials));
         }
 
         private void MapSubMaterials()
@@ -56,6 +55,22 @@ namespace Estimation.Common.AutoMapper
             CreateMap<SubMaterial, SubMaterialDb>();
             CreateMap<SubMaterialDb, SubMaterial>()
                 .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.MainMaterial.Code.ToString()}-{src.Code.ToString("D2")}"));
+        }
+
+        private void MapProjectInfos()
+        {
+            CreateMap<ProjectInfoIncommingDto, ProjectInfo>();
+
+            CreateMap<ProjectInfo, ProjectInfoDb>()
+                .ForMember(dest => dest.MiscellaneousManual, opts => opts.MapFrom(src => src.Miscellaneous.Manual))
+                .ForMember(dest => dest.MiscellaneousPercentage, opts => opts.MapFrom(src => src.Miscellaneous.Percentage))
+                .ForMember(dest => dest.MiscellaneousIsUsePercentage, opts => opts.MapFrom(src => src.Miscellaneous.IsUsePercentage))
+                .ForMember(dest => dest.TransportationManual, opts => opts.MapFrom(src => src.Transportation.Manual))
+                .ForMember(dest => dest.TransportationPercentage, opts => opts.MapFrom(src => src.Transportation.Percentage))
+                .ForMember(dest => dest.TransportationIsUsePercentage, opts => opts.MapFrom(src => src.Transportation.IsUsePercentage));
+            CreateMap<ProjectInfoDb, ProjectInfo>()
+                .ForMember(dest => dest.Miscellaneous, opts => opts.MapFrom(src => new Cost() { Percentage = src.MiscellaneousPercentage, Manual = src.MiscellaneousManual, IsUsePercentage = src.MiscellaneousIsUsePercentage }))
+                .ForMember(dest => dest.Transportation, opts => opts.MapFrom(src => new Cost() { Percentage = src.TransportationPercentage, Manual = src.TransportationManual, IsUsePercentage = src.TransportationIsUsePercentage }));
         }
     }
 }

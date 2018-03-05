@@ -131,6 +131,13 @@
             Project controller
             </summary>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IProjectRepository)">
+            <summary>
+            Constructor of material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="projectRepository"></param>
+        </member>
         <member name="M:Estimation.WebApi.Controllers.ProjectsController.GetAllProject">
             <summary>
             Get All Available Projects
@@ -147,7 +154,7 @@
             <summary>
             Create new project.
             </summary>
-            <param name="value"></param>
+            <param name="project"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ProjectsController.EditProject(System.Int32,Estimation.Domain.Dtos.ProjectInfoIncommingDto)">
             <summary>
