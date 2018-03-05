@@ -4,6 +4,23 @@
         <name>Estimation.WebApi</name>
     </assembly>
     <members>
+        <member name="T:Estimation.WebApi.Controllers.AppDatabaseController">
+            <summary>
+            Material database constroller class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.#ctor(Estimation.Services.Interfaces.IAppDbMigrationService)">
+            <summary>
+            Constructor of material database controller
+            </summary>
+            <param name="materialDbMigrationService"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.Migrate">
+            <summary>
+            Migrate material database
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.EstimationBaseController">
             <summary>
             Estimation base controller
@@ -109,23 +126,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Estimation.WebApi.Controllers.MaterialDatabaseController">
-            <summary>
-            Material database constroller class
-            </summary>
-        </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialDatabaseController.#ctor(Estimation.Services.Interfaces.IMaterialDbMigrationService)">
-            <summary>
-            Constructor of material database controller
-            </summary>
-            <param name="materialDbMigrationService"></param>
-        </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialDatabaseController.Migrate">
-            <summary>
-            Migrate material database
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectsController">
             <summary>
             Project controller
@@ -156,12 +156,12 @@
             </summary>
             <param name="project"></param>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectsController.EditProject(System.Int32,Estimation.Domain.Dtos.ProjectInfoIncommingDto)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.UpdateProjectInfo(System.Int32,Estimation.Domain.Dtos.ProjectInfoIncommingDto)">
             <summary>
-            Edit project information by id.
+            Update project information by id.
             </summary>
             <param name="id"></param>
-            <param name="value"></param>
+            <param name="project"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ProjectsController.Delete(System.Int32)">
             <summary>

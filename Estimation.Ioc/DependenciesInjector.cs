@@ -27,8 +27,11 @@ namespace Estimation.Ioc
             _services.AddScoped<MaterialDbContext>((arg) => {
                 return new MaterialDbContext(_configuration.GetConnectionString("MaterialDb"));
             });
+            _services.AddScoped<ProjectDbContext>((arg) => {
+                return new ProjectDbContext(_configuration.GetConnectionString("ProjectDb"));
+            });
 
-            _services.AddScoped<IMaterialDbMigrationService, MaterialDbMigrationService>();
+            _services.AddScoped<IAppDbMigrationService, AppDbMigrationService>();
 
             RepositoriesInjector.Inject(_services);
         }

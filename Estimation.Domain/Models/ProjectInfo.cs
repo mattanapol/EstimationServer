@@ -25,19 +25,14 @@ namespace Estimation.Domain.Models
         public string Code { get; set; }
 
         /// <summary>
-        /// Project type
-        /// </summary>
-        public string ProjectType { get; set; }
-
-        /// <summary>
         /// Created Date
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// Last Modified date
         /// </summary>
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         /// <summary>
         /// Remark

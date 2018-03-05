@@ -15,6 +15,7 @@ namespace Estimation.Common.AutoMapper
             MapMainMaterials();
             MapSubMaterials();
             MapMaterials();
+            MapProjectInfos();
         }
 
         private void MapMaterials()
@@ -59,7 +60,10 @@ namespace Estimation.Common.AutoMapper
 
         private void MapProjectInfos()
         {
-            CreateMap<ProjectInfoIncommingDto, ProjectInfo>();
+            CreateMap<ProjectInfoIncommingDto, ProjectInfo>()
+                .ForMember(dest => dest.CreatedDate, opts => opts.Ignore())
+                .ForMember(dest => dest.LastModifiedDate, opts => opts.Ignore());
+            CreateMap<ProjectInfo, ProjectInfoLightDto>();
 
             CreateMap<ProjectInfo, ProjectInfoDb>()
                 .ForMember(dest => dest.MiscellaneousManual, opts => opts.MapFrom(src => src.Miscellaneous.Manual))

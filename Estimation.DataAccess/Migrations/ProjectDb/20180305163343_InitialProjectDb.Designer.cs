@@ -11,7 +11,7 @@ using System;
 namespace Estimation.DataAccess.Migrations.ProjectDb
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20180301110416_InitialProjectDb")]
+    [Migration("20180305163343_InitialProjectDb")]
     partial class InitialProjectDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,9 +78,6 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                         .IsRequired();
 
                     b.Property<string>("Owner");
-
-                    b.Property<string>("ProjectType")
-                        .IsRequired();
 
                     b.Property<string>("Remark");
 

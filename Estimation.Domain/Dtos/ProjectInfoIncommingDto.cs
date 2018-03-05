@@ -18,11 +18,6 @@ namespace Estimation.Domain.Dtos
         public string Code { get; set; }
 
         /// <summary>
-        /// Project type
-        /// </summary>
-        public string ProjectType { get; set; }
-
-        /// <summary>
         /// Remark
         /// </summary>
         public string Remark { get; set; }

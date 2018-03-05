@@ -14,7 +14,6 @@ namespace Estimation.DataAccess.Configurations
             builder.HasKey(t => t.Id);
             builder.Property(m => m.Name).IsRequired();
             builder.Property(m => m.Code).IsRequired();
-            builder.Property(m => m.ProjectType).IsRequired();
             builder.Property(m => m.LabourCost).IsRequired();
             builder.Property(m => m.MiscellaneousIsUsePercentage).IsRequired();
             builder.Property(m => m.TransportationIsUsePercentage).IsRequired();

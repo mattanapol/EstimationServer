@@ -29,7 +29,6 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     MiscellaneousPercentage = table.Column<decimal>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Owner = table.Column<string>(nullable: true),
-                    ProjectType = table.Column<string>(nullable: false),
                     Remark = table.Column<string>(nullable: true),
                     SubmitBy = table.Column<string>(nullable: true),
                     TransportationIsUsePercentage = table.Column<bool>(nullable: false),

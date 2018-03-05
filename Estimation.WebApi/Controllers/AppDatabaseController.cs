@@ -14,14 +14,14 @@ namespace Estimation.WebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/database/material/")]
-    public class MaterialDatabaseController : Controller
+    public class AppDatabaseController : Controller
     {
-        private readonly IMaterialDbMigrationService _materialDbMigrationService;
+        private readonly IAppDbMigrationService _materialDbMigrationService;
         /// <summary>
         /// Constructor of material database controller
         /// </summary>
         /// <param name="materialDbMigrationService"></param>
-        public MaterialDatabaseController(IMaterialDbMigrationService materialDbMigrationService)
+        public AppDatabaseController(IAppDbMigrationService materialDbMigrationService)
         {
             _materialDbMigrationService = materialDbMigrationService ?? throw new ArgumentNullException(nameof(materialDbMigrationService));
         }
@@ -35,7 +35,7 @@ namespace Estimation.WebApi.Controllers
         {
             await _materialDbMigrationService.Migrate();
 
-            return Ok(OutgoingResult<string>.SuccessResponse("Migrate material database complete."));
+            return Ok(OutgoingResult<string>.SuccessResponse("Migrate application database complete."));
         }
     }
 }

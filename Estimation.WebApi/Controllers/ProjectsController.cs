@@ -38,13 +38,8 @@ namespace Estimation.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProject()
         {
-            IList<ProjectInfo> projects = new List<ProjectInfo>
-            {
-                new ProjectInfo(){Id = 1, Name = "Computer Example Project", CreatedDate = DateTime.Now, ProjectType = "Computer" },
-                new ProjectInfo(){Id = 2, Name = "Electronic Example Project", CreatedDate = DateTime.Now, ProjectType = "Electronic" },
-                new ProjectInfo(){Id = 3, Name = "Mechanic Example Project", CreatedDate = DateTime.Now, ProjectType = "Mechanic" }
-            };
-            return Ok(OutgoingResult<IList<ProjectInfo>>.SuccessResponse(projects));
+            IEnumerable<ProjectInfoLightDto> projects = await _projectRepository.GetAllProjectInfo();
+            return Ok(OutgoingResult<IEnumerable<ProjectInfoLightDto>>.SuccessResponse(projects));
         }
 
         /// <summary>
@@ -54,14 +49,8 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProject(int id)
         {
-            ProjectInfo project = new ProjectInfo()
-            {
-                Id = id,
-                Name = "Example Project",
-                CreatedDate = DateTime.Now,
-                ProjectType = "Mechanic"
-            };
-            return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(project));
+            var result = await _projectRepository.GetProjectInfo(id);
+            return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
         }
 
         /// <summary>
@@ -75,16 +64,17 @@ namespace Estimation.WebApi.Controllers
             var result = await _projectRepository.CreateProjectInfo(projectInfo);
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
         }
-        
+
         /// <summary>
-        /// Edit project information by id.
+        /// Update project information by id.
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="value"></param>
+        /// <param name="project"></param>
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditProject(int id, [FromBody]ProjectInfoIncommingDto value)
+        public async Task<IActionResult> UpdateProjectInfo(int id, [FromBody]ProjectInfoIncommingDto project)
         {
-            var result = new ProjectInfo() { Id = 1, Name = value.Name, CreatedDate = DateTime.Now, ProjectType = value.ProjectType };
+            ProjectInfo projectInfo = TypeMappingService.Map<ProjectInfoIncommingDto, ProjectInfo>(project);
+            var result = await _projectRepository.UpdateProjectInfo(id, projectInfo);
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
         }
         

@@ -78,9 +78,6 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
 
                     b.Property<string>("Owner");
 
-                    b.Property<string>("ProjectType")
-                        .IsRequired();
-
                     b.Property<string>("Remark");
 
                     b.Property<string>("SubmitBy");

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Estimation.Services.Interfaces
 {
-    public interface IMaterialDbMigrationService
+    public interface IAppDbMigrationService
     {
         Task Migrate();
 
