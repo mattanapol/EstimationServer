@@ -93,5 +93,10 @@ namespace Estimation.Domain.Models
         /// Transportation cost
         /// </summary>
         public Cost Transportation { get; set; }
+
+        /// <summary>
+        /// List of main materials
+        /// </summary>
+        public IEnumerable<MainMaterial> ProjectMaterials { get; set; }
     }
 }

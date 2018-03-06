@@ -12,10 +12,13 @@ using System.Threading.Tasks;
 
 namespace Estimation.DataAccess.Repositories
 {
+    /// <summary>
+    /// Project repository class
+    /// </summary>
     public class ProjectRepository : BaseProjectRepository, IProjectRepository
     {
         /// <summary>
-        /// Project repository
+        /// Project repository constructor
         /// </summary>
         /// <param name="projectDbContext"></param>
         /// <param name="typeMappingService"></param>
@@ -25,6 +28,11 @@ namespace Estimation.DataAccess.Repositories
         {
         }
 
+        /// <summary>
+        /// Create project infomation record
+        /// </summary>
+        /// <param name="projectInfo"></param>
+        /// <returns></returns>
         public async Task<ProjectInfo> CreateProjectInfo(ProjectInfo projectInfo)
         {
             // Add main material record
@@ -37,6 +45,22 @@ namespace Estimation.DataAccess.Repositories
             return TypeMappingService.Map<ProjectInfoDb, ProjectInfo>(projectDb);
         }
 
+        public async Task DeleteProjectInfo(int id)
+        {
+            var projectDb = await DbContext.ProjectInfo
+                                             .AsNoTracking()
+                                             .SingleOrDefaultAsync(s => s.Id == id);
+            if (projectDb == null)
+                return;
+            DbContext.ProjectInfo.Remove(projectDb);
+
+            await DbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get all project information
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ProjectInfoLightDto>> GetAllProjectInfo()
         {
             var projectInfoDbs = await DbContext.ProjectInfo
@@ -46,9 +70,15 @@ namespace Estimation.DataAccess.Repositories
             return projectInfoDbs;
         }
 
+        /// <summary>
+        /// Get project information record by project id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ProjectInfo> GetProjectInfo(int id)
         {
             ProjectInfoDb projectInfoDb = await DbContext.ProjectInfo
+                .Include(p => p.MaterialGroups)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (projectInfoDb == null)
@@ -58,6 +88,12 @@ namespace Estimation.DataAccess.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Update project information
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="projectInfo"></param>
+        /// <returns></returns>
         public async Task<ProjectInfo> UpdateProjectInfo(int id, ProjectInfo projectInfo)
         {
             var projectInfoDb = await DbContext.ProjectInfo

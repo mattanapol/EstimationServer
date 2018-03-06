@@ -16,6 +16,7 @@ namespace Estimation.Common.AutoMapper
             MapSubMaterials();
             MapMaterials();
             MapProjectInfos();
+            MapMaterialGroups();
         }
 
         private void MapMaterials()
@@ -75,6 +76,11 @@ namespace Estimation.Common.AutoMapper
             CreateMap<ProjectInfoDb, ProjectInfo>()
                 .ForMember(dest => dest.Miscellaneous, opts => opts.MapFrom(src => new Cost() { Percentage = src.MiscellaneousPercentage, Manual = src.MiscellaneousManual, IsUsePercentage = src.MiscellaneousIsUsePercentage }))
                 .ForMember(dest => dest.Transportation, opts => opts.MapFrom(src => new Cost() { Percentage = src.TransportationPercentage, Manual = src.TransportationManual, IsUsePercentage = src.TransportationIsUsePercentage }));
+        }
+
+        private void MapMaterialGroups()
+        {
+            CreateMap<MaterialGroupDb, ProjectMaterialGroup>();
         }
     }
 }
