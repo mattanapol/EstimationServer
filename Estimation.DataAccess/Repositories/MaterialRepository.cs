@@ -57,7 +57,7 @@ namespace Estimation.DataAccess.Repositories
                                         .Include(m => m.SubMaterial)
                                         .ThenInclude(s=> s.MainMaterial)
                                         .AsNoTracking()
-                                        .SingleOrDefaultAsync(m => m.Id == materialId);
+                                        .FirstOrDefaultAsync(m => m.Id == materialId);
             var material = TypeMappingService.Map<MaterialDb, Material>(materialDb);
             return material;
         }
@@ -96,7 +96,7 @@ namespace Estimation.DataAccess.Repositories
                                             .Include(m => m.SubMaterial)
                                             .ThenInclude(s => s.MainMaterial)
                                             .AsNoTracking()
-                                            .SingleOrDefaultAsync(e => e.Id == materialId);
+                                            .FirstOrDefaultAsync(e => e.Id == materialId);
             if (materialDb == null)
                 throw new ArgumentOutOfRangeException(nameof(materialId), $"Material id = { materialId } does not exist.");
 
@@ -128,7 +128,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialDb = await DbContext.Materials
                                              .AsNoTracking()
-                                             .SingleOrDefaultAsync(s => s.Id == materialId);
+                                             .FirstOrDefaultAsync(s => s.Id == materialId);
             if (materialDb == null)
                 return;
             DbContext.Materials.Remove(materialDb);

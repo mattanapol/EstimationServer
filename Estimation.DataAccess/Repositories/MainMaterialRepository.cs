@@ -57,7 +57,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialDb = await DbContext.MainMaterials
                                              .AsNoTracking()
-                                             .SingleOrDefaultAsync(s => s.Id == id);
+                                             .FirstOrDefaultAsync(s => s.Id == id);
             if (materialDb == null)
                 return;
             DbContext.MainMaterials.Remove(materialDb);
@@ -76,7 +76,7 @@ namespace Estimation.DataAccess.Repositories
                 .Include(m => m.SubMaterials)
                 .ThenInclude(s => s.Materials)
                 .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (mainMaterialDb == null)
                 throw new KeyNotFoundException($"Main material id = {id} is not exist.");
 
@@ -95,7 +95,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var mainMaterialDb = await DbContext.MainMaterials
                                             .AsNoTracking()
-                                            .SingleOrDefaultAsync(e => e.Id == id);
+                                            .FirstOrDefaultAsync(e => e.Id == id);
             if (mainMaterialDb == null)
                 throw new ArgumentOutOfRangeException(nameof(mainMaterialDb), $"Main material id = { id } does not exist.");
 

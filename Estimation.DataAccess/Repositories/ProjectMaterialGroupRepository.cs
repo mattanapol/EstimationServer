@@ -58,7 +58,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var projectMaterialDb = await DbContext.MaterialGroup
                                              .AsNoTracking()
-                                             .SingleOrDefaultAsync(s => s.Id == id);
+                                             .FirstOrDefaultAsync(s => s.Id == id);
             if (projectMaterialDb == null)
                 return;
             DbContext.MaterialGroup.Remove(projectMaterialDb);

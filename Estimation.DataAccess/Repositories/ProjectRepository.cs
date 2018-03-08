@@ -89,7 +89,7 @@ namespace Estimation.DataAccess.Repositories
             ProjectInfoDb projectInfoDb = await DbContext.ProjectInfo
                 .Include(p => p.MaterialGroups)
                 .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (projectInfoDb == null)
                 throw new KeyNotFoundException($"Project id = {id} is not exist.");
 
@@ -107,7 +107,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var projectInfoDb = await DbContext.ProjectInfo
                                             .AsNoTracking()
-                                            .SingleOrDefaultAsync(e => e.Id == id);
+                                            .FirstOrDefaultAsync(e => e.Id == id);
             if (projectInfoDb == null)
                 throw new ArgumentOutOfRangeException(nameof(id), $"Project id = { id } does not exist.");
 
