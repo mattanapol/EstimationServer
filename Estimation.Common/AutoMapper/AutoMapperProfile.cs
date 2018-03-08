@@ -17,6 +17,7 @@ namespace Estimation.Common.AutoMapper
             MapMaterials();
             MapProjectInfos();
             MapMaterialGroups();
+            MapProjectMaterial();
         }
 
         private void MapMaterials()
@@ -80,7 +81,18 @@ namespace Estimation.Common.AutoMapper
 
         private void MapMaterialGroups()
         {
+            CreateMap<ProjectMaterialGroupIncomingDto, ProjectMaterialGroup>();
+            CreateMap<ProjectMaterialGroupUpdateIncomingDto, ProjectMaterialGroup>();
+
+            CreateMap<ProjectMaterialGroup, MaterialGroupDb>()
+                .ForMember(dest => dest.Materials, opts => opts.MapFrom(src => Mapper.Map<IEnumerable<Material>, List<ProjectMaterialDb>>(src.Materials)));
             CreateMap<MaterialGroupDb, ProjectMaterialGroup>();
+        }
+
+        private void MapProjectMaterial()
+        {
+            CreateMap<ProjectMaterialDb, Material>();
+            CreateMap<Material, ProjectMaterialDb>();
         }
     }
 }

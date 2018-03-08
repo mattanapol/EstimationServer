@@ -97,6 +97,6 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// List of main materials
         /// </summary>
-        public IEnumerable<MainMaterial> ProjectMaterials { get; set; }
+        public IEnumerable<ProjectMaterialGroup> MaterialGroups { get; set; }
     }
 }

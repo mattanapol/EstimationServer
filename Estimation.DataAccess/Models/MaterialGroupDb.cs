@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Estimation.DataAccess.Models
 {
-    public class MaterialGroupDb
+    public class MaterialGroupDb: BaseEntity
     {
         /// <summary>
         /// Group identification
@@ -15,6 +15,11 @@ namespace Estimation.DataAccess.Models
         /// Group code
         /// </summary>
         public string GroupCode { get; set; }
+
+        /// <summary>
+        /// Material type
+        /// </summary>
+        public string MaterialType { get; set; }
 
         /// <summary>
         /// Project Id this group belong to

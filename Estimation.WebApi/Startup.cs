@@ -68,6 +68,7 @@ namespace Estimation.WebApi
                             }
                         };
                         options.SerializerSettings.FloatParseHandling = Newtonsoft.Json.FloatParseHandling.Decimal;
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     });
 
             // Cors

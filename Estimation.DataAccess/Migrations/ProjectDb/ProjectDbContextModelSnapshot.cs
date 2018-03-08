@@ -24,11 +24,17 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("CreatedDate");
+
                     b.Property<string>("GroupCode")
                         .IsRequired();
 
                     b.Property<string>("GroupName")
                         .IsRequired();
+
+                    b.Property<DateTime?>("LastModifiedDate");
+
+                    b.Property<string>("MaterialType");
 
                     b.Property<int?>("ParentGroupId");
 

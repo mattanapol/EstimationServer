@@ -22,7 +22,7 @@ namespace Estimation.WebApi.Controllers
         private readonly IProjectRepository _projectRepository;
 
         /// <summary>
-        /// Constructor of material controller
+        /// Constructor of project controller
         /// </summary>
         /// <param name="typeMappingService"></param>
         /// <param name="projectRepository"></param>
@@ -85,6 +85,7 @@ namespace Estimation.WebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            await _projectRepository.DeleteProjectInfo(id);
             return Ok(OutgoingResult<string>.SuccessResponse("Deleted"));
         }
     }

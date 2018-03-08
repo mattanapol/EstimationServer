@@ -46,8 +46,11 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
                     GroupCode = table.Column<string>(nullable: false),
                     GroupName = table.Column<string>(nullable: false),
+                    LastModifiedDate = table.Column<DateTime>(nullable: true),
+                    MaterialType = table.Column<string>(nullable: true),
                     ParentGroupId = table.Column<int>(nullable: true),
                     ProjectId = table.Column<int>(nullable: false)
                 },

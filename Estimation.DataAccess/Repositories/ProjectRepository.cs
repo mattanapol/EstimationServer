@@ -49,7 +49,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var projectDb = await DbContext.ProjectInfo
                                              .AsNoTracking()
-                                             .SingleOrDefaultAsync(s => s.Id == id);
+                                             .FirstOrDefaultAsync(s => s.Id == id);
             if (projectDb == null)
                 return;
             DbContext.ProjectInfo.Remove(projectDb);
@@ -65,7 +65,16 @@ namespace Estimation.DataAccess.Repositories
         {
             var projectInfoDbs = await DbContext.ProjectInfo
                 .AsNoTracking()
-                .Select(p => new ProjectInfoLightDto() { Id = p.Id, Code = p.Code, LastModifiedDate = p.LastModifiedDate, CreatedDate = p.CreatedDate, Name = p.Name, Owner = p.Owner, SubmitBy = p.SubmitBy})
+                .Select(p => new ProjectInfoLightDto()
+                {
+                    Id = p.Id,
+                    Code = p.Code,
+                    LastModifiedDate = p.LastModifiedDate,
+                    CreatedDate = p.CreatedDate,
+                    Name = p.Name,
+                    Owner = p.Owner,
+                    SubmitBy = p.SubmitBy
+                })
                 .ToArrayAsync();
             return projectInfoDbs;
         }

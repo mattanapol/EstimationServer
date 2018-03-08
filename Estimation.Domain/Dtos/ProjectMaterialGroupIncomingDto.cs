@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Domain.Models
+namespace Estimation.Domain.Dtos
 {
-    public class ProjectMaterialGroup
+    public class ProjectMaterialGroupIncomingDto
     {
-        /// <summary>
-        /// Group identification
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Group code
         /// </summary>
@@ -30,15 +25,5 @@ namespace Estimation.Domain.Models
         /// Parent group identification
         /// </summary>
         public int? ParentGroupId { get; set; }
-
-        /// <summary>
-        /// Materials
-        /// </summary>
-        public List<Material> Materials { get; set; }
-
-        /// <summary>
-        /// Project information this group belong to
-        /// </summary>
-        public ProjectInfo ProjectInfo { get; set; }
     }
 }
