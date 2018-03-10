@@ -26,6 +26,7 @@ namespace Estimation.Ioc
         {
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectMaterialGroupRepository, ProjectMaterialGroupRepository>();
+            services.AddScoped<IProjectMaterialRepository, ProjectMaterialRepository>();
         }
     }
 }

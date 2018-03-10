@@ -93,6 +93,8 @@ namespace Estimation.Common.AutoMapper
         {
             CreateMap<ProjectMaterialDb, Material>();
             CreateMap<Material, ProjectMaterialDb>();
+
+            CreateMap<ProjectMaterialIncomingDto, Material>();
         }
     }
 }

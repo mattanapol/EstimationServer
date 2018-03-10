@@ -126,6 +126,26 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Estimation.WebApi.Controllers.ProjectMaterialController">
+            <summary>
+            Project material controller class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IProjectMaterialRepository)">
+            <summary>
+            Constructor of project material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="projectMaterialRepository"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.AddMaterialToGroupById(System.Int32,Estimation.Domain.Dtos.ProjectMaterialIncomingDto)">
+            <summary>
+            Add material to material group by material group id.
+            </summary>
+            <param name="projectMaterialGroupId"></param>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectMaterialGroupController">
             <summary>
             Project material group controller

@@ -36,6 +36,7 @@ namespace Estimation.DataAccess.Repositories
                 throw new KeyNotFoundException($"Project material group id = {projectMaterialGroup} is not exist.");
             
             var projectMaterialDb = TypeMappingService.Map<Material, ProjectMaterialDb>(material);
+            projectMaterialDb.MaterialGroupId = projectMaterialGroup.Id;
             projectMaterialDb.MaterialType = projectMaterialGroup.MaterialType;
             DbContext.Material.Add(projectMaterialDb);
 
