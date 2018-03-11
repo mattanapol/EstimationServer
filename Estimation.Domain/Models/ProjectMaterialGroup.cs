@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Estimation.Domain.Models
@@ -34,11 +35,21 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Materials
         /// </summary>
-        public List<Material> Materials { get; set; }
+        public Collection<Material> Materials { get; set; }
+
+        /// <summary>
+        /// Project id that this group belong to.
+        /// </summary>
+        public int ProjectId { get; set; }
 
         /// <summary>
         /// Project information this group belong to
         /// </summary>
         public ProjectInfo ProjectInfo { get; set; }
+
+        /// <summary>
+        /// Child group of this material group
+        /// </summary>
+        public Collection<ProjectMaterialGroup> ChildGroups { get; set; }
     }
 }

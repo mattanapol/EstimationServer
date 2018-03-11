@@ -151,12 +151,12 @@
             Project material group controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialGroupController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IProjectMaterialGroupRepository)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialGroupController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.IProjectMaterialGroupService)">
             <summary>
             Constructor of project material group controller
             </summary>
             <param name="typeMappingService"></param>
-            <param name="projectMaterialGroupRepository"></param>
+            <param name="projectMaterialGroupService"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ProjectMaterialGroupController.CreateProjectMaterialGroup(System.Int32,Estimation.Domain.Dtos.ProjectMaterialGroupIncomingDto)">
             <summary>

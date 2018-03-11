@@ -38,7 +38,16 @@ namespace Estimation.DataAccess.Repositories
         {
             var project = await _projectRepository.GetProjectInfo(projectId);
             if (project == null)
-                throw new KeyNotFoundException($"Project id = {projectId} is not exist.");
+                throw new ArgumentOutOfRangeException($"Project id = {projectId} is not exist.");
+
+            if (projectInfo.ParentGroupId.GetValueOrDefault(0) > 0)
+            {
+                var parentMaterialGroup = await GetProjectMaterialGroup(projectInfo.ParentGroupId.Value);
+                if (parentMaterialGroup.ProjectId != projectId)
+                    throw new ArgumentException("ParentGroupId is not in the same project.");
+                else if (parentMaterialGroup.Materials.Count > 0)
+                    throw new ArgumentException("ParentGroupId is already has materials.");
+            }
 
             var materialGroupDb = TypeMappingService.Map<ProjectMaterialGroup, MaterialGroupDb>(projectInfo);
             materialGroupDb.ProjectId = projectId;
@@ -93,6 +102,9 @@ namespace Estimation.DataAccess.Repositories
                 .Include(e => e.Materials)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (materialGroupDb == null)
+                throw new ArgumentOutOfRangeException($"Project material group id = {id} is not exist.");
 
             var materialGroup = TypeMappingService.Map<MaterialGroupDb, ProjectMaterialGroup>(materialGroupDb);
             return materialGroup;

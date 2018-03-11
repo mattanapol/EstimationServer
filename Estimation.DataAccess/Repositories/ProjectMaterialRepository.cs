@@ -33,7 +33,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.GetProjectMaterialGroup(materialGroupId);
             if (projectMaterialGroup == null)
-                throw new KeyNotFoundException($"Project material group id = {projectMaterialGroup} is not exist.");
+                throw new ArgumentOutOfRangeException($"Project material group id = {materialGroupId} is not exist.");
             
             var projectMaterialDb = TypeMappingService.Map<Material, ProjectMaterialDb>(material);
             projectMaterialDb.MaterialGroupId = projectMaterialGroup.Id;

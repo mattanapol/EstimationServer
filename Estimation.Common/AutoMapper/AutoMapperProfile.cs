@@ -87,6 +87,7 @@ namespace Estimation.Common.AutoMapper
             CreateMap<ProjectMaterialGroup, MaterialGroupDb>()
                 .ForMember(dest => dest.Materials, opts => opts.MapFrom(src => Mapper.Map<IEnumerable<Material>, List<ProjectMaterialDb>>(src.Materials)));
             CreateMap<MaterialGroupDb, ProjectMaterialGroup>();
+                //.ForMember(dest => dest.Materials, opts => opts.MapFrom(src => Mapper.Map<IEnumerable<ProjectMaterialDb>,List<Material>>(src.Materials)));
         }
 
         private void MapProjectMaterial()
