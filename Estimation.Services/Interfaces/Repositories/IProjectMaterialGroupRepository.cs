@@ -9,10 +9,10 @@ namespace Estimation.Services.Interfaces.Repositories
     public interface IProjectMaterialGroupRepository
     {
         /// <summary>
-        /// Get all project material records by project id
+        /// Get all project material group id by project id
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterial(int projectId);
+        Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterialGroupInProject(int projectId);
 
         /// <summary>
         /// Create project material group record to specific project id

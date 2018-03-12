@@ -80,7 +80,7 @@ namespace Estimation.DataAccess.Repositories
         /// </summary>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterial(int projectId)
+        public async Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterialGroupInProject(int projectId)
         {
             var materialGroupDbs = await DbContext.MaterialGroup
                 .AsNoTracking()

@@ -20,15 +20,19 @@ namespace Estimation.WebApi.Controllers
     public class ProjectsController : EstimationBaseController
     {
         private readonly IProjectRepository _projectRepository;
+        private readonly IProjectService _projectService;
 
         /// <summary>
         /// Constructor of project controller
         /// </summary>
         /// <param name="typeMappingService"></param>
         /// <param name="projectRepository"></param>
-        public ProjectsController(ITypeMappingService typeMappingService, IProjectRepository projectRepository) : base(typeMappingService)
+        /// <param name="projectService"></param>
+        public ProjectsController(ITypeMappingService typeMappingService, IProjectRepository projectRepository,
+            IProjectService projectService) : base(typeMappingService)
         {
             _projectRepository = projectRepository ?? throw new ArgumentNullException(nameof(projectRepository));
+            _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
         }
 
         /// <summary>
@@ -49,7 +53,7 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProject(int id)
         {
-            var result = await _projectRepository.GetProjectInfo(id);
+            var result = await _projectService.GetProject(id);
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
         }
 

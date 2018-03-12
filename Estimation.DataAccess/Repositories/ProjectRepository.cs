@@ -87,7 +87,7 @@ namespace Estimation.DataAccess.Repositories
         public async Task<ProjectInfo> GetProjectInfo(int id)
         {
             ProjectInfoDb projectInfoDb = await DbContext.ProjectInfo
-                .Include(p => p.MaterialGroups)
+                //.Include(p => p.MaterialGroups)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (projectInfoDb == null)

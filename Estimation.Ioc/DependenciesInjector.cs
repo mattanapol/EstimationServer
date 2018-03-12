@@ -34,6 +34,7 @@ namespace Estimation.Ioc
             _services.AddScoped<IAppDbMigrationService, AppDbMigrationService>();
 
             RepositoriesInjector.Inject(_services);
+            ServicesInjector.Inject(_services);
         }
     }
 }

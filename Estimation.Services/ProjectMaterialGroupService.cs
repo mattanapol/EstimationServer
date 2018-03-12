@@ -54,8 +54,16 @@ namespace Estimation.Services
         /// <returns></returns>
         public async Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterial(int projectId)
         {
-            var projectMaterialGroups = await _projectMaterialGroupRepository.GetAllProjectMaterial(projectId);
-            return projectMaterialGroups;
+            var projectMaterialGroups = await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectId);
+            Collection<ProjectMaterialGroup> results = new Collection<ProjectMaterialGroup>(projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == 0).ToList());
+            projectMaterialGroups = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) > 0);
+            foreach (var result in results)
+            {
+                var projectMaterialGroupChilds = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == result.Id);
+                result.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChilds.ToList());
+            }
+            
+            return results;
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> GetProjectMaterialGroup(int id)
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.GetProjectMaterialGroup(id);
-            var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterial(projectMaterialGroup.ProjectId))
+            var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
                 .Where(e => e.ParentGroupId.GetValueOrDefault(0) == id);
             projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
 

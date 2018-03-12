@@ -15,7 +15,6 @@ namespace Estimation.Ioc
         {
             InjectMaterialRepository(services);
             InjectProjectRepository(services);
-            InjectProjectServices(services);
         }
 
         private static void InjectMaterialRepository(IServiceCollection services)
@@ -30,11 +29,6 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectMaterialGroupRepository, ProjectMaterialGroupRepository>();
             services.AddScoped<IProjectMaterialRepository, ProjectMaterialRepository>();
-        }
-
-        private static void InjectProjectServices(IServiceCollection services)
-        {
-            services.AddScoped<IProjectMaterialGroupService, ProjectMaterialGroupService>();
         }
     }
 }
