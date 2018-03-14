@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Estimation.Domain.Dtos
 {
-    /// <summary>
-    /// Main material incomming dto
-    /// </summary>
-    public class MainMaterialIncommingDto
+    public abstract class MaterialOutgoingBaseDto
     {
+        /// <summary>
+        /// Material Id
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Material Name
         /// </summary>
@@ -18,7 +20,7 @@ namespace Estimation.Domain.Dtos
         /// <summary>
         /// Material Code
         /// </summary>
-        public int? Code { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
         /// Material type

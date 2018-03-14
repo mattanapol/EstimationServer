@@ -71,6 +71,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Class = table.Column<int>(nullable: false),
                     Code = table.Column<int>(nullable: false),
                     CodeAsString = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: true),

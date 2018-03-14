@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Estimation.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,5 +21,10 @@ namespace Estimation.DataAccess.Models
         /// Material group
         /// </summary>
         public MaterialGroupDb MaterialGroup { get; set; }
+
+        /// <summary>
+        /// Material class
+        /// </summary>
+        public MaterialClass Class { get; set; }
     }
 }

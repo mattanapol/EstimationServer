@@ -103,6 +103,7 @@ namespace Estimation.DataAccess.Repositories
             mainMaterialDb.Name = mainMaterial.Name;
             mainMaterialDb.Code = mainMaterial.Code;
             mainMaterialDb.MaterialType = mainMaterial.MaterialType;
+            mainMaterialDb.Class = mainMaterial.Class;
             DbContext.Entry(mainMaterialDb).State = EntityState.Modified;
             DbContext.Entry(mainMaterialDb).Property(e => e.CreatedDate).IsModified = false;
             DbContext.Entry(mainMaterialDb).Property(e => e.Id).IsModified = false;

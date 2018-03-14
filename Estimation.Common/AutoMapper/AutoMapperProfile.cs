@@ -27,11 +27,19 @@ namespace Estimation.Common.AutoMapper
 
             CreateMap<MaterialInfo, MaterialDb>();
             CreateMap<MaterialDb, MaterialInfo>()
-                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"));
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"))
+                .AfterMap((src, dest) => {
+                    if (src.SubMaterial != null && src.SubMaterial.MainMaterial != null)
+                        dest.Class = src.SubMaterial.MainMaterial.Class;
+                });
 
             CreateMap<Material, MaterialDb>();
             CreateMap<MaterialDb, Material>()
-                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"));
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.SubMaterial.MainMaterial.Code.ToString()}-{src.SubMaterial.Code.ToString("D2")}-{src.Code.ToString("D2")}"))
+                .AfterMap((src, dest) => {
+                    if (src.SubMaterial != null && src.SubMaterial.MainMaterial != null)
+                        dest.Class = src.SubMaterial.MainMaterial.Class;
+                });
         }
 
         private void MapMainMaterials()
@@ -53,11 +61,19 @@ namespace Estimation.Common.AutoMapper
 
             CreateMap<MaterialInfo, SubMaterialDb>();
             CreateMap<SubMaterialDb, MaterialInfo>()
-                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.MainMaterial.Code.ToString()}-{src.Code.ToString("D2")}"));
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.MainMaterial.Code.ToString()}-{src.Code.ToString("D2")}"))
+                .AfterMap((src, dest) => {
+                    if (src.MainMaterial != null)
+                        dest.Class = src.MainMaterial.Class;
+                });
 
             CreateMap<SubMaterial, SubMaterialDb>();
             CreateMap<SubMaterialDb, SubMaterial>()
-                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.MainMaterial.Code.ToString()}-{src.Code.ToString("D2")}"));
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.MainMaterial.Code.ToString()}-{src.Code.ToString("D2")}"))
+                .AfterMap((src, dest) => {
+                    if (src.MainMaterial != null)
+                        dest.Class = src.MainMaterial.Class;
+                });
         }
 
         private void MapProjectInfos()

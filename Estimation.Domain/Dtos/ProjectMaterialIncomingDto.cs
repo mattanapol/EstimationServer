@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Estimation.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -12,6 +13,11 @@ namespace Estimation.Domain.Dtos
         /// </summary>
         [Required]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Material class
+        /// </summary>
+        public MaterialClass Class { get; set; }
 
         /// <summary>
         /// Material Code

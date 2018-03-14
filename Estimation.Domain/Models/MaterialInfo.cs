@@ -33,5 +33,10 @@ namespace Estimation.Domain.Models
         /// Material type
         /// </summary>
         public string MaterialType { get; set; }
+
+        /// <summary>
+        /// Material class
+        /// </summary>
+        public MaterialClass Class { get; set; }
     }
 }

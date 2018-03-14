@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Estimation.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +14,10 @@ namespace Estimation.DataAccess.Models
         /// Submaterial
         /// </summary>
         public IEnumerable<SubMaterialDb> SubMaterials { get; set; }
+
+        /// <summary>
+        /// Material class
+        /// </summary>
+        public MaterialClass Class { get; set; }
     }
 }
