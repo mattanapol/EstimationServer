@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.WebApi", "Estimation.WebApi\Estimation.WebApi.csproj", "{CB79B5EA-A349-4213-BF07-3885168765F7}"
 EndProject
@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.Utilities.WebApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Common", "Estimation.Common\Estimation.Common.csproj", "{1FF1247C-4E97-421A-8EA7-D7F1E3C9EB17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Ioc", "Estimation.Ioc\Estimation.Ioc.csproj", "{BEE53D37-FA86-40C3-8CDA-8E28467FF4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Ioc", "Estimation.Ioc\Estimation.Ioc.csproj", "{BEE53D37-FA86-40C3-8CDA-8E28467FF4F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.Utilities.Configurations", "Kaewsai.Utilities.Configurations\Kaewsai.Utilities.Configurations.csproj", "{B1056713-786A-4FB1-B952-2640DBA938ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{BEE53D37-FA86-40C3-8CDA-8E28467FF4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE53D37-FA86-40C3-8CDA-8E28467FF4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE53D37-FA86-40C3-8CDA-8E28467FF4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1056713-786A-4FB1-B952-2640DBA938ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1056713-786A-4FB1-B952-2640DBA938ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1056713-786A-4FB1-B952-2640DBA938ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1056713-786A-4FB1-B952-2640DBA938ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

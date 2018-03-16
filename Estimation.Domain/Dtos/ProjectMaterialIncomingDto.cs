@@ -17,6 +17,7 @@ namespace Estimation.Domain.Dtos
         /// <summary>
         /// Material class
         /// </summary>
+        [Required]
         public MaterialClass Class { get; set; }
 
         /// <summary>
