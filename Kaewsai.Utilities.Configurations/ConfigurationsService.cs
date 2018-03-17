@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kaewsai.Utilities.Configurations
 {
-    public class ConfigurationsService : IConfigurationsService
+    public abstract class ConfigurationsService : IConfigurationsService
     {
         IConfigurationsCache _configurationsCache;
         IConfigurationRepository _configurationDictRepository;
@@ -66,8 +66,11 @@ namespace Kaewsai.Utilities.Configurations
             return await _configurationDictRepository.GetAllConfiguration();
         }
 
-        public virtual async Task CreateDefaultConfigurations()
+        public abstract Task CreateDefaultConfigurations();
+
+        public Task MigrateAsync()
         {
+            throw new NotImplementedException();
         }
     }
 }

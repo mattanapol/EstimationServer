@@ -1,6 +1,8 @@
 ﻿using Estimation.Common.AutoMapper;
 using Estimation.DataAccess;
-using Estimation.Services.Interfaces;
+using Estimation.Interface;
+using Kaewsai.Utilities.Configurations;
+using Kaewsai.Utilities.Configurations.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -22,13 +24,18 @@ namespace Estimation.Ioc
 
         public void Inject()
         {
-            _services.AddSingleton<ITypeMappingService, AutoMapperService>();
+            _services.AddSingleton<Interface.ITypeMappingService, AutoMapperService>();
 
             _services.AddScoped<MaterialDbContext>((arg) => {
                 return new MaterialDbContext(_configuration.GetConnectionString("MaterialDb"));
             });
+
             _services.AddScoped<ProjectDbContext>((arg) => {
                 return new ProjectDbContext(_configuration.GetConnectionString("ProjectDb"));
+            });
+            
+            _services.AddScoped<ConfigurationDbContext>((arg) => {
+                return new ConfigurationDbContext(_configuration.GetConnectionString("ConfigurationDb"));
             });
 
             _services.AddScoped<IAppDbMigrationService, AppDbMigrationService>();

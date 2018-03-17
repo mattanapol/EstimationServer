@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Estimation.Services.Interfaces.Repositories
+namespace Estimation.Interface.Repositories
 {
     public interface ILocalStorageRepository
     {

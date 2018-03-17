@@ -1,10 +1,7 @@
 ﻿using Estimation.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Estimation.Services.Interfaces
+namespace Estimation.Interface
 {
     public interface IProjectService
     {

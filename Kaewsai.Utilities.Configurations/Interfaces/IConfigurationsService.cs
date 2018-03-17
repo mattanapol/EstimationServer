@@ -21,5 +21,7 @@ namespace Kaewsai.Utilities.Configurations.Interfaces
         Task<IEnumerable<ConfigurationDict>> GetAllConfiguration();
 
         Task CreateDefaultConfigurations();
+
+        Task MigrateAsync();
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Estimation.Services.Interfaces
+namespace Estimation.Interface
 {
     interface IFolderNavigationService
     {

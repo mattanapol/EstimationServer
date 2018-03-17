@@ -1,7 +1,9 @@
 ﻿using Estimation.DataAccess.Repositories;
 using Estimation.Services;
-using Estimation.Services.Interfaces;
-using Estimation.Services.Interfaces.Repositories;
+using Estimation.Interface;
+using Estimation.Interface.Repositories;
+using Kaewsai.Utilities.Configurations;
+using Kaewsai.Utilities.Configurations.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ namespace Estimation.Ioc
         {
             InjectMaterialRepository(services);
             InjectProjectRepository(services);
+            InjectConfigurationRepository(services);
         }
 
         private static void InjectMaterialRepository(IServiceCollection services)
@@ -29,6 +32,11 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectMaterialGroupRepository, ProjectMaterialGroupRepository>();
             services.AddScoped<IProjectMaterialRepository, ProjectMaterialRepository>();
+        }
+
+        private static void InjectConfigurationRepository(IServiceCollection services)
+        {
+            services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
         }
     }
 }

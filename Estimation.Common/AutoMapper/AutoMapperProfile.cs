@@ -2,6 +2,7 @@
 using Estimation.DataAccess.Models;
 using Estimation.Domain.Dtos;
 using Estimation.Domain.Models;
+using Kaewsai.Utilities.Configurations.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -112,6 +113,12 @@ namespace Estimation.Common.AutoMapper
             CreateMap<Material, ProjectMaterialDb>();
 
             CreateMap<ProjectMaterialIncomingDto, Material>();
+        }
+
+        private void MapConfiguration()
+        {
+            CreateMap<ConfigurationDict, ConfigurationDictDto>();
+            CreateMap<ConfigurationDictDto, ConfigurationDict>();
         }
     }
 }

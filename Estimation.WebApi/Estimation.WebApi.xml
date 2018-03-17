@@ -9,7 +9,7 @@
             Material database constroller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.#ctor(Estimation.Services.Interfaces.IAppDbMigrationService)">
+        <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.#ctor(Estimation.Interface.IAppDbMigrationService)">
             <summary>
             Constructor of material database controller
             </summary>
@@ -21,6 +21,52 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Estimation.WebApi.Controllers.ConfigurationController">
+            <summary>
+            Configuration controller class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.#ctor(Estimation.Interface.ITypeMappingService,Kaewsai.Utilities.Configurations.Interfaces.IConfigurationsService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Estimation.WebApi.Controllers.ConfigurationController"/> class.
+            </summary>
+            <param name="typeMappingService">Type mapping service.</param>
+            <param name="configurationsService">Configuration dict service.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.GetAllTitle">
+            <summary>
+            Gets all configuration title.
+            </summary>
+            <returns>The all.</returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.GetAll">
+            <summary>
+            Gets all configurations.
+            </summary>
+            <returns>The all.</returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.Get(System.String)">
+            <summary>
+            Get the specified configuration by title.
+            </summary>
+            <returns>The get.</returns>
+            <param name="title">Title.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.Post(Estimation.Domain.Dtos.ConfigurationDictDto)">
+            <summary>
+            Create configuration.
+            </summary>
+            <returns>The post.</returns>
+            <param name="configuration">Configuration.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ConfigurationController.Put(System.String,Estimation.Domain.Dtos.ConfigurationDictDto)">
+            <summary>
+            Update the specified configuration by title.
+            </summary>
+            <returns>The put.</returns>
+            <param name="title">Title.</param>
+            <param name="configuration">Configuration.</param>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.EstimationBaseController">
             <summary>
             Estimation base controller
@@ -31,7 +77,7 @@
             Type Mapping service
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.EstimationBaseController.#ctor(Estimation.Services.Interfaces.ITypeMappingService)">
+        <member name="M:Estimation.WebApi.Controllers.EstimationBaseController.#ctor(Estimation.Interface.ITypeMappingService)">
             <summary>
             Constructor of estimation base controller
             </summary>
@@ -42,7 +88,7 @@
             Main material controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository,Estimation.Interface.Repositories.IMainMaterialRepository,Estimation.Interface.Repositories.ISubMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
@@ -83,7 +129,7 @@
             Material controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository,Estimation.Interface.Repositories.IMainMaterialRepository,Estimation.Interface.Repositories.ISubMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
@@ -131,7 +177,7 @@
             Project material controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IProjectMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IProjectMaterialRepository)">
             <summary>
             Constructor of project material controller
             </summary>
@@ -151,7 +197,7 @@
             Project material group controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialGroupController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.IProjectMaterialGroupService)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialGroupController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IProjectMaterialGroupService)">
             <summary>
             Constructor of project material group controller
             </summary>
@@ -190,7 +236,7 @@
             Project controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectsController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IProjectRepository,Estimation.Services.Interfaces.IProjectService)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IProjectRepository,Estimation.Interface.IProjectService)">
             <summary>
             Constructor of project controller
             </summary>
@@ -234,7 +280,7 @@
             Sub material controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.SubMaterialController.#ctor(Estimation.Services.Interfaces.ITypeMappingService,Estimation.Services.Interfaces.Repositories.IMaterialRepository,Estimation.Services.Interfaces.Repositories.IMainMaterialRepository,Estimation.Services.Interfaces.Repositories.ISubMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.SubMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository,Estimation.Interface.Repositories.IMainMaterialRepository,Estimation.Interface.Repositories.ISubMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
@@ -270,6 +316,18 @@
             Get sub material by ID
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeConfigurationDbContextFactory.#ctor">
+            <summary>
+            Design time database context factory
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.DesignTimeConfigurationDbContextFactory.CreateDbContext(System.String[])">
+            <summary>
+            Creates the db context.
+            </summary>
+            <returns>The db context.</returns>
+            <param name="args">Arguments.</param>
         </member>
         <member name="T:Estimation.WebApi.Infrastructure.DesignTimeMaterialDbContextFactory">
             <summary>

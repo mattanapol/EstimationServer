@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Estimation.Services.Interfaces.Repositories;
+using Estimation.Interface.Repositories;
 
 namespace Estimation.DataAccess.Repositories
 {

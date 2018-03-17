@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Estimation.Services.Interfaces.Repositories
+namespace Estimation.Interface.Repositories
 {
     public interface IMainMaterialRepository
     {

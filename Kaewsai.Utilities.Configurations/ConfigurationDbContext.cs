@@ -8,6 +8,13 @@ using System.Text;
 
 namespace Kaewsai.Utilities.Configurations
 {
+    /// <summary>
+    /// Configuration db context
+    /// </summary>
+    /// <remarks>
+    /// dotnet ef migrations remove -c ConfigurationDbContext -s ..\Estimation.WebApi
+    /// dotnet ef migrations add InitialConfigurationDb -c ConfigurationDbContext -s ..\Estimation.WebApi
+    /// </remarks>
     public class ConfigurationDbContext: DbContext
     {
         /// <summary>

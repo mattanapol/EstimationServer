@@ -1,6 +1,6 @@
 ﻿using Estimation.Domain.Models;
-using Estimation.Services.Interfaces;
-using Estimation.Services.Interfaces.Repositories;
+using Estimation.Interface;
+using Estimation.Interface.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

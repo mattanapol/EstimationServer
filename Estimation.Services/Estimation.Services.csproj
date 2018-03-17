@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Estimation.Domain\Estimation.Domain.csproj" />
+    <ProjectReference Include="..\Estimation.Interface\Estimation.Interface.csproj" />
     <ProjectReference Include="..\Kaewsai.Utilities.Configurations\Kaewsai.Utilities.Configurations.csproj" />
   </ItemGroup>
 

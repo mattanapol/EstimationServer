@@ -1,8 +1,8 @@
 ﻿using Estimation.DataAccess.Models;
 using Estimation.Domain.Dtos;
 using Estimation.Domain.Models;
-using Estimation.Services.Interfaces;
-using Estimation.Services.Interfaces.Repositories;
+using Estimation.Interface;
+using Estimation.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
