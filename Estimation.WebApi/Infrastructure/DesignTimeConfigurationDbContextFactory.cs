@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Estimation.WebApi.Infrastructure
 {
+    /// <summary>
+    /// Design time for configuration db context factory class
+    /// </summary>
     public class DesignTimeConfigurationDbContextFactory : IDesignTimeDbContextFactory<ConfigurationDbContext>
     {
         /// <summary>

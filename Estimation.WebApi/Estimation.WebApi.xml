@@ -317,6 +317,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Estimation.WebApi.Infrastructure.DesignTimeConfigurationDbContextFactory">
+            <summary>
+            Design time for configuration db context factory class
+            </summary>
+        </member>
         <member name="M:Estimation.WebApi.Infrastructure.DesignTimeConfigurationDbContextFactory.#ctor">
             <summary>
             Design time database context factory
