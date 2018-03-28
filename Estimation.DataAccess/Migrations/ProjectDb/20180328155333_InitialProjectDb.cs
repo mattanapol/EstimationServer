@@ -25,14 +25,14 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     LabourCost = table.Column<decimal>(nullable: false),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MiscellaneousIsUsePercentage = table.Column<bool>(nullable: false),
-                    MiscellaneousManual = table.Column<decimal>(nullable: false),
+                    MiscellaneousManual = table.Column<int>(nullable: false),
                     MiscellaneousPercentage = table.Column<decimal>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Owner = table.Column<string>(nullable: true),
                     Remark = table.Column<string>(nullable: true),
                     SubmitBy = table.Column<string>(nullable: true),
                     TransportationIsUsePercentage = table.Column<bool>(nullable: false),
-                    TransportationManual = table.Column<decimal>(nullable: false),
+                    TransportationManual = table.Column<int>(nullable: false),
                     TransportationPercentage = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -51,8 +51,14 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     GroupName = table.Column<string>(nullable: false),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     MaterialType = table.Column<string>(nullable: true),
+                    MiscellaneousIsUsePercentage = table.Column<bool>(nullable: false),
+                    MiscellaneousManual = table.Column<int>(nullable: false),
+                    MiscellaneousPercentage = table.Column<decimal>(nullable: false),
                     ParentGroupId = table.Column<int>(nullable: true),
-                    ProjectId = table.Column<int>(nullable: false)
+                    ProjectId = table.Column<int>(nullable: false),
+                    TransportationIsUsePercentage = table.Column<bool>(nullable: false),
+                    TransportationManual = table.Column<int>(nullable: false),
+                    TransportationPercentage = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

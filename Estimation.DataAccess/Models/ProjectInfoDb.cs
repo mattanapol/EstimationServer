@@ -74,7 +74,7 @@ namespace Estimation.DataAccess.Models
         /// <summary>
         /// Miscellaneous manual cost
         /// </summary>
-        public decimal MiscellaneousManual { get; set; }
+        public int MiscellaneousManual { get; set; }
 
         /// <summary>
         /// Miscellaneous percentage cost
@@ -89,7 +89,7 @@ namespace Estimation.DataAccess.Models
         /// <summary>
         /// Transportation manual cost
         /// </summary>
-        public decimal TransportationManual { get; set; }
+        public int TransportationManual { get; set; }
 
         /// <summary>
         /// Transportation percentage cost

@@ -18,7 +18,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("Estimation.DataAccess.Models.MaterialGroupDb", b =>
                 {
@@ -37,9 +37,21 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
 
                     b.Property<string>("MaterialType");
 
+                    b.Property<bool>("MiscellaneousIsUsePercentage");
+
+                    b.Property<int>("MiscellaneousManual");
+
+                    b.Property<decimal>("MiscellaneousPercentage");
+
                     b.Property<int?>("ParentGroupId");
 
                     b.Property<int>("ProjectId");
+
+                    b.Property<bool>("TransportationIsUsePercentage");
+
+                    b.Property<int>("TransportationManual");
+
+                    b.Property<decimal>("TransportationPercentage");
 
                     b.HasKey("Id");
 
@@ -76,7 +88,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
 
                     b.Property<bool>("MiscellaneousIsUsePercentage");
 
-                    b.Property<decimal>("MiscellaneousManual");
+                    b.Property<int>("MiscellaneousManual");
 
                     b.Property<decimal>("MiscellaneousPercentage");
 
@@ -91,7 +103,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
 
                     b.Property<bool>("TransportationIsUsePercentage");
 
-                    b.Property<decimal>("TransportationManual");
+                    b.Property<int>("TransportationManual");
 
                     b.Property<decimal>("TransportationPercentage");
 

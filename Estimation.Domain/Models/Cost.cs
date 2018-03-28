@@ -17,7 +17,7 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Manual cost
         /// </summary>
-        public decimal Manual { get; set; }
+        public int Manual { get; set; }
 
         /// <summary>
         /// Percentage cost

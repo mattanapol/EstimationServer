@@ -275,6 +275,20 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.GetProjectSummary(System.Int32)">
+            <summary>
+            Get project summary by project id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.GetGroupSummary(System.Int32)">
+            <summary>
+            Get group summary by group id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.SubMaterialController">
             <summary>
             Sub material controller class

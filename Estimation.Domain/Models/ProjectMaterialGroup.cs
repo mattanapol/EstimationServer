@@ -51,5 +51,15 @@ namespace Estimation.Domain.Models
         /// Child group of this material group
         /// </summary>
         public Collection<ProjectMaterialGroup> ChildGroups { get; set; }
+
+        /// <summary>
+        /// Miscellaneous cost
+        /// </summary>
+        public Cost Miscellaneous { get; set; }
+
+        /// <summary>
+        /// Transportation cost
+        /// </summary>
+        public Cost Transportation { get; set; }
     }
 }
