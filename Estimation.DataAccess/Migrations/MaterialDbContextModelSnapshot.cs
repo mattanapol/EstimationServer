@@ -18,7 +18,7 @@ namespace Estimation.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("Estimation.DataAccess.Models.MainMaterialDb", b =>
                 {
@@ -48,9 +48,13 @@ namespace Estimation.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<decimal>("Accessory");
+
                     b.Property<int>("Code");
 
                     b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<string>("Description");
 
                     b.Property<decimal>("Fittings");
 

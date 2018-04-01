@@ -12,41 +12,46 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Sum of material price
         /// </summary>
-        int MaterialPrice { get; set; }
+        public decimal MaterialPrice { get; set; }
 
         /// <summary>
         /// Sum of accessories price
         /// </summary>
-        int Accessories { get; set; }
+        public decimal Accessories { get; set; }
+
+        /// <summary>
+        /// Sum of fittings price
+        /// </summary>
+        public decimal Fittings { get; set; }
 
         /// <summary>
         /// Sum of supporting price
         /// </summary>
-        int Supporting { get; set; }
+        public decimal Supporting { get; set; }
 
         /// <summary>
         /// Sum of painting price
         /// </summary>
-        int Painting { get; set; }
+        public decimal Painting { get; set; }
 
         /// <summary>
         /// Miscellaneous price
         /// </summary>
-        int Miscellaneous { get; set; }
+        public decimal Miscellaneous { get; set; }
 
         /// <summary>
         /// Sum of installation price
         /// </summary>
-        int Installation { get; set; }
+        public decimal Installation { get; set; }
 
         /// <summary>
         /// Transportation price
         /// </summary>
-        int Transportation { get; set; }
+        public decimal Transportation { get; set; }
 
         /// <summary>
         /// Overall price
         /// </summary>
-        int GrandTotal { get; set; }
+        public decimal GrandTotal { get; set; }
     }
 }

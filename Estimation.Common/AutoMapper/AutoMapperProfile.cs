@@ -107,7 +107,7 @@ namespace Estimation.Common.AutoMapper
                 .ForMember(dest => dest.TransportationManual, opts => opts.MapFrom(src => src.Transportation.Manual))
                 .ForMember(dest => dest.TransportationPercentage, opts => opts.MapFrom(src => src.Transportation.Percentage))
                 .ForMember(dest => dest.TransportationIsUsePercentage, opts => opts.MapFrom(src => src.Transportation.IsUsePercentage))
-                .ForMember(dest => dest.Materials, opts => opts.MapFrom(src => Mapper.Map<IEnumerable<Material>, List<ProjectMaterialDb>>(src.Materials)));
+                .ForMember(dest => dest.Materials, opts => opts.MapFrom(src => Mapper.Map<IEnumerable<ProjectMaterial>, List<ProjectMaterialDb>>(src.Materials)));
             CreateMap<MaterialGroupDb, ProjectMaterialGroup>()
                 .ForMember(dest => dest.Miscellaneous, opts => opts.MapFrom(src => new Cost() { Percentage = src.MiscellaneousPercentage, Manual = src.MiscellaneousManual, IsUsePercentage = src.MiscellaneousIsUsePercentage }))
                 .ForMember(dest => dest.Transportation, opts => opts.MapFrom(src => new Cost() { Percentage = src.TransportationPercentage, Manual = src.TransportationManual, IsUsePercentage = src.TransportationIsUsePercentage }));
@@ -115,10 +115,10 @@ namespace Estimation.Common.AutoMapper
 
         private void MapProjectMaterial()
         {
-            CreateMap<ProjectMaterialDb, Material>();
-            CreateMap<Material, ProjectMaterialDb>();
+            CreateMap<ProjectMaterialDb, ProjectMaterial>();
+            CreateMap<ProjectMaterial, ProjectMaterialDb>();
 
-            CreateMap<ProjectMaterialIncomingDto, Material>();
+            CreateMap<ProjectMaterialIncomingDto, ProjectMaterial>();
         }
 
         private void MapConfiguration()

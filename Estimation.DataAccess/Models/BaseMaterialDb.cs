@@ -7,6 +7,11 @@ namespace Estimation.DataAccess.Models
     public class BaseMaterialDb: MaterialInfoDb
     {
         /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// List Price
         /// </summary>
         public decimal ListPrice { get; set; }
@@ -30,6 +35,11 @@ namespace Estimation.DataAccess.Models
         /// Fittings
         /// </summary>
         public decimal Fittings { get; set; }
+
+        /// <summary>
+        /// Accessory
+        /// </summary>
+        public decimal Accessory { get; set; }
 
         /// <summary>
         /// Supporting

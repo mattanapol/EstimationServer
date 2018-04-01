@@ -77,10 +77,12 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Accessory = table.Column<decimal>(nullable: false),
                     Class = table.Column<int>(nullable: false),
                     Code = table.Column<int>(nullable: false),
                     CodeAsString = table.Column<string>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Fittings = table.Column<decimal>(nullable: false),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     ListPrice = table.Column<decimal>(nullable: false),
@@ -91,6 +93,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     NetPrice = table.Column<decimal>(nullable: false),
                     OfferPrice = table.Column<decimal>(nullable: false),
                     Painting = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
                     Remark = table.Column<string>(nullable: true),
                     Supporting = table.Column<decimal>(nullable: false),
                     Unit = table.Column<string>(nullable: true)

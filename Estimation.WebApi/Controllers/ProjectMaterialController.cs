@@ -40,9 +40,20 @@ namespace Estimation.WebApi.Controllers
         [HttpPost("{projectMaterialGroupId}")]
         public async Task<IActionResult> AddMaterialToGroupById(int projectMaterialGroupId, [FromBody]ProjectMaterialIncomingDto product)
         {
-            Material materialModel = TypeMappingService.Map<ProjectMaterialIncomingDto, Material>(product);
+            ProjectMaterial materialModel = TypeMappingService.Map<ProjectMaterialIncomingDto, ProjectMaterial>(product);
             var result = await _projectMaterialRepository.CreateMaterial(projectMaterialGroupId, materialModel);
             return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Get Project material by ID
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProjectMaterial(int id)
+        {
+            var result = await _projectMaterialRepository.GetProjectMaterial(id);
+            return Ok(OutgoingResult<ProjectMaterial>.SuccessResponse(result));
         }
     }
 }

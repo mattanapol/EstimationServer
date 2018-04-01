@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Estimation.Domain.Models;
 using Estimation.Interface;
+using Kaewsai.Utilities.WebApi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,7 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("project/{id}/summary")]
         public async Task<IActionResult> GetProjectSummary(int id)
         {
+            //var result = await _projectSummaryService.GetGroupSummary(id);
             return Ok(new ProjectSummary());
         }
 
@@ -46,7 +48,8 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("group/{id}/summary")]
         public async Task<IActionResult> GetGroupSummary(int id)
         {
-            return Ok(new GroupSummary());
+            var result = await _projectSummaryService.GetGroupSummary(id);
+            return Ok(OutgoingResult<ProjectSummary>.SuccessResponse(result));
         }
     }
 }

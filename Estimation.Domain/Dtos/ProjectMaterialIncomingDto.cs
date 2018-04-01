@@ -15,10 +15,20 @@ namespace Estimation.Domain.Dtos
         public string Name { get; set; }
 
         /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Material class
         /// </summary>
         [Required]
         public MaterialClass Class { get; set; }
+
+        /// <summary>
+        /// Quantity of material
+        /// </summary>
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Material Code
@@ -49,6 +59,11 @@ namespace Estimation.Domain.Dtos
         /// Fittings
         /// </summary>
         public decimal Fittings { get; set; }
+
+        /// <summary>
+        /// Accessory
+        /// </summary>
+        public decimal Accessory { get; set; }
 
         /// <summary>
         /// Supporting

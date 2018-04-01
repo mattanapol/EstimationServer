@@ -49,6 +49,9 @@ namespace Estimation.DataAccess.Repositories
                     throw new ArgumentException("ParentGroupId is already has materials.");
             }
 
+            // Default miscellaneous and transportation
+            projectInfo.Miscellaneous = project.Miscellaneous;
+            projectInfo.Transportation = project.Transportation;
             var materialGroupDb = TypeMappingService.Map<ProjectMaterialGroup, MaterialGroupDb>(projectInfo);
             materialGroupDb.ProjectId = projectId;
             DbContext.MaterialGroup.Add(materialGroupDb);

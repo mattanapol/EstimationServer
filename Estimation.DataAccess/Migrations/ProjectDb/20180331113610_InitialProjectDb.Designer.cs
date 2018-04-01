@@ -12,7 +12,7 @@ using System;
 namespace Estimation.DataAccess.Migrations.ProjectDb
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20180328155333_InitialProjectDb")]
+    [Migration("20180331113610_InitialProjectDb")]
     partial class InitialProjectDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,8 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<decimal>("Accessory");
+
                     b.Property<int>("Class");
 
                     b.Property<int>("Code");
@@ -126,6 +128,8 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                         .IsRequired();
 
                     b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<string>("Description");
 
                     b.Property<decimal>("Fittings");
 
@@ -147,6 +151,8 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     b.Property<decimal>("OfferPrice");
 
                     b.Property<decimal>("Painting");
+
+                    b.Property<int>("Quantity");
 
                     b.Property<string>("Remark");
 

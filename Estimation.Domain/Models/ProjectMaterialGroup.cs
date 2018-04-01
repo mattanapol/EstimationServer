@@ -35,7 +35,7 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Materials
         /// </summary>
-        public Collection<Material> Materials { get; set; }
+        public Collection<ProjectMaterial> Materials { get; set; }
 
         /// <summary>
         /// Project id that this group belong to.

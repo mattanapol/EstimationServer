@@ -8,6 +8,11 @@ namespace Estimation.DataAccess.Models
     public class ProjectMaterialDb: BaseMaterialDb
     {
         /// <summary>
+        /// Quantity of material
+        /// </summary>
+        public int Quantity { get; set; }
+
+        /// <summary>
         /// Material code as string
         /// </summary>
         public string CodeAsString { get; set; }

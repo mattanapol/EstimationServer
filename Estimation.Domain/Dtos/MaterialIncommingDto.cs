@@ -12,6 +12,11 @@ namespace Estimation.Domain.Dtos
         public string Name { get; set; }
 
         /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Material Code
         /// </summary>
         public int? Code { get; set; }
@@ -40,6 +45,11 @@ namespace Estimation.Domain.Dtos
         /// Fittings
         /// </summary>
         public decimal Fittings { get; set; }
+
+        /// <summary>
+        /// Accessory
+        /// </summary>
+        public decimal Accessory { get; set; }
 
         /// <summary>
         /// Supporting

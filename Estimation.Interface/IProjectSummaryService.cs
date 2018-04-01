@@ -20,6 +20,6 @@ namespace Estimation.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ProjectSummary> GetGroupSummary(int id);
+        Task<GroupSummary> GetGroupSummary(int id);
     }
 }

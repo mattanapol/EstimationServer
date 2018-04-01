@@ -56,8 +56,10 @@ namespace Estimation.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Accessory = table.Column<decimal>(nullable: false),
                     Code = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Fittings = table.Column<decimal>(nullable: false),
                     LastModifiedDate = table.Column<DateTime>(nullable: true),
                     ListPrice = table.Column<decimal>(nullable: false),

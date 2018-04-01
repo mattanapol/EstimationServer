@@ -9,11 +9,11 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Miscellaneous information
         /// </summary>
-        Cost MiscellaneousInfo { get; set; }
+        public Cost MiscellaneousInfo { get; set; }
 
         /// <summary>
         /// Transportation information
         /// </summary>
-        Cost TransportationInfo { get; set; }
+        public Cost TransportationInfo { get; set; }
     }
 }
