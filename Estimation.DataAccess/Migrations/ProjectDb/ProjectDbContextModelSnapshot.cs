@@ -65,6 +65,8 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CeilingSummary");
+
                     b.Property<string>("Code")
                         .IsRequired();
 

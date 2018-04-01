@@ -14,6 +14,7 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    CeilingSummary = table.Column<int>(nullable: false),
                     Code = table.Column<string>(nullable: false),
                     ConstructionPlace = table.Column<string>(nullable: true),
                     ConstructionScale = table.Column<string>(nullable: true),

@@ -36,12 +36,27 @@ namespace Estimation.Services
                 // Sum all materials
                 foreach (var material in projectMaterialGroup.Materials)
                 {
-                    groupSummary.Accessories += material.Accessory;
-                    groupSummary.Fittings += material.Fittings;
-                    groupSummary.Painting += material.Painting;
-                    groupSummary.Supporting += material.Supporting;
-                    //groupSummary.Installation += material.
+                    groupSummary.Accessories += material.TotalAccessory;
+                    groupSummary.Fittings += material.Totalfitting;
+                    groupSummary.Painting += material.TotalPainting;
+                    groupSummary.Supporting += material.TotalSupport;
+                    groupSummary.Installation += material.Installation;
+                    groupSummary.MaterialPrice += material.TotalOfferPrice;
                 }
+
+                groupSummary.Transportation = groupSummary.TransportationInfo.IsUsePercentage ?
+                    groupSummary.TransportationInfo.Percentage * groupSummary.Installation / 100 :
+                    groupSummary.TransportationInfo.Manual;
+
+                groupSummary.Miscellaneous = groupSummary.MiscellaneousInfo.IsUsePercentage ?
+                    groupSummary.MiscellaneousInfo.Percentage : //ToDo: percent of what?
+                    groupSummary.MiscellaneousInfo.Manual;
+
+                groupSummary.GrandTotal = Math.Ceiling((groupSummary.Accessories + groupSummary.Fittings 
+                    + groupSummary.Painting + groupSummary.Supporting + groupSummary.Installation + groupSummary.MaterialPrice 
+                    + groupSummary.Transportation + groupSummary.Miscellaneous) / (decimal)Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary)) 
+                    * (decimal)Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary);
+                
             }
 
             return groupSummary;

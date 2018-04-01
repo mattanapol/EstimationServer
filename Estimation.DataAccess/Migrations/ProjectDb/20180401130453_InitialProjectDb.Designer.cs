@@ -12,7 +12,7 @@ using System;
 namespace Estimation.DataAccess.Migrations.ProjectDb
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20180331113610_InitialProjectDb")]
+    [Migration("20180401130453_InitialProjectDb")]
     partial class InitialProjectDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,8 @@ namespace Estimation.DataAccess.Migrations.ProjectDb
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CeilingSummary");
 
                     b.Property<string>("Code")
                         .IsRequired();

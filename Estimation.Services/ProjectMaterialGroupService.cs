@@ -76,10 +76,12 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> GetProjectMaterialGroup(int id)
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.GetProjectMaterialGroup(id);
-            var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
-                .Where(e => e.ParentGroupId.GetValueOrDefault(0) == id);
-            projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
             var projectInfo = await _projectRepository.GetProjectInfo(projectMaterialGroup.ProjectId);
+            var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
+                .Where(e => e.ParentGroupId.GetValueOrDefault(0) == id).Select(e => { e.ProjectInfo = projectInfo; return e; });
+            projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
+            projectMaterialGroup.ProjectInfo = projectInfo;
+
             projectMaterialGroup = CalculateMaterialFields(projectMaterialGroup, projectInfo);
 
             return projectMaterialGroup;

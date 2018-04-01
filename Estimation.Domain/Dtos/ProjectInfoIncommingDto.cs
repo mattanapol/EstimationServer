@@ -76,5 +76,10 @@ namespace Estimation.Domain.Dtos
         /// Transportation cost
         /// </summary>
         public Cost Transportation { get; set; }
+
+        /// <summary>
+        /// Ceiling summary up to n place.
+        /// </summary>
+        public int CeilingSummary { get; set; }
     }
 }

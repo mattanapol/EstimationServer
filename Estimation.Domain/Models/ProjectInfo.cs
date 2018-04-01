@@ -98,5 +98,10 @@ namespace Estimation.Domain.Models
         /// List of main materials
         /// </summary>
         public IEnumerable<ProjectMaterialGroup> MaterialGroups { get; set; }
+
+        /// <summary>
+        /// Ceiling summary up to n place.
+        /// </summary>
+        public int CeilingSummary { get; set; }
     }
 }

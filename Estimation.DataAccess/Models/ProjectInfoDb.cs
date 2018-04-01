@@ -105,5 +105,10 @@ namespace Estimation.DataAccess.Models
         /// Material groups
         /// </summary>
         public IEnumerable<MaterialGroupDb> MaterialGroups { get; set; }
+
+        /// <summary>
+        /// Ceiling summary up to n place.
+        /// </summary>
+        public int CeilingSummary { get; set; }
     }
 }
