@@ -21,6 +21,7 @@ namespace Estimation.Ioc
         {
             services.AddScoped<IProjectMaterialGroupService, ProjectMaterialGroupService>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IProjectSummaryService, ProjectSummaryService>();
         }
 
         private static void InjectConfigurationServices(IServiceCollection services)
