@@ -103,6 +103,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialGroupDb = await DbContext.MaterialGroup
                 .Include(e => e.Materials)
+                //.Include(e => e.ProjectInfo)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 

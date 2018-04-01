@@ -25,5 +25,30 @@ namespace Estimation.Domain.Models
         /// Total cost of this material
         /// </summary>
         public decimal TotalCost { get; set; }
+
+        /// <summary>
+        /// Total offer price
+        /// </summary>
+        public decimal TotalOfferPrice { get; set; }
+
+        /// <summary>
+        /// Total accessory cost
+        /// </summary>
+        public decimal TotalAccessory { get; set; }
+
+        /// <summary>
+        /// Total fitting cost
+        /// </summary>
+        public decimal Totalfitting { get; set; }
+
+        /// <summary>
+        /// Total support cost
+        /// </summary>
+        public decimal TotalSupport { get; set; }
+
+        /// <summary>
+        /// Total painting cost
+        /// </summary>
+        public decimal TotalPainting { get; set; }
     }
 }

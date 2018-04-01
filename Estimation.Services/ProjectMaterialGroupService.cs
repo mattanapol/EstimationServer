@@ -16,14 +16,16 @@ namespace Estimation.Services
     public class ProjectMaterialGroupService : IProjectMaterialGroupService
     {
         private readonly IProjectMaterialGroupRepository _projectMaterialGroupRepository;
+        private readonly IProjectRepository _projectRepository;
 
         /// <summary>
         /// Project material group service constructor
         /// </summary>
         /// <param name="projectMaterialGroupRepository"></param>
-        public ProjectMaterialGroupService(IProjectMaterialGroupRepository projectMaterialGroupRepository)
+        public ProjectMaterialGroupService(IProjectMaterialGroupRepository projectMaterialGroupRepository, IProjectRepository projectRepository)
         {
             _projectMaterialGroupRepository = projectMaterialGroupRepository ?? throw new ArgumentNullException(nameof(projectMaterialGroupRepository));
+            _projectRepository = projectRepository ?? throw new ArgumentNullException(nameof(projectRepository));
         }
 
         /// <summary>
@@ -77,6 +79,8 @@ namespace Estimation.Services
             var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
                 .Where(e => e.ParentGroupId.GetValueOrDefault(0) == id);
             projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
+            var projectInfo = await _projectRepository.GetProjectInfo(projectMaterialGroup.ProjectId);
+            projectMaterialGroup = CalculateMaterialFields(projectMaterialGroup, projectInfo);
 
             return projectMaterialGroup;
         }
@@ -91,6 +95,41 @@ namespace Estimation.Services
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.UpdateProjectMaterialGroup(id, projectInfo);
             return projectMaterialGroup;
+        }
+
+        private ProjectMaterialGroup CalculateMaterialFields(ProjectMaterialGroup projectMaterialGroup, ProjectInfo projectInfo)
+        {
+            ProjectMaterialGroup newProjectMaterialGroup = projectMaterialGroup;
+            if (projectMaterialGroup.ChildGroups.Count > 0)
+            {
+                Collection<ProjectMaterialGroup> child = new Collection<ProjectMaterialGroup>();
+                foreach (var childMaterialGroup in projectMaterialGroup.ChildGroups)
+                {
+                    child.Add(CalculateMaterialFields(childMaterialGroup, projectInfo));
+                }
+                newProjectMaterialGroup.ChildGroups = child;
+            }
+            else if (projectMaterialGroup.Materials.Count > 0)
+            {
+                foreach (var material in projectMaterialGroup.Materials)
+                {
+                    material.LabourCost = material.Manpower * projectInfo.LabourCost;
+                    material.Installation = material.LabourCost * material.Quantity;
+
+                    material.TotalAccessory = material.Accessory * material.Quantity;
+
+                    material.Totalfitting = material.Fittings * material.Quantity;
+
+                    material.TotalOfferPrice = material.OfferPrice * material.Quantity;
+
+                    material.TotalPainting = material.Painting * material.Quantity;
+
+                    material.TotalSupport = material.Supporting * material.Quantity;
+
+                    material.TotalCost = material.Installation + material.TotalAccessory + material.Totalfitting + material.TotalOfferPrice + material.TotalPainting + material.TotalSupport;
+                }
+            }
+            return newProjectMaterialGroup;
         }
     }
 }
