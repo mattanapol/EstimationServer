@@ -25,38 +25,68 @@ namespace Estimation.Services
         {
             var projectMaterialGroup = await _projectMaterialGroupService.GetProjectMaterialGroup(id);
 
+            GroupSummary groupSummary = GetGroupSummary(projectMaterialGroup);
+
+            return groupSummary;
+        }
+
+        /// <summary>
+        /// Get group summary by project material group
+        /// </summary>
+        /// <param name="projectMaterialGroup"></param>
+        /// <returns></returns>
+        public GroupSummary GetGroupSummary(ProjectMaterialGroup projectMaterialGroup)
+        {
             GroupSummary groupSummary = new GroupSummary { MiscellaneousInfo = projectMaterialGroup.Miscellaneous, TransportationInfo = projectMaterialGroup.Transportation };
             if (projectMaterialGroup.ChildGroups.Count != 0)
             {
                 // Sum all groups
-
+                foreach (var group in projectMaterialGroup.ChildGroups)
+                {
+                    var childGroupSummary = GetGroupSummary(group);
+                    groupSummary.Accessories += childGroupSummary.Accessories;
+                    groupSummary.Fittings += childGroupSummary.Fittings;
+                    groupSummary.Painting += childGroupSummary.Painting;
+                    groupSummary.Supporting += childGroupSummary.Supporting;
+                    groupSummary.Installation += childGroupSummary.Installation;
+                    groupSummary.MaterialPrice += childGroupSummary.MaterialPrice;
+                    groupSummary.Transportation += childGroupSummary.Transportation;
+                    groupSummary.Miscellaneous += childGroupSummary.Miscellaneous;
+                }
             }
             else if (projectMaterialGroup.Materials.Count != 0)
             {
                 // Sum all materials
                 foreach (var material in projectMaterialGroup.Materials)
                 {
-                    groupSummary.Accessories += material.TotalAccessory;
-                    groupSummary.Fittings += material.Totalfitting;
-                    groupSummary.Painting += material.TotalPainting;
-                    groupSummary.Supporting += material.TotalSupport;
-                    groupSummary.Installation += material.Installation;
-                    groupSummary.MaterialPrice += material.TotalOfferPrice;
+                    groupSummary.Accessories += (int)Math.Round(material.TotalAccessory);
+                    groupSummary.Fittings += (int)Math.Round(material.Totalfitting);
+                    groupSummary.Painting += (int)Math.Round(material.TotalPainting);
+                    groupSummary.Supporting += (int)Math.Round(material.TotalSupport);
+                    groupSummary.Installation += (int)Math.Round(material.Installation);
+                    groupSummary.MaterialPrice += (int)Math.Round(material.TotalOfferPrice);
                 }
 
-                groupSummary.Transportation = groupSummary.TransportationInfo.IsUsePercentage ?
+                groupSummary.Transportation = (int)Math.Round(groupSummary.TransportationInfo.IsUsePercentage ?
                     groupSummary.TransportationInfo.Percentage * groupSummary.Installation / 100 :
-                    groupSummary.TransportationInfo.Manual;
+                    groupSummary.TransportationInfo.Manual);
 
-                groupSummary.Miscellaneous = groupSummary.MiscellaneousInfo.IsUsePercentage ?
-                    groupSummary.MiscellaneousInfo.Percentage : //ToDo: percent of what?
-                    groupSummary.MiscellaneousInfo.Manual;
+                groupSummary.Miscellaneous = (int)Math.Round(groupSummary.MiscellaneousInfo.IsUsePercentage ?
+                    groupSummary.MiscellaneousInfo.Percentage * groupSummary.MaterialPrice / 100 :
+                    groupSummary.MiscellaneousInfo.Manual);
 
-                groupSummary.GrandTotal = Math.Ceiling((groupSummary.Accessories + groupSummary.Fittings 
-                    + groupSummary.Painting + groupSummary.Supporting + groupSummary.Installation + groupSummary.MaterialPrice 
-                    + groupSummary.Transportation + groupSummary.Miscellaneous) / (decimal)Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary)) 
-                    * (decimal)Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary);
-                
+                int total = (groupSummary.Accessories + groupSummary.Fittings
+                    + groupSummary.Painting + groupSummary.Supporting + groupSummary.Installation + groupSummary.MaterialPrice
+                    + groupSummary.Transportation + groupSummary.Miscellaneous);
+
+                int roundedTotal = (int)(Math.Ceiling((double)total / Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary))
+                    * Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary));
+
+                // Adjust Miscellaneous
+                groupSummary.Miscellaneous += roundedTotal - total;
+
+                groupSummary.GrandTotal = roundedTotal;
+
             }
 
             return groupSummary;

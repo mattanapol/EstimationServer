@@ -130,6 +130,7 @@ namespace Estimation.DataAccess.Repositories
             projectInfoDb.TransportationManual = projectInfo.Transportation.Manual;
             projectInfoDb.TransportationPercentage = projectInfo.Transportation.Percentage;
             projectInfoDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
+            projectInfoDb.CeilingSummary = projectInfo.CeilingSummary;
             DbContext.Entry(projectInfoDb).State = EntityState.Modified;
             DbContext.Entry(projectInfoDb).Property(e => e.CreatedDate).IsModified = false;
             DbContext.Entry(projectInfoDb).Property(e => e.Id).IsModified = false;
