@@ -6,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Kaewsai.HtmlToPdf.Interface;
+using Kaewsai.HtmlToPdf;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace Estimation.Ioc
 {
@@ -22,6 +26,9 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectMaterialGroupService, ProjectMaterialGroupService>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IProjectSummaryService, ProjectSummaryService>();
+            // Html to pdf
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
         }
 
         private static void InjectConfigurationServices(IServiceCollection services)

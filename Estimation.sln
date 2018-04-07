@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Ioc", "Estimatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.Utilities.Configurations", "Kaewsai.Utilities.Configurations\Kaewsai.Utilities.Configurations.csproj", "{B1056713-786A-4FB1-B952-2640DBA938ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Interface", "Estimation.Interface\Estimation.Interface.csproj", "{DDC4BA10-7AC7-44F4-9B63-E3A026D3B253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Interface", "Estimation.Interface\Estimation.Interface.csproj", "{DDC4BA10-7AC7-44F4-9B63-E3A026D3B253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.HtmlToPdf", "Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj", "{345C5EFE-08ED-4A66-97C2-56E53C20E339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{DDC4BA10-7AC7-44F4-9B63-E3A026D3B253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC4BA10-7AC7-44F4-9B63-E3A026D3B253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC4BA10-7AC7-44F4-9B63-E3A026D3B253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{345C5EFE-08ED-4A66-97C2-56E53C20E339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{345C5EFE-08ED-4A66-97C2-56E53C20E339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{345C5EFE-08ED-4A66-97C2-56E53C20E339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{345C5EFE-08ED-4A66-97C2-56E53C20E339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

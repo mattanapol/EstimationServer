@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Estimation.Common\Estimation.Common.csproj" />
     <ProjectReference Include="..\Estimation.DataAccess\Estimation.DataAccess.csproj" />
+    <ProjectReference Include="..\Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj" />
   </ItemGroup>
 
 </Project>
