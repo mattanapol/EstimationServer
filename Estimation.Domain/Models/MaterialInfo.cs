@@ -30,6 +30,11 @@ namespace Estimation.Domain.Models
         public string CodeAsString { get; set; }
 
         /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Material type
         /// </summary>
         public string MaterialType { get; set; }

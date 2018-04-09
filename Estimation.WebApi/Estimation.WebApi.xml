@@ -129,20 +129,12 @@
             Material controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository,Estimation.Interface.Repositories.IMainMaterialRepository,Estimation.Interface.Repositories.ISubMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.MaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
             <param name="typeMappingService"></param>
             <param name="materialRepository"></param>
-            <param name="mainMaterialRepository"></param>
-            <param name="subMaterialRepository"></param>
-        </member>
-        <member name="M:Estimation.WebApi.Controllers.MaterialController.GetAllMaterialList">
-            <summary>
-            Get all materials list
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Estimation.WebApi.Controllers.MaterialController.GetMaterial(System.Int32)">
             <summary>
@@ -304,6 +296,32 @@
             Get group summary by group id
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Estimation.WebApi.Controllers.SearchMaterialController">
+            <summary>
+            Search material class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.SearchMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IMaterialService)">
+            <summary>
+            Constructor of material controller
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="materialService"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.SearchMaterialController.GetAllMaterialList(System.String)">
+            <summary>
+            Get all materials list
+            </summary>
+            <param name="materialType">Material type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.SearchMaterialController.GetMaterialWithTags(System.String)">
+            <summary>
+            Get all materials list with tags
+            </summary>
+            <param name="materialType">Material type</param>
             <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Controllers.SubMaterialController">

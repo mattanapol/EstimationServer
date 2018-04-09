@@ -66,15 +66,16 @@ namespace Estimation.DataAccess.Repositories
         /// Get material list
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<MainMaterial>> GetMaterialList()
+        public async Task<IEnumerable<MainMaterial>> GetMaterialList(string materialType)
         {
             IQueryable<MainMaterial> queryable = DbContext.MainMaterials
                 .Include(c => c.SubMaterials)
                 .ThenInclude(c => c.Materials)
+                .Where(c => string.IsNullOrWhiteSpace(materialType) ? true : c.MaterialType.Equals(materialType,StringComparison.OrdinalIgnoreCase))
                 .Select(m => new MainMaterial
                 { Id = m.Id, Code = m.Code, Name = m.Name, MaterialType = m.MaterialType, CodeAsString = m.Code.ToString(),
                     SubMaterials = m.SubMaterials.Select(s => new SubMaterial { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}",
-                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}-{c.Code.ToString("D2")}" })
+                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}-{c.Code.ToString("D2")}", Description = c.Description })
                     })
                 })
                 .AsNoTracking();
@@ -110,6 +111,7 @@ namespace Estimation.DataAccess.Repositories
             materialDb.Supporting = material.Supporting;
             materialDb.Fittings = material.Fittings;
             materialDb.Code = material.Code;
+            materialDb.Description = material.Description;
             DbContext.Entry(materialDb).State = EntityState.Modified;
             DbContext.Entry(materialDb).Property(e => e.CreatedDate).IsModified = false;
             DbContext.Entry(materialDb).Property(e => e.Id).IsModified = false;

@@ -12,6 +12,6 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Submaterial
         /// </summary>
-        public IEnumerable<MaterialInfo> SubMaterials { get; set; }
+        public IEnumerable<SubMaterial> SubMaterials { get; set; }
     }
 }

@@ -26,24 +26,9 @@ namespace Estimation.WebApi.Controllers
         /// </summary>
         /// <param name="typeMappingService"></param>
         /// <param name="materialRepository"></param>
-        /// <param name="mainMaterialRepository"></param>
-        /// <param name="subMaterialRepository"></param>
-        public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository, 
-            IMainMaterialRepository mainMaterialRepository, ISubMaterialRepository subMaterialRepository): base(typeMappingService)
+        public MaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository): base(typeMappingService)
         {
             _materialRepository = materialRepository ?? throw new ArgumentNullException(nameof(materialRepository));
-        }
-
-        /// <summary>
-        /// Get all materials list
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllMaterialList()
-        {
-            var materials = await _materialRepository.GetMaterialList();
-
-            return Ok(OutgoingResult<IEnumerable<MainMaterial>>.SuccessResponse(materials));
         }
 
         /// <summary>

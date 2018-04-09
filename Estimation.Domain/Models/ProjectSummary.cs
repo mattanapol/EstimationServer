@@ -53,5 +53,22 @@ namespace Estimation.Domain.Models
         /// Overall price
         /// </summary>
         public int GrandTotal { get; set; }
+        
+        /// <summary>
+        /// Add by group summary
+        /// </summary>
+        /// <param name="groupSummary"></param>
+        public void AddByGroupSummary(GroupSummary groupSummary)
+        {
+            Accessories += groupSummary.Accessories;
+            Fittings += groupSummary.Fittings;
+            Painting += groupSummary.Painting;
+            Supporting += groupSummary.Supporting;
+            Installation += groupSummary.Installation;
+            MaterialPrice += groupSummary.MaterialPrice;
+            Transportation += groupSummary.Transportation;
+            Miscellaneous += groupSummary.Miscellaneous;
+            GrandTotal += groupSummary.GrandTotal;
+        }
     }
 }

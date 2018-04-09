@@ -36,8 +36,8 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("project/{id}/summary")]
         public async Task<IActionResult> GetProjectSummary(int id)
         {
-            //var result = await _projectSummaryService.GetGroupSummary(id);
-            return Ok(new ProjectSummary());
+            var result = await _projectSummaryService.GetProjectSummary(id);
+            return Ok(OutgoingResult<ProjectSummary>.SuccessResponse(result));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Estimation.WebApi.Controllers
         public async Task<IActionResult> GetGroupSummary(int id)
         {
             var result = await _projectSummaryService.GetGroupSummary(id);
-            return Ok(OutgoingResult<ProjectSummary>.SuccessResponse(result));
+            return Ok(OutgoingResult<GroupSummary>.SuccessResponse(result));
         }
     }
 }

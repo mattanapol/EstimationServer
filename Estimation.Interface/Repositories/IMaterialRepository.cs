@@ -28,7 +28,7 @@ namespace Estimation.Interface.Repositories
         /// Get all material list not include material details
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<MainMaterial>> GetMaterialList();
+        Task<IEnumerable<MainMaterial>> GetMaterialList(string materialType);
 
         /// <summary>
         /// Update material

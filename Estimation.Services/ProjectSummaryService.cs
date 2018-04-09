@@ -10,10 +10,12 @@ namespace Estimation.Services
     public class ProjectSummaryService : IProjectSummaryService
     {
         private readonly IProjectMaterialGroupService _projectMaterialGroupService;
+        private readonly IProjectService _projectService;
 
-        public ProjectSummaryService(IProjectMaterialGroupService projectMaterialGroupService)
+        public ProjectSummaryService(IProjectMaterialGroupService projectMaterialGroupService, IProjectService projectService)
         {
             _projectMaterialGroupService = projectMaterialGroupService ?? throw new ArgumentNullException(nameof(projectMaterialGroupService));
+            _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
         }
 
         /// <summary>
@@ -44,14 +46,7 @@ namespace Estimation.Services
                 foreach (var group in projectMaterialGroup.ChildGroups)
                 {
                     var childGroupSummary = GetGroupSummary(group);
-                    groupSummary.Accessories += childGroupSummary.Accessories;
-                    groupSummary.Fittings += childGroupSummary.Fittings;
-                    groupSummary.Painting += childGroupSummary.Painting;
-                    groupSummary.Supporting += childGroupSummary.Supporting;
-                    groupSummary.Installation += childGroupSummary.Installation;
-                    groupSummary.MaterialPrice += childGroupSummary.MaterialPrice;
-                    groupSummary.Transportation += childGroupSummary.Transportation;
-                    groupSummary.Miscellaneous += childGroupSummary.Miscellaneous;
+                    groupSummary.AddByGroupSummary(childGroupSummary);
                 }
             }
             else if (projectMaterialGroup.Materials.Count != 0)
@@ -59,33 +54,10 @@ namespace Estimation.Services
                 // Sum all materials
                 foreach (var material in projectMaterialGroup.Materials)
                 {
-                    groupSummary.Accessories += (int)Math.Round(material.TotalAccessory);
-                    groupSummary.Fittings += (int)Math.Round(material.Totalfitting);
-                    groupSummary.Painting += (int)Math.Round(material.TotalPainting);
-                    groupSummary.Supporting += (int)Math.Round(material.TotalSupport);
-                    groupSummary.Installation += (int)Math.Round(material.Installation);
-                    groupSummary.MaterialPrice += (int)Math.Round(material.TotalOfferPrice);
+                    groupSummary.AddByMaterial(material);
                 }
 
-                groupSummary.Transportation = (int)Math.Round(groupSummary.TransportationInfo.IsUsePercentage ?
-                    groupSummary.TransportationInfo.Percentage * groupSummary.Installation / 100 :
-                    groupSummary.TransportationInfo.Manual);
-
-                groupSummary.Miscellaneous = (int)Math.Round(groupSummary.MiscellaneousInfo.IsUsePercentage ?
-                    groupSummary.MiscellaneousInfo.Percentage * groupSummary.MaterialPrice / 100 :
-                    groupSummary.MiscellaneousInfo.Manual);
-
-                int total = (groupSummary.Accessories + groupSummary.Fittings
-                    + groupSummary.Painting + groupSummary.Supporting + groupSummary.Installation + groupSummary.MaterialPrice
-                    + groupSummary.Transportation + groupSummary.Miscellaneous);
-
-                int roundedTotal = (int)(Math.Ceiling((double)total / Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary))
-                    * Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary));
-
-                // Adjust Miscellaneous
-                groupSummary.Miscellaneous += roundedTotal - total;
-
-                groupSummary.GrandTotal = roundedTotal;
+                groupSummary.CalculateGrandTotal(projectMaterialGroup.ProjectInfo.CeilingSummary);
 
             }
 
@@ -97,9 +69,18 @@ namespace Estimation.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<ProjectSummary> GetProjectSummary(int id)
+        public async Task<ProjectSummary> GetProjectSummary(int id)
         {
-            throw new NotImplementedException();
+            var project = await _projectService.GetProject(id);
+            var materialGroups = project.MaterialGroups;
+
+            ProjectSummary projectSummary = new ProjectSummary();
+            foreach(var materialGroup in materialGroups)
+            {
+                projectSummary.AddByGroupSummary(await GetGroupSummary(materialGroup.Id));
+            }
+
+            return projectSummary;
         }
     }
 }
