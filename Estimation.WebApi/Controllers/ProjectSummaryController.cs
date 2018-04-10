@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Estimation.Domain.Dtos;
 using Estimation.Domain.Models;
 using Estimation.Interface;
 using Kaewsai.Utilities.WebApi;
@@ -49,6 +50,18 @@ namespace Estimation.WebApi.Controllers
         public async Task<IActionResult> GetGroupSummary(int id)
         {
             var result = await _projectSummaryService.GetGroupSummary(id);
+            return Ok(OutgoingResult<GroupSummary>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Adjust group summary by group id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("group/{id}/summary")]
+        public async Task<IActionResult> AdjustGroupSummary(int id, [FromBody]GroupSummaryIncomingDto groupSummaryIncomingDto)
+        {
+            var result = await _projectSummaryService.AdjustGroupSummary(id, groupSummaryIncomingDto);
             return Ok(OutgoingResult<GroupSummary>.SuccessResponse(result));
         }
     }

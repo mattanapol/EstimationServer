@@ -298,6 +298,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.AdjustGroupSummary(System.Int32,Estimation.Domain.Dtos.GroupSummaryIncomingDto)">
+            <summary>
+            Adjust group summary by group id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.SearchMaterialController">
             <summary>
             Search material class

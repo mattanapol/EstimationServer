@@ -1,4 +1,5 @@
-﻿using Estimation.Domain.Models;
+﻿using Estimation.Domain.Dtos;
+using Estimation.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,5 +22,13 @@ namespace Estimation.Interface
         /// <param name="id"></param>
         /// <returns></returns>
         Task<GroupSummary> GetGroupSummary(int id);
+
+        /// <summary>
+        /// Adjust group summary
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="groupSummaryIncomingDto"></param>
+        /// <returns></returns>
+        Task<GroupSummary> AdjustGroupSummary(int id, GroupSummaryIncomingDto groupSummaryIncomingDto);
     }
 }
