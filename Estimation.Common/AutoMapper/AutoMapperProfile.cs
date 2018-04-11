@@ -51,8 +51,10 @@ namespace Estimation.Common.AutoMapper
                 .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.Code.ToString()}"));
 
             CreateMap<MainMaterial, MainMaterialDb>();
+
             CreateMap<MainMaterialDb, MainMaterial>()
-                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.Code.ToString()}"));
+                .ForMember(dest => dest.CodeAsString, opts => opts.MapFrom(src => $"{src.Code.ToString()}"))
+                .ForMember(dest => dest.SubMaterials, opts => opts.MapFrom(src => src.SubMaterials));
         }
 
         private void MapSubMaterials()
@@ -73,6 +75,8 @@ namespace Estimation.Common.AutoMapper
                 .AfterMap((src, dest) => {
                     if (src.MainMaterial != null)
                         dest.Class = src.MainMaterial.Class;
+                    if (src.Materials == null)
+                        dest.Materials = null;
                 });
         }
 

@@ -32,7 +32,7 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Get project summary by project id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Project ID</param>
         /// <returns></returns>
         [HttpGet("project/{id}/summary")]
         public async Task<IActionResult> GetProjectSummary(int id)
@@ -44,7 +44,7 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Get group summary by group id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Group ID</param>
         /// <returns></returns>
         [HttpGet("group/{id}/summary")]
         public async Task<IActionResult> GetGroupSummary(int id)
@@ -56,7 +56,8 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Adjust group summary by group id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Group ID</param>
+        /// <param name="groupSummaryIncomingDto"></param>
         /// <returns></returns>
         [HttpPut("group/{id}/summary")]
         public async Task<IActionResult> AdjustGroupSummary(int id, [FromBody]GroupSummaryIncomingDto groupSummaryIncomingDto)

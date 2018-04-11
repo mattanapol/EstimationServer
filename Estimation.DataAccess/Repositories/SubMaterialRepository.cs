@@ -42,7 +42,7 @@ namespace Estimation.DataAccess.Repositories
             DbContext.SubMaterials.Add(subMaterialDb);
 
             await DbContext.SaveChangesAsync();
-            subMaterialDb.MainMaterial = TypeMappingService.Map<MainMaterial,MainMaterialDb> (mainMaterial);
+            subMaterialDb.Materials = new List<MaterialDb>(); // For automapper bug
 
             return TypeMappingService.Map<SubMaterialDb, SubMaterial>(subMaterialDb);
         }
