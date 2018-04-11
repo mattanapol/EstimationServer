@@ -131,6 +131,12 @@ namespace Estimation.DataAccess.Repositories
 
             projectMaterialGroupDb.GroupCode = projectInfo.GroupCode;
             projectMaterialGroupDb.GroupName = projectInfo.GroupName;
+            projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectInfo.Miscellaneous.IsUsePercentage;
+            projectMaterialGroupDb.MiscellaneousManual = projectInfo.Miscellaneous.Manual;
+            projectMaterialGroupDb.MiscellaneousPercentage = projectInfo.Miscellaneous.Percentage;
+            projectMaterialGroupDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
+            projectMaterialGroupDb.TransportationManual = projectInfo.Transportation.Manual;
+            projectMaterialGroupDb.TransportationPercentage = projectInfo.Transportation.Percentage;
             //projectMaterialGroupDb.ParentGroupId = projectInfo.ParentGroupId; //Todo: Need to discuss about whether should we allow to change this.
             DbContext.Entry(projectMaterialGroupDb).State = EntityState.Modified;
             DbContext.Entry(projectMaterialGroupDb).Property(e => e.CreatedDate).IsModified = false;

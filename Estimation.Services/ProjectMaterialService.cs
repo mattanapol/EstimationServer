@@ -29,7 +29,6 @@ namespace Estimation.Services
         public async Task<ProjectMaterial> GetProjectMaterial(int projectMaterialId)
         {
             var projectMaterial = await _projectMaterialRepository.GetProjectMaterial(projectMaterialId);
-            projectMaterial.LabourCost = projectMaterial.Manpower;
             return projectMaterial;
         }
     }

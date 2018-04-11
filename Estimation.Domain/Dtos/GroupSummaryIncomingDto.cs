@@ -41,5 +41,24 @@ namespace Estimation.Domain.Dtos
         /// Transportation information
         /// </summary>
         public Cost TransportationInfo { get; set; }
+
+        /// <summary>
+        /// Create new instance with multiplied data
+        /// </summary>
+        /// <param name="multiplier"></param>
+        /// <returns></returns>
+        public GroupSummaryIncomingDto Split(decimal multiplier)
+        {
+            return new GroupSummaryIncomingDto
+            {
+                Accessories = Accessories * multiplier,
+                Fittings = Fittings * multiplier,
+                Supporting = Supporting * multiplier,
+                Painting = Painting * multiplier,
+                Installation = Installation * multiplier,
+                MiscellaneousInfo = MiscellaneousInfo,
+                TransportationInfo = TransportationInfo
+            };
+        }
     }
 }

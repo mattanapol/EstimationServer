@@ -46,6 +46,11 @@ namespace Estimation.DataAccess.Repositories
             return TypeMappingService.Map<ProjectMaterialDb, ProjectMaterial>(projectMaterialDb);
         }
 
+        /// <summary>
+        /// Get project material
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ProjectMaterial> GetProjectMaterial(int id)
         {
             var projectMaterialDb = await DbContext.Material
@@ -57,6 +62,37 @@ namespace Estimation.DataAccess.Repositories
 
             var projectMaterial = TypeMappingService.Map<ProjectMaterialDb, ProjectMaterial>(projectMaterialDb);
             return projectMaterial;
+        }
+
+        public async Task<ProjectMaterial> UpdateMaterial(int id, ProjectMaterial material)
+        {
+            var materialDb = await DbContext.Material
+                                            .AsNoTracking()
+                                            .FirstOrDefaultAsync(e => e.Id == id);
+            if (materialDb == null)
+                throw new ArgumentOutOfRangeException(nameof(id), $"Material id = { id } does not exist.");
+
+            materialDb.ListPrice = material.ListPrice;
+            materialDb.Manpower = material.Manpower;
+            materialDb.Name = material.Name;
+            materialDb.NetPrice = material.NetPrice;
+            materialDb.OfferPrice = material.OfferPrice;
+            materialDb.Accessory = material.Accessory;
+            materialDb.Painting = material.Painting;
+            materialDb.Remark = material.Remark;
+            materialDb.Supporting = material.Supporting;
+            materialDb.Fittings = material.Fittings;
+            materialDb.Code = material.Code;
+            materialDb.Unit = material.Unit;
+            materialDb.Quantity = material.Quantity;
+            materialDb.Description = material.Description;
+            DbContext.Entry(materialDb).State = EntityState.Modified;
+            DbContext.Entry(materialDb).Property(e => e.CreatedDate).IsModified = false;
+            DbContext.Entry(materialDb).Property(e => e.Id).IsModified = false;
+
+            await DbContext.SaveChangesAsync();
+
+            return TypeMappingService.Map<ProjectMaterialDb, ProjectMaterial>(materialDb);
         }
     }
 }

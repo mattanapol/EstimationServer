@@ -13,7 +13,7 @@ namespace Estimation.Services
     {
         private readonly IProjectMaterialGroupService _projectMaterialGroupService;
         private readonly IProjectService _projectService;
-        private readonly IMaterialRepository _materialRepository;
+        private readonly IProjectMaterialRepository _materialRepository;
 
         /// <summary>
         /// Constructor of project summary service
@@ -21,7 +21,7 @@ namespace Estimation.Services
         /// <param name="projectMaterialGroupService"></param>
         /// <param name="projectService"></param>
         /// <param name="materialRepository"></param>
-        public ProjectSummaryService(IProjectMaterialGroupService projectMaterialGroupService, IProjectService projectService, IMaterialRepository materialRepository) 
+        public ProjectSummaryService(IProjectMaterialGroupService projectMaterialGroupService, IProjectService projectService, IProjectMaterialRepository materialRepository) 
         {
             _projectMaterialGroupService = projectMaterialGroupService ?? throw new ArgumentNullException(nameof(projectMaterialGroupService));
             _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
@@ -52,13 +52,18 @@ namespace Estimation.Services
         public async Task<GroupSummary> AdjustGroupSummary(int id, GroupSummaryIncomingDto groupSummaryIncomingDto, AdjustSummaryRatioDto summaryRatio)
         {
             var projectMaterialGroup = await _projectMaterialGroupService.GetProjectMaterialGroup(id);
+            projectMaterialGroup.Miscellaneous = groupSummaryIncomingDto.MiscellaneousInfo;
+            projectMaterialGroup.Transportation = groupSummaryIncomingDto.TransportationInfo;
+            await _projectMaterialGroupService.UpdateProjectMaterialGroup(projectMaterialGroup.Id,projectMaterialGroup);
             GroupSummary groupSummary = new GroupSummary { MiscellaneousInfo = groupSummaryIncomingDto.MiscellaneousInfo, TransportationInfo = groupSummaryIncomingDto.TransportationInfo };
             if (projectMaterialGroup.ChildGroups.Count != 0)
             {
+                int allMaterialQuantity = projectMaterialGroup.GetMaterialsQuantity();
                 // Sum all groups
                 foreach (var group in projectMaterialGroup.ChildGroups)
                 {
-                    var childGroupSummary = await AdjustGroupSummary(id, groupSummaryIncomingDto, summaryRatio);
+                    int groupMaterialQuantity = group.GetMaterialsQuantity();
+                    var childGroupSummary = await AdjustGroupSummary(id, groupSummaryIncomingDto.Split((decimal)groupMaterialQuantity/allMaterialQuantity), summaryRatio);
                     groupSummary.AddByGroupSummary(childGroupSummary);
                 }
             }
@@ -67,37 +72,38 @@ namespace Estimation.Services
                 // Sum all materials
                 foreach (var material in projectMaterialGroup.Materials) //ToDo: Handle when original material is 0
                 {
+                    if (material.Quantity == 0)
+                        continue;
+
                     if (summaryRatio.Accessories != -1)
                         material.Accessory = material.Accessory * summaryRatio.Accessories;
-                    //else
-                    //    material.Accessory = (decimal)groupSummaryIncomingDto.Accessories / (decimal)material.Quantity;
+                    else
+                        material.Accessory = (decimal)groupSummaryIncomingDto.Accessories / (decimal)material.Quantity;
 
                     if (summaryRatio.Fittings != -1)
                         material.Fittings = material.Fittings * summaryRatio.Fittings;
-                    //else
-                    //    material.Fittings = (decimal)groupSummaryIncomingDto.Fittings / (decimal)material.Quantity;
+                    else
+                        material.Fittings = (decimal)groupSummaryIncomingDto.Fittings / (decimal)material.Quantity;
 
                     if (summaryRatio.Painting != -1)
                         material.Painting = material.Painting * summaryRatio.Painting;
-                    //else
-                    //    material.Painting = (decimal)groupSummaryIncomingDto.Painting / (decimal)material.Quantity;
+                    else
+                        material.Painting = (decimal)groupSummaryIncomingDto.Painting / (decimal)material.Quantity;
 
                     if (summaryRatio.Supporting != -1)
                         material.Supporting = material.Supporting * summaryRatio.Supporting;
-                    //else
-                    //    material.Supporting = (decimal)groupSummaryIncomingDto.Supporting / (decimal)material.Quantity;
+                    else
+                        material.Supporting = (decimal)groupSummaryIncomingDto.Supporting / (decimal)material.Quantity;
 
                     if (summaryRatio.Installation != -1)
                         material.Manpower = material.Manpower * summaryRatio.Installation;
-                    //else
-                    //    material.Manpower = (decimal)groupSummaryIncomingDto.Installation / material.LabourCost;
+                    else
+                        material.Manpower = (decimal)groupSummaryIncomingDto.Installation / (material.Quantity * projectMaterialGroup.ProjectInfo.LabourCost);
 
                     await _materialRepository.UpdateMaterial(material.Id, material);
-
-                    groupSummary.AddByMaterial(material);
                 }
 
-                groupSummary.CalculateGrandTotal(projectMaterialGroup.ProjectInfo.CeilingSummary);
+                groupSummary = await GetGroupSummary(id);
 
             }
 

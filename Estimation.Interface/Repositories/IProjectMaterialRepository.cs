@@ -25,5 +25,13 @@ namespace Estimation.Interface.Repositories
         /// <param name="id">Project material id</param>
         /// <returns></returns>
         Task<ProjectMaterial> GetProjectMaterial(int id);
+
+        /// <summary>
+        /// Update project material
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
+        Task<ProjectMaterial> UpdateMaterial(int id, ProjectMaterial material);
     }
 }

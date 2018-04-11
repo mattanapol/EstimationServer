@@ -112,6 +112,7 @@ namespace Estimation.DataAccess.Repositories
             materialDb.Fittings = material.Fittings;
             materialDb.Code = material.Code;
             materialDb.Description = material.Description;
+            materialDb.Unit = material.Unit;
             DbContext.Entry(materialDb).State = EntityState.Modified;
             DbContext.Entry(materialDb).Property(e => e.CreatedDate).IsModified = false;
             DbContext.Entry(materialDb).Property(e => e.Id).IsModified = false;
