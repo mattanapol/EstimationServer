@@ -73,6 +73,15 @@ namespace Estimation.DataAccess.Repositories
                                              .FirstOrDefaultAsync(s => s.Id == id);
             if (projectMaterialDb == null)
                 return;
+
+            var childGroups = await DbContext.MaterialGroup
+                                             .AsNoTracking()
+                                             .Where(e => e.ParentGroupId == id)
+                                             .ToListAsync();
+
+            foreach (var childGroup in childGroups)
+                await DeleteProjectMaterialGroup(childGroup.Id);
+
             DbContext.MaterialGroup.Remove(projectMaterialDb);
 
             await DbContext.SaveChangesAsync();
@@ -86,6 +95,7 @@ namespace Estimation.DataAccess.Repositories
         public async Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterialGroupInProject(int projectId)
         {
             var materialGroupDbs = await DbContext.MaterialGroup
+                .Include(e => e.Materials)
                 .AsNoTracking()
                 .Where(m => m.ProjectId == projectId)
                 .ToArrayAsync();
@@ -131,12 +141,15 @@ namespace Estimation.DataAccess.Repositories
 
             projectMaterialGroupDb.GroupCode = projectInfo.GroupCode;
             projectMaterialGroupDb.GroupName = projectInfo.GroupName;
-            projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectInfo.Miscellaneous.IsUsePercentage;
-            projectMaterialGroupDb.MiscellaneousManual = projectInfo.Miscellaneous.Manual;
-            projectMaterialGroupDb.MiscellaneousPercentage = projectInfo.Miscellaneous.Percentage;
-            projectMaterialGroupDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
-            projectMaterialGroupDb.TransportationManual = projectInfo.Transportation.Manual;
-            projectMaterialGroupDb.TransportationPercentage = projectInfo.Transportation.Percentage;
+            if (projectInfo.Miscellaneous != null && projectInfo.Transportation != null)
+            {
+                projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectInfo.Miscellaneous.IsUsePercentage;
+                projectMaterialGroupDb.MiscellaneousManual = projectInfo.Miscellaneous.Manual;
+                projectMaterialGroupDb.MiscellaneousPercentage = projectInfo.Miscellaneous.Percentage;
+                projectMaterialGroupDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
+                projectMaterialGroupDb.TransportationManual = projectInfo.Transportation.Manual;
+                projectMaterialGroupDb.TransportationPercentage = projectInfo.Transportation.Percentage;
+            }
             //projectMaterialGroupDb.ParentGroupId = projectInfo.ParentGroupId; //Todo: Need to discuss about whether should we allow to change this.
             DbContext.Entry(projectMaterialGroupDb).State = EntityState.Modified;
             DbContext.Entry(projectMaterialGroupDb).Property(e => e.CreatedDate).IsModified = false;

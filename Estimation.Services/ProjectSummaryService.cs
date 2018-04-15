@@ -132,7 +132,7 @@ namespace Estimation.Services
         public async Task<GroupSummary> GetGroupSummary(ProjectMaterialGroup projectMaterialGroup)
         {
             GroupSummary groupSummary = new GroupSummary { MiscellaneousInfo = projectMaterialGroup.Miscellaneous, TransportationInfo = projectMaterialGroup.Transportation };
-            if (projectMaterialGroup.ChildGroups.Count != 0)
+            if (projectMaterialGroup.ChildGroups != null && projectMaterialGroup.ChildGroups.Count != 0)
             {
                 // Sum all groups
                 foreach (var group in projectMaterialGroup.ChildGroups)
@@ -141,7 +141,7 @@ namespace Estimation.Services
                     groupSummary.AddByGroupSummary(childGroupSummary);
                 }
             }
-            else if (projectMaterialGroup.Materials.Count != 0)
+            else if (projectMaterialGroup.Materials != null && projectMaterialGroup.Materials.Count != 0)
             {
                 // Sum all materials
                 foreach (var material in projectMaterialGroup.Materials)

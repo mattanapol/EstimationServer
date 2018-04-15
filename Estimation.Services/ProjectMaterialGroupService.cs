@@ -102,7 +102,7 @@ namespace Estimation.Services
         private ProjectMaterialGroup CalculateMaterialFields(ProjectMaterialGroup projectMaterialGroup, ProjectInfo projectInfo)
         {
             ProjectMaterialGroup newProjectMaterialGroup = projectMaterialGroup;
-            if (projectMaterialGroup.ChildGroups.Count > 0)
+            if (projectMaterialGroup.ChildGroups != null && projectMaterialGroup.ChildGroups.Count > 0)
             {
                 Collection<ProjectMaterialGroup> child = new Collection<ProjectMaterialGroup>();
                 foreach (var childMaterialGroup in projectMaterialGroup.ChildGroups)
@@ -111,7 +111,7 @@ namespace Estimation.Services
                 }
                 newProjectMaterialGroup.ChildGroups = child;
             }
-            else if (projectMaterialGroup.Materials.Count > 0)
+            else if (projectMaterialGroup.Materials != null && projectMaterialGroup.Materials.Count > 0)
             {
                 foreach (var material in projectMaterialGroup.Materials)
                 {

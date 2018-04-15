@@ -55,5 +55,29 @@ namespace Estimation.WebApi.Controllers
             var result = await _projectMaterialRepository.GetProjectMaterial(id);
             return Ok(OutgoingResult<ProjectMaterial>.SuccessResponse(result));
         }
+
+        /// <summary>
+        /// Update project material by id.
+        /// </summary>
+        /// <param name="id">Project material id</param>
+        /// <param name="product"></param>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMaterialGroup(int id, [FromBody]ProjectMaterialIncomingDto product)
+        {
+            ProjectMaterial materialModel = TypeMappingService.Map<ProjectMaterialIncomingDto, ProjectMaterial>(product);
+            var result = await _projectMaterialRepository.UpdateMaterial(id, materialModel);
+            return Ok(OutgoingResult<MaterialInfo>.SuccessResponse(result));
+        }
+
+        /// <summary>
+        /// Delete project material by id
+        /// </summary>
+        /// <param name="id">Project material id</param>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _projectMaterialRepository.DeleteMaterial(id);
+            return Ok(OutgoingResult<string>.SuccessResponse("Deleted"));
+        }
     }
 }

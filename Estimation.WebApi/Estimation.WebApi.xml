@@ -190,6 +190,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.UpdateMaterialGroup(System.Int32,Estimation.Domain.Dtos.ProjectMaterialIncomingDto)">
+            <summary>
+            Update project material by id.
+            </summary>
+            <param name="id">Project material id</param>
+            <param name="product"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectMaterialController.Delete(System.Int32)">
+            <summary>
+            Delete project material by id
+            </summary>
+            <param name="id">Project material id</param>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectMaterialGroupController">
             <summary>
             Project material group controller

@@ -47,6 +47,23 @@ namespace Estimation.DataAccess.Repositories
         }
 
         /// <summary>
+        /// Delete project material by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DeleteMaterial(int id)
+        {
+            var materialDb = await DbContext.Material
+                                             .AsNoTracking()
+                                             .FirstOrDefaultAsync(s => s.Id == id);
+            if (materialDb == null)
+                return;
+            DbContext.Material.Remove(materialDb);
+
+            await DbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Get project material
         /// </summary>
         /// <param name="id"></param>
@@ -64,6 +81,12 @@ namespace Estimation.DataAccess.Repositories
             return projectMaterial;
         }
 
+        /// <summary>
+        /// Update project material
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="material"></param>
+        /// <returns></returns>
         public async Task<ProjectMaterial> UpdateMaterial(int id, ProjectMaterial material)
         {
             var materialDb = await DbContext.Material

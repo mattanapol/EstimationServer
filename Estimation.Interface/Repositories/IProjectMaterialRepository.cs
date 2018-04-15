@@ -33,5 +33,12 @@ namespace Estimation.Interface.Repositories
         /// <param name="material"></param>
         /// <returns></returns>
         Task<ProjectMaterial> UpdateMaterial(int id, ProjectMaterial material);
+
+        /// <summary>
+        /// Delete project material by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task DeleteMaterial(int id);
     }
 }
