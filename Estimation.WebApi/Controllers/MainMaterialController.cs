@@ -25,11 +25,9 @@ namespace Estimation.WebApi.Controllers
         /// Constructor of material controller
         /// </summary>
         /// <param name="typeMappingService"></param>
-        /// <param name="materialRepository"></param>
         /// <param name="mainMaterialRepository"></param>
-        /// <param name="subMaterialRepository"></param>
-        public MainMaterialController(ITypeMappingService typeMappingService, IMaterialRepository materialRepository,
-            IMainMaterialRepository mainMaterialRepository, ISubMaterialRepository subMaterialRepository) : base(typeMappingService)
+        public MainMaterialController(ITypeMappingService typeMappingService,
+            IMainMaterialRepository mainMaterialRepository) : base(typeMappingService)
         {
             _mainMaterialRepository = mainMaterialRepository ?? throw new ArgumentNullException(nameof(mainMaterialRepository));
         }

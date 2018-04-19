@@ -8,6 +8,12 @@ namespace Estimation.Interface
 {
     public interface IExportService
     {
-        Task<byte[]> GetExportedPdf(ExportRequest exportRequest);
+        /// <summary>
+        /// Export project to pdf file
+        /// </summary>
+        /// <param name="id">Project Id</param>
+        /// <param name="exportRequest"></param>
+        /// <returns></returns>
+        Task<byte[]> ExportProjectToPdf(int id,ProjectExportRequest exportRequest);
     }
 }

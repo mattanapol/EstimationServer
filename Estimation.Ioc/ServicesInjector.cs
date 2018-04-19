@@ -27,6 +27,7 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IProjectSummaryService, ProjectSummaryService>();
             services.AddScoped<IMaterialService, MaterialService>();
+            services.AddScoped<IExportService, ExportService>();
             // Html to pdf
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();

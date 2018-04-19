@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Estimation.Domain.Models
 {
-    public class ExportRequest
+    public enum SubmitForm
     {
+        SubmitForm,
+        MaterialAndLabourCostForm,
+        NetForm
     }
 }
