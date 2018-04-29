@@ -7,11 +7,6 @@ namespace Estimation.Domain.Models
     public class Material: MaterialInfo
     {
         /// <summary>
-        /// Description
-        /// </summary>
-        public string Description { get; set; }
-
-        /// <summary>
         /// List Price
         /// </summary>
         public decimal ListPrice { get; set; }

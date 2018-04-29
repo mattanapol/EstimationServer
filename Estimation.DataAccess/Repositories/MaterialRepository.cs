@@ -71,11 +71,83 @@ namespace Estimation.DataAccess.Repositories
             IQueryable<MainMaterial> queryable = DbContext.MainMaterials
                 .Include(c => c.SubMaterials)
                 .ThenInclude(c => c.Materials)
-                .Where(c => string.IsNullOrWhiteSpace(materialType) ? true : c.MaterialType.Equals(materialType,StringComparison.OrdinalIgnoreCase))
+                .Where(c => string.IsNullOrWhiteSpace(materialType) || c.MaterialType.Equals(materialType,StringComparison.OrdinalIgnoreCase))
                 .Select(m => new MainMaterial
-                { Id = m.Id, Code = m.Code, Name = m.Name, MaterialType = m.MaterialType, CodeAsString = m.Code.ToString(),
-                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial { Id = s.Id, Code = s.Code, Name = s.Name, MaterialType = s.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}",
-                        Materials = s.Materials.Select(c => new MaterialInfo { Id = c.Id, Code = c.Code, Name = c.Name, MaterialType = c.MaterialType, CodeAsString = $"{m.Code.ToString()}-{s.Code.ToString("D2")}-{c.Code.ToString("D2")}", Description = c.Description })
+                {
+                    Id = m.Id,
+                    Code = m.Code,
+                    Name = m.Name,
+                    MaterialType = m.MaterialType,
+                    CodeAsString = m.Code.ToString(),
+                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial
+                    {
+                        Id = s.Id,
+                        Code = s.Code,
+                        Name = s.Name,
+                        MaterialType = s.MaterialType,
+                        CodeAsString = $"{m.Code.ToString()}-{s.Code:D2}",
+                        Materials = s.Materials.Select(c => new Material()
+                        {
+                            Id = c.Id,
+                            Code = c.Code,
+                            Name = c.Name,
+                            MaterialType = c.MaterialType,
+                            CodeAsString = $"{m.Code.ToString()}-{s.Code:D2}-{c.Code:D2}",
+                            Description = c.Description
+                        })
+                    })
+                })
+                .AsNoTracking();
+
+            var results = await Task.Run(() => queryable.ToArray());
+
+            return results;
+        }
+
+        /// <summary>
+        /// Get material list
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<MainMaterial>> GetMaterialListWithFullInfo(string materialType)
+        {
+            IQueryable<MainMaterial> queryable = DbContext.MainMaterials
+                .Include(c => c.SubMaterials)
+                .ThenInclude(c => c.Materials)
+                .Where(c => string.IsNullOrWhiteSpace(materialType) || c.MaterialType.Equals(materialType, StringComparison.OrdinalIgnoreCase))
+                .Select(m => new MainMaterial
+                {
+                    Id = m.Id,
+                    Code = m.Code,
+                    Name = m.Name,
+                    MaterialType = m.MaterialType,
+                    CodeAsString = m.Code.ToString(),
+                    Class = m.Class,
+                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial
+                    {
+                        Id = s.Id,
+                        Code = s.Code,
+                        Name = s.Name,
+                        MaterialType = s.MaterialType,
+                        CodeAsString = $"{m.Code.ToString()}-{s.Code:D2}",
+                        Materials = s.Materials.Select(c => new Material()
+                        {
+                            Id = c.Id,
+                            Code = c.Code,
+                            Name = c.Name,
+                            MaterialType = c.MaterialType,
+                            CodeAsString = $"{m.Code.ToString()}-{s.Code:D2}-{c.Code:D2}",
+                            Description = c.Description,
+                            ListPrice = c.ListPrice,
+                            NetPrice = c.NetPrice,
+                            OfferPrice = c.OfferPrice,
+                            Manpower = c.Manpower,
+                            Fittings = c.Fittings,
+                            Accessory = c.Accessory,
+                            Supporting = c.Supporting,
+                            Painting = c.Painting,
+                            Remark = c.Remark,
+                            Unit = c.Unit
+                        })
                     })
                 })
                 .AsNoTracking();

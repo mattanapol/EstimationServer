@@ -1,16 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Estimation.Domain\Estimation.Domain.csproj" />
     <ProjectReference Include="..\Estimation.Interface\Estimation.Interface.csproj" />
+    <ProjectReference Include="..\Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj" />
     <ProjectReference Include="..\Kaewsai.Utilities.Configurations\Kaewsai.Utilities.Configurations.csproj" />
   </ItemGroup>
 

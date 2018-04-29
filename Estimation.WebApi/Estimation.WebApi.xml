@@ -83,19 +83,45 @@
             </summary>
             <param name="typeMappingService"></param>
         </member>
+        <member name="T:Estimation.WebApi.Controllers.ExportController">
+            <summary>
+            Export controller class
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ExportController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IExportService,Estimation.Services.IPrintMaterialListService)">
+            <summary>
+            Export controller constructor
+            </summary>
+            <param name="typeMappingService"></param>
+            <param name="exportService"></param>
+            <param name="printMaterialListService"></param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportProject(System.Int32,Estimation.Domain.Models.ProjectExportRequest)">
+            <summary>
+            Export project to PDF
+            </summary>
+            <param name="projectExportRequest">Project export request object</param>
+            <param name="id">Project Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportProject(Estimation.Domain.Models.PrintOrderRequest)">
+            <summary>
+            Export material list to PDF
+            </summary>
+            <param name="printOrderRequest">Print request object</param>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.MainMaterialController">
             <summary>
             Main material controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMaterialRepository,Estimation.Interface.Repositories.IMainMaterialRepository,Estimation.Interface.Repositories.ISubMaterialRepository)">
+        <member name="M:Estimation.WebApi.Controllers.MainMaterialController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.Repositories.IMainMaterialRepository)">
             <summary>
             Constructor of material controller
             </summary>
             <param name="typeMappingService"></param>
-            <param name="materialRepository"></param>
             <param name="mainMaterialRepository"></param>
-            <param name="subMaterialRepository"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.MainMaterialController.CreateMainMaterial(Estimation.Domain.Dtos.MainMaterialIncommingDto)">
             <summary>

@@ -50,7 +50,7 @@ namespace Kaewsai.HtmlToPdf.Domain
         /// Gets or sets the kind of the paper.
         /// </summary>
         /// <value>The kind of the paper.</value>
-        public PaperKind PaperKind { get; set; }
+        public PaperKind PaperKind { get; set; } = PaperKind.A4;
 
         /// <summary>
         /// Get DinkToPdf file

@@ -19,6 +19,7 @@ namespace Estimation.Ioc
         {
             InjectProjectServices(services);
             InjectConfigurationServices(services);
+            InjectPrintService(services);
         }
 
         private static void InjectProjectServices(IServiceCollection services)
@@ -28,15 +29,22 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectSummaryService, ProjectSummaryService>();
             services.AddScoped<IMaterialService, MaterialService>();
             services.AddScoped<IExportService, ExportService>();
-            // Html to pdf
-            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-            services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
+            
         }
 
         private static void InjectConfigurationServices(IServiceCollection services)
         {
             services.AddScoped<IConfigurationsCache, ConfigurationsCache>();
             services.AddScoped<IConfigurationsService, AppConfigurationService>();
+        }
+
+        private static void InjectPrintService(IServiceCollection services)
+        {
+            // Html to pdf
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
+
+            services.AddScoped<IPrintMaterialListService, PrintMaterialListService>();
         }
     }
 }

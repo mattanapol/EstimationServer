@@ -31,6 +31,13 @@ namespace Estimation.Interface.Repositories
         Task<IEnumerable<MainMaterial>> GetMaterialList(string materialType);
 
         /// <summary>
+        /// Get all material list include material details
+        /// </summary>
+        /// <param name="materialType"></param>
+        /// <returns></returns>
+        Task<IEnumerable<MainMaterial>> GetMaterialListWithFullInfo(string materialType);
+
+        /// <summary>
         /// Update material
         /// </summary>
         /// <param name="materialId"></param>

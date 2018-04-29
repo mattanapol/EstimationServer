@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -27,6 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\Libraries\libwkhtmltox.dll" Link="libwkhtmltox.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Estimation.DataAccess\Estimation.DataAccess.csproj" />
     <ProjectReference Include="..\Estimation.Domain\Estimation.Domain.csproj" />
     <ProjectReference Include="..\Estimation.Ioc\Estimation.Ioc.csproj" />
@@ -36,6 +41,9 @@
 
   <ItemGroup>
     <None Update="Estimation.WebApi.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Forms\MaterialList.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

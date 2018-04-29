@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Estimation.Domain.Models
 {
-    public class ProjectExportRequest
+    public class ProjectExportRequest: PrintOrderRequest
     {
         /// <summary>
         /// Submit form
