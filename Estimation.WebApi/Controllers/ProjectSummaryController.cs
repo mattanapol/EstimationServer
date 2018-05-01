@@ -18,7 +18,7 @@ namespace Estimation.WebApi.Controllers
     [Route("api")]
     public class ProjectSummaryController : Controller
     {
-        IProjectSummaryService _projectSummaryService;
+        private readonly IProjectSummaryService _projectSummaryService;
 
         /// <summary>
         /// Project summary controller constructor

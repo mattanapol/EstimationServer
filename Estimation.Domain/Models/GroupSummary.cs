@@ -48,10 +48,7 @@ namespace Estimation.Domain.Models
                 + Painting + Supporting + Installation + MaterialPrice
                 + Transportation + Miscellaneous);
 
-            //int roundedTotal = (int)(Math.Ceiling((double)total / Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary))
-            //    * Math.Pow(10, projectMaterialGroup.ProjectInfo.CeilingSummary));
-
-            int roundedTotal = (int)(Math.Round((double)total, decimals));
+            int roundedTotal = (int)(Math.Round((double)total / Math.Pow(10, decimals), 0) * Math.Pow(10, decimals));
 
             // Adjust Miscellaneous
             Miscellaneous += roundedTotal - total;
