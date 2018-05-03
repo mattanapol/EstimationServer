@@ -43,5 +43,33 @@ namespace Estimation.Domain.Models
         /// Material class
         /// </summary>
         public MaterialClass Class { get; set; }
+
+        /// <summary>
+        /// Get data dictionary
+        /// </summary>
+        /// <returns></returns>
+        public virtual Dictionary<string, string> GetDataDictionary()
+        {
+            var dataDict = new Dictionary<string, string>
+            {
+                {
+                    "##CODE##", CodeAsString
+                },
+                {
+                    "##NAME##", Name
+                },
+                {
+                    "##DESCRIPTION##", Description
+                },
+                {
+                    "##TYPE##", MaterialType
+                },
+                {
+                    "##ID##", Id.ToString()
+                }
+            };
+
+            return dataDict;
+        }
     }
 }

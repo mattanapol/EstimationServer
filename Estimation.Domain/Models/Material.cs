@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Estimation.Domain.Models
 {
@@ -55,5 +54,49 @@ namespace Estimation.Domain.Models
         /// Unit of material
         /// </summary>
         public string Unit { get; set; }
+
+
+        /// <inheritdoc />
+        public override Dictionary<string, string> GetDataDictionary()
+        {
+            var baseDataDict = base.GetDataDictionary();
+            var dataDict = new Dictionary<string, string>
+            {
+                {
+                    "##LISTPRICE##", ListPrice.ToString("N")
+                },
+                {
+                    "##NETPRICE##", NetPrice.ToString("N")
+                },
+                {
+                    "##OFFERPRICE##", OfferPrice.ToString("N")
+                },
+                {
+                    "##MANPOWER##", Manpower.ToString("N")
+                },
+                {
+                    "##FITTINGS##", Fittings.ToString("N")
+                },
+                {
+                    "##ACCESSORY##", Accessory.ToString("N")
+                },
+                {
+                    "##SUPPORTING##", Supporting.ToString("N")
+                },
+                {
+                    "##PAINTING##", Painting.ToString("N")
+                },
+                {
+                    "##REMARK##", Remark
+                },
+                {
+                    "##UNIT##", Unit
+                }
+            };
+
+            var result = baseDataDict.Concat(dataDict).GroupBy(d => d.Key)
+                .ToDictionary(d => d.Key, d => d.First().Value);
+            return result;
+        }
     }
 }

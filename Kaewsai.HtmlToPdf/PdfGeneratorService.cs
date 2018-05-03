@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Kaewsai.HtmlToPdf
 {
-    public class PdfGeneratorService: IPdfGeneratorService
+    public class PdfGeneratorService : IPdfGeneratorService
     {
         private readonly IConverter _pdfConverter;
 
@@ -31,27 +31,32 @@ namespace Kaewsai.HtmlToPdf
         {
             var doc = new HtmlToPdfDocument()
             {
-                GlobalSettings = {
+                GlobalSettings =
+                {
                     ColorMode = ColorMode.Color,
                     Orientation = inputContent.Portrait ? Orientation.Portrait : Orientation.Landscape,
                     DPI = inputContent.DPI,
                     PaperSize = inputContent.GetDinkToPdfPaperKind()
                 }
             };
+
             if (inputContent.GetDinkToPdfPaperKind() == DinkToPdf.PaperKind.Custom)
             {
-                doc.GlobalSettings.PaperSize = new PechkinPaperSize(inputContent.Width.ToString(), inputContent.Height.ToString());
+                doc.GlobalSettings.PaperSize =
+                    new PechkinPaperSize(inputContent.Width.ToString(), inputContent.Height.ToString());
             }
+
             foreach (string html in inputContent.Html)
             {
                 doc.Objects.Add(new ObjectSettings()
                 {
                     PagesCount = true,
                     HtmlContent = html,
-                    WebSettings = { DefaultEncoding = "utf-8" }
+                    WebSettings = {DefaultEncoding = "utf-8"}
                 });
             }
-            return await Task.Run(() => { return _pdfConverter.Convert(doc); });
+
+            return await Task.Run(() => _pdfConverter.Convert(doc));
         }
     }
 }
