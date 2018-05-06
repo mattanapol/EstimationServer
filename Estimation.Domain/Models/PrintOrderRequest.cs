@@ -1,7 +1,4 @@
 ﻿using Kaewsai.HtmlToPdf.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Estimation.Domain.Models
 {

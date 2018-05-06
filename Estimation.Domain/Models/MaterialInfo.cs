@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Estimation.Domain.Models
 {
     /// <summary>
     /// Material Information model
     /// </summary>
-    public class MaterialInfo
+    public class MaterialInfo: IPrintable
     {
         /// <summary>
         /// Material Id

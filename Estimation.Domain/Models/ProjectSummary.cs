@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Estimation.Domain.Models
 {
     /// <summary>
     /// Project summary
     /// </summary>
-    public class ProjectSummary
+    public class ProjectSummary: IPrintable
     {
+        public ProjectSummary()
+        {
+            ChildSummaries = new List<GroupSummary>();
+        }
+
         /// <summary>
         /// Sum of material price
         /// </summary>
@@ -53,6 +56,11 @@ namespace Estimation.Domain.Models
         /// Overall price
         /// </summary>
         public int GrandTotal { get; set; }
+
+        /// <summary>
+        /// Childs project summary
+        /// </summary>
+        public IList<GroupSummary> ChildSummaries { get; set; }
         
         /// <summary>
         /// Add by group summary
@@ -69,6 +77,76 @@ namespace Estimation.Domain.Models
             Transportation += groupSummary.Transportation;
             Miscellaneous += groupSummary.Miscellaneous;
             GrandTotal += groupSummary.GrandTotal;
+        }
+
+        /// <summary>
+        /// Add child group summary to this object
+        /// </summary>
+        /// <param name="childGroupSummary"></param>
+        public void AddChildGroupSummary(GroupSummary childGroupSummary)
+        {
+            ChildSummaries.Add(childGroupSummary);
+        }
+
+        public ProjectSummary ClearProjectSummary()
+        {
+            MaterialPrice = 0;
+            Accessories = 0;
+            Fittings = 0;
+            Supporting = 0;
+            Painting = 0;
+            Miscellaneous = 0;
+            Installation = 0;
+            Transportation = 0;
+            GrandTotal = 0;
+            return this;
+        }
+
+        public ProjectSummary CalculateFromChildGroupSummaries()
+        {
+            ClearProjectSummary();
+            foreach (var childGroupSummary in ChildSummaries)
+            {
+                AddByGroupSummary(childGroupSummary);
+            }
+            return this;
+        }
+
+        /// <inheritdoc />
+        public Dictionary<string, string> GetDataDictionary()
+        {
+            var dataDict = new Dictionary<string, string>
+            {
+                {
+                    "##MATERIALPRICE##", MaterialPrice.ToString("N")
+                },
+                {
+                    "##ACCESSORIES##", Accessories.ToString("N")
+                },
+                {
+                    "##FITTINGS##", Fittings.ToString("N")
+                },
+                {
+                    "##PAINTING##", Painting.ToString("N")
+                },
+                {
+                    "##SUPPORTING##", Supporting.ToString("N")
+                },
+                {
+                    "##INSTALLATION##", Installation.ToString("N")
+                },
+                {
+                    "##TRANSPORTATION##", Transportation.ToString("N")
+                },
+                {
+                    "##MISCELANEOUS##", Miscellaneous.ToString("N")
+                },
+                {
+                    "##GRANDTOTAL##", GrandTotal.ToString("N")
+                }
+            };
+
+            return dataDict;
         }
     }
 }

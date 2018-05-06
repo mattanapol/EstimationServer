@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Estimation.Domain.Models
 {
-    public class ProjectMaterialGroup
+    public class ProjectMaterialGroup: IPrintable
     {
         /// <summary>
         /// Group identification
@@ -61,6 +59,25 @@ namespace Estimation.Domain.Models
         /// Transportation cost
         /// </summary>
         public Cost Transportation { get; set; }
+
+        /// <inheritdoc />
+        public Dictionary<string, string> GetDataDictionary()
+        {
+            var dataDict = new Dictionary<string, string>
+            {
+                {
+                    "##GROUPID##", Id.ToString()
+                },
+                {
+                    "##GROUPCODE##", GroupCode
+                },
+                {
+                    "##PGROUPNAME##", GroupName
+                }
+            };
+
+            return dataDict;
+        }
 
         public int GetMaterialsQuantity()
         {
