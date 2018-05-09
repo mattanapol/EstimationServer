@@ -7,6 +7,9 @@ namespace Estimation.Domain.Models
     /// </summary>
     public class ProjectSummary: IPrintable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectSummary"/> class.
+        /// </summary>
         public ProjectSummary()
         {
             ChildSummaries = new List<GroupSummary>();
@@ -58,14 +61,14 @@ namespace Estimation.Domain.Models
         public int GrandTotal { get; set; }
 
         /// <summary>
-        /// Childs project summary
+        /// Child project summary
         /// </summary>
         public IList<GroupSummary> ChildSummaries { get; set; }
-        
+
         /// <summary>
-        /// Add by group summary
+        /// Adds the group summary by group summary.
         /// </summary>
-        /// <param name="groupSummary"></param>
+        /// <param name="groupSummary">The group summary.</param>
         public void AddByGroupSummary(GroupSummary groupSummary)
         {
             Accessories += groupSummary.Accessories;
@@ -88,6 +91,10 @@ namespace Estimation.Domain.Models
             ChildSummaries.Add(childGroupSummary);
         }
 
+        /// <summary>
+        /// Clears the project summary.
+        /// </summary>
+        /// <returns></returns>
         public ProjectSummary ClearProjectSummary()
         {
             MaterialPrice = 0;
@@ -102,6 +109,10 @@ namespace Estimation.Domain.Models
             return this;
         }
 
+        /// <summary>
+        /// Calculates from child group summaries.
+        /// </summary>
+        /// <returns></returns>
         public ProjectSummary CalculateFromChildGroupSummaries()
         {
             ClearProjectSummary();
@@ -113,7 +124,7 @@ namespace Estimation.Domain.Models
         }
 
         /// <inheritdoc />
-        public Dictionary<string, string> GetDataDictionary()
+        public virtual Dictionary<string, string> GetDataDictionary()
         {
             var dataDict = new Dictionary<string, string>
             {
@@ -139,7 +150,7 @@ namespace Estimation.Domain.Models
                     "##TRANSPORTATION##", Transportation.ToString("N")
                 },
                 {
-                    "##MISCELANEOUS##", Miscellaneous.ToString("N")
+                    "##MISCELLANEOUS##", Miscellaneous.ToString("N")
                 },
                 {
                     "##GRANDTOTAL##", GrandTotal.ToString("N")
@@ -148,5 +159,13 @@ namespace Estimation.Domain.Models
 
             return dataDict;
         }
+
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        public IEnumerable<IPrintable> Child => ChildSummaries;
     }
 }

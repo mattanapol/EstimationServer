@@ -98,6 +98,25 @@ namespace Estimation.DataAccess.Repositories
         }
 
         /// <summary>
+        /// Get project information record by project id with all material included
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ProjectInfo> GetProjectInfoWithDetails(int id)
+        {
+            ProjectInfoDb projectInfoDb = await DbContext.ProjectInfo
+                .Include(p => p.MaterialGroups)
+                .ThenInclude(m => m.Materials)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (projectInfoDb == null)
+                throw new KeyNotFoundException($"Project id = {id} is not exist.");
+
+            var result = TypeMappingService.Map<ProjectInfoDb, ProjectInfo>(projectInfoDb);
+            return result;
+        }
+
+        /// <summary>
         /// Update project information
         /// </summary>
         /// <param name="id"></param>

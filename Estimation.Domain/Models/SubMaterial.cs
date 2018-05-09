@@ -2,11 +2,19 @@
 
 namespace Estimation.Domain.Models
 {
-    public class SubMaterial: MaterialInfo
+    public class SubMaterial: MaterialInfo, IPrintable
     {
         /// <summary>
-        /// Submaterial
+        /// Sub material
         /// </summary>
         public IEnumerable<Material> Materials { get; set; }
+
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        public IEnumerable<IPrintable> Child => Materials;
     }
 }

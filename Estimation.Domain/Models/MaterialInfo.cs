@@ -5,7 +5,7 @@ namespace Estimation.Domain.Models
     /// <summary>
     /// Material Information model
     /// </summary>
-    public class MaterialInfo: IPrintable
+    public class MaterialInfo
     {
         /// <summary>
         /// Material Id

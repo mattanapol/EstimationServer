@@ -13,8 +13,8 @@ namespace Estimation.Ioc
 {
     public class DependenciesInjector
     {
-        IServiceCollection _services;
-        IConfiguration _configuration;
+        readonly IServiceCollection _services;
+        readonly IConfiguration _configuration;
 
         public DependenciesInjector(IServiceCollection services, IConfiguration configuration)
         {
@@ -24,19 +24,16 @@ namespace Estimation.Ioc
 
         public void Inject()
         {
-            _services.AddSingleton<Interface.ITypeMappingService, AutoMapperService>();
+            _services.AddSingleton<ITypeMappingService, AutoMapperService>();
 
-            _services.AddScoped<MaterialDbContext>((arg) => {
-                return new MaterialDbContext(_configuration.GetConnectionString("MaterialDb"));
-            });
+            _services.AddScoped<MaterialDbContext>((arg) => 
+                new MaterialDbContext(_configuration.GetConnectionString("MaterialDb")));
 
-            _services.AddScoped<ProjectDbContext>((arg) => {
-                return new ProjectDbContext(_configuration.GetConnectionString("ProjectDb"));
-            });
+            _services.AddScoped<ProjectDbContext>((arg) => 
+                new ProjectDbContext(_configuration.GetConnectionString("ProjectDb")));
             
-            _services.AddScoped<ConfigurationDbContext>((arg) => {
-                return new ConfigurationDbContext(_configuration.GetConnectionString("ConfigurationDb"));
-            });
+            _services.AddScoped<ConfigurationDbContext>((arg) =>
+                new ConfigurationDbContext(_configuration.GetConnectionString("ConfigurationDb")));
 
             _services.AddScoped<IAppDbMigrationService, AppDbMigrationService>();
 

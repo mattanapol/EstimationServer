@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Estimation.Common.AutoMapper.Profiles;
 
 namespace Estimation.Common.AutoMapper
 {
     public sealed class AutoMapperConfig
     {
         /// <summary>
-        /// Initialsies a new instance of <see cref="AutoMapperConfig"/>
+        /// Initializes a new instance of <see cref="AutoMapperConfig"/>
         /// </summary>
         private AutoMapperConfig()
         {
@@ -22,7 +23,14 @@ namespace Estimation.Common.AutoMapper
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<AutoMapperProfile>();
+                cfg.AddProfile<ConfigurationProfile>();
+                cfg.AddProfile<MainMaterialProfile>();
+                cfg.AddProfile<MaterialGroupProfile>();
+                cfg.AddProfile<MaterialProfile>();
+                cfg.AddProfile<ProjectInfoProfile>();
+                cfg.AddProfile<ProjectMaterialProfile>();
+                cfg.AddProfile<ProjectSummaryProfile>();
+                cfg.AddProfile<ProjectMaterialProfile>();
             });
             //config.AssertConfigurationIsValid();
             IMapper mapper = config.CreateMapper();

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Estimation.Domain.Models
 {
-    public class GroupSummary: ProjectSummary
+    public class GroupSummary: ProjectSummary, IPrintable
     {
         /// <summary>
         /// Miscellaneous information
@@ -13,6 +15,14 @@ namespace Estimation.Domain.Models
         /// Transportation information
         /// </summary>
         public Cost TransportationInfo { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the project material group information.
+        /// </summary>
+        /// <value>
+        /// The project material group information.
+        /// </value>
+        public ProjectMaterialGroup ProjectMaterialGroupInfo { get; set; }
 
         /// <summary>
         /// Increase summary value by material
@@ -52,6 +62,17 @@ namespace Estimation.Domain.Models
             Miscellaneous += roundedTotal - total;
 
             GrandTotal = roundedTotal;
+        }
+
+        /// <inheritdoc />
+        public override Dictionary<string, string> GetDataDictionary()
+        {
+            var baseDataDict = base.GetDataDictionary();
+            var projectMaterialGroupDataDict = ProjectMaterialGroupInfo.GetDataDictionary();
+
+            var result = baseDataDict.Concat(projectMaterialGroupDataDict).GroupBy(d => d.Key)
+                .ToDictionary(d => d.Key, d => d.First().Value);
+            return result;
         }
     }
 }

@@ -131,15 +131,22 @@ namespace Estimation.Services
         /// <returns></returns>
         public async Task<GroupSummary> GetGroupSummary(ProjectMaterialGroup projectMaterialGroup)
         {
-            GroupSummary groupSummary = new GroupSummary { MiscellaneousInfo = projectMaterialGroup.Miscellaneous, TransportationInfo = projectMaterialGroup.Transportation };
+            GroupSummary groupSummary = new GroupSummary
+            {
+                MiscellaneousInfo = projectMaterialGroup.Miscellaneous,
+                TransportationInfo = projectMaterialGroup.Transportation,
+                ProjectMaterialGroupInfo = projectMaterialGroup
+            };
             if (projectMaterialGroup.ChildGroups != null && projectMaterialGroup.ChildGroups.Count != 0)
             {
                 // Sum all groups
                 foreach (var group in projectMaterialGroup.ChildGroups)
                 {
                     var childGroupSummary = await GetGroupSummary(group);
-                    groupSummary.AddByGroupSummary(childGroupSummary);
+                    groupSummary.AddChildGroupSummary(childGroupSummary);
                 }
+
+                groupSummary.CalculateFromChildGroupSummaries();
             }
             else if (projectMaterialGroup.Materials != null && projectMaterialGroup.Materials.Count != 0)
             {
@@ -169,8 +176,10 @@ namespace Estimation.Services
             ProjectSummary projectSummary = new ProjectSummary();
             foreach(var materialGroup in materialGroups)
             {
-                projectSummary.AddByGroupSummary(await GetGroupSummary(materialGroup.Id));
+                projectSummary.AddChildGroupSummary(await GetGroupSummary(materialGroup.Id));
             }
+
+            projectSummary.CalculateFromChildGroupSummaries();
 
             return projectSummary;
         }

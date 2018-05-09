@@ -5,9 +5,9 @@ namespace Estimation.Domain.Models
     public class PrintOrderRequest
     {
         /// <summary>
-        /// Is portait
+        /// Is portrait
         /// </summary>
-        public bool IsPortait { get; set; } = true;
+        public bool IsPortrait { get; set; } = true;
         
         /// <summary>
         /// Paper kind

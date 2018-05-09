@@ -16,15 +16,17 @@ namespace Estimation.WebApi.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api")]
-    public class ProjectSummaryController : Controller
+    public class ProjectSummaryController : EstimationBaseController
     {
         private readonly IProjectSummaryService _projectSummaryService;
+
 
         /// <summary>
         /// Project summary controller constructor
         /// </summary>
         /// <param name="projectSummaryService"></param>
-        public ProjectSummaryController(IProjectSummaryService projectSummaryService)
+        /// <param name="typeMappingService"></param>
+        public ProjectSummaryController(IProjectSummaryService projectSummaryService, ITypeMappingService typeMappingService): base(typeMappingService)
         {
             _projectSummaryService = projectSummaryService ?? throw new ArgumentNullException(nameof(projectSummaryService));
         }
@@ -37,8 +39,9 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("project/{id}/summary")]
         public async Task<IActionResult> GetProjectSummary(int id)
         {
-            var result = await _projectSummaryService.GetProjectSummary(id);
-            return Ok(OutgoingResult<ProjectSummary>.SuccessResponse(result));
+            var projectSummary = await _projectSummaryService.GetProjectSummary(id);
+            var result = TypeMappingService.Map<ProjectSummary, ProjectSummaryOutgoingDto>(projectSummary);
+            return Ok(OutgoingResult<ProjectSummaryOutgoingDto>.SuccessResponse(result));
         }
 
         /// <summary>
@@ -49,8 +52,9 @@ namespace Estimation.WebApi.Controllers
         [HttpGet("group/{id}/summary")]
         public async Task<IActionResult> GetGroupSummary(int id)
         {
-            var result = await _projectSummaryService.GetGroupSummary(id);
-            return Ok(OutgoingResult<GroupSummary>.SuccessResponse(result));
+            var groupSummary = await _projectSummaryService.GetGroupSummary(id);
+            var result = TypeMappingService.Map<GroupSummary, GroupSummaryOutgoingDto>(groupSummary);
+            return Ok(OutgoingResult<GroupSummaryOutgoingDto>.SuccessResponse(result));
         }
 
         /// <summary>
@@ -62,8 +66,9 @@ namespace Estimation.WebApi.Controllers
         [HttpPut("group/{id}/summary")]
         public async Task<IActionResult> AdjustGroupSummary(int id, [FromBody]GroupSummaryIncomingDto groupSummaryIncomingDto)
         {
-            var result = await _projectSummaryService.AdjustGroupSummary(id, groupSummaryIncomingDto);
-            return Ok(OutgoingResult<GroupSummary>.SuccessResponse(result));
+            var groupSummary = await _projectSummaryService.AdjustGroupSummary(id, groupSummaryIncomingDto);
+            var result = TypeMappingService.Map<GroupSummary, GroupSummaryOutgoingDto>(groupSummary);
+            return Ok(OutgoingResult<GroupSummaryOutgoingDto>.SuccessResponse(result));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Estimation.DataAccess.Repositories
     /// </summary>
     public class ProjectMaterialRepository : BaseProjectRepository, IProjectMaterialRepository
     {
-        IProjectMaterialGroupRepository _projectMaterialGroupRepository;
+        readonly IProjectMaterialGroupRepository _projectMaterialGroupRepository;
 
         public ProjectMaterialRepository(ProjectDbContext projectDbContext,
                                     ITypeMappingService typeMappingService,

@@ -72,13 +72,36 @@ namespace Estimation.Domain.Models
                     "##GROUPCODE##", GroupCode
                 },
                 {
-                    "##PGROUPNAME##", GroupName
+                    "##GROUPNAME##", GroupName
                 }
             };
 
             return dataDict;
         }
 
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        public IEnumerable<IPrintable> Child
+        {
+            get
+            {
+                if (Materials.Count != 0)
+                    return Materials;
+                else if (ChildGroups.Count != 0)
+                    return ChildGroups;
+                else
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the materials quantity.
+        /// </summary>
+        /// <returns>All material quantity</returns>
         public int GetMaterialsQuantity()
         {
             int materialsQuantity = 0;

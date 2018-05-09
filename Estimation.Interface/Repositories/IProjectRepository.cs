@@ -43,5 +43,12 @@ namespace Estimation.Interface.Repositories
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteProjectInfo(int id);
+
+        /// <summary>
+        /// Get project information with all material included
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<ProjectInfo> GetProjectInfoWithDetails(int id);
     }
 }

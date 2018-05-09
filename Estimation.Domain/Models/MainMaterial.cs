@@ -5,11 +5,20 @@ namespace Estimation.Domain.Models
     /// <summary>
     /// Main material model
     /// </summary>
-    public class MainMaterial: MaterialInfo
+    public class MainMaterial: MaterialInfo, IPrintable
     {
         /// <summary>
-        /// Submaterial
+        /// Sub Material
         /// </summary>
         public IEnumerable<SubMaterial> SubMaterials { get; set; }
+
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public IEnumerable<IPrintable> Child => SubMaterials;
     }
 }

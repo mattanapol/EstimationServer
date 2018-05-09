@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Estimation.Domain.Models
 {
-    public class Material: MaterialInfo
+    public class Material: MaterialInfo, IPrintable
     {
         /// <summary>
         /// List Price
@@ -54,6 +54,15 @@ namespace Estimation.Domain.Models
         /// Unit of material
         /// </summary>
         public string Unit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        /// <remark>Material don't have child</remark>
+        public IEnumerable<IPrintable> Child => null;
 
 
         /// <inheritdoc />

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Estimation.Domain.Models;
-using Estimation.Interface;
 using Estimation.Interface.Repositories;
 using Estimation.Services.Helpers;
 using HtmlAgilityPack;
@@ -65,7 +62,7 @@ namespace Estimation.Services
             PdfGeneratorInputContent pdfContents = new PdfGeneratorInputContent()
             {
                 Html = { html.DocumentNode.OuterHtml },
-                Portrait = printOrder.IsPortait,
+                Portrait = printOrder.IsPortrait,
                 PaperKind = printOrder.Paper
             };
             var result = await _pdfGeneratorService.GetPdfFromHtmlAsync(pdfContents);

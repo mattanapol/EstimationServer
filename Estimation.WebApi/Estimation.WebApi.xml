@@ -88,13 +88,14 @@
             Export controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ExportController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IExportService,Estimation.Services.IPrintMaterialListService)">
+        <member name="M:Estimation.WebApi.Controllers.ExportController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IExportService,Estimation.Services.IPrintMaterialListService,Estimation.Interface.IPrintProjectDatasheetService)">
             <summary>
             Export controller constructor
             </summary>
             <param name="typeMappingService"></param>
             <param name="exportService"></param>
             <param name="printMaterialListService"></param>
+            <param name="printProjectDatasheetService"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ExportController.ExportProject(System.Int32,Estimation.Domain.Models.ProjectExportRequest)">
             <summary>
@@ -104,7 +105,7 @@
             <param name="id">Project Id</param>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportProject(Estimation.Domain.Models.PrintOrderRequest)">
+        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportMaterial(Estimation.Domain.Models.PrintOrderRequest)">
             <summary>
             Export material list to PDF
             </summary>
@@ -317,11 +318,12 @@
             Project summary controller
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.#ctor(Estimation.Interface.IProjectSummaryService)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.#ctor(Estimation.Interface.IProjectSummaryService,Estimation.Interface.ITypeMappingService)">
             <summary>
             Project summary controller constructor
             </summary>
             <param name="projectSummaryService"></param>
+            <param name="typeMappingService"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ProjectSummaryController.GetProjectSummary(System.Int32)">
             <summary>

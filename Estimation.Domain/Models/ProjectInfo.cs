@@ -44,7 +44,7 @@ namespace Estimation.Domain.Models
         public string Owner { get; set; }
 
         /// <summary>
-        /// Gerneral Contractor
+        /// General Contractor
         /// </summary>
         public string GeneralContractor { get; set; }
 

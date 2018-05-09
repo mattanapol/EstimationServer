@@ -9,5 +9,13 @@ namespace Estimation.Domain
         /// </summary>
         /// <returns></returns>
         Dictionary<string, string> GetDataDictionary();
+
+        /// <summary>
+        /// Gets or sets the child.
+        /// </summary>
+        /// <value>
+        /// The child.
+        /// </value>
+        IEnumerable<IPrintable> Child { get; }
     }
 }

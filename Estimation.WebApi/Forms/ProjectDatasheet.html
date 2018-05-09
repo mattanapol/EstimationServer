@@ -2,33 +2,77 @@
 <html>
 <head>
     <style>
+        /*For print tables*/
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
         body {
             font-family: AngsanaUPC, MS Sans Serif;
         }
 
-        table {
-            border-collapse: collapse;
-            /*table-layout: fixed;*/
-            width: 100%;
-        }
-
-        th {
-            border: 1px solid black;
-        }
-
-        th {
+        .content-table th {
             text-align: center;
             padding: 4pt 0pt 4pt 0pt;
             font-size: 14pt;
             font-weight: bold;
         }
 
-        td {
+        .content-table td {
             font-size: 13pt;
             padding: 3pt 5pt 3pt 5pt;
             word-wrap: break-word;
-            border: 1px solid grey;
         }
+
+        .content-table {
+            border-collapse: collapse;
+            /*table-layout: fixed;*/
+            width: 100%;
+            border-bottom: none;
+        }
+
+            .content-table tfoot td, .content-table tfoot tr {
+                height: 0px;
+                padding: 0px;
+                border-bottom: none;
+                border-top: 1px solid black;
+            }
+
+        table {
+            border: 1px solid black;
+        }
+
+        tr {
+            border-top: 1px solid black;
+        }
+
+            tr + tr {
+                border-top: 1px solid lightgray;
+            }
+
+        td {
+            border-left: 1px solid black;
+        }
+
+            td + td {
+                border-left: 1px solid lightgray;
+            }
+
+        th {
+            border-left: 1px solid black;
+        }
+
+            th + th {
+                border-left: 1px solid lightgray;
+            }
 
         .header {
             text-align: center;
@@ -59,6 +103,7 @@
         <p>Project Datasheet</p>
     </div>
     <table>
+        <thead>
         <tr>
             <th>Code</th>
             <th>Name</th>
@@ -75,6 +120,8 @@
             <th>Painting</th>
             <th>Remark</th>
         </tr>
+        </thead>
+        <tbody>
         <tr class="row-content">
             <td class="text-align-center">##CODE##</td>
             <td class="text-align-left">##NAME##</td>
@@ -91,6 +138,12 @@
             <td class="text-align-center">##PAINTING##</td>
             <td class="text-align-left">##REMARK##</td>
         </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="14"></td>
+        </tr>
+        </tfoot>
     </table>
 </body>
 </html>

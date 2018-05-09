@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Estimation.DataAccess.Repositories
@@ -20,6 +19,7 @@ namespace Estimation.DataAccess.Repositories
         /// </summary>
         /// <param name="projectDbContext"></param>
         /// <param name="typeMappingService"></param>
+        /// <param name="projectRepository"></param>
         public ProjectMaterialGroupRepository(ProjectDbContext projectDbContext,
                                   ITypeMappingService typeMappingService,
                                   IProjectRepository projectRepository)
@@ -40,7 +40,7 @@ namespace Estimation.DataAccess.Repositories
             if (project == null)
                 throw new ArgumentOutOfRangeException($"Project id = {projectId} is not exist.");
 
-            if (projectInfo.ParentGroupId.GetValueOrDefault(0) > 0)
+            if (projectInfo.ParentGroupId.GetValueOrDefault(0) > 0 && projectInfo.ParentGroupId != null)
             {
                 var parentMaterialGroup = await GetProjectMaterialGroup(projectInfo.ParentGroupId.Value);
                 if (parentMaterialGroup.ProjectId != projectId)
@@ -113,12 +113,14 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialGroupDb = await DbContext.MaterialGroup
                 .Include(e => e.Materials)
-                //.Include(e => e.ProjectInfo)
+                .OrderBy(e => e.GroupCode)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (materialGroupDb == null)
                 throw new ArgumentOutOfRangeException($"Project material group id = {id} is not exist.");
+
+            materialGroupDb.Materials = materialGroupDb.Materials.OrderBy(e => e.CodeAsString);
 
             var materialGroup = TypeMappingService.Map<MaterialGroupDb, ProjectMaterialGroup>(materialGroupDb);
             return materialGroup;
