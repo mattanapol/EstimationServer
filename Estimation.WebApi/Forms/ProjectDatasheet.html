@@ -102,47 +102,79 @@
     <div class="header">
         <p>Project Datasheet</p>
     </div>
-    <table>
+    <table class="content-table">
         <thead>
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Unit</th>
-            <th>List Price</th>
-            <th>Net Price</th>
-            <th>Offer Price</th>
-            <th>Manpower</th>
-            <th>Fittings</th>
-            <th>Accessory</th>
-            <th>Supporting</th>
-            <th>Painting</th>
-            <th>Remark</th>
-        </tr>
+            <tr class="row-header">
+                <th>Code</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>List Price</th>
+                <th>Net Price</th>
+                <th>Offer Price</th>
+                <th>Manpower</th>
+                <th>Fittings</th>
+                <th>Accessory</th>
+                <th>Supporting</th>
+                <th>Painting</th>
+                <th>Remark</th>
+            </tr>
         </thead>
-        <tbody>
-        <tr class="row-content">
-            <td class="text-align-center">##CODE##</td>
-            <td class="text-align-left">##NAME##</td>
-            <td class="text-align-left">##DESCRIPTION##</td>
-            <td class="text-align-center">##QUANTITY##</td>
-            <td class="text-align-center">##UNIT##</td>
-            <td class="text-align-center">##LISTPRICE##</td>
-            <td class="text-align-center">##NETPRICE##</td>
-            <td class="text-align-center">##OFFERPRICE##</td>
-            <td class="text-align-center">##MANPOWER##</td>
-            <td class="text-align-center">##FITTINGS##</td>
-            <td class="text-align-center">##ACCESSORY##</td>
-            <td class="text-align-center">##SUPPORTING##</td>
-            <td class="text-align-center">##PAINTING##</td>
-            <td class="text-align-left">##REMARK##</td>
+        <tbody class="group-summary template">
+        <tbody class="group template">
+            <tr class="group contents">
+                <td class="text-align-center">##GROUPCOUNTER##</td>
+                <td class="text-align-left" colspan="13">##GROUPNAME##</td>
+            </tr>
+            <tr class="material template contents">
+                <td class="text-align-center">##CODE##</td>
+                <td class="text-align-left">##NAME##</td>
+                <td class="text-align-left">##DESCRIPTION##</td>
+                <td class="text-align-center">##QUANTITY##</td>
+                <td class="text-align-center">##UNIT##</td>
+                <td class="text-align-center">##LISTPRICE##</td>
+                <td class="text-align-center">##NETPRICE##</td>
+                <td class="text-align-center">##OFFERPRICE##</td>
+                <td class="text-align-center">##MANPOWER##</td>
+                <td class="text-align-center">##FITTINGS##</td>
+                <td class="text-align-center">##ACCESSORY##</td>
+                <td class="text-align-center">##SUPPORTING##</td>
+                <td class="text-align-center">##PAINTING##</td>
+                <td class="text-align-left">##REMARK##</td>
+            </tr>
+<tbody class="subgroup template">
+            <tr class="subgroup contents">
+                <td class="text-align-center">##SUBGROUPCOUNTER##</td>
+                <td class="text-align-left" colspan="13">##GROUPNAME##</td>
+            </tr>
+            <tr class="material template contents">
+                <td class="text-align-center">##CODE##</td>
+                <td class="text-align-left">##NAME##</td>
+                <td class="text-align-left">##DESCRIPTION##</td>
+                <td class="text-align-center">##QUANTITY##</td>
+                <td class="text-align-center">##UNIT##</td>
+                <td class="text-align-center">##LISTPRICE##</td>
+                <td class="text-align-center">##NETPRICE##</td>
+                <td class="text-align-center">##OFFERPRICE##</td>
+                <td class="text-align-center">##MANPOWER##</td>
+                <td class="text-align-center">##FITTINGS##</td>
+                <td class="text-align-center">##ACCESSORY##</td>
+                <td class="text-align-center">##SUPPORTING##</td>
+                <td class="text-align-center">##PAINTING##</td>
+                <td class="text-align-left">##REMARK##</td>
+            </tr>
+        </tbody>
+        </tbody>
+        <tr class="group-summary contents">
+            <td class="text-align-center">Sum</td>
+            <td class="text-align-left" colspan="13">##GRANDTOTAL##</td>
         </tr>
         </tbody>
         <tfoot>
-        <tr>
-            <td colspan="14"></td>
-        </tr>
+            <tr>
+                <td colspan="14"></td>
+            </tr>
         </tfoot>
     </table>
 </body>

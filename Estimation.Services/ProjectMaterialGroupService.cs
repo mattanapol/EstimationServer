@@ -61,8 +61,8 @@ namespace Estimation.Services
             projectMaterialGroups = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) > 0);
             foreach (var result in results)
             {
-                var projectMaterialGroupChilds = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == result.Id);
-                result.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChilds.ToList());
+                var projectMaterialGroupChild = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == result.Id);
+                result.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChild.ToList());
             }
             
             return results;
@@ -120,7 +120,7 @@ namespace Estimation.Services
 
                     material.TotalAccessory = material.Accessory * material.Quantity;
 
-                    material.Totalfitting = material.Fittings * material.Quantity;
+                    material.TotalFitting = material.Fittings * material.Quantity;
 
                     material.TotalOfferPrice = material.OfferPrice * material.Quantity;
 
@@ -128,7 +128,7 @@ namespace Estimation.Services
 
                     material.TotalSupport = material.Supporting * material.Quantity;
 
-                    material.TotalCost = material.Installation + material.TotalAccessory + material.Totalfitting + material.TotalOfferPrice + material.TotalPainting + material.TotalSupport;
+                    material.TotalCost = material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalOfferPrice + material.TotalPainting + material.TotalSupport;
                 }
             }
             return newProjectMaterialGroup;

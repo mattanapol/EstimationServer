@@ -11,6 +11,14 @@ namespace Estimation.Domain
         Dictionary<string, string> GetDataDictionary();
 
         /// <summary>
+        /// Gets the target class.
+        /// </summary>
+        /// <value>
+        /// The target class.
+        /// </value>
+        string TargetClass { get; }
+
+        /// <summary>
         /// Gets or sets the child.
         /// </summary>
         /// <value>

@@ -107,5 +107,8 @@ namespace Estimation.Domain.Models
                 .ToDictionary(d => d.Key, d => d.First().Value);
             return result;
         }
+
+        /// <inheritdoc />
+        public string TargetClass => "material";
     }
 }

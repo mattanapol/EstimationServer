@@ -31,7 +31,7 @@ namespace Estimation.Domain.Models
         public void AddByMaterial(ProjectMaterial projectMaterial)
         {
             Accessories += (int)Math.Round(projectMaterial.TotalAccessory);
-            Fittings += (int)Math.Round(projectMaterial.Totalfitting);
+            Fittings += (int)Math.Round(projectMaterial.TotalFitting);
             Painting += (int)Math.Round(projectMaterial.TotalPainting);
             Supporting += (int)Math.Round(projectMaterial.TotalSupport);
             Installation += (int)Math.Round(projectMaterial.Installation);
@@ -73,6 +73,23 @@ namespace Estimation.Domain.Models
             var result = baseDataDict.Concat(projectMaterialGroupDataDict).GroupBy(d => d.Key)
                 .ToDictionary(d => d.Key, d => d.First().Value);
             return result;
+        }
+
+        /// <inheritdoc />
+        public override string TargetClass => "group-summary";
+
+        /// <inheritdoc />
+        public override IEnumerable<IPrintable> Child
+        {
+            get
+            {
+                if (ChildSummaries.Count > 0)
+                    return ChildSummaries;
+                else
+                {
+                    return new List<IPrintable> {ProjectMaterialGroupInfo};
+                }
+            }
         }
     }
 }

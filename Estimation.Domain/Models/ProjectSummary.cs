@@ -160,12 +160,15 @@ namespace Estimation.Domain.Models
             return dataDict;
         }
 
+        /// <inheritdoc />
+        public virtual string TargetClass => "project-summary";
+
         /// <summary>
         /// Gets or sets the child.
         /// </summary>
         /// <value>
         /// The child.
         /// </value>
-        public IEnumerable<IPrintable> Child => ChildSummaries;
+        public virtual IEnumerable<IPrintable> Child => ChildSummaries;
     }
 }

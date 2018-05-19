@@ -79,6 +79,10 @@ namespace Estimation.Domain.Models
             return dataDict;
         }
 
+
+        /// <inheritdoc />
+        public string TargetClass => ParentGroupId != null && ParentGroupId != 0 ? "subgroup" : "group";
+
         /// <summary>
         /// Gets or sets the child.
         /// </summary>
@@ -89,9 +93,9 @@ namespace Estimation.Domain.Models
         {
             get
             {
-                if (Materials.Count != 0)
+                if (Materials?.Count != 0)
                     return Materials;
-                else if (ChildGroups.Count != 0)
+                else if (ChildGroups?.Count != 0)
                     return ChildGroups;
                 else
                     return null;

@@ -12,6 +12,9 @@ namespace Estimation.Domain.Models
         /// </summary>
         public IEnumerable<SubMaterial> SubMaterials { get; set; }
 
+        /// <inheritdoc />
+        public string TargetClass => "main-material";
+
         /// <summary>
         /// Gets or sets the child.
         /// </summary>
