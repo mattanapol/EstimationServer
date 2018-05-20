@@ -74,21 +74,23 @@ namespace Estimation.Services.Helpers
                 contentRow.Attributes["class"].Value = contentRow.GetClasses()
                     .Where(e => e != TemplateClassName).Aggregate((current, next) => current + ' ' + next);
 
-                var contentElement =
+                var contentElements =
                     contentRow.GetClasses().Any(e => e == ContentsClassName)
-                        ? contentRow
+                        ? new List<HtmlNode>{contentRow}
                         : contentRow.Descendants()
-                            .FirstOrDefault(n =>
+                            .Where(n =>
                             {
                                 var classes = n.GetClasses();
                                 return classes.Any(e => e == ContentsClassName) &&
                                        classes.Any(e => e == printable.TargetClass);
                             });
 
-                if (contentElement != null)
+                foreach (var contentElement in contentElements)
                     contentElement.InnerHtml = ParseHtml(contentElement.InnerHtml, printable.GetDataDictionary());
-                else
-                    contentRow.InnerHtml = ParseHtml(contentRow.InnerHtml, printable.GetDataDictionary());
+                //if (contentElement != null)
+                //    contentElement.InnerHtml = ParseHtml(contentElement.InnerHtml, printable.GetDataDictionary());
+                //else
+                //    contentRow.InnerHtml = ParseHtml(contentRow.InnerHtml, printable.GetDataDictionary());
 
                 if (printable.Child != null && printable.Child.Count() != 0)
                     ParseHtmlNodeByClass(contentRow, "", printable.Child);

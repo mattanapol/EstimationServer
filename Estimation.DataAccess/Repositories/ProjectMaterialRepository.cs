@@ -106,6 +106,7 @@ namespace Estimation.DataAccess.Repositories
             materialDb.Supporting = material.Supporting;
             materialDb.Fittings = material.Fittings;
             materialDb.Code = material.Code;
+            materialDb.CodeAsString = material.CodeAsString;
             materialDb.Unit = material.Unit;
             materialDb.Quantity = material.Quantity;
             materialDb.Description = material.Description;

@@ -100,6 +100,9 @@ namespace Estimation.DataAccess.Repositories
                 .Where(m => m.ProjectId == projectId)
                 .ToArrayAsync();
 
+            foreach(var materialGroupDb in materialGroupDbs)
+                materialGroupDb.Materials = materialGroupDb.Materials.OrderBy(e => e.CodeAsString);
+
             var materialGroups = TypeMappingService.Map<IEnumerable<MaterialGroupDb>, IEnumerable<ProjectMaterialGroup>>(materialGroupDbs);
             return materialGroups;
         }
