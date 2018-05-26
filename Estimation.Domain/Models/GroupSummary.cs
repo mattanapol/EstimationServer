@@ -36,6 +36,7 @@ namespace Estimation.Domain.Models
             Supporting += (int)Math.Round(projectMaterial.TotalSupport);
             Installation += (int)Math.Round(projectMaterial.Installation);
             MaterialPrice += (int)Math.Round(projectMaterial.TotalOfferPrice);
+            NetPrice += (int)Math.Round(projectMaterial.TotalNetPrice);
         }
 
         /// <summary>

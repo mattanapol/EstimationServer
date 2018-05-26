@@ -124,6 +124,8 @@ namespace Estimation.Services
 
                     material.TotalOfferPrice = material.OfferPrice * material.Quantity;
 
+                    material.TotalNetPrice = material.NetPrice * material.Quantity;
+
                     material.TotalPainting = material.Painting * material.Quantity;
 
                     material.TotalSupport = material.Supporting * material.Quantity;

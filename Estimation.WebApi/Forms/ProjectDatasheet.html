@@ -47,13 +47,12 @@
             }
 
         table {
-            border: 1px solid black;
+            border: none;
         }
 
         tr {
             border-top: 1px solid black;
         }
-
             tr + tr {
                 border-top: 1px solid lightgray;
             }
@@ -66,6 +65,13 @@
                 border-left: 1px solid lightgray;
             }
 
+        td:first-child {
+            border-left: 1px solid black;
+        }
+        td:last-child {
+            border-right: 1px solid black;
+        }
+
         th {
             border-left: 1px solid black;
         }
@@ -73,6 +79,14 @@
             th + th {
                 border-left: 1px solid lightgray;
             }
+
+        th:first-child {
+            border-left: 1px solid black;
+        }
+
+        th:last-child {
+            border-right: 1px solid black;
+        }
 
         .header {
             text-align: center;
@@ -110,9 +124,10 @@
                 <th>Description</th>
                 <th>Quantity</th>
                 <th>Unit</th>
-                <th>List Price</th>
                 <th>Net Price</th>
-                <th>Offer Price</th>
+                <th>Total</th>
+                <th>Estimate Price</th>
+                <th>Total</th>
                 <th>Manpower</th>
                 <th>Fittings</th>
                 <th>Accessory</th>
@@ -123,8 +138,8 @@
         </thead>
         <tbody class="group-summary template">
             <tr class="group-summary contents">
-                <td class="text-align-center">##GROUPCOUNTER##</td>
-                <td class="text-align-left" colspan="13">##GROUPNAME##</td>
+                <td class="text-align-center">##GROUPCODE##</td>
+                <td class="text-align-left" colspan="14">##GROUPNAME##</td>
             </tr>
             <tr class="material template contents">
                 <td class="text-align-center">##CODE##</td>
@@ -132,9 +147,10 @@
                 <td class="text-align-left">##DESCRIPTION##</td>
                 <td class="text-align-center">##QUANTITY##</td>
                 <td class="text-align-center">##UNIT##</td>
-                <td class="text-align-center">##LISTPRICE##</td>
                 <td class="text-align-center">##NETPRICE##</td>
+                <td class="text-align-center">##TOTALNETPRICE##</td>
                 <td class="text-align-center">##OFFERPRICE##</td>
+                <td class="text-align-center">##TOTALOFFERPRICE##</td>
                 <td class="text-align-center">##MANPOWER##</td>
                 <td class="text-align-center">##FITTINGS##</td>
                 <td class="text-align-center">##ACCESSORY##</td>
@@ -144,8 +160,8 @@
             </tr>
         <tbody class="sub-group-summary template">
             <tr class="sub-group-summary contents">
-                <td class="text-align-center">##SUBGROUPCOUNTER##</td>
-                <td class="text-align-left" colspan="13">##GROUPNAME##</td>
+                <td class="text-align-center">##GROUPCODE##</td>
+                <td class="text-align-left" colspan="14">##GROUPNAME##</td>
             </tr>
             <tr class="material template contents">
                 <td class="text-align-center">##CODE##</td>
@@ -153,9 +169,10 @@
                 <td class="text-align-left">##DESCRIPTION##</td>
                 <td class="text-align-center">##QUANTITY##</td>
                 <td class="text-align-center">##UNIT##</td>
-                <td class="text-align-center">##LISTPRICE##</td>
                 <td class="text-align-center">##NETPRICE##</td>
+                <td class="text-align-center">##TOTALNETPRICE##</td>
                 <td class="text-align-center">##OFFERPRICE##</td>
+                <td class="text-align-center">##TOTALOFFERPRICE##</td>
                 <td class="text-align-center">##MANPOWER##</td>
                 <td class="text-align-center">##FITTINGS##</td>
                 <td class="text-align-center">##ACCESSORY##</td>
@@ -164,18 +181,47 @@
                 <td class="text-align-left">##REMARK##</td>
             </tr>
             <tr class="sub-group-summary contents">
-                <td class="text-align-center">Sum</td>
-                <td class="text-align-left" colspan="13">##GRANDTOTAL##</td>
+                <td class="text-align-center"></td>
+                <td class="text-align-left"></td>
+                <td class="text-align-left">Sub-Total</td>
+                <td class="text-align-center"></td>
+                <td class="text-align-center"></td>
+                <td class="text-align-center"></td>
+                <td class="text-align-center">##NETPRICE##</td>
+                <td class="text-align-center"></td>
+                <td class="text-align-center">##MATERIALPRICE##</td>
+                <td class="text-align-center">##MANPOWER##</td>
+                <td class="text-align-center">##FITTINGS##</td>
+                <td class="text-align-center">##ACCESSORY##</td>
+                <td class="text-align-center">##SUPPORTING##</td>
+                <td class="text-align-center">##PAINTING##</td>
+                <td class="text-align-left">##GRANDTOTAL##</td>
             </tr>
         </tbody>
         <tr class="group-summary contents">
-            <td class="text-align-center">Sum</td>
-            <td class="text-align-left" colspan="13">##GRANDTOTAL##</td>
+            <td class="text-align-center"></td>
+            <td class="text-align-left"></td>
+            <td class="text-align-left">Total</td>
+            <td class="text-align-center"></td>
+            <td class="text-align-center"></td>
+            <td class="text-align-center"></td>
+            <td class="text-align-center">##NETPRICE##</td>
+            <td class="text-align-center"></td>
+            <td class="text-align-center">##MATERIALPRICE##</td>
+            <td class="text-align-center">##MANPOWER##</td>
+            <td class="text-align-center">##FITTINGS##</td>
+            <td class="text-align-center">##ACCESSORY##</td>
+            <td class="text-align-center">##SUPPORTING##</td>
+            <td class="text-align-center">##PAINTING##</td>
+            <td class="text-align-left">##GRANDTOTAL##</td>
+        </tr>
+        <tr style="border-left: none; border-right: none;">
+            <td style="border-left: none; border-right: none;" colspan="15">&nbsp;</td>
         </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="14"></td>
+                <td colspan="15"></td>
             </tr>
         </tfoot>
     </table>

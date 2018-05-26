@@ -31,6 +31,11 @@ namespace Estimation.Domain.Models
         public decimal TotalOfferPrice { get; set; }
 
         /// <summary>
+        /// Total net price
+        /// </summary>
+        public decimal TotalNetPrice { get; set; }
+
+        /// <summary>
         /// Total accessory cost
         /// </summary>
         public decimal TotalAccessory { get; set; }
@@ -70,6 +75,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##TOTALOFFERPRICE##", TotalOfferPrice.ToString("N")
+                },
+                {
+                    "##TOTALNETPRICE##", TotalNetPrice.ToString("N")
                 },
                 {
                     "##TOTALACCESSORY##", TotalAccessory.ToString("N")

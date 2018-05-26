@@ -16,7 +16,7 @@ namespace Estimation.Domain.Models
         }
 
         /// <summary>
-        /// Sum of material price
+        /// Sum of material price(Offer price)
         /// </summary>
         public int MaterialPrice { get; set; }
 
@@ -56,6 +56,11 @@ namespace Estimation.Domain.Models
         public int Transportation { get; set; }
 
         /// <summary>
+        /// Gets or sets the net price.
+        /// </summary>
+        public int NetPrice { get; set; }
+
+        /// <summary>
         /// Overall price
         /// </summary>
         public int GrandTotal { get; set; }
@@ -80,6 +85,7 @@ namespace Estimation.Domain.Models
             Transportation += groupSummary.Transportation;
             Miscellaneous += groupSummary.Miscellaneous;
             GrandTotal += groupSummary.GrandTotal;
+            NetPrice += groupSummary.NetPrice;
         }
 
         /// <summary>
@@ -106,6 +112,7 @@ namespace Estimation.Domain.Models
             Installation = 0;
             Transportation = 0;
             GrandTotal = 0;
+            NetPrice = 0;
             return this;
         }
 
@@ -130,6 +137,9 @@ namespace Estimation.Domain.Models
             {
                 {
                     "##MATERIALPRICE##", MaterialPrice.ToString("N")
+                },
+                {
+                    "##NETPRICE##", NetPrice.ToString("N")
                 },
                 {
                     "##ACCESSORIES##", Accessories.ToString("N")
