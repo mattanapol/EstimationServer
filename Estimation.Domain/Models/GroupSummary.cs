@@ -76,7 +76,11 @@ namespace Estimation.Domain.Models
         }
 
         /// <inheritdoc />
-        public override string TargetClass => ProjectMaterialGroupInfo == null ? "group-summary" : ProjectMaterialGroupInfo.ParentGroupId == 0 ? "group-summary" : "sub-group-summary";
+        public override string TargetClass => ProjectMaterialGroupInfo == null
+            ? "group-summary"
+            : ProjectMaterialGroupInfo.ParentGroupId == 0
+                ? "group-summary"
+                : "sub-group-summary";
 
         /// <inheritdoc />
         public override IEnumerable<IPrintable> Child

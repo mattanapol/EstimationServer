@@ -26,7 +26,7 @@ namespace Estimation.Ioc
         {
             services.AddScoped<IProjectMaterialGroupService, ProjectMaterialGroupService>();
             services.AddScoped<IProjectService, ProjectService>();
-            services.AddScoped<IProjectSummaryService, ProjectSummaryService>();
+            services.AddScoped<IProjectSummaryService, SummaryService>();
             services.AddScoped<IMaterialService, MaterialService>();
             services.AddScoped<IExportService, ExportService>();
             

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Estimation.Services
 {
-    public class ProjectSummaryService : IProjectSummaryService
+    public class SummaryService : IProjectSummaryService
     {
         private readonly IProjectMaterialGroupService _projectMaterialGroupService;
         private readonly IProjectService _projectService;
@@ -21,7 +21,7 @@ namespace Estimation.Services
         /// <param name="projectMaterialGroupService"></param>
         /// <param name="projectService"></param>
         /// <param name="materialRepository"></param>
-        public ProjectSummaryService(IProjectMaterialGroupService projectMaterialGroupService, IProjectService projectService, IProjectMaterialRepository materialRepository) 
+        public SummaryService(IProjectMaterialGroupService projectMaterialGroupService, IProjectService projectService, IProjectMaterialRepository materialRepository) 
         {
             _projectMaterialGroupService = projectMaterialGroupService ?? throw new ArgumentNullException(nameof(projectMaterialGroupService));
             _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
