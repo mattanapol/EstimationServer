@@ -46,6 +46,14 @@ namespace Estimation.Domain.Models
         public int Miscellaneous { get; set; }
 
         /// <summary>
+        /// Gets or sets the net miscellaneous.
+        /// </summary>
+        /// <value>
+        /// The net miscellaneous.
+        /// </value>
+        public int NetMiscellaneous { get; set; }
+
+        /// <summary>
         /// Sum of installation price
         /// </summary>
         public int Installation { get; set; }
@@ -61,9 +69,25 @@ namespace Estimation.Domain.Models
         public int NetPrice { get; set; }
 
         /// <summary>
+        /// Gets or sets the list price.
+        /// </summary>
+        /// <value>
+        /// The list price.
+        /// </value>
+        public int ListPrice { get; set; }
+
+        /// <summary>
         /// Overall price
         /// </summary>
         public int GrandTotal { get; set; }
+
+        /// <summary>
+        /// Gets or sets the net grand total.
+        /// </summary>
+        /// <value>
+        /// The net grand total.
+        /// </value>
+        public int NetGrandTotal { get; set; }
 
         /// <summary>
         /// Child project summary
@@ -85,7 +109,9 @@ namespace Estimation.Domain.Models
             Transportation += groupSummary.Transportation;
             Miscellaneous += groupSummary.Miscellaneous;
             GrandTotal += groupSummary.GrandTotal;
+            NetGrandTotal += groupSummary.NetGrandTotal;
             NetPrice += groupSummary.NetPrice;
+            ListPrice += groupSummary.ListPrice;
         }
 
         /// <summary>
@@ -113,6 +139,8 @@ namespace Estimation.Domain.Models
             Transportation = 0;
             GrandTotal = 0;
             NetPrice = 0;
+            ListPrice = 0;
+            NetGrandTotal = 0;
             return this;
         }
 
@@ -142,6 +170,9 @@ namespace Estimation.Domain.Models
                     "##NETPRICE##", NetPrice.ToString("N")
                 },
                 {
+                    "##LISTPRICE##", ListPrice.ToString("N")
+                },
+                {
                     "##ACCESSORIES##", Accessories.ToString("N")
                 },
                 {
@@ -164,6 +195,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##GRANDTOTAL##", GrandTotal.ToString("N")
+                },
+                {
+                    "##NETGRANDTOTAL##", NetGrandTotal.ToString("N")
                 }
             };
 

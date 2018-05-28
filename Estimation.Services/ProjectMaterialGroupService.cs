@@ -117,20 +117,18 @@ namespace Estimation.Services
                 {
                     material.LabourCost = material.Manpower * projectInfo.LabourCost;
                     material.Installation = material.LabourCost * material.Quantity;
-
-                    material.TotalAccessory = material.Accessory * material.Quantity;
-
-                    material.TotalFitting = material.Fittings * material.Quantity;
-
+                    
                     material.TotalOfferPrice = material.OfferPrice * material.Quantity;
-
                     material.TotalNetPrice = material.NetPrice * material.Quantity;
+                    material.TotalListPrice = material.ListPrice * material.Quantity;
 
                     material.TotalPainting = material.Painting * material.Quantity;
-
                     material.TotalSupport = material.Supporting * material.Quantity;
+                    material.TotalAccessory = material.Accessory * material.Quantity;
+                    material.TotalFitting = material.Fittings * material.Quantity;
 
-                    material.TotalCost = material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalOfferPrice + material.TotalPainting + material.TotalSupport;
+                    material.TotalNetCost = material.TotalNetPrice + material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalPainting + material.TotalSupport;
+                    material.TotalCost = material.TotalOfferPrice + material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalPainting + material.TotalSupport;
                 }
             }
             return newProjectMaterialGroup;

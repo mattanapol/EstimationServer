@@ -55,6 +55,22 @@ namespace Estimation.Domain.Models
         /// </summary>
         public decimal TotalPainting { get; set; }
 
+        /// <summary>
+        /// Gets or sets the total list price.
+        /// </summary>
+        /// <value>
+        /// The total list price.
+        /// </value>
+        public decimal TotalListPrice { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total net cost.
+        /// </summary>
+        /// <value>
+        /// The total net cost.
+        /// </value>
+        public decimal TotalNetCost { get; set; }
+
         /// <inheritdoc />
         public override Dictionary<string, string> GetDataDictionary()
         {
@@ -74,10 +90,16 @@ namespace Estimation.Domain.Models
                     "##TOTALCOST##", TotalCost.ToString("N")
                 },
                 {
+                    "##TOTALNETCOST##", TotalNetCost.ToString("N")
+                },
+                {
                     "##TOTALOFFERPRICE##", TotalOfferPrice.ToString("N")
                 },
                 {
                     "##TOTALNETPRICE##", TotalNetPrice.ToString("N")
+                },
+                {
+                    "##TOTALLISTPRICE##", TotalListPrice.ToString("N")
                 },
                 {
                     "##TOTALACCESSORY##", TotalAccessory.ToString("N")

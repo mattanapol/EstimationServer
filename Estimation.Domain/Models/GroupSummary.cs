@@ -37,6 +37,7 @@ namespace Estimation.Domain.Models
             Installation += (int)Math.Round(projectMaterial.Installation);
             MaterialPrice += (int)Math.Round(projectMaterial.TotalOfferPrice);
             NetPrice += (int)Math.Round(projectMaterial.TotalNetPrice);
+            ListPrice += (int)Math.Round(projectMaterial.TotalListPrice);
         }
 
         /// <summary>
@@ -46,23 +47,46 @@ namespace Estimation.Domain.Models
         public void CalculateGrandTotal(int decimals)
         {
             Transportation = (int)Math.Round(TransportationInfo.IsUsePercentage ?
-                    TransportationInfo.Percentage * Installation / 100 :
-                    TransportationInfo.Manual);
+                TransportationInfo.Percentage * Installation / 100 :
+                TransportationInfo.Manual);
 
-            Miscellaneous = (int)Math.Round(MiscellaneousInfo.IsUsePercentage ?
-                    MiscellaneousInfo.Percentage * MaterialPrice / 100 :
-                    MiscellaneousInfo.Manual);
+            var summary = CalculateGrandTotal(decimals, MaterialPrice);
+            Miscellaneous = summary.Miscellaneous;
+            GrandTotal = summary.GrandTotal;
+
+            var netSummary = CalculateGrandTotal(decimals, NetPrice);
+            NetMiscellaneous = netSummary.Miscellaneous;
+            NetGrandTotal = netSummary.GrandTotal;
+        }
+
+        /// <summary>
+        /// Calculates the grand total.
+        /// </summary>
+        /// <param name="decimals">The decimals.</param>
+        /// <param name="materialPrice">The material price.</param>
+        /// <returns>(miscellaneous, grandTotal)</returns>
+        private SummaryDto CalculateGrandTotal(int decimals, int materialPrice)
+        {
+            int miscellaneous = (int)Math.Round(MiscellaneousInfo.IsUsePercentage ?
+                MiscellaneousInfo.Percentage * materialPrice / 100 :
+                MiscellaneousInfo.Manual);
 
             int total = (Accessories + Fittings
-                + Painting + Supporting + Installation + MaterialPrice
-                + Transportation + Miscellaneous);
+                                     + Painting + Supporting + Installation + materialPrice
+                                     + Transportation + miscellaneous);
 
             int roundedTotal = (int)(Math.Round((double)total / Math.Pow(10, decimals), 0) * Math.Pow(10, decimals));
 
             // Adjust Miscellaneous
-            Miscellaneous += roundedTotal - total;
+            miscellaneous += roundedTotal - total;
 
-            GrandTotal = roundedTotal;
+            int grandTotal = roundedTotal;
+
+            return new SummaryDto()
+            {
+                Miscellaneous = miscellaneous,
+                GrandTotal = grandTotal
+            };
         }
 
         /// <inheritdoc />
@@ -95,6 +119,24 @@ namespace Estimation.Domain.Models
                     return ProjectMaterialGroupInfo.Child;
                 }
             }
+        }
+
+        private class SummaryDto
+        {
+            /// <summary>
+            /// Gets or sets the miscellaneous.
+            /// </summary>
+            /// <value>
+            /// The miscellaneous.
+            /// </value>
+            public int Miscellaneous { get; set; }
+            /// <summary>
+            /// Gets or sets the grand total.
+            /// </summary>
+            /// <value>
+            /// The grand total.
+            /// </value>
+            public int GrandTotal { get; set; }
         }
     }
 }
