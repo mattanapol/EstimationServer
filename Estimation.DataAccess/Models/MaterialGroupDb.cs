@@ -75,5 +75,10 @@ namespace Estimation.DataAccess.Models
         /// Is Transportation currently using percentage
         /// </summary>
         public bool TransportationIsUsePercentage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the remarks.
+        /// </summary>
+        public string Remarks { get; set; }
     }
 }

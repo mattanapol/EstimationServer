@@ -21,5 +21,13 @@
         /// Parent group identification
         /// </summary>
         public int? ParentGroupId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the remarks.
+        /// </summary>
+        /// <value>
+        /// The remarks.
+        /// </value>
+        public string Remarks { get; set; }
     }
 }

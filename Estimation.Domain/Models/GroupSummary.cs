@@ -38,6 +38,7 @@ namespace Estimation.Domain.Models
             MaterialPrice += (int)Math.Round(projectMaterial.TotalOfferPrice);
             NetPrice += (int)Math.Round(projectMaterial.TotalNetPrice);
             ListPrice += (int)Math.Round(projectMaterial.TotalListPrice);
+            Manpower += projectMaterial.TotalManpower;
         }
 
         /// <summary>

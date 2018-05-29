@@ -11,5 +11,13 @@
         /// Group name
         /// </summary>
         public string GroupName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the remarks.
+        /// </summary>
+        /// <value>
+        /// The remarks.
+        /// </value>
+        public string Remarks { get; set; }
     }
 }

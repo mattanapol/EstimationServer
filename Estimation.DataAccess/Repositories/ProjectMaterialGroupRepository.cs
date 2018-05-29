@@ -96,6 +96,7 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialGroupDbs = await DbContext.MaterialGroup
                 .Include(e => e.Materials)
+                .OrderBy(e => e.GroupCode)
                 .AsNoTracking()
                 .Where(m => m.ProjectId == projectId)
                 .ToArrayAsync();
@@ -116,7 +117,6 @@ namespace Estimation.DataAccess.Repositories
         {
             var materialGroupDb = await DbContext.MaterialGroup
                 .Include(e => e.Materials)
-                .OrderBy(e => e.GroupCode)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -146,15 +146,21 @@ namespace Estimation.DataAccess.Repositories
 
             projectMaterialGroupDb.GroupCode = projectInfo.GroupCode;
             projectMaterialGroupDb.GroupName = projectInfo.GroupName;
-            if (projectInfo.Miscellaneous != null && projectInfo.Transportation != null)
+            projectMaterialGroupDb.Remarks = projectInfo.Remarks;
+            if (projectInfo.Miscellaneous != null)
             {
                 projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectInfo.Miscellaneous.IsUsePercentage;
                 projectMaterialGroupDb.MiscellaneousManual = projectInfo.Miscellaneous.Manual;
                 projectMaterialGroupDb.MiscellaneousPercentage = projectInfo.Miscellaneous.Percentage;
+            }
+
+            if (projectInfo.Transportation != null)
+            {
                 projectMaterialGroupDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
                 projectMaterialGroupDb.TransportationManual = projectInfo.Transportation.Manual;
                 projectMaterialGroupDb.TransportationPercentage = projectInfo.Transportation.Percentage;
             }
+            
             //projectMaterialGroupDb.ParentGroupId = projectInfo.ParentGroupId; //Todo: Need to discuss about whether should we allow to change this.
             DbContext.Entry(projectMaterialGroupDb).State = EntityState.Modified;
             DbContext.Entry(projectMaterialGroupDb).Property(e => e.CreatedDate).IsModified = false;

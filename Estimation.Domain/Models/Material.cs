@@ -81,7 +81,7 @@ namespace Estimation.Domain.Models
                     "##OFFERPRICE##", OfferPrice.ToString("N")
                 },
                 {
-                    "##MANPOWER##", Manpower.ToString("N")
+                    "##MANPOWER##", Manpower.ToString("N3")
                 },
                 {
                     "##FITTINGS##", Fittings.ToString("N")

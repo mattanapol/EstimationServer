@@ -60,6 +60,14 @@ namespace Estimation.Domain.Models
         /// </summary>
         public Cost Transportation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the remarks.
+        /// </summary>
+        /// <value>
+        /// The remarks.
+        /// </value>
+        public string Remarks { get; set; }
+
         /// <inheritdoc />
         public Dictionary<string, string> GetDataDictionary()
         {
@@ -73,6 +81,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##GROUPNAME##", GroupName
+                },
+                {
+                    "##REMARKS##", Remarks
                 }
             };
 

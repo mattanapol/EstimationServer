@@ -77,6 +77,14 @@ namespace Estimation.Domain.Models
         public int ListPrice { get; set; }
 
         /// <summary>
+        /// Gets or sets the manpower.
+        /// </summary>
+        /// <value>
+        /// The manpower.
+        /// </value>
+        public decimal Manpower { get; set; }
+
+        /// <summary>
         /// Overall price
         /// </summary>
         public int GrandTotal { get; set; }
@@ -112,6 +120,7 @@ namespace Estimation.Domain.Models
             NetGrandTotal += groupSummary.NetGrandTotal;
             NetPrice += groupSummary.NetPrice;
             ListPrice += groupSummary.ListPrice;
+            Manpower += groupSummary.Manpower;
         }
 
         /// <summary>
@@ -141,6 +150,7 @@ namespace Estimation.Domain.Models
             NetPrice = 0;
             ListPrice = 0;
             NetGrandTotal = 0;
+            Manpower = 0;
             return this;
         }
 
@@ -198,6 +208,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##NETGRANDTOTAL##", NetGrandTotal.ToString("N")
+                },
+                {
+                    "##MANPOWER##", Manpower.ToString("N")
                 }
             };
 

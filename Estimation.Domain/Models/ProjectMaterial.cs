@@ -71,6 +71,14 @@ namespace Estimation.Domain.Models
         /// </value>
         public decimal TotalNetCost { get; set; }
 
+        /// <summary>
+        /// Gets or sets the total manpower.
+        /// </summary>
+        /// <value>
+        /// The total manpower.
+        /// </value>
+        public decimal TotalManpower => Manpower * Quantity;
+
         /// <inheritdoc />
         public override Dictionary<string, string> GetDataDictionary()
         {
@@ -112,6 +120,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##TOTALPAINTING##", TotalPainting.ToString("N")
+                },
+                {
+                    "##TOTALMANPOWER##", TotalManpower.ToString("N")
                 }
             };
 
