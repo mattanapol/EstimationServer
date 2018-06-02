@@ -96,8 +96,7 @@ namespace Estimation.Domain.Models
             var baseDataDict = base.GetDataDictionary();
             var projectMaterialGroupDataDict = ProjectMaterialGroupInfo.GetDataDictionary();
 
-            var result = baseDataDict.Concat(projectMaterialGroupDataDict).GroupBy(d => d.Key)
-                .ToDictionary(d => d.Key, d => d.First().Value);
+            var result = baseDataDict.Combine(projectMaterialGroupDataDict);
             return result;
         }
 

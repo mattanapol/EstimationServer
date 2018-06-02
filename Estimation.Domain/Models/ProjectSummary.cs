@@ -226,8 +226,7 @@ namespace Estimation.Domain.Models
 
             if (projectInfoDataDict != null)
             {
-                var result = dataDict.Concat(projectInfoDataDict).GroupBy(d => d.Key)
-                    .ToDictionary(d => d.Key, d => d.First().Value);
+                var result = dataDict.Combine(projectInfoDataDict);
 
                 return result;
             }

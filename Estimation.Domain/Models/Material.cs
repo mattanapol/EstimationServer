@@ -103,8 +103,7 @@ namespace Estimation.Domain.Models
                 }
             };
 
-            var result = baseDataDict.Concat(dataDict).GroupBy(d => d.Key)
-                .ToDictionary(d => d.Key, d => d.First().Value);
+            var result = baseDataDict.Combine(dataDict);
             return result;
         }
 

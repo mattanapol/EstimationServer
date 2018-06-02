@@ -24,7 +24,7 @@ namespace Estimation.Services.Helpers
         {
             foreach (var data in dataList)
             {
-                html = html.Replace(data.Key, data.Value, StringComparison.Ordinal);
+                html = html.Replace(data.Key, data.Value, StringComparison.OrdinalIgnoreCase);
             }
 
             if (clearHtml)
