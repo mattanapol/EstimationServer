@@ -8,8 +8,18 @@
         public SubmitForm SubmitForm { get; set; }
 
         /// <summary>
-        /// Submit report
+        /// Gets or sets a value indicating whether [summary report].
         /// </summary>
-        public SubmitReport SubmitReport { get; set; }
+        public bool SummaryReport { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [description report].
+        /// </summary>
+        public bool DescriptionReport { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [data sheet report].
+        /// </summary>
+        public bool DataSheetReport { get; set; }
     }
 }
