@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Estimation.Domain.Models
 {
@@ -14,6 +15,14 @@ namespace Estimation.Domain.Models
         {
             ChildSummaries = new List<GroupSummary>();
         }
+
+        /// <summary>
+        /// Gets or sets the project information.
+        /// </summary>
+        /// <value>
+        /// The project information.
+        /// </value>
+        public ProjectInfo ProjectInfo { get; set; }
 
         /// <summary>
         /// Sum of material price(Offer price)
@@ -213,8 +222,19 @@ namespace Estimation.Domain.Models
                     "##MANPOWER##", Manpower.ToString("N")
                 }
             };
+            var projectInfoDataDict = ProjectInfo?.GetDataDictionary();
 
-            return dataDict;
+            if (projectInfoDataDict != null)
+            {
+                var result = dataDict.Concat(projectInfoDataDict).GroupBy(d => d.Key)
+                    .ToDictionary(d => d.Key, d => d.First().Value);
+
+                return result;
+            }
+            else
+            {
+                return dataDict;
+            }
         }
 
         /// <inheritdoc />

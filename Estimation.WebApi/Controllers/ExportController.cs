@@ -8,6 +8,7 @@ using Estimation.Services;
 using Kaewsai.Utilities.WebApi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using IPrintProjectSummaryReportService = Estimation.Interface.IPrintProjectSummaryReportService;
 
 namespace Estimation.WebApi.Controllers
 {
@@ -21,6 +22,7 @@ namespace Estimation.WebApi.Controllers
         private readonly IExportService _exportService;
         private readonly IPrintMaterialListService _printMaterialListService;
         private readonly IPrintProjectDatasheetService _printProjectDatasheetService;
+        private readonly IPrintProjectSummaryReportService _printProjectSummaryReportService;
 
         /// <summary>
         /// Export controller constructor
@@ -29,14 +31,16 @@ namespace Estimation.WebApi.Controllers
         /// <param name="exportService"></param>
         /// <param name="printMaterialListService"></param>
         /// <param name="printProjectDatasheetService"></param>
+        /// <param name="printProjectSummaryReportService"></param>
         public ExportController(ITypeMappingService typeMappingService,
             IExportService exportService,
             IPrintMaterialListService printMaterialListService,
-            IPrintProjectDatasheetService printProjectDatasheetService) : base(typeMappingService)
+            IPrintProjectDatasheetService printProjectDatasheetService, IPrintProjectSummaryReportService printProjectSummaryReportService) : base(typeMappingService)
         {
             _exportService = exportService ?? throw new ArgumentNullException(nameof(exportService));
             _printMaterialListService = printMaterialListService ?? throw new ArgumentNullException(nameof(printMaterialListService));
             _printProjectDatasheetService = printProjectDatasheetService ?? throw new ArgumentNullException(nameof(printProjectDatasheetService));
+            _printProjectSummaryReportService = printProjectSummaryReportService ?? throw new ArgumentNullException(nameof(printProjectSummaryReportService));
         }
 
         /// <summary>
@@ -48,9 +52,20 @@ namespace Estimation.WebApi.Controllers
         [HttpPost("project/{id}")]
         public async Task<IActionResult> ExportProject(int id,[FromBody]ProjectExportRequest projectExportRequest)
         {
-            byte[] result = await _printProjectDatasheetService.GetProjectDatasheetAsPdf(id, projectExportRequest);
-            var streamResult = File(result, "application/pdf", "ProjectDataSheet.pdf");
-            return streamResult;
+            if (projectExportRequest.DataSheetReport)
+            {
+                byte[] result = await _printProjectDatasheetService.GetProjectDatasheetAsPdf(id, projectExportRequest);
+                var streamResult = File(result, "application/pdf", "ProjectDataSheet.pdf");
+                return streamResult;
+            }
+            else if (projectExportRequest.SummaryReport)
+            {
+                byte[] result = await _printProjectSummaryReportService.GetProjectSummaryAsPdf(id, projectExportRequest);
+                var streamResult = File(result, "application/pdf", "ProjectSummary.pdf");
+                return streamResult;
+            }
+
+            return NoContent();
         }
 
         /// <summary>

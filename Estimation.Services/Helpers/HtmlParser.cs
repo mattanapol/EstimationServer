@@ -51,6 +51,58 @@ namespace Estimation.Services.Helpers
         /// Parses the HTML node by class.
         /// </summary>
         /// <param name="rootNode">The root node.</param>
+        /// <param name="printableObject">The printable object.</param>
+        /// <returns></returns>
+        public static HtmlNode ParseHtmlNodeByClass(HtmlNode rootNode, IPrintable printableObject)
+        {
+            var rowTemplate = rootNode.Descendants()
+                .FirstOrDefault(n =>
+                {
+                    var classes = n.GetClasses();
+                    var classesAsArray = classes as string[] ?? classes.ToArray();
+                    return classesAsArray.Any(e => e == TemplateClassName) &&
+                           classesAsArray.Any(e => e == printableObject.TargetClass);
+                });
+            if (rowTemplate == null)
+                return rootNode;
+            var rowParent = rowTemplate.ParentNode;
+            var lastNode = rowTemplate;
+
+            var contentRow = rowTemplate.Clone();
+            contentRow.Attributes["class"].Value = contentRow.GetClasses()
+                .Where(e => e != TemplateClassName).Aggregate((current, next) => current + ' ' + next);
+
+            var contentElements =
+                contentRow.GetClasses().Any(e => e == ContentsClassName)
+                    ? new List<HtmlNode> { contentRow }
+                    : contentRow.Descendants()
+                        .Where(n =>
+                        {
+                            var classes = n.GetClasses();
+                            var classesAsArray = classes as string[] ?? classes.ToArray();
+                            return classesAsArray.Any(e => e == ContentsClassName) &&
+                                   classesAsArray.Any(e => e == printableObject.TargetClass);
+                        });
+
+            foreach (var contentElement in contentElements)
+                contentElement.InnerHtml = ParseHtml(contentElement.InnerHtml, printableObject.GetDataDictionary());
+
+            if (printableObject.Child != null && printableObject.Child.Count() != 0)
+                ParseHtmlNodeByClass(contentRow, printableObject.Child);
+
+            rowParent.InsertAfter(contentRow, lastNode);
+            lastNode = contentRow;
+
+            rowParent.RemoveChild(rowTemplate);
+            RemoveAllTemplate(rootNode);
+
+            return rootNode;
+        }
+
+        /// <summary>
+        /// Parses the HTML node by class.
+        /// </summary>
+        /// <param name="rootNode">The root node.</param>
         /// <param name="printableObjectList">The printable object list.</param>
         /// <returns></returns>
         public static HtmlNode ParseHtmlNodeByClass(HtmlNode rootNode, IEnumerable<IPrintable> printableObjectList)

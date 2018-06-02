@@ -46,6 +46,7 @@ namespace Estimation.Ioc
 
             services.AddScoped<IPrintMaterialListService, PrintMaterialListService>();
             services.AddScoped<IPrintProjectDatasheetService, PrintProjectDatasheetService>();
+            services.AddScoped<IPrintProjectSummaryReportService, PrintProjectSummaryReportService>();
         }
     }
 }

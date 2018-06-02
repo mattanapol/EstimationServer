@@ -6,7 +6,7 @@ namespace Estimation.Domain.Models
     /// <summary>
     /// Project information model
     /// </summary>
-    public class ProjectInfo
+    public class ProjectInfo: IPrintable
     {
         /// <summary>
         /// Project id
@@ -102,5 +102,63 @@ namespace Estimation.Domain.Models
         /// Ceiling summary up to n place.
         /// </summary>
         public int CeilingSummary { get; set; }
+
+        /// <inheritdoc />
+        public Dictionary<string, string> GetDataDictionary()
+        {
+            var dataDict = new Dictionary<string, string>
+            {
+                {
+                    "##NAME##", Name
+                },
+                {
+                    "##CODE##", Code
+                },
+                {
+                    "##CREATEDDATE##", CreatedDate?.ToString()
+                },
+                {
+                    "##LASTMODIFIEDDATE##", LastModifiedDate?.ToString()
+                },
+                {
+                    "##REMARKS##", Remark
+                },
+                {
+                    "##OWNER##", Owner
+                },
+                {
+                    "##GeneralContractor##", GeneralContractor
+                },
+                {
+                    "##ConstructionTerm##", ConstructionTerm
+                },
+                {
+                    "##ConstructionPlace##", ConstructionPlace
+                },
+                {
+                    "##ConstructionScale##", ConstructionScale
+                },
+                {
+                    "##KindOfWork##", KindOfWork
+                },
+                {
+                    "##SubmitBy##", SubmitBy
+                },
+                {
+                    "##LabourCost##", LabourCost.ToString("N")
+                },
+                {
+                    "##CurrencyUnit##", CurrencyUnit
+                },
+            };
+
+            return dataDict;
+        }
+
+        /// <inheritdoc />
+        public string TargetClass => "project-info";
+
+        /// <inheritdoc />
+        public IEnumerable<IPrintable> Child => null;
     }
 }

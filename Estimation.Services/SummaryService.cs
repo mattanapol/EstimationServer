@@ -173,8 +173,8 @@ namespace Estimation.Services
             var project = await _projectService.GetProject(id);
             var materialGroups = project.MaterialGroups;
 
-            ProjectSummary projectSummary = new ProjectSummary();
-            foreach(var materialGroup in materialGroups)
+            ProjectSummary projectSummary = new ProjectSummary {ProjectInfo = project};
+            foreach (var materialGroup in materialGroups)
             {
                 projectSummary.AddChildGroupSummary(await GetGroupSummary(materialGroup.Id));
             }
