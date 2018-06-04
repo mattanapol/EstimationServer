@@ -88,7 +88,11 @@ namespace Estimation.Services.Helpers
                 contentElement.InnerHtml = ParseHtml(contentElement.InnerHtml, printableObject.GetDataDictionary());
 
             if (printableObject.Child != null && printableObject.Child.Count() != 0)
+            {
+                rowParent.SetAttributeValue("HasChild","true");
                 ParseHtmlNodeByClass(contentRow, printableObject.Child);
+            }
+                
 
             rowParent.InsertAfter(contentRow, lastNode);
             lastNode = contentRow;

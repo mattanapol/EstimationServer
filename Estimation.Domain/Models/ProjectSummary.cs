@@ -107,6 +107,15 @@ namespace Estimation.Domain.Models
         public int NetGrandTotal { get; set; }
 
         /// <summary>
+        /// Gets the total material cost.
+        /// </summary>
+        /// <value>
+        /// The total material cost.
+        /// </value>
+        /// <remarks>Only used in detail form(Form2)</remarks>
+        public int TotalMaterialCost => GrandTotal - Installation;
+
+        /// <summary>
         /// Child project summary
         /// </summary>
         public IList<GroupSummary> ChildSummaries { get; set; }
@@ -220,6 +229,9 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "##MANPOWER##", Manpower.ToString("N")
+                },
+                {
+                    "##TotalMaterialCost##", TotalMaterialCost.ToString("N")
                 }
             };
             var projectInfoDataDict = ProjectInfo?.GetDataDictionary();

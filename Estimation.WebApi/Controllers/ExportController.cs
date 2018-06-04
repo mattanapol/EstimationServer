@@ -64,6 +64,10 @@ namespace Estimation.WebApi.Controllers
                 var streamResult = File(result, "application/pdf", "ProjectSummary.pdf");
                 return streamResult;
             }
+            else if (projectExportRequest.DescriptionReport)
+            {
+
+            }
 
             return NoContent();
         }
