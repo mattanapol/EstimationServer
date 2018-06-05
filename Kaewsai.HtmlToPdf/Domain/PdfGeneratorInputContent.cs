@@ -76,8 +76,6 @@ namespace Kaewsai.HtmlToPdf.Domain
                     return DinkToPdf.PaperKind.B5;
                 case Domain.PaperKind.Letter:
                     return DinkToPdf.PaperKind.Letter;
-                case Domain.PaperKind.Custom:
-                    return DinkToPdf.PaperKind.Custom;
                 default:
                     return DinkToPdf.PaperKind.A4;
             }

@@ -69,6 +69,7 @@ namespace Estimation.Services.Helpers
             var lastNode = rowTemplate;
 
             var contentRow = rowTemplate.Clone();
+            // Remove template class
             contentRow.Attributes["class"].Value = contentRow.GetClasses()
                 .Where(e => e != TemplateClassName).Aggregate((current, next) => current + ' ' + next);
 
@@ -89,7 +90,7 @@ namespace Estimation.Services.Helpers
 
             if (printableObject.Child != null && printableObject.Child.Count() != 0)
             {
-                rowParent.SetAttributeValue("HasChild","true");
+                contentRow.SetAttributeValue("HasChild","true");
                 ParseHtmlNodeByClass(contentRow, printableObject.Child);
             }
                 
@@ -146,7 +147,10 @@ namespace Estimation.Services.Helpers
                     contentElement.InnerHtml = ParseHtml(contentElement.InnerHtml, printable.GetDataDictionary());
 
                 if (printable.Child != null && printable.Child.Count() != 0)
+                {
+                    contentRow.SetAttributeValue("HasChild", printable.Child.First().TargetClass);
                     ParseHtmlNodeByClass(contentRow, printable.Child);
+                }
 
                 rowParent.InsertAfter(contentRow, lastNode);
                 lastNode = contentRow;

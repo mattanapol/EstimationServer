@@ -31,20 +31,20 @@
             border-bottom: none;
         }
 
-        .content-table tfoot td, .content-table tfoot tr {
-            height: 0px;
-            padding: 0px;
-            border-bottom: none;
-            border-top: 1px solid black;
-        }
-
-        .content-table tr {
-            border-top: 1px solid black;
-        }
-
-        .content-table tr + tr {
-                border-top: 1px solid lightgray;
+            .content-table tfoot td, .content-table tfoot tr {
+                height: 0px;
+                padding: 0px;
+                border-bottom: none;
+                border-top: 1px solid black;
             }
+
+            .content-table tr {
+                border-top: 1px solid black;
+            }
+
+                .content-table tr + tr {
+                    border-top: 1px solid lightgray;
+                }
 
             .content-table td {
                 border-left: 1px solid black;
@@ -53,17 +53,17 @@
                 word-wrap: break-word;
             }
 
-        .content-table td + td {
-                border-left: 1px solid lightgray;
-            }
+                .content-table td + td {
+                    border-left: 1px solid lightgray;
+                }
 
-        .content-table td:first-child {
-                border-left: 1px solid black;
-            }
+                .content-table td:first-child {
+                    border-left: 1px solid black;
+                }
 
-        .content-table td:last-child {
-                border-right: 1px solid black;
-            }
+                .content-table td:last-child {
+                    border-right: 1px solid black;
+                }
 
             .content-table th {
                 border-left: 1px solid black;
@@ -73,17 +73,17 @@
                 font-weight: bold;
             }
 
-        .content-table th + th {
-                border-left: 1px solid lightgray;
-            }
+                .content-table th + th {
+                    border-left: 1px solid lightgray;
+                }
 
-        .content-table th:first-child {
-                border-left: 1px solid black;
-            }
+                .content-table th:first-child {
+                    border-left: 1px solid black;
+                }
 
-        .content-table th:last-child {
-                border-right: 1px solid black;
-            }
+                .content-table th:last-child {
+                    border-right: 1px solid black;
+                }
 
         .header {
             text-align: center;
@@ -108,8 +108,12 @@
             text-align: center;
         }
 
-        .group-summary[HasChild="true"] {
-            background: red;
+        .group-summary[haschild="sub-group-summary"] > tr > .hide-if-has-child {
+            color: rgba(255, 255, 255, 0);
+        }
+
+        .group-summary:not([haschild="sub-group-summary"]) > .hide-if-has-no-child {
+            display: none;
         }
     </style>
 </head>
@@ -146,9 +150,9 @@
                     <td class="text-align-left">##GROUPNAME##</td>
                     <td class="text-align-center">1</td>
                     <td class="text-align-center">LOT</td>
-                    <td class="text-align-right">##TotalMaterialCost##</td>
-                    <td class="text-align-right">##INSTALLATION##</td>
-                    <td class="text-align-right">##GRANDTOTAL##</td>
+                    <td class="text-align-right hide-if-has-child">##TotalMaterialCost##</td>
+                    <td class="text-align-right hide-if-has-child">##INSTALLATION##</td>
+                    <td class="text-align-right hide-if-has-child">##GRANDTOTAL##</td>
                     <td class="text-align-left">##REMARKS##</td>
                 </tr>
             <tbody class="sub-group-summary template">
@@ -163,7 +167,7 @@
                 <td class="text-align-left">##REMARKS##</td>
             </tr>
             </tbody>
-            <!--<tr class="group-summary contents">
+            <tr class="group-summary contents hide-if-has-no-child">
                 <td class="text-align-center"></td>
                 <td class="text-align-center">Sub-Total</td>
                 <td class="text-align-center">1</td>
@@ -172,7 +176,7 @@
                 <td class="text-align-right">##INSTALLATION##</td>
                 <td class="text-align-right">##GRANDTOTAL##</td>
                 <td class="text-align-left"></td>
-            </tr>-->
+            </tr>
             </tbody>
             <tr class="project-summary contents">
                 <td class="text-align-center">##GROUPCODE##</td>

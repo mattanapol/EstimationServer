@@ -6,7 +6,6 @@ namespace Kaewsai.HtmlToPdf.Domain
 {
     public enum PaperKind
     {
-        Custom,
         Letter,
         A3,
         A4,
