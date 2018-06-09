@@ -7,15 +7,12 @@ namespace Estimation.Services.Logger
 {
     public class AppLogger
     {
-        private static ILoggerFactory _Factory = null;
-
-        public static ILoggerFactory LoggerFactory
-        {
-            get
-            {
-                return _Factory;
-            }
-            set { _Factory = value; }
-        }
+        /// <summary>
+        /// Gets or sets the logger factory.
+        /// </summary>
+        /// <value>
+        /// The logger factory.
+        /// </value>
+        public static ILoggerFactory LoggerFactory { get; set; } = null;
     }
 }

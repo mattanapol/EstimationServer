@@ -42,5 +42,14 @@ namespace Estimation.Interface.Repositories
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteProjectMaterialGroup(int id);
+
+        /// <summary>
+        /// Updates the project material group order.
+        /// </summary>
+        /// <param name="id">The project material group id.</param>
+        /// <param name="order">The order.</param>
+        /// <param name="groupCode">The group code.</param>
+        /// <returns></returns>
+        Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order, string groupCode);
     }
 }

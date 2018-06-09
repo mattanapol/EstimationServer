@@ -17,6 +17,14 @@ namespace Estimation.DataAccess.Models
         public string GroupCode { get; set; }
 
         /// <summary>
+        /// Gets or sets the order.
+        /// </summary>
+        /// <value>
+        /// The order.
+        /// </value>
+        public int Order { get; set; }
+
+        /// <summary>
         /// Material type
         /// </summary>
         public string MaterialType { get; set; }

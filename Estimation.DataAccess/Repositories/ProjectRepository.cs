@@ -29,7 +29,7 @@ namespace Estimation.DataAccess.Repositories
         }
 
         /// <summary>
-        /// Create project infomation record
+        /// Create project information record
         /// </summary>
         /// <param name="projectInfo"></param>
         /// <returns></returns>

@@ -113,6 +113,31 @@
             <param name="printOrderRequest">Print request object</param>
             <returns></returns>
         </member>
+        <member name="T:Estimation.WebApi.Controllers.GroupSortingController">
+            <summary>
+            For sorting group and sub-group
+            </summary>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.GroupSortingController.#ctor(Estimation.Interface.IGroupSortingService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Estimation.WebApi.Controllers.GroupSortingController"/> class.
+            </summary>
+            <param name="groupSortingService">The group sorting service.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.GroupSortingController.SortMaterialGroup(System.Int32,Estimation.Domain.Dtos.GroupSortingDto)">
+            <summary>
+            Sort group in specific project
+            </summary>
+            <param name="projectId">Project Id</param>
+            <param name="sortedGroupId">Sorted group Id</param>
+        </member>
+        <member name="M:Estimation.WebApi.Controllers.GroupSortingController.SortMaterialSubGroup(System.Int32,Estimation.Domain.Dtos.GroupSortingDto)">
+            <summary>
+            Sort sub-group in specific project
+            </summary>
+            <param name="groupId">Group Id</param>
+            <param name="sortedGroupId">Sorted sub-group Id</param>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.MainMaterialController">
             <summary>
             Main material controller class

@@ -17,6 +17,7 @@ namespace Estimation.Interface
         /// <summary>
         /// Create project material group record to specific project id
         /// </summary>
+        /// <param name="projectId"></param>
         /// <param name="projectInfo"></param>
         /// <returns></returns>
         Task<ProjectMaterialGroup> CreateProjectMaterialGroup(int projectId, ProjectMaterialGroup projectInfo);
@@ -42,5 +43,22 @@ namespace Estimation.Interface
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteProjectMaterialGroup(int id);
+
+        /// <summary>
+        /// Updates the project material group order.
+        /// </summary>
+        /// <param name="id">The Project material group id.</param>
+        /// <param name="order">The order.</param>
+        /// <returns></returns>
+        Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order);
+
+        /// <summary>
+        /// Updates the project material sub group order.
+        /// </summary>
+        /// <param name="id">The Project material sub group id.</param>
+        /// <param name="parentOrder">Parent group order</param>
+        /// <param name="childOrder">Sub group order</param>
+        /// <returns></returns>
+        Task<ProjectMaterialGroup> UpdateProjectMaterialSubGroupOrder(int id, int parentOrder, int childOrder);
     }
 }

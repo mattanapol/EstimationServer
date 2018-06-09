@@ -50,6 +50,50 @@ namespace Estimation.Services
         }
 
         /// <summary>
+        /// Updates the project material group order.
+        /// </summary>
+        /// <param name="id">The Project material group id.</param>
+        /// <param name="order">The order.</param>
+        /// <returns></returns>
+        public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order)
+        {
+            var originalProjectMaterialGroup = await GetProjectMaterialGroup(id);
+            if (originalProjectMaterialGroup.Order != order)
+            {
+                ProjectMaterialGroup projectMaterialGroup = await _projectMaterialGroupRepository.UpdateProjectMaterialGroupOrder(id, order, (order + 1).ToString());
+                if (originalProjectMaterialGroup.ChildGroups != null)
+                    for (var i = 0; i < originalProjectMaterialGroup.ChildGroups.Count; i++)
+                    {
+                        originalProjectMaterialGroup.ChildGroups[i] = await UpdateProjectMaterialSubGroupOrder(
+                            originalProjectMaterialGroup.ChildGroups[i].Id,
+                            order,
+                            originalProjectMaterialGroup.ChildGroups[i].Order);
+                    }
+
+                return projectMaterialGroup;
+            }
+            else
+            {
+                return originalProjectMaterialGroup;
+            }
+        }
+
+        /// <summary>
+        /// Updates the project material sub group order.
+        /// </summary>
+        /// <param name="id">The Project material sub group id.</param>
+        /// <param name="parentOrder">Parent group order</param>
+        /// <param name="childOrder">Sub group order</param>
+        /// <returns></returns>
+        public async Task<ProjectMaterialGroup> UpdateProjectMaterialSubGroupOrder(int id, int parentOrder, int childOrder)
+        {
+            var projectMaterialGroup = await _projectMaterialGroupRepository.UpdateProjectMaterialGroupOrder(id, childOrder, ($"{parentOrder + 1}-{childOrder + 1}"));
+
+            return projectMaterialGroup;
+        }
+
+
+        /// <summary>
         /// Get all project material group by project id.
         /// </summary>
         /// <param name="projectId"></param>
@@ -76,14 +120,26 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> GetProjectMaterialGroup(int id)
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.GetProjectMaterialGroup(id);
+            projectMaterialGroup = await GetSubGroup(projectMaterialGroup);
+
+            return projectMaterialGroup;
+        }
+
+        private async Task<ProjectMaterialGroup> GetSubGroup(ProjectMaterialGroup projectMaterialGroup)
+        {
+            if (projectMaterialGroup == null) throw new ArgumentNullException(nameof(projectMaterialGroup));
             var projectInfo = await _projectRepository.GetProjectInfo(projectMaterialGroup.ProjectId);
             var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
-                .Where(e => e.ParentGroupId.GetValueOrDefault(0) == id).Select(e => { e.ProjectInfo = projectInfo; return e; });
+                .Where(e => e.ParentGroupId.GetValueOrDefault(0) == projectMaterialGroup.Id)
+                .Select(e =>
+                {
+                    e.ProjectInfo = projectInfo;
+                    return e;
+                });
             projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
             projectMaterialGroup.ProjectInfo = projectInfo;
 
             projectMaterialGroup = CalculateMaterialFields(projectMaterialGroup, projectInfo);
-
             return projectMaterialGroup;
         }
 
@@ -96,6 +152,7 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroup(int id, ProjectMaterialGroup projectInfo)
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.UpdateProjectMaterialGroup(id, projectInfo);
+
             return projectMaterialGroup;
         }
 

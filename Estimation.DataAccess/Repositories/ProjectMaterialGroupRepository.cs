@@ -88,6 +88,34 @@ namespace Estimation.DataAccess.Repositories
         }
 
         /// <summary>
+        /// Updates the project material group order.
+        /// </summary>
+        /// <param name="id">The project material group id.</param>
+        /// <param name="order">The order.</param>
+        /// <param name="groupCode">The group code.</param>
+        /// <returns></returns>
+        public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order, string groupCode)
+        {
+            var projectMaterialGroupDb = await DbContext.MaterialGroup
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == id);
+            if (projectMaterialGroupDb == null)
+                throw new ArgumentOutOfRangeException(nameof(id), $"Project group id = { id } does not exist.");
+
+
+            projectMaterialGroupDb.GroupCode = groupCode;
+            projectMaterialGroupDb.Order = order;
+
+            DbContext.Entry(projectMaterialGroupDb).State = EntityState.Modified;
+            DbContext.Entry(projectMaterialGroupDb).Property(e => e.CreatedDate).IsModified = false;
+            DbContext.Entry(projectMaterialGroupDb).Property(e => e.Id).IsModified = false;
+
+            await DbContext.SaveChangesAsync();
+
+            return TypeMappingService.Map<MaterialGroupDb, ProjectMaterialGroup>(projectMaterialGroupDb);
+        }
+
+        /// <summary>
         /// Get all project material group by project id
         /// </summary>
         /// <param name="projectId"></param>
@@ -133,9 +161,9 @@ namespace Estimation.DataAccess.Repositories
         /// Update project material group by id
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="projectInfo"></param>
+        /// <param name="projectMaterialGroup"></param>
         /// <returns></returns>
-        public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroup(int id, ProjectMaterialGroup projectInfo)
+        public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroup(int id, ProjectMaterialGroup projectMaterialGroup)
         {
             var projectMaterialGroupDb = await DbContext.MaterialGroup
                                             .AsNoTracking()
@@ -144,21 +172,22 @@ namespace Estimation.DataAccess.Repositories
                 throw new ArgumentOutOfRangeException(nameof(id), $"Project group id = { id } does not exist.");
 
 
-            projectMaterialGroupDb.GroupCode = projectInfo.GroupCode;
-            projectMaterialGroupDb.GroupName = projectInfo.GroupName;
-            projectMaterialGroupDb.Remarks = projectInfo.Remarks;
-            if (projectInfo.Miscellaneous != null)
+            projectMaterialGroupDb.GroupCode = projectMaterialGroup.GroupCode;
+            projectMaterialGroupDb.Order = projectMaterialGroup.Order;
+            projectMaterialGroupDb.GroupName = projectMaterialGroup.GroupName;
+            projectMaterialGroupDb.Remarks = projectMaterialGroup.Remarks;
+            if (projectMaterialGroup.Miscellaneous != null)
             {
-                projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectInfo.Miscellaneous.IsUsePercentage;
-                projectMaterialGroupDb.MiscellaneousManual = projectInfo.Miscellaneous.Manual;
-                projectMaterialGroupDb.MiscellaneousPercentage = projectInfo.Miscellaneous.Percentage;
+                projectMaterialGroupDb.MiscellaneousIsUsePercentage = projectMaterialGroup.Miscellaneous.IsUsePercentage;
+                projectMaterialGroupDb.MiscellaneousManual = projectMaterialGroup.Miscellaneous.Manual;
+                projectMaterialGroupDb.MiscellaneousPercentage = projectMaterialGroup.Miscellaneous.Percentage;
             }
 
-            if (projectInfo.Transportation != null)
+            if (projectMaterialGroup.Transportation != null)
             {
-                projectMaterialGroupDb.TransportationIsUsePercentage = projectInfo.Transportation.IsUsePercentage;
-                projectMaterialGroupDb.TransportationManual = projectInfo.Transportation.Manual;
-                projectMaterialGroupDb.TransportationPercentage = projectInfo.Transportation.Percentage;
+                projectMaterialGroupDb.TransportationIsUsePercentage = projectMaterialGroup.Transportation.IsUsePercentage;
+                projectMaterialGroupDb.TransportationManual = projectMaterialGroup.Transportation.Manual;
+                projectMaterialGroupDb.TransportationPercentage = projectMaterialGroup.Transportation.Percentage;
             }
             
             //projectMaterialGroupDb.ParentGroupId = projectInfo.ParentGroupId; //Todo: Need to discuss about whether should we allow to change this.
