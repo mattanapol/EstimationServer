@@ -55,6 +55,9 @@
     <None Update="Forms\SummaryOfEstimation_NetForm.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Forms\DescriptionOfEstimation_SubmitForm.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Forms\SummaryOfEstimation_SubmitForm.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

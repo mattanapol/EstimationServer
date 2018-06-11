@@ -23,6 +23,7 @@ namespace Estimation.WebApi.Controllers
         private readonly IPrintMaterialListService _printMaterialListService;
         private readonly IPrintProjectDatasheetService _printProjectDatasheetService;
         private readonly IPrintProjectSummaryReportService _printProjectSummaryReportService;
+        private readonly IPrintProjectDescriptionReportService _printProjectDescriptionReportService;
 
         /// <summary>
         /// Export controller constructor
@@ -32,15 +33,19 @@ namespace Estimation.WebApi.Controllers
         /// <param name="printMaterialListService"></param>
         /// <param name="printProjectDatasheetService"></param>
         /// <param name="printProjectSummaryReportService"></param>
+        /// <param name="printProjectDescriptionReportService"></param>
         public ExportController(ITypeMappingService typeMappingService,
             IExportService exportService,
             IPrintMaterialListService printMaterialListService,
-            IPrintProjectDatasheetService printProjectDatasheetService, IPrintProjectSummaryReportService printProjectSummaryReportService) : base(typeMappingService)
+            IPrintProjectDatasheetService printProjectDatasheetService,
+            IPrintProjectSummaryReportService printProjectSummaryReportService,
+            IPrintProjectDescriptionReportService printProjectDescriptionReportService) : base(typeMappingService)
         {
             _exportService = exportService ?? throw new ArgumentNullException(nameof(exportService));
             _printMaterialListService = printMaterialListService ?? throw new ArgumentNullException(nameof(printMaterialListService));
             _printProjectDatasheetService = printProjectDatasheetService ?? throw new ArgumentNullException(nameof(printProjectDatasheetService));
             _printProjectSummaryReportService = printProjectSummaryReportService ?? throw new ArgumentNullException(nameof(printProjectSummaryReportService));
+            _printProjectDescriptionReportService = printProjectDescriptionReportService ?? throw new ArgumentNullException(nameof(printProjectDescriptionReportService));
         }
 
         /// <summary>
@@ -66,7 +71,9 @@ namespace Estimation.WebApi.Controllers
             }
             else if (projectExportRequest.DescriptionReport)
             {
-
+                byte[] result = await _printProjectDescriptionReportService.GetProjectDescriptionAsPdf(id, projectExportRequest);
+                var streamResult = File(result, "application/pdf", "ProjectDescription.pdf");
+                return streamResult;
             }
 
             return NoContent();
