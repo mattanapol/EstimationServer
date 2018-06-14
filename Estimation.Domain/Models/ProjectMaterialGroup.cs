@@ -82,16 +82,16 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##GROUPID##", Id.ToString()
+                    "GROUPID", Id.ToString()
                 },
                 {
-                    "##GROUPCODE##", GroupCode
+                    "GROUPCODE", GroupCode
                 },
                 {
-                    "##GROUPNAME##", GroupName
+                    "GROUPNAME", GroupName
                 },
                 {
-                    "##REMARKS##", Remarks
+                    "REMARKS", Remarks
                 }
             };
 

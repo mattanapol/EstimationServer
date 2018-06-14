@@ -86,43 +86,43 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##LABOURCOST##", LabourCost.ToString("N")
+                    "LABOURCOST", LabourCost.ToString("N")
                 },
                 {
-                    "##INSTALLATION##", Installation.ToString("N")
+                    "INSTALLATION", Installation.ToString("N")
                 },
                 {
-                    "##QUANTITY##", Quantity.ToString("N")
+                    "QUANTITY", Quantity.ToString()
                 },
                 {
-                    "##TOTALCOST##", TotalCost.ToString("N")
+                    "TOTALCOST", TotalCost.ToString("N")
                 },
                 {
-                    "##TOTALNETCOST##", TotalNetCost.ToString("N")
+                    "TOTALNETCOST", TotalNetCost.ToString("N")
                 },
                 {
-                    "##TOTALOFFERPRICE##", TotalOfferPrice.ToString("N")
+                    "TOTALOFFERPRICE", TotalOfferPrice.ToString("N")
                 },
                 {
-                    "##TOTALNETPRICE##", TotalNetPrice.ToString("N")
+                    "TOTALNETPRICE", TotalNetPrice.ToString("N")
                 },
                 {
-                    "##TOTALLISTPRICE##", TotalListPrice.ToString("N")
+                    "TOTALLISTPRICE", TotalListPrice.ToString("N")
                 },
                 {
-                    "##TOTALACCESSORY##", TotalAccessory.ToString("N")
+                    "TOTALACCESSORY", TotalAccessory.ToString("N")
                 },
                 {
-                    "##TOTALFITTING##", TotalFitting.ToString("N")
+                    "TOTALFITTING", TotalFitting.ToString("N")
                 },
                 {
-                    "##TOTALSUPPORT##", TotalSupport.ToString("N")
+                    "TOTALSUPPORT", TotalSupport.ToString("N")
                 },
                 {
-                    "##TOTALPAINTING##", TotalPainting.ToString("N")
+                    "TOTALPAINTING", TotalPainting.ToString("N")
                 },
                 {
-                    "##TOTALMANPOWER##", TotalManpower.ToString("N")
+                    "TOTALMANPOWER", TotalManpower.ToString("N")
                 }
             };
 

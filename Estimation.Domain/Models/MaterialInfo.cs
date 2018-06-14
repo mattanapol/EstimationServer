@@ -51,19 +51,19 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##CODE##", CodeAsString
+                    "CODE", CodeAsString
                 },
                 {
-                    "##NAME##", Name
+                    "NAME", Name
                 },
                 {
-                    "##DESCRIPTION##", Description
+                    "DESCRIPTION", Description
                 },
                 {
-                    "##TYPE##", MaterialType
+                    "TYPE", MaterialType
                 },
                 {
-                    "##ID##", Id.ToString()
+                    "ID", Id.ToString()
                 }
             };
 

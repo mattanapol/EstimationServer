@@ -116,6 +116,11 @@ namespace Estimation.Domain.Models
         public int TotalMaterialCost => GrandTotal - Installation;
 
         /// <summary>
+        /// Gets the sub total.
+        /// </summary>
+        public int SubTotal => GrandTotal - Installation - Transportation;
+
+        /// <summary>
         /// Child project summary
         /// </summary>
         public IList<GroupSummary> ChildSummaries { get; set; }
@@ -192,46 +197,49 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##MATERIALPRICE##", MaterialPrice.ToString("N")
+                    "MATERIALPRICE", MaterialPrice.ToString("N")
                 },
                 {
-                    "##NETPRICE##", NetPrice.ToString("N")
+                    "NETPRICE", NetPrice.ToString("N")
                 },
                 {
-                    "##LISTPRICE##", ListPrice.ToString("N")
+                    "LISTPRICE", ListPrice.ToString("N")
                 },
                 {
-                    "##ACCESSORIES##", Accessories.ToString("N")
+                    "ACCESSORIES", Accessories.ToString("N")
                 },
                 {
-                    "##FITTINGS##", Fittings.ToString("N")
+                    "FITTINGS", Fittings.ToString("N")
                 },
                 {
-                    "##PAINTING##", Painting.ToString("N")
+                    "PAINTING", Painting.ToString("N")
                 },
                 {
-                    "##SUPPORTING##", Supporting.ToString("N")
+                    "SUPPORTING", Supporting.ToString("N")
                 },
                 {
-                    "##INSTALLATION##", Installation.ToString("N")
+                    "INSTALLATION", Installation.ToString("N")
                 },
                 {
-                    "##TRANSPORTATION##", Transportation.ToString("N")
+                    "TRANSPORTATION", Transportation.ToString("N")
                 },
                 {
-                    "##MISCELLANEOUS##", Miscellaneous.ToString("N")
+                    "MISCELLANEOUS", Miscellaneous.ToString("N")
                 },
                 {
-                    "##GRANDTOTAL##", GrandTotal.ToString("N")
+                    "GRANDTOTAL", GrandTotal.ToString("N")
                 },
                 {
-                    "##NETGRANDTOTAL##", NetGrandTotal.ToString("N")
+                    "NETGRANDTOTAL", NetGrandTotal.ToString("N")
                 },
                 {
-                    "##MANPOWER##", Manpower.ToString("N")
+                    "MANPOWER", Manpower.ToString("N")
                 },
                 {
-                    "##TotalMaterialCost##", TotalMaterialCost.ToString("N")
+                    "TotalMaterialCost", TotalMaterialCost.ToString("N")
+                },
+                {
+                    "subTotal", SubTotal.ToString("N")
                 }
             };
             var projectInfoDataDict = ProjectInfo?.GetDataDictionary();

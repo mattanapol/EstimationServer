@@ -22,13 +22,13 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##DateTime##", CurrentDateTime.ToString("dd/MM/yyyy HH:mm")
+                    "DateTime", CurrentDateTime.ToString("dd/MM/yyyy HH:mm")
                 },
                 {
-                    "##Date##", CurrentDateTime.ToString("dd/MM/yyyy")
+                    "Date", CurrentDateTime.ToString("dd/MM/yyyy")
                 },
                 {
-                    "##LongDate##", CurrentDateTime.ToString("dd/MMMM/yyyy")
+                    "LongDate", CurrentDateTime.ToString("dd/MMMM/yyyy")
                 }
             };
 

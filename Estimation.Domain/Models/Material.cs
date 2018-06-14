@@ -72,34 +72,34 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##LISTPRICE##", ListPrice.ToString("N")
+                    "LISTPRICE", ListPrice.ToString("N")
                 },
                 {
-                    "##NETPRICE##", NetPrice.ToString("N")
+                    "NETPRICE", NetPrice.ToString("N")
                 },
                 {
-                    "##OFFERPRICE##", OfferPrice.ToString("N")
+                    "OFFERPRICE", OfferPrice.ToString("N")
                 },
                 {
-                    "##MANPOWER##", Manpower.ToString("N3")
+                    "MANPOWER", Manpower.ToString("N3")
                 },
                 {
-                    "##FITTINGS##", Fittings.ToString("N")
+                    "FITTINGS", Fittings.ToString("N")
                 },
                 {
-                    "##ACCESSORY##", Accessory.ToString("N")
+                    "ACCESSORY", Accessory.ToString("N")
                 },
                 {
-                    "##SUPPORTING##", Supporting.ToString("N")
+                    "SUPPORTING", Supporting.ToString("N")
                 },
                 {
-                    "##PAINTING##", Painting.ToString("N")
+                    "PAINTING", Painting.ToString("N")
                 },
                 {
-                    "##REMARK##", Remark
+                    "REMARK", Remark
                 },
                 {
-                    "##UNIT##", Unit
+                    "UNIT", Unit
                 }
             };
 

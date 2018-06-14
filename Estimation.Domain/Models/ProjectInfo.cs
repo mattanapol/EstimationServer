@@ -109,46 +109,46 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "##NAME##", Name
+                    "NAME", Name
                 },
                 {
-                    "##CODE##", Code
+                    "CODE", Code
                 },
                 {
-                    "##CREATEDDATE##", CreatedDate?.ToString()
+                    "CREATEDDATE", CreatedDate?.ToString()
                 },
                 {
-                    "##LASTMODIFIEDDATE##", LastModifiedDate?.ToString()
+                    "LASTMODIFIEDDATE", LastModifiedDate?.ToString()
                 },
                 {
-                    "##REMARKS##", Remark
+                    "REMARKS", Remark
                 },
                 {
-                    "##OWNER##", Owner
+                    "OWNER", Owner
                 },
                 {
-                    "##GeneralContractor##", GeneralContractor
+                    "GeneralContractor", GeneralContractor
                 },
                 {
-                    "##ConstructionTerm##", ConstructionTerm
+                    "ConstructionTerm", ConstructionTerm
                 },
                 {
-                    "##ConstructionPlace##", ConstructionPlace
+                    "ConstructionPlace", ConstructionPlace
                 },
                 {
-                    "##ConstructionScale##", ConstructionScale
+                    "ConstructionScale", ConstructionScale
                 },
                 {
-                    "##KindOfWork##", KindOfWork
+                    "KindOfWork", KindOfWork
                 },
                 {
-                    "##SubmitBy##", SubmitBy
+                    "SubmitBy", SubmitBy
                 },
                 {
-                    "##LabourCost##", LabourCost.ToString("N")
+                    "LabourCost", LabourCost.ToString("N")
                 },
                 {
-                    "##CurrencyUnit##", CurrencyUnit
+                    "CurrencyUnit", CurrencyUnit
                 },
             };
 

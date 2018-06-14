@@ -9,7 +9,8 @@ namespace Estimation.Services.Helpers
 {
     public class HtmlParser
     {
-        private const string CommandPattern = @"##\w+##";
+        private const string EnclosingString = "##";
+        private static readonly string CommandPattern = $@"{ EnclosingString }\w+{ EnclosingString }";
         private const string TemplateClassName = "template";
         private const string ContentsClassName = "contents";
 
@@ -24,7 +25,7 @@ namespace Estimation.Services.Helpers
         {
             foreach (var data in dataList)
             {
-                html = html.Replace(data.Key, data.Value, StringComparison.OrdinalIgnoreCase);
+                html = html.Replace($"{EnclosingString}{data.Key}{EnclosingString}", data.Value, StringComparison.OrdinalIgnoreCase);
             }
 
             if (clearHtml)
@@ -93,7 +94,11 @@ namespace Estimation.Services.Helpers
                 contentRow.SetAttributeValue("HasChild","true");
                 ParseHtmlNodeByClass(contentRow, printableObject.Child);
             }
-                
+
+            foreach (var data in printableObject.GetDataDictionary())
+            {
+                contentRow.SetAttributeValue(data.Key, data.Value);
+            }
 
             rowParent.InsertAfter(contentRow, lastNode);
             lastNode = contentRow;
@@ -150,6 +155,11 @@ namespace Estimation.Services.Helpers
                 {
                     contentRow.SetAttributeValue("HasChild", printable.Child.First().TargetClass);
                     ParseHtmlNodeByClass(contentRow, printable.Child);
+                }
+
+                foreach (var data in printable.GetDataDictionary())
+                {
+                    contentRow.SetAttributeValue(data.Key, data.Value);
                 }
 
                 rowParent.InsertAfter(contentRow, lastNode);
