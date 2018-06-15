@@ -14,6 +14,11 @@ namespace Kaewsai.HtmlToPdf.Domain
             Html = new List<string>();
         }
 
+        public PdfGeneratorInputContent(IEnumerable<string> htmls)
+        {
+            Html = new List<string>(htmls);
+        }
+
         /// <summary>
         /// Gets or sets the html.
         /// </summary>

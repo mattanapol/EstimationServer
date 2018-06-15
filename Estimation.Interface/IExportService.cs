@@ -11,9 +11,9 @@ namespace Estimation.Interface
         /// <summary>
         /// Export project to pdf file
         /// </summary>
-        /// <param name="id">Project Id</param>
+        /// <param name="htmls"></param>
         /// <param name="exportRequest"></param>
         /// <returns></returns>
-        Task<byte[]> ExportProjectToPdf(int id,ProjectExportRequest exportRequest);
+        Task<byte[]> ExportProjectToPdf(IEnumerable<string> htmls,ProjectExportRequest exportRequest);
     }
 }

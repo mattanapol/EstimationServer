@@ -57,26 +57,32 @@ namespace Estimation.WebApi.Controllers
         [HttpPost("project/{id}")]
         public async Task<IActionResult> ExportProject(int id,[FromBody]ProjectExportRequest projectExportRequest)
         {
+            var htmls = new List<string>();
+
             if (projectExportRequest.DataSheetReport)
             {
-                byte[] result = await _printProjectDatasheetService.GetProjectDatasheetAsPdf(id, projectExportRequest);
-                var streamResult = File(result, "application/pdf", "ProjectDataSheet.pdf");
-                return streamResult;
-            }
-            else if (projectExportRequest.SummaryReport)
-            {
-                byte[] result = await _printProjectSummaryReportService.GetProjectSummaryAsPdf(id, projectExportRequest);
-                var streamResult = File(result, "application/pdf", "ProjectSummary.pdf");
-                return streamResult;
-            }
-            else if (projectExportRequest.DescriptionReport)
-            {
-                byte[] result = await _printProjectDescriptionReportService.GetProjectDescriptionAsPdf(id, projectExportRequest);
-                var streamResult = File(result, "application/pdf", "ProjectDescription.pdf");
-                return streamResult;
+                byte[] dataSheetResult = await _printProjectDatasheetService.GetProjectDatasheetAsPdf(id, projectExportRequest);
+                var dataSheetStreamResult = File(dataSheetResult, "application/pdf", "ProjectDataSheet.pdf");
+                return dataSheetStreamResult;
             }
 
-            return NoContent();
+            if (projectExportRequest.SummaryReport)
+            {
+                htmls.Add(await _printProjectSummaryReportService.GetProjectSummaryAsHtml(id, projectExportRequest));
+            }
+            if (projectExportRequest.DescriptionReport)
+            {
+                htmls.Add(await _printProjectDescriptionReportService.GetProjectDescriptionAsHtml(id, projectExportRequest));
+            }
+
+            if (htmls.Any())
+            {
+                byte[] result = await _exportService.ExportProjectToPdf(htmls, projectExportRequest);
+                var streamResult = File(result, "application/pdf", "ProjectEstimation.pdf");
+                return streamResult;
+            }
+            else
+                return NoContent();
         }
 
         /// <summary>
