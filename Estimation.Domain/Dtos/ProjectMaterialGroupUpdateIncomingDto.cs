@@ -8,6 +8,14 @@
         public string GroupCode { get; set; }
 
         /// <summary>
+        /// Gets or sets the order.
+        /// </summary>
+        /// <value>
+        /// The order.
+        /// </value>
+        public int Order { get; set; }
+
+        /// <summary>
         /// Group name
         /// </summary>
         public string GroupName { get; set; }
