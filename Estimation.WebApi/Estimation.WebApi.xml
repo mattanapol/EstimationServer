@@ -6,7 +6,7 @@
     <members>
         <member name="T:Estimation.WebApi.Controllers.AppDatabaseController">
             <summary>
-            Material database constroller class
+            Material database controller class
             </summary>
         </member>
         <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.#ctor(Estimation.Interface.IAppDbMigrationService)">

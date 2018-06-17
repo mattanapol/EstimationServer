@@ -66,10 +66,8 @@ namespace Estimation.WebApi.Infrastructure
             var result = OutgoingResult<Exception>.ExceptionResponse(exception);
             if (exception is ArgumentOutOfRangeException) code = HttpStatusCode.BadRequest;
             else if (exception is NullReferenceException) code = HttpStatusCode.BadRequest;
-            else if (exception is ArgumentException)
-            {
-                code = HttpStatusCode.BadRequest;
-            }
+            else if (exception is ArgumentException) code = HttpStatusCode.BadRequest;
+            else if (exception is KeyNotFoundException) code = HttpStatusCode.BadRequest;
 
 
             context.Response.ContentType = "application/json";

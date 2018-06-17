@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /*For print tables*/
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
+        body {
+            font-family: AngsanaUPC, MS Sans Serif;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            /*table-layout: fixed;*/
+            width: 100%;
+            border: none;
+            border-bottom: none;
+        }
+
+        .content-table tfoot td, .content-table tfoot tr {
+            height: 0px;
+            padding: 0px;
+            border-bottom: none;
+            border-top: 1px solid black;
+        }
+
+        .content-table tr {
+            border-top: 1px solid black;
+        }
+
+        .content-table tr + tr {
+                border-top: 1px solid lightgray;
+            }
+
+            .content-table td {
+                border-left: 1px solid black;
+                font-size: 13pt;
+                padding: 3pt 5pt 3pt 5pt;
+                word-wrap: break-word;
+            }
+
+        .content-table td + td {
+                border-left: 1px solid lightgray;
+            }
+
+        .content-table td:first-child {
+                border-left: 1px solid black;
+            }
+
+        .content-table td:last-child {
+                border-right: 1px solid black;
+            }
+
+            .content-table th {
+                border-left: 1px solid black;
+                text-align: center;
+                padding: 4pt 0pt 4pt 0pt;
+                font-size: 14pt;
+                font-weight: bold;
+            }
+
+        .content-table th + th {
+                border-left: 1px solid lightgray;
+            }
+
+        .content-table th:first-child {
+                border-left: 1px solid black;
+            }
+
+        .content-table th:last-child {
+                border-right: 1px solid black;
+            }
+
+        .header {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 15pt 0pt 15pt 0pt;
+        }
+
+            .header p {
+                margin: 5pt 0pt 5pt 0pt;
+            }
+
+        .text-align-right {
+            text-align: right;
+        }
+
+        .text-align-left {
+            text-align: left;
+        }
+
+        .text-align-center {
+            text-align: center;
+        }
+
+        .group-summary[haschild="sub-group-summary"] > .hide-if-has-child {
+            display: none;
+        }
+
+        .group-summary[painting="0.00"] > #painting {
+            display: none;
+        }
+
+        .group-summary[supporting="0.00"] > #supporting {
+            display: none;
+        }
+
+        .group-summary[installation="0.00"] > #installation {
+            display: none;
+        }
+
+        .group-summary[transportation="0.00"] > #transportation {
+            display: none;
+        }
+
+        .group-summary[miscellaneous="0.00"] > #miscellaneous {
+            display: none;
+        }
+
+        .group-summary[subtotal="0.00"] > #subtotal {
+            display: none;
+        }
+
+        .sub-group-summary[painting="0.00"] > #painting {
+            display: none;
+        }
+
+        .sub-group-summary[supporting="0.00"] > #supporting {
+            display: none;
+        }
+
+        .sub-group-summary[installation="0.00"] > #installation {
+            display: none;
+        }
+
+        .sub-group-summary[transportation="0.00"] > #transportation {
+            display: none;
+        }
+
+        .sub-group-summary[miscellaneous="0.00"] > #miscellaneous {
+            display: none;
+        }
+
+        .sub-group-summary[subtotal="0.00"] > #subtotal {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-summary template">
+    <div class="header">
+        <p>DESCRIPTION OF ESTIMATE</p>
+    </div>
+        <div class="header">
+            <table class="full-width project-summary contents">
+                <tr>
+                    <td class="text-align-left">Project: ##NAME##</td>
+                    <td class="text-align-right">Date: ##DATE##</td>
+                </tr>
+            </table>
+        </div>
+        <table class="content-table">
+            <thead>
+                <tr class="row-header">
+                    <th>Material</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Remark</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody class="group-summary template">
+                <tr class="group-summary contents">
+                    <td class="text-align-left">##GROUPCODE##) ##GROUPNAME##</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-left">##REMARKS##</td>
+                </tr>
+                <tr class="material template contents hide-if-has-child">
+                    <td class="text-align-left">##NAME##</td>
+                    <td class="text-align-left">##DESCRIPTION##</td>
+                    <td class="text-align-right">##QUANTITY##</td>
+                    <td class="text-align-center">##UNIT##</td>
+                    <td class="text-align-right">##OFFERPRICE##</td>
+                    <td class="text-align-right">##TOTALOFFERPRICE##</td>
+                    <td class="text-align-left">##REMARK##</td>
+                </tr>
+                <tr class="hide-if-has-child">
+                    <td class="text-align-center">&nbsp;</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="supporting">
+                    <td class="text-align-left">Supporting Materials</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##SUPPORTING##</td>
+                    <td class="text-align-right">##SUPPORTING##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="painting">
+                    <td class="text-align-left">Painting</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##PAINTING##</td>
+                    <td class="text-align-right">##PAINTING##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="miscellaneous">
+                    <td class="text-align-left">Miscellaneous</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##MISCELLANEOUS##</td>
+                    <td class="text-align-right">##MISCELLANEOUS##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="subtotal">
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right">Sub-Total</td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-right">##SUBTOTAL##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="installation">
+                    <td class="text-align-left">Installation</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##INSTALLATION##</td>
+                    <td class="text-align-right">##INSTALLATION##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child" id="transportation">
+                    <td class="text-align-left">Transportation</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##TRANSPORTATION##</td>
+                    <td class="text-align-right">##TRANSPORTATION##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="group-summary contents hide-if-has-child">
+                    <td class="text-align-left"></td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center" colspan="3">Total of ##GROUPCODE##</td>
+                    <td class="text-align-right">##GRANDTOTAL##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+            <tbody class="sub-group-summary template page-break-after">
+                <tr class="sub-group-summary contents">
+                    <td class="text-align-left">##GROUPCODE##) ##GROUPNAME##</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-left">##REMARKS##</td>
+                </tr>
+                <tr class="material template contents">
+                    <td class="text-align-left">##NAME##</td>
+                    <td class="text-align-left">##DESCRIPTION##</td>
+                    <td class="text-align-right">##QUANTITY##</td>
+                    <td class="text-align-right">##UNIT##</td>
+                    <td class="text-align-right">##OFFERPRICE##</td>
+                    <td class="text-align-right">##TOTALOFFERPRICE##</td>
+                    <td class="text-align-left">##REMARK##</td>
+                </tr>
+                <tr>
+                    <td class="text-align-center">&nbsp;</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="supporting">
+                    <td class="text-align-left">Supporting Materials</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##SUPPORTING##</td>
+                    <td class="text-align-right">##SUPPORTING##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="painting">
+                    <td class="text-align-left">Painting</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##PAINTING##</td>
+                    <td class="text-align-right">##PAINTING##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="miscellaneous">
+                    <td class="text-align-left">Miscellaneous</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##MISCELLANEOUS##</td>
+                    <td class="text-align-right">##MISCELLANEOUS##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="subtotal">
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right">Sub-Total</td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-right">##SUBTOTAL##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="installation">
+                    <td class="text-align-left">Installation</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##INSTALLATION##</td>
+                    <td class="text-align-right">##INSTALLATION##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="transportation">
+                    <td class="text-align-left">Transportation</td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##TRANSPORTATION##</td>
+                    <td class="text-align-right">##TRANSPORTATION##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+                <tr class="sub-group-summary contents" id="grandtotal">
+                    <td class="text-align-left"></td>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-center" colspan="3">Total of ##GROUPCODE##</td>
+                    <td class="text-align-right">##GRANDTOTAL##</td>
+                    <td class="text-align-left"></td>
+                </tr>
+            </tbody>
+            </tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

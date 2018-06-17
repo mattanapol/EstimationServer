@@ -43,6 +43,12 @@
     <None Update="Estimation.WebApi.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Forms\DescriptionOfEstimation_DetailForm.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Forms\DescriptionOfEstimation_NetForm.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Forms\MaterialList.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

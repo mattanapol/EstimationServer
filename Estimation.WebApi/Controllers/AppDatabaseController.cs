@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Estimation.WebApi.Controllers
 {
     /// <summary>
-    /// Material database constroller class
+    /// Material database controller class
     /// </summary>
     [Produces("application/json")]
     [Route("api/database/material/")]

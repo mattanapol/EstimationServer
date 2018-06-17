@@ -26,7 +26,7 @@ namespace Kaewsai.Utilities.WebApi
         public ErrorResult<T> Error { get; set; }
 
         /// <summary>
-        /// Create successesful response.
+        /// Create successful response.
         /// </summary>
         /// <returns>The response.</returns>
         /// <param name="result">Result.</param>
@@ -63,16 +63,14 @@ namespace Kaewsai.Utilities.WebApi
         /// <returns>The response.</returns>
         /// <param name="exceptionObject">Exception object.</param>
         /// <param name="errorCode">Error code.</param>
-        public static OutgoingResult<T> ExceptionResponse(T exceptionObject, int? errorCode)
+        public static OutgoingResult<ExceptionDto> ExceptionResponse(Exception exceptionObject, int? errorCode)
         {
-            if (exceptionObject is Exception)
+            var exceptionDto = new ExceptionDto(exceptionObject);
+            return new OutgoingResult<ExceptionDto>()
             {
-                return FailResponse(exceptionObject, (exceptionObject as Exception).Message, errorCode);
-            }
-            else
-            {
-                return FailResponse(exceptionObject, "", errorCode);
-            }
+                Status = "Fail",
+                Error = new ErrorResult<ExceptionDto>(exceptionDto, exceptionObject.Message, errorCode)
+            };
         }
 
         /// <summary>
@@ -80,7 +78,7 @@ namespace Kaewsai.Utilities.WebApi
         /// </summary>
         /// <returns>The response.</returns>
         /// <param name="exceptionObject">Exception object.</param>
-        public static OutgoingResult<T> ExceptionResponse(T exceptionObject)
+        public static OutgoingResult<ExceptionDto> ExceptionResponse(Exception exceptionObject)
         {
             return ExceptionResponse(exceptionObject, null);
         }
