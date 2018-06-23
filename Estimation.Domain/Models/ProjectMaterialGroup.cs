@@ -49,9 +49,20 @@ namespace Estimation.Domain.Models
         public int ProjectId { get; set; }
 
         /// <summary>
-        /// Project information this group belong to
+        /// Gets or sets the ceiling summary.
         /// </summary>
-        public ProjectInfo ProjectInfo { get; set; }
+        /// <value>
+        /// The ceiling summary.
+        /// </value>
+        public int CeilingSummary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the labour cost.
+        /// </summary>
+        /// <value>
+        /// The labour cost.
+        /// </value>
+        public decimal LabourCost { get; set; }
 
         /// <summary>
         /// Child group of this material group

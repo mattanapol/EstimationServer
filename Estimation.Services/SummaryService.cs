@@ -98,7 +98,7 @@ namespace Estimation.Services
                     if (summaryRatio.Installation != -1)
                         material.Manpower = material.Manpower * summaryRatio.Installation;
                     else
-                        material.Manpower = (decimal)groupSummaryIncomingDto.Installation / (material.Quantity * projectMaterialGroup.ProjectInfo.LabourCost);
+                        material.Manpower = (decimal)groupSummaryIncomingDto.Installation / (material.Quantity * projectMaterialGroup.LabourCost);
 
                     await _materialRepository.UpdateMaterial(material.Id, material);
                 }
@@ -121,6 +121,25 @@ namespace Estimation.Services
 
             GroupSummary groupSummary = await GetGroupSummary(projectMaterialGroup);
 
+            return groupSummary;
+        }
+
+        public async Task<ProjectMaterialTypeSummary> GetGroupSummary(ProjectInfo projectInfo, ProjectMaterialType projectMaterialType)
+        {
+            ProjectMaterialTypeSummary groupSummary = new ProjectMaterialTypeSummary()
+            {
+                MiscellaneousInfo = projectInfo.Miscellaneous,
+                TransportationInfo = projectInfo.Transportation,
+                MaterialType = projectMaterialType.MaterialType
+            };
+            // Sum all groups
+            foreach (var group in projectMaterialType.ProjectMaterialGroups)
+            {
+                var childGroupSummary = await GetGroupSummary(group);
+                groupSummary.AddChildGroupSummary(childGroupSummary);
+            }
+
+            groupSummary.CalculateFromChildGroupSummaries();
             return groupSummary;
         }
 
@@ -156,7 +175,7 @@ namespace Estimation.Services
                     groupSummary.AddByMaterial(material);
                 }
 
-                groupSummary.CalculateGrandTotal(projectMaterialGroup.ProjectInfo.CeilingSummary);
+                groupSummary.CalculateGrandTotal(projectMaterialGroup.CeilingSummary);
 
             }
 
@@ -171,12 +190,12 @@ namespace Estimation.Services
         public async Task<ProjectSummary> GetProjectSummary(int id)
         {
             var project = await _projectService.GetProject(id);
-            var materialGroups = project.MaterialGroups;
+            var materialGroups = project.MaterialTypeGroups;
 
             ProjectSummary projectSummary = new ProjectSummary {ProjectInfo = project};
-            foreach (var materialGroup in materialGroups)
+            foreach (var keyPairMaterialTypeGroup in materialGroups)
             {
-                projectSummary.AddChildGroupSummary(await GetGroupSummary(materialGroup.Id));
+                projectSummary.AddChildGroupSummary(await GetGroupSummary(project, keyPairMaterialTypeGroup));
             }
 
             projectSummary.CalculateFromChildGroupSummaries();

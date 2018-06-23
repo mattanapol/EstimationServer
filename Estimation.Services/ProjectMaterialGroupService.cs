@@ -101,12 +101,22 @@ namespace Estimation.Services
         public async Task<IEnumerable<ProjectMaterialGroup>> GetAllProjectMaterial(int projectId)
         {
             var projectMaterialGroups = await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectId);
-            Collection<ProjectMaterialGroup> results = new Collection<ProjectMaterialGroup>(projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == 0).ToList());
-            projectMaterialGroups = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) > 0);
-            foreach (var result in results)
+            var projectInfo = await _projectRepository.GetProjectInfo(projectId);
+            projectMaterialGroups = projectMaterialGroups.Select(e =>
             {
-                var projectMaterialGroupChild = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == result.Id);
-                result.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChild.ToList());
+                e.LabourCost = projectInfo.LabourCost;
+                e.CeilingSummary = projectInfo.CeilingSummary;
+                return e;
+            }).ToList();
+            Collection<ProjectMaterialGroup> results = new Collection<ProjectMaterialGroup>(projectMaterialGroups
+                .Where(e => e.ParentGroupId.GetValueOrDefault(0) == 0)
+                .ToList());
+            projectMaterialGroups = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) > 0);
+            for(int i = 0; i<results.Count; i++)
+            {
+                var projectMaterialGroupChild = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == results[i].Id);
+                results[i].ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChild.ToList());
+                results[i] = CalculateMaterialFields(results[i], projectInfo);
             }
             
             return results;
@@ -120,25 +130,28 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> GetProjectMaterialGroup(int id)
         {
             var projectMaterialGroup = await _projectMaterialGroupRepository.GetProjectMaterialGroup(id);
-            projectMaterialGroup = await GetSubGroup(projectMaterialGroup);
+            var projectInfo = await _projectRepository.GetProjectInfo(projectMaterialGroup.ProjectId);
+            projectMaterialGroup.LabourCost = projectInfo.LabourCost;
+            projectMaterialGroup.CeilingSummary = projectInfo.CeilingSummary;
+            projectMaterialGroup = await GetSubGroup(projectMaterialGroup, projectInfo);
 
             return projectMaterialGroup;
         }
 
-        private async Task<ProjectMaterialGroup> GetSubGroup(ProjectMaterialGroup projectMaterialGroup)
+        private async Task<ProjectMaterialGroup> GetSubGroup(ProjectMaterialGroup projectMaterialGroup, ProjectInfo projectInfo)
         {
             if (projectMaterialGroup == null) throw new ArgumentNullException(nameof(projectMaterialGroup));
-            var projectInfo = await _projectRepository.GetProjectInfo(projectMaterialGroup.ProjectId);
+            
             var projectMaterialGroups = (await _projectMaterialGroupRepository.GetAllProjectMaterialGroupInProject(projectMaterialGroup.ProjectId))
                 .Where(e => e.ParentGroupId.GetValueOrDefault(0) == projectMaterialGroup.Id)
                 .Select(e =>
                 {
-                    e.ProjectInfo = projectInfo;
+                    e.LabourCost = projectInfo.LabourCost;
+                    e.CeilingSummary = projectInfo.CeilingSummary;
                     return e;
                 });
             projectMaterialGroup.ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroups.ToList());
-            projectMaterialGroup.ProjectInfo = projectInfo;
-
+            
             projectMaterialGroup = CalculateMaterialFields(projectMaterialGroup, projectInfo);
             return projectMaterialGroup;
         }
@@ -172,20 +185,7 @@ namespace Estimation.Services
             {
                 foreach (var material in projectMaterialGroup.Materials)
                 {
-                    material.LabourCost = material.Manpower * projectInfo.LabourCost;
-                    material.Installation = material.LabourCost * material.Quantity;
-                    
-                    material.TotalOfferPrice = material.OfferPrice * material.Quantity;
-                    material.TotalNetPrice = material.NetPrice * material.Quantity;
-                    material.TotalListPrice = material.ListPrice * material.Quantity;
-
-                    material.TotalPainting = material.Painting * material.Quantity;
-                    material.TotalSupport = material.Supporting * material.Quantity;
-                    material.TotalAccessory = material.Accessory * material.Quantity;
-                    material.TotalFitting = material.Fittings * material.Quantity;
-
-                    material.TotalNetCost = material.TotalNetPrice + material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalPainting + material.TotalSupport;
-                    material.TotalCost = material.TotalOfferPrice + material.Installation + material.TotalAccessory + material.TotalFitting + material.TotalPainting + material.TotalSupport;
+                    material.ProjectLabourCost = projectInfo.LabourCost;
                 }
             }
             return newProjectMaterialGroup;

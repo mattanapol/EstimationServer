@@ -99,6 +99,11 @@ namespace Estimation.Domain.Models
         public IEnumerable<ProjectMaterialGroup> MaterialGroups { get; set; }
 
         /// <summary>
+        /// Gets or sets the material groups dictionary.
+        /// </summary>
+        public IList<ProjectMaterialType> MaterialTypeGroups { get; set; }
+
+        /// <summary>
         /// Ceiling summary up to n place.
         /// </summary>
         public int CeilingSummary { get; set; }

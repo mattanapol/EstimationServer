@@ -6,14 +6,19 @@ namespace Estimation.Domain.Models
     public class ProjectMaterial: Material, IPrintable
     {
         /// <summary>
-        /// Labour cost (Manday x Labour)
+        /// Gets or sets the project labour cost.
         /// </summary>
-        public decimal LabourCost { get; set; }
+        public decimal ProjectLabourCost { get; set; }
+
+        /// <summary>
+        /// Labour cost (Manday x ProjectLabour)
+        /// </summary>
+        public decimal LabourCost => Manpower * ProjectLabourCost;
 
         /// <summary>
         /// Installation cost (LabourCost x Quantity)
         /// </summary>
-        public decimal Installation { get; set; }
+        public decimal Installation => LabourCost * Quantity;
 
         /// <summary>
         /// Quantity of material
@@ -23,37 +28,37 @@ namespace Estimation.Domain.Models
         /// <summary>
         /// Total cost of this material
         /// </summary>
-        public decimal TotalCost { get; set; }
+        public decimal TotalCost => TotalOfferPrice + Installation + TotalAccessory + TotalFitting + TotalPainting + TotalSupport;
 
         /// <summary>
         /// Total offer price
         /// </summary>
-        public decimal TotalOfferPrice { get; set; }
+        public decimal TotalOfferPrice => OfferPrice * Quantity;
 
         /// <summary>
         /// Total net price
         /// </summary>
-        public decimal TotalNetPrice { get; set; }
+        public decimal TotalNetPrice => NetPrice * Quantity;
 
         /// <summary>
         /// Total accessory cost
         /// </summary>
-        public decimal TotalAccessory { get; set; }
+        public decimal TotalAccessory => Accessory * Quantity;
 
         /// <summary>
         /// Total fitting cost
         /// </summary>
-        public decimal TotalFitting { get; set; }
+        public decimal TotalFitting => Fittings* Quantity;
 
         /// <summary>
         /// Total support cost
         /// </summary>
-        public decimal TotalSupport { get; set; }
+        public decimal TotalSupport => Supporting * Quantity;
 
         /// <summary>
         /// Total painting cost
         /// </summary>
-        public decimal TotalPainting { get; set; }
+        public decimal TotalPainting => Painting * Quantity;
 
         /// <summary>
         /// Gets or sets the total list price.
@@ -61,7 +66,7 @@ namespace Estimation.Domain.Models
         /// <value>
         /// The total list price.
         /// </value>
-        public decimal TotalListPrice { get; set; }
+        public decimal TotalListPrice => ListPrice * Quantity;
 
         /// <summary>
         /// Gets or sets the total net cost.
@@ -69,7 +74,7 @@ namespace Estimation.Domain.Models
         /// <value>
         /// The total net cost.
         /// </value>
-        public decimal TotalNetCost { get; set; }
+        public decimal TotalNetCost => TotalNetPrice + Installation + TotalAccessory + TotalFitting + TotalPainting + TotalSupport;
 
         /// <summary>
         /// Gets or sets the total manpower.

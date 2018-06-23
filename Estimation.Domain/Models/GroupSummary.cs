@@ -94,8 +94,10 @@ namespace Estimation.Domain.Models
         public override Dictionary<string, string> GetDataDictionary()
         {
             var baseDataDict = base.GetDataDictionary();
-            var projectMaterialGroupDataDict = ProjectMaterialGroupInfo.GetDataDictionary();
+            var projectMaterialGroupDataDict = ProjectMaterialGroupInfo?.GetDataDictionary();
 
+            if (projectMaterialGroupDataDict == null)
+                return baseDataDict;
             var result = baseDataDict.Combine(projectMaterialGroupDataDict);
             return result;
         }

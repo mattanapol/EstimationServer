@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -56,7 +57,8 @@ namespace Estimation.WebApi
             services.AddMvc(options => { })
                     .AddJsonOptions(options =>
                     {
-                        options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                        options.SerializerSettings.Converters.Add(new KeyValuePairConverter());
                         options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                         options.SerializerSettings.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;
                         options.SerializerSettings.ContractResolver = new DefaultContractResolver

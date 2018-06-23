@@ -121,6 +121,11 @@ namespace Estimation.Domain.Models
         public int SubTotal => GrandTotal - Installation - Transportation;
 
         /// <summary>
+        /// Gets the net sub total.
+        /// </summary>
+        public int NetSubTotal => NetGrandTotal - Installation - Transportation;
+
+        /// <summary>
         /// Child project summary
         /// </summary>
         public IList<GroupSummary> ChildSummaries { get; set; }
@@ -240,6 +245,12 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "subTotal", SubTotal.ToString("N")
+                },
+                {
+                    "NetSubTotal", NetSubTotal.ToString("N")
+                },
+                {
+                    "NetMiscellaneous", NetMiscellaneous.ToString("N")
                 }
             };
             var projectInfoDataDict = ProjectInfo?.GetDataDictionary();
