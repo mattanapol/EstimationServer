@@ -12,7 +12,7 @@ namespace Estimation.Common.AutoMapper.Profiles
     /// <summary>
     /// Project material profile class
     /// </summary>
-    /// <seealso cref="AutoMapper.Profile" />
+    /// <seealso cref="Profile" />
     public class ProjectMaterialProfile: Profile
     {
         /// <summary>

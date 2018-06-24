@@ -139,10 +139,12 @@ namespace Estimation.Domain.Models
         public int GetMaterialsQuantity()
         {
             int materialsQuantity = 0;
-            if (ChildGroups.Count != 0)
-                foreach (var childGroup in ChildGroups)
-                    materialsQuantity += childGroup.GetMaterialsQuantity();
-            else if (Materials.Count != 0)
+            if (ChildGroups != null && ChildGroups?.Count != 0)
+            {
+                    foreach (var childGroup in ChildGroups)
+                        materialsQuantity += childGroup.GetMaterialsQuantity();
+            }
+            else if (Materials != null && Materials.Count != 0)
                 foreach (var material in Materials)
                     materialsQuantity += material.Quantity;
 

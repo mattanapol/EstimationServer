@@ -30,7 +30,7 @@ namespace Estimation.Common.AutoMapper
                 cfg.AddProfile<ProjectInfoProfile>();
                 cfg.AddProfile<ProjectMaterialProfile>();
                 cfg.AddProfile<ProjectSummaryProfile>();
-                cfg.AddProfile<ProjectMaterialProfile>();
+                cfg.AddProfile<SubMaterialProfile>();
             });
             //config.AssertConfigurationIsValid();
             IMapper mapper = config.CreateMapper();

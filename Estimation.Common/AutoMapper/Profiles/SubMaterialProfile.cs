@@ -8,7 +8,7 @@ namespace Estimation.Common.AutoMapper.Profiles
     /// <summary>
     /// Sub material profile class
     /// </summary>
-    /// <seealso cref="AutoMapper.Profile" />
+    /// <seealso cref="Profile" />
     public class SubMaterialProfile: Profile
     {
         /// <summary>
