@@ -77,6 +77,14 @@ namespace Estimation.Domain.Models
         public decimal TotalNetCost => TotalNetPrice + Installation + TotalAccessory + TotalFitting + TotalPainting + TotalSupport;
 
         /// <summary>
+        /// Gets the total offer price and installation.
+        /// </summary>
+        /// <value>
+        /// The total offer price and installation.
+        /// </value>
+        public decimal TotalOfferPriceAndInstallation => TotalOfferPrice + Installation;
+
+        /// <summary>
         /// Gets or sets the total manpower.
         /// </summary>
         /// <value>
@@ -128,7 +136,10 @@ namespace Estimation.Domain.Models
                 },
                 {
                     "TOTALMANPOWER", TotalManpower.ToString("N")
-                }
+                },
+                {
+                    "TotalOfferPriceAndInstallation", TotalOfferPriceAndInstallation.ToString("N")
+                },
             };
 
             var result = baseDataDict.Combine(dataDict);

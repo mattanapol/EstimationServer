@@ -39,7 +39,7 @@
             }
 
             .content-table tr {
-                border-top: 1px solid black;
+                border-top: 1px solid lightgray;
             }
 
                 .content-table tr + tr {
@@ -84,6 +84,27 @@
                 .content-table th:last-child {
                     border-right: 1px solid black;
                 }
+
+        .content-table thead tr:first-child {
+            border-top: 1px solid black;
+        }
+
+        .content-table thead tr:last-child {
+            border-bottom: 1px solid black;
+        }
+
+        .content-table .grand-total-row {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        .content-table .section-row {
+            border-bottom: 1px solid gray;
+        }
+
+        .content-table .subtotal {
+            border-bottom: 1px solid gray;
+        }
 
         .header {
             text-align: center;
@@ -144,6 +165,17 @@
                 </tr>
             </thead>
             <tbody>
+            <tbody class="material-type-group-summary template">
+                <tr class="material-type-group-summary contents">
+                    <td class="text-align-center"></td>
+                    <td class="text-align-left">##MaterialType## Work</td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-center"></td>
+                    <td class="text-align-right"></td>
+                    <td class="text-align-left"></td>
+                </tr>
             <tbody class="group-summary template">
                 <tr class="group-summary contents">
                     <td class="text-align-center">##GROUPCODE##</td>
@@ -156,16 +188,16 @@
                     <td class="text-align-left">##REMARKS##</td>
                 </tr>
             <tbody class="sub-group-summary template">
-            <tr class="sub-group-summary contents">
-                <td class="text-align-center"></td>
-                <td class="text-align-left">##GROUPCODE##)##GROUPNAME##</td>
-                <td class="text-align-center">1</td>
-                <td class="text-align-center">LOT</td>
-                <td class="text-align-right">##TotalMaterialCost##</td>
-                <td class="text-align-right">##INSTALLATION##</td>
-                <td class="text-align-right">##GRANDTOTAL##</td>
-                <td class="text-align-left">##REMARKS##</td>
-            </tr>
+                <tr class="sub-group-summary contents">
+                    <td class="text-align-center"></td>
+                    <td class="text-align-left">##GROUPCODE##)##GROUPNAME##</td>
+                    <td class="text-align-center">1</td>
+                    <td class="text-align-center">LOT</td>
+                    <td class="text-align-right">##TotalMaterialCost##</td>
+                    <td class="text-align-right">##INSTALLATION##</td>
+                    <td class="text-align-right">##GRANDTOTAL##</td>
+                    <td class="text-align-left">##REMARKS##</td>
+                </tr>
             </tbody>
             <tr class="group-summary contents hide-if-has-no-child">
                 <td class="text-align-center"></td>
@@ -178,6 +210,15 @@
                 <td class="text-align-left"></td>
             </tr>
             </tbody>
+            <tr class="material-type-group-summary contents">
+                <td class="text-align-center"></td>
+                <td class="text-align-right"></td>
+                <td class="text-align-center subtotal" colspan="2">Total of ##MaterialType## Work</td>
+                <td class="text-align-right subtotal">##TotalMaterialCost##</td>
+                <td class="text-align-right subtotal">##INSTALLATION##</td>
+                <td class="text-align-right subtotal">##GRANDTOTAL##</td>
+                <td class="text-align-left"></td>
+            </tr>
             <tr>
                 <td class="text-align-center">&nbsp;</td>
                 <td class="text-align-left"></td>
@@ -188,7 +229,8 @@
                 <td class="text-align-left"></td>
                 <td class="text-align-left"></td>
             </tr>
-            <tr class="project-summary contents">
+            </tbody>
+            <tr class="project-summary contents grand-total-row">
                 <td class="text-align-center">##GROUPCODE##</td>
                 <td class="text-align-left">##GROUPNAME##</td>
                 <td class="text-align-center" colspan="2">GRAND TOTAL</td>
