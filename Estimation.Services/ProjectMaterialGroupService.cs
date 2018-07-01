@@ -58,7 +58,7 @@ namespace Estimation.Services
         public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order)
         {
             var originalProjectMaterialGroup = await GetProjectMaterialGroup(id);
-            if (originalProjectMaterialGroup.Order != order)
+            if (originalProjectMaterialGroup.Order != order || order == 0)
             {
                 ProjectMaterialGroup projectMaterialGroup = await _projectMaterialGroupRepository.UpdateProjectMaterialGroupOrder(id, order, (order + 1).ToString());
                 if (originalProjectMaterialGroup.ChildGroups != null)
