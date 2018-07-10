@@ -33,6 +33,29 @@ namespace Estimation.Services
             var html = new HtmlDocument();
             html.LoadHtml(htmlTemplate);
             var root = html.DocumentNode;
+
+            HtmlParser.ParseHtmlNodeByClass(root, mainMaterials);
+
+            // ------Get Pdf from html
+            PdfGeneratorInputContent pdfContents = new PdfGeneratorInputContent()
+            {
+                Html = { html.DocumentNode.OuterHtml },
+                Portrait = printOrder.IsPortrait,
+                PaperKind = printOrder.Paper
+            };
+            var result = await _pdfGeneratorService.GetPdfFromHtmlAsync(pdfContents);
+            return result;
+        }
+
+        public async Task<byte[]> GetMaterialListAsPdf_Old(PrintOrderRequest printOrder)
+        {
+            var mainMaterials = await _materialRepository.GetMaterialListWithFullInfo("");
+            // Load form path from config
+            var htmlTemplate = File.ReadAllText(FormPath);
+
+            var html = new HtmlDocument();
+            html.LoadHtml(htmlTemplate);
+            var root = html.DocumentNode;
             // -----Processing Content in table
             var rowTemplate = root.Descendants()
                                   .First(n => n.GetAttributeValue("class", "").Equals("row-content"));
@@ -57,7 +80,7 @@ namespace Estimation.Services
                 }
             }
 
-            
+
             // ------Get Pdf from html
             PdfGeneratorInputContent pdfContents = new PdfGeneratorInputContent()
             {

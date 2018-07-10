@@ -23,12 +23,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Interface", "Est
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.HtmlToPdf", "Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj", "{345C5EFE-08ED-4A66-97C2-56E53C20E339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.HtmlToPdf.Test", "Kaewsai.HtmlToPdf.Test\Kaewsai.HtmlToPdf.Test.csproj", "{177BCAF2-498F-41E3-B735-5185A700B5AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.HtmlToPdf.Test", "Kaewsai.HtmlToPdf.Test\Kaewsai.HtmlToPdf.Test.csproj", "{177BCAF2-498F-41E3-B735-5185A700B5AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C9AFDC9D-98FC-424C-BD3D-537251432F68}"
 	ProjectSection(SolutionItems) = preProject
 		Libraries\libwkhtmltox.dll = Libraries\libwkhtmltox.dll
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{8E5B0292-14BA-4D4C-BDB6-874373C6E29F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationTool", "Tools\MigrationTool\MigrationTool.csproj", "{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,9 +84,16 @@ Global
 		{177BCAF2-498F-41E3-B735-5185A700B5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{177BCAF2-498F-41E3-B735-5185A700B5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{177BCAF2-498F-41E3-B735-5185A700B5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354} = {8E5B0292-14BA-4D4C-BDB6-874373C6E29F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E0F3AA9-705A-4DAE-9B3A-07E721170CBD}

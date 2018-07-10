@@ -9,19 +9,22 @@
 
         tr { page-break-inside: avoid; }
 
-        body { font-family: AngsanaUPC, MS Sans Serif; }
+        body {
+            font-family: Times New Roman, MS Sans Serif;
+        }
 
         .content-table th {
             text-align: center;
             padding: 4pt 0pt 4pt 0pt;
-            font-size: 14pt;
+            font-size: 13pt;
             font-weight: bold;
         }
 
         .content-table td {
-            font-size: 13pt;
+            font-size: 12pt;
             padding: 3pt 5pt 3pt 5pt;
             word-wrap: break-word;
+            text-transform: uppercase;
         }
 
         .content-table {
@@ -74,24 +77,55 @@
 </div>
 <table class="content-table">
     <thead>
-    <tr class="row-header">
-        <th>Code</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Unit</th>
-        <th>List Price</th>
-        <th>Net Price</th>
-        <th>Offer Price</th>
-        <th>Manpower</th>
-        <th>Fittings</th>
-        <th>Accessory</th>
-        <th>Supporting</th>
-        <th>Painting</th>
-        <th>Remark</th>
-    </tr>
+        <tr class="row-header">
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>List Price</th>
+            <th>Net Price</th>
+            <th>Offer Price</th>
+            <th>Manpower</th>
+            <th>Fittings</th>
+            <th>Accessory</th>
+            <th>Supporting</th>
+            <th>Painting</th>
+            <th>Remark</th>
+        </tr>
     </thead>
-    <tbody>
-    <tr class="row-content">
+    <tbody class="main-material template">
+        <tr class="main-material contents">
+            <td class="text-align-center">##CODE##</td>
+            <td class="text-align-left">##NAME##</td>
+            <td class="text-align-left">##DESCRIPTION##</td>
+            <td class="text-align-center">##UNIT##</td>
+            <td class="text-align-center">##LISTPRICE##</td>
+            <td class="text-align-center">##NETPRICE##</td>
+            <td class="text-align-center">##OFFERPRICE##</td>
+            <td class="text-align-center">##MANPOWER##</td>
+            <td class="text-align-center">##FITTINGS##</td>
+            <td class="text-align-center">##ACCESSORY##</td>
+            <td class="text-align-center">##SUPPORTING##</td>
+            <td class="text-align-center">##PAINTING##</td>
+            <td class="text-align-left">##REMARK##</td>
+        </tr>
+    <tbody class="sub-material template">
+    <tr class="sub-material contents">
+        <td class="text-align-center">##CODE##</td>
+        <td class="text-align-left">##NAME##</td>
+        <td class="text-align-left">##DESCRIPTION##</td>
+        <td class="text-align-center">##UNIT##</td>
+        <td class="text-align-center">##LISTPRICE##</td>
+        <td class="text-align-center">##NETPRICE##</td>
+        <td class="text-align-center">##OFFERPRICE##</td>
+        <td class="text-align-center">##MANPOWER##</td>
+        <td class="text-align-center">##FITTINGS##</td>
+        <td class="text-align-center">##ACCESSORY##</td>
+        <td class="text-align-center">##SUPPORTING##</td>
+        <td class="text-align-center">##PAINTING##</td>
+        <td class="text-align-left">##REMARK##</td>
+    </tr>
+    <tr class="material template contents">
         <td class="text-align-center">##CODE##</td>
         <td class="text-align-left">##NAME##</td>
         <td class="text-align-left">##DESCRIPTION##</td>
@@ -107,10 +141,11 @@
         <td class="text-align-left">##REMARK##</td>
     </tr>
     </tbody>
+    </tbody>
     <tfoot>
-    <tr>
-        <td colspan="13"></td>
-    </tr>
+        <tr>
+            <td colspan="13"></td>
+        </tr>
     </tfoot>
 </table>
 </body>
