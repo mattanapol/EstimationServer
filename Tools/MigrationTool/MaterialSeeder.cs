@@ -60,7 +60,7 @@ namespace MigrationTool
                 try
                 {
                     //Console.WriteLine(JsonConvert.SerializeObject(material, Formatting.Indented));
-                    if (string.IsNullOrWhiteSpace(material.Name) && string.IsNullOrWhiteSpace(material.Description))
+                    if (!material.IsValid())
                         continue;
                     
                     await CreateMaterial(subMaterialId, JsonConvert.SerializeObject(material, Formatting.Indented));

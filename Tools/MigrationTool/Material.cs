@@ -106,5 +106,13 @@ namespace MigrationTool
             material.Code = Int16.Parse(codes[2]);
             return material;
         }
+
+        public bool IsValid()
+        {
+            if (string.IsNullOrWhiteSpace(Name) && string.IsNullOrWhiteSpace(Description))
+                return false;
+
+            return true;
+        }
     }
 }

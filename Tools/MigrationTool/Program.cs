@@ -21,26 +21,26 @@ namespace MigrationTool
             try
             {
                 string baseUrl = "http://localhost:8989/";
-                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, "Electric");
-                var mainMaterials = await mainMaterialSeeder.Seed(@"C:\Estimate2\ELECTRIC.MAT");
-                MaterialSeeder materialSeeder = new MaterialSeeder(baseUrl);
+                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, "Computer");
+                var mainMaterials = await mainMaterialSeeder.Seed(@"C:\Estimate2\COMPUTER.MAT");
+                //MaterialSeeder materialSeeder = new MaterialSeeder(baseUrl);
 
-                foreach (var mainMaterialDto in mainMaterials)
-                {
-                    Console.WriteLine(JsonConvert.SerializeObject(mainMaterialDto.MainMaterialIncommingDto, Formatting.Indented));
-                    foreach (var subMaterialDto in mainMaterialDto.SubMaterialDtos)
-                    {
-                        await materialSeeder.Seed(@"C:\Estimate2\MATERIAL\ELECTRIC", subMaterialDto.DbFileName, subMaterialDto.SubMaterialId);
-                    }
+                //foreach (var mainMaterialDto in mainMaterials)
+                //{
+                //    Console.WriteLine(JsonConvert.SerializeObject(mainMaterialDto.MainMaterialIncommingDto, Formatting.Indented));
+                //    foreach (var subMaterialDto in mainMaterialDto.SubMaterialDtos)
+                //    {
+                //        await materialSeeder.Seed(@"C:\Estimate2\MATERIAL\COMPUTER", subMaterialDto.DbFileName, subMaterialDto.SubMaterialId);
+                //    }
 
-                }
+                //}
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-
+            Console.WriteLine("Finish!! Press any key to exit...");
             Console.ReadKey();
         }
 

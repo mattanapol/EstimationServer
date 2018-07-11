@@ -122,14 +122,16 @@ namespace Estimation.DataAccess.Repositories
                     MaterialType = m.MaterialType,
                     CodeAsString = m.Code.ToString(),
                     Class = m.Class,
-                    SubMaterials = m.SubMaterials.Select(s => new SubMaterial
+                    SubMaterials = m.SubMaterials.OrderBy(e => e.Code)
+                        .Select(s => new SubMaterial
                     {
                         Id = s.Id,
                         Code = s.Code,
                         Name = s.Name,
                         MaterialType = s.MaterialType,
                         CodeAsString = $"{m.Code.ToString()}-{s.Code:D2}",
-                        Materials = s.Materials.Select(c => new Material()
+                        Materials = s.Materials.OrderBy(e => e.Code)
+                            .Select(c => new Material()
                         {
                             Id = c.Id,
                             Code = c.Code,
