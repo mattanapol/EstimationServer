@@ -21,8 +21,8 @@ namespace MigrationTool
             try
             {
                 string baseUrl = "http://localhost:8989/";
-                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, "Computer");
-                var mainMaterials = await mainMaterialSeeder.Seed(@"C:\Estimate2\COMPUTER.MAT");
+                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, "Mechanic");
+                var mainMaterials = await mainMaterialSeeder.Seed(@"C:\Estimate2\MECHANIC.MAT");
                 //MaterialSeeder materialSeeder = new MaterialSeeder(baseUrl);
 
                 //foreach (var mainMaterialDto in mainMaterials)

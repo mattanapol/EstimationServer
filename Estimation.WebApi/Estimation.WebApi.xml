@@ -21,6 +21,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.AppDatabaseController.Seed">
+            <summary>
+            Migrate material database
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.ConfigurationController">
             <summary>
             Configuration controller class

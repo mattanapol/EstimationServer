@@ -30,12 +30,24 @@ namespace Estimation.WebApi.Controllers
         /// Migrate material database
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("migrate")]
         public async Task<IActionResult> Migrate()
         {
             await _materialDbMigrationService.Migrate();
 
             return Ok(OutgoingResult<string>.SuccessResponse("Migrate application database complete."));
+        }
+
+        /// <summary>
+        /// Migrate material database
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("seed")]
+        public async Task<IActionResult> Seed()
+        {
+            await _materialDbMigrationService.Seed();
+
+            return Ok(OutgoingResult<string>.SuccessResponse("Seed application database complete."));
         }
     }
 }
