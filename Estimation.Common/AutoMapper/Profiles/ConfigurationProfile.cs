@@ -18,8 +18,9 @@ namespace Estimation.Common.AutoMapper.Profiles
         /// </summary>
         public ConfigurationProfile()
         {
-            CreateMap<ConfigurationDict, ConfigurationDictDto>();
-            CreateMap<ConfigurationDictDto, ConfigurationDict>();
+            CreateMap<ConfigurationDict, ConfigurationDictDto>().ReverseMap();
+
+            CreateMap<ConfigurationEntryDto, ConfigurationEntry>().ReverseMap();
         }
     }
 }
