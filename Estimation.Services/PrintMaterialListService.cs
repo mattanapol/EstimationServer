@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,9 +25,34 @@ namespace Estimation.Services
             _pdfGeneratorService = pdfGeneratorService ?? throw new ArgumentNullException(nameof(pdfGeneratorService));
         }
 
-        public async Task<byte[]> GetMaterialListAsPdf(PrintOrderRequest printOrder)
+        public async Task<byte[]> GetMaterialListAsPdf(MaterialListPrintRequest printOrder)
         {
-            var mainMaterials = await _materialRepository.GetMaterialListWithFullInfo("");
+            var mainMaterialTypeGroup = new List<MainMaterialType>();
+            if (printOrder.MaterialTypes == null || !printOrder.MaterialTypes.Any())
+            {
+                IList<MainMaterial> mainMaterials = (await _materialRepository.GetMaterialListWithFullInfo(null)).ToList();
+                mainMaterialTypeGroup = mainMaterials.GroupBy(m => m.MaterialType,
+                    m => m,
+                    (type,
+                        materials) => new MainMaterialType
+                {
+                    MaterialType = type,
+                    MainMaterials = materials.ToList()
+                }).ToList();
+            }
+            else
+            {
+                foreach (var materialType in printOrder.MaterialTypes)
+                {
+                    var mainMaterialType = new MainMaterialType
+                    {
+                        MaterialType = materialType,
+                        MainMaterials = (await _materialRepository.GetMaterialListWithFullInfo(materialType)).ToList()
+                    };
+                    mainMaterialTypeGroup.Add(mainMaterialType);
+                }
+            }
+            
             // Load form path from config
             var htmlTemplate = File.ReadAllText(FormPath);
 
@@ -34,7 +60,7 @@ namespace Estimation.Services
             html.LoadHtml(htmlTemplate);
             var root = html.DocumentNode;
 
-            HtmlParser.ParseHtmlNodeByClass(root, mainMaterials);
+            HtmlParser.ParseHtmlNodeByClass(root, mainMaterialTypeGroup);
 
             // ------Get Pdf from html
             PdfGeneratorInputContent pdfContents = new PdfGeneratorInputContent()

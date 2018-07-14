@@ -91,7 +91,7 @@ namespace Estimation.WebApi.Controllers
         /// <param name="printOrderRequest">Print request object</param>
         /// <returns></returns>
         [HttpPost("material")]
-        public async Task<IActionResult> ExportMaterial([FromBody]PrintOrderRequest printOrderRequest)
+        public async Task<IActionResult> ExportMaterial([FromBody]MaterialListPrintRequest printOrderRequest)
         {
             byte[] result = await _printMaterialListService.GetMaterialListAsPdf(printOrderRequest);
             var streamResult = File(result, "application/pdf", "MaterialList.pdf");

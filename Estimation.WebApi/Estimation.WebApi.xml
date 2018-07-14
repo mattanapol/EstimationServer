@@ -113,7 +113,7 @@
             <param name="id">Project Id</param>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportMaterial(Estimation.Domain.Models.PrintOrderRequest)">
+        <member name="M:Estimation.WebApi.Controllers.ExportController.ExportMaterial(Estimation.Domain.Models.MaterialListPrintRequest)">
             <summary>
             Export material list to PDF
             </summary>

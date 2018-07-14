@@ -6,6 +6,6 @@ namespace Estimation.Services
 {
     public interface IPrintMaterialListService
     {
-        Task<byte[]> GetMaterialListAsPdf(PrintOrderRequest printOrder);
+        Task<byte[]> GetMaterialListAsPdf(MaterialListPrintRequest printOrder);
     }
 }
