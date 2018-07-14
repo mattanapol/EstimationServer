@@ -73,15 +73,23 @@
         .page-break-after {
             page-break-after: always;
         }
+
+            .page-break-after:last-child {
+                page-break-after: auto;
+            }
+
+        .upper-case {
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
+<div class="header upper-case">
     <p>Material Datasheet</p>
 </div>
 <div class="material-type-group template page-break-after">
-    <div class="header material-type-group contents">
+    <div class="header upper-case material-type-group contents">
         <p>##MaterialType## System</p>
     </div>
     <table class="content-table">
