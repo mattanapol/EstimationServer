@@ -29,10 +29,13 @@ namespace MigrationTool
         /// Seeds the specified main database file.
         /// </summary>
         /// <param name="mainDbFile">The main database file.</param>
-        public async Task<List<MainMaterialDto>> Seed(string mainDbFile)
+        /// <param name="take">The take.</param>
+        /// <param name="skip">The skip.</param>
+        /// <returns></returns>
+        public async Task<List<MainMaterialDto>> Seed(string mainDbFile, int take, int skip)
         {
             List<MainMaterialDto> mainMaterials = new List<MainMaterialDto>();
-            var dbf = DbfReaderUtil.OpenTable(mainDbFile);
+            var dbf = DbfReaderUtil.OpenTable(mainDbFile).Skip(skip).Take(take);
             foreach (var row in dbf)
             {
                 try

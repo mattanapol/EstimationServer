@@ -18,22 +18,40 @@ namespace MigrationTool
 
         static async Task Main(string[] args)
         {
+            string baseUrl = "http://localhost:8989/";
+
+            // Electric
+            //const int mainLimit = int.MaxValue;
+            //string materialType = "Electric";
+            //string mainMaterialFilePath = @"C:\Estimate2\ELECTRIC.MAT";
+            //string materialFolderPath = @"C:\Estimate2\MATERIAL\ELECTRIC";
+
+            // Mechanic
+            //const int mainLimit = 7;
+            //string materialType = "Mechanic";
+            //string mainMaterialFilePath = @"C:\Estimate2\MECHANIC.MAT";
+            //string materialFolderPath = @"C:\Estimate2\MATERIAL\MECHANIC";
+
+            // Computer
+            const int mainLimit = 35;
+            string materialType = "Computer";
+            string mainMaterialFilePath = @"C:\Estimate2\COMPUTER.MAT";
+            string materialFolderPath = @"C:\Estimate2\MATERIAL\COMPUTER";
+
             try
             {
-                string baseUrl = "http://localhost:8989/";
-                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, "Mechanic");
-                var mainMaterials = await mainMaterialSeeder.Seed(@"C:\Estimate2\MECHANIC.MAT");
-                //MaterialSeeder materialSeeder = new MaterialSeeder(baseUrl);
+                MainMaterialSeeder mainMaterialSeeder = new MainMaterialSeeder(baseUrl, materialType);
+                var mainMaterials = await mainMaterialSeeder.Seed(mainMaterialFilePath, mainLimit, 0);
+                MaterialSeeder materialSeeder = new MaterialSeeder(baseUrl);
 
-                //foreach (var mainMaterialDto in mainMaterials)
-                //{
-                //    Console.WriteLine(JsonConvert.SerializeObject(mainMaterialDto.MainMaterialIncommingDto, Formatting.Indented));
-                //    foreach (var subMaterialDto in mainMaterialDto.SubMaterialDtos)
-                //    {
-                //        await materialSeeder.Seed(@"C:\Estimate2\MATERIAL\COMPUTER", subMaterialDto.DbFileName, subMaterialDto.SubMaterialId);
-                //    }
-
-                //}
+                foreach (var mainMaterialDto in mainMaterials)
+                {
+                    Console.WriteLine(JsonConvert.SerializeObject(mainMaterialDto.MainMaterialIncommingDto, Formatting.Indented));
+                    foreach (var subMaterialDto in mainMaterialDto.SubMaterialDtos)
+                    {
+                        await materialSeeder.Seed(materialFolderPath, subMaterialDto.DbFileName, subMaterialDto.SubMaterialId);
+                    }
+                }
             }
             catch (Exception e)
             {
