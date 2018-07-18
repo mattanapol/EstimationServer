@@ -21,5 +21,30 @@
         /// Gets or sets a value indicating whether [data sheet report].
         /// </summary>
         public bool DataSheetReport { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the export file.
+        /// </summary>
+        /// <value>
+        /// The type of the export file.
+        /// </value>
+        public ExportFileType ExportFileType { get; set; }
+
+        /// <summary>
+        /// Gets the export file extension.
+        /// </summary>
+        /// <returns></returns>
+        public string GetExportFileExtension()
+        {
+            switch (ExportFileType)
+            {
+                case ExportFileType.Pdf:
+                    return "pdf";
+                case ExportFileType.Excel:
+                    return "xlsx";
+                default:
+                    return "";
+            }
+        }
     }
 }

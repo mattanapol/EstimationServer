@@ -19,33 +19,25 @@ namespace Estimation.WebApi.Controllers
     [Route("api/export")]
     public class ExportController : EstimationBaseController
     {
-        private readonly IExportService _exportService;
         private readonly IPrintMaterialListService _printMaterialListService;
-        private readonly IPrintProjectDatasheetService _printProjectDatasheetService;
-        private readonly IPrintProjectSummaryReportService _printProjectSummaryReportService;
-        private readonly IPrintProjectDescriptionReportService _printProjectDescriptionReportService;
+        private readonly IExportProjectService _exportProjectService;
+        private readonly IProjectService _projectService;
 
         /// <summary>
         /// Export controller constructor
         /// </summary>
         /// <param name="typeMappingService"></param>
-        /// <param name="exportService"></param>
         /// <param name="printMaterialListService"></param>
-        /// <param name="printProjectDatasheetService"></param>
-        /// <param name="printProjectSummaryReportService"></param>
-        /// <param name="printProjectDescriptionReportService"></param>
+        /// <param name="exportProjectService"></param>
+        /// <param name="projectService"></param>
         public ExportController(ITypeMappingService typeMappingService,
-            IExportService exportService,
             IPrintMaterialListService printMaterialListService,
-            IPrintProjectDatasheetService printProjectDatasheetService,
-            IPrintProjectSummaryReportService printProjectSummaryReportService,
-            IPrintProjectDescriptionReportService printProjectDescriptionReportService) : base(typeMappingService)
+            IExportProjectService exportProjectService,
+            IProjectService projectService) : base(typeMappingService)
         {
-            _exportService = exportService ?? throw new ArgumentNullException(nameof(exportService));
             _printMaterialListService = printMaterialListService ?? throw new ArgumentNullException(nameof(printMaterialListService));
-            _printProjectDatasheetService = printProjectDatasheetService ?? throw new ArgumentNullException(nameof(printProjectDatasheetService));
-            _printProjectSummaryReportService = printProjectSummaryReportService ?? throw new ArgumentNullException(nameof(printProjectSummaryReportService));
-            _printProjectDescriptionReportService = printProjectDescriptionReportService ?? throw new ArgumentNullException(nameof(printProjectDescriptionReportService));
+            _exportProjectService = exportProjectService ?? throw new ArgumentNullException(nameof(exportProjectService));
+            _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
         }
 
         /// <summary>
@@ -57,32 +49,14 @@ namespace Estimation.WebApi.Controllers
         [HttpPost("project/{id}")]
         public async Task<IActionResult> ExportProject(int id,[FromBody]ProjectExportRequest projectExportRequest)
         {
-            var htmls = new List<string>();
-
-            if (projectExportRequest.DataSheetReport)
+            var exportedFile = await _exportProjectService.ExportProjectEstimation(id, projectExportRequest);
+            if (exportedFile == null)
+                return NoContent();
+            else
             {
-                byte[] dataSheetResult = await _printProjectDatasheetService.GetProjectDatasheetAsPdf(id, projectExportRequest);
-                var dataSheetStreamResult = File(dataSheetResult, "application/pdf", "ProjectDataSheet.pdf");
+                var dataSheetStreamResult = File(exportedFile, GetContentTypeFromExportRequest(projectExportRequest), await GetProjectExportedFileName(id, projectExportRequest));
                 return dataSheetStreamResult;
             }
-
-            if (projectExportRequest.SummaryReport)
-            {
-                htmls.Add(await _printProjectSummaryReportService.GetProjectSummaryAsHtml(id, projectExportRequest));
-            }
-            if (projectExportRequest.DescriptionReport)
-            {
-                htmls.Add(await _printProjectDescriptionReportService.GetProjectDescriptionAsHtml(id, projectExportRequest));
-            }
-
-            if (htmls.Any())
-            {
-                byte[] result = await _exportService.ExportProjectToPdf(htmls, projectExportRequest);
-                var streamResult = File(result, "application/pdf", "ProjectEstimation.pdf");
-                return streamResult;
-            }
-            else
-                return NoContent();
         }
 
         /// <summary>
@@ -96,6 +70,34 @@ namespace Estimation.WebApi.Controllers
             byte[] result = await _printMaterialListService.GetMaterialListAsPdf(printOrderRequest);
             var streamResult = File(result, "application/pdf", "MaterialList.pdf");
             return streamResult;
+        }
+
+        private async Task<string> GetProjectExportedFileName(int projectId, ProjectExportRequest projectExportRequest)
+        {
+            var projectInfo = await _projectService.GetProject(projectId);
+            string projectName = projectInfo.Name;
+            string extension = projectExportRequest.GetExportFileExtension();
+
+            if (projectExportRequest.DataSheetReport)
+                return $"{projectName}_ProjectDataSheet.{extension}";
+            
+            if (projectExportRequest.SummaryReport || projectExportRequest.DescriptionReport)
+                return $"{projectName}_ProjectEstimation.{extension}";
+
+            return projectName;
+        }
+
+        private string GetContentTypeFromExportRequest(ProjectExportRequest projectExportRequest)
+        {
+            switch (projectExportRequest.ExportFileType)
+            {
+                case ExportFileType.Pdf:
+                    return "application/pdf";
+                case ExportFileType.Excel:
+                    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                default:
+                    return "";
+            }
         }
     }
 }

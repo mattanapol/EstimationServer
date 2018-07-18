@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Estimation.Interface
 {
-    public interface IExportService
+    public interface IPdfService
     {
         /// <summary>
         /// Export project to pdf file

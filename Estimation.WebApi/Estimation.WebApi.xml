@@ -94,16 +94,14 @@
             Export controller class
             </summary>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ExportController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Interface.IExportService,Estimation.Services.IPrintMaterialListService,Estimation.Interface.IPrintProjectDatasheetService,Estimation.Interface.IPrintProjectSummaryReportService,Estimation.Interface.IPrintProjectDescriptionReportService)">
+        <member name="M:Estimation.WebApi.Controllers.ExportController.#ctor(Estimation.Interface.ITypeMappingService,Estimation.Services.IPrintMaterialListService,Estimation.Interface.IExportProjectService,Estimation.Interface.IProjectService)">
             <summary>
             Export controller constructor
             </summary>
             <param name="typeMappingService"></param>
-            <param name="exportService"></param>
             <param name="printMaterialListService"></param>
-            <param name="printProjectDatasheetService"></param>
-            <param name="printProjectSummaryReportService"></param>
-            <param name="printProjectDescriptionReportService"></param>
+            <param name="exportProjectService"></param>
+            <param name="projectService"></param>
         </member>
         <member name="M:Estimation.WebApi.Controllers.ExportController.ExportProject(System.Int32,Estimation.Domain.Models.ProjectExportRequest)">
             <summary>

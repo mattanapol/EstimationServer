@@ -9,11 +9,11 @@ using Kaewsai.HtmlToPdf.Interface;
 
 namespace Estimation.Services
 {
-    public class ExportService : IExportService
+    public class PdfService : IPdfService
     {
         private readonly IPdfGeneratorService _pdfGeneratorService;
 
-        public ExportService(IPdfGeneratorService pdfGeneratorService)
+        public PdfService(IPdfGeneratorService pdfGeneratorService)
         {
             _pdfGeneratorService = pdfGeneratorService ?? throw new ArgumentNullException(nameof(pdfGeneratorService));
         }

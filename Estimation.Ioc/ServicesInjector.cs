@@ -28,8 +28,9 @@ namespace Estimation.Ioc
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IProjectSummaryService, SummaryService>();
             services.AddScoped<IMaterialService, MaterialService>();
-            services.AddScoped<IExportService, ExportService>();
+            services.AddScoped<IPdfService, PdfService>();
             services.AddScoped<IGroupSortingService, GroupSortingService>();
+            services.AddScoped<IExportProjectService, ExportProjectService>();
         }
 
         private static void InjectConfigurationServices(IServiceCollection services)

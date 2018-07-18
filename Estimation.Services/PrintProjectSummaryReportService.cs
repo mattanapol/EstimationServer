@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Estimation.Domain.Models;
+using Estimation.Excel;
 using Estimation.Interface;
 using Estimation.Services.Helpers;
 using HtmlAgilityPack;
+using Kaewsai.Excel;
 using Kaewsai.HtmlToPdf.Domain;
 using Kaewsai.HtmlToPdf.Interface;
 
@@ -24,6 +24,24 @@ namespace Estimation.Services
         {
             _pdfGeneratorService = pdfGeneratorService ?? throw new ArgumentNullException(nameof(pdfGeneratorService));
             _projectSummaryService = projectSummaryService ?? throw new ArgumentNullException(nameof(projectSummaryService));
+        }
+
+        /// <inheritdoc />
+        public async Task<byte[]> GetProjectSummaryAsExcel(int projectId, ProjectExportRequest printOrder)
+        {
+            var projectDetails = await _projectSummaryService.GetProjectSummary(projectId);
+            switch (printOrder.SubmitForm)
+            {
+                case SubmitForm.SubmitForm:
+                    return SummaryOfEstimationSubmitForm.ExportToExcel(projectDetails);
+                case SubmitForm.MaterialAndLabourCostForm:
+                    return SummaryOfEstimationDetailForm.ExportToExcel(projectDetails);
+                case SubmitForm.NetForm:
+                    return SummaryOfEstimationNetForm.ExportToExcel(projectDetails);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
         }
         
         /// <inheritdoc />

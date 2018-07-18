@@ -11,7 +11,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Estimation.Domain\Estimation.Domain.csproj" />
+    <ProjectReference Include="..\Estimation.Excel\Estimation.Excel.csproj" />
     <ProjectReference Include="..\Estimation.Interface\Estimation.Interface.csproj" />
+    <ProjectReference Include="..\Kaewsai.Excel\Kaewsai.Excel.csproj" />
     <ProjectReference Include="..\Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj" />
     <ProjectReference Include="..\Kaewsai.Utilities.Configurations\Kaewsai.Utilities.Configurations.csproj" />
   </ItemGroup>

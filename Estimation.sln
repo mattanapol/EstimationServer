@@ -32,7 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{8E5B0292-14BA-4D4C-BDB6-874373C6E29F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationTool", "Tools\MigrationTool\MigrationTool.csproj", "{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationTool", "Tools\MigrationTool\MigrationTool.csproj", "{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.Excel", "Kaewsai.Excel\Kaewsai.Excel.csproj", "{05E0DC21-3592-45D7-B24E-32D4EC8A0225}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Excel", "Estimation.Excel\Estimation.Excel.csproj", "{069563DF-2D56-42EF-B7DC-2902C3232C32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +92,14 @@ Global
 		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E0DC21-3592-45D7-B24E-32D4EC8A0225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E0DC21-3592-45D7-B24E-32D4EC8A0225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E0DC21-3592-45D7-B24E-32D4EC8A0225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E0DC21-3592-45D7-B24E-32D4EC8A0225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
