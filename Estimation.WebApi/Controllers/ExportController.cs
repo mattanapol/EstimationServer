@@ -54,7 +54,9 @@ namespace Estimation.WebApi.Controllers
                 return NoContent();
             else
             {
-                var dataSheetStreamResult = File(exportedFile, GetContentTypeFromExportRequest(projectExportRequest), await GetProjectExportedFileName(id, projectExportRequest));
+                string exportedFileName = await GetProjectExportedFileName(id, projectExportRequest);
+                string contentType = GetContentTypeFromExportRequest(projectExportRequest);
+                var dataSheetStreamResult = File(exportedFile, contentType, exportedFileName);
                 return dataSheetStreamResult;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
@@ -97,6 +98,26 @@ namespace Estimation.Excel
 
         public static void RemoveAndShiftUp(this ISheet workSheet, IRow row)
         {
+            // Clear merge area
+            for (int i = 0; i < workSheet.NumMergedRegions; i++)
+            {
+                CellRangeAddress cellRangeAddress = workSheet.GetMergedRegion(i);
+                if (cellRangeAddress != null && cellRangeAddress.FirstRow == row.RowNum)
+                {
+                    workSheet.RemoveMergedRegion(i);
+                }
+            }
+            // Move page break up
+            if (workSheet.RowBreaks != null)
+            {
+                var movingRowBreaks = workSheet.RowBreaks.Where(rowBreak => rowBreak >= row.RowNum).ToList();
+                foreach (var movingRowBreak in movingRowBreaks)
+                {
+                    workSheet.RemoveRowBreak(movingRowBreak);
+                    workSheet.SetRowBreak(movingRowBreak - 1);
+                }
+            }
+
             workSheet.RemoveRow(row);
             workSheet.ShiftRows(row.RowNum + 1, workSheet.LastRowNum, -1, true, false);
         }

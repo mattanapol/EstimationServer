@@ -20,5 +20,13 @@ namespace Estimation.Interface
         /// <param name="printOrder"></param>
         /// <returns></returns>
         Task<string> GetProjectDescriptionAsHtml(int projectId, ProjectExportRequest printOrder);
+
+        /// <summary>
+        /// Gets the project description as excel.
+        /// </summary>
+        /// <param name="projectId">The project identifier.</param>
+        /// <param name="printOrder">The print order.</param>
+        /// <returns></returns>
+        Task<byte[]> GetProjectDescriptionAsExcel(int projectId, ProjectExportRequest printOrder);
     }
 }

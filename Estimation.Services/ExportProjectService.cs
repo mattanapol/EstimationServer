@@ -53,7 +53,14 @@ namespace Estimation.Services
             }
             else if (printOrder.ExportFileType == ExportFileType.Excel)
             {
-                return await _printProjectSummaryReportService.GetProjectSummaryAsExcel(projectId, printOrder);
+                if (printOrder.DataSheetReport)
+                    return null;
+
+                if (printOrder.SummaryReport)
+                    return await _printProjectSummaryReportService.GetProjectSummaryAsExcel(projectId, printOrder);
+
+                if (printOrder.DescriptionReport)
+                    return await _printProjectDescriptionReportService.GetProjectDescriptionAsExcel(projectId, printOrder);
             }
 
             return null;
