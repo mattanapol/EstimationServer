@@ -54,10 +54,10 @@ namespace Estimation.DataAccess.Repositories
             projectInfo.Transportation = project.Transportation;
             var materialGroupDb = TypeMappingService.Map<ProjectMaterialGroup, MaterialGroupDb>(projectInfo);
             materialGroupDb.ProjectId = projectId;
-            DbContext.MaterialGroup.Add(materialGroupDb);
+            var entity = DbContext.MaterialGroup.Add(materialGroupDb);
 
             await DbContext.SaveChangesAsync();
-
+            
             return TypeMappingService.Map<MaterialGroupDb, ProjectMaterialGroup>(materialGroupDb);
         }
 
@@ -96,9 +96,13 @@ namespace Estimation.DataAccess.Repositories
         /// <returns></returns>
         public async Task<ProjectMaterialGroup> UpdateProjectMaterialGroupOrder(int id, int order, string groupCode)
         {
-            var projectMaterialGroupDb = await DbContext.MaterialGroup
-                .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.Id == id);
+            var projectMaterialGroupDb = DbContext.MaterialGroup
+                                             .Local
+                                             .FirstOrDefault(e => e.Id == id) ?? 
+                                         await DbContext.MaterialGroup
+                                             .AsNoTracking()
+                                             .FirstOrDefaultAsync(e => e.Id == id);
+
             if (projectMaterialGroupDb == null)
                 throw new ArgumentOutOfRangeException(nameof(id), $"Project group id = { id } does not exist.");
 

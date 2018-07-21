@@ -50,7 +50,7 @@ namespace Estimation.Services
                 {
                     foreach(var material in sub.Materials)
                     {
-                        var materialWithTags = new SearchResultMaterialDto { Id = material.Id, Name = material.Name };
+                        var materialWithTags = new SearchResultMaterialDto { Id = material.Id, Name = $"{material.Name} - {material.Description}", Description = material.Description };
                         materialWithTags.AddTag(material.Name);
                         materialWithTags.AddTag(material.Description);
                         materialWithTags.AddTag(material.CodeAsString);

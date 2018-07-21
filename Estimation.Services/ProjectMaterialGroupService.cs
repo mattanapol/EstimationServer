@@ -36,7 +36,33 @@ namespace Estimation.Services
         /// <returns></returns>
         public async Task<ProjectMaterialGroup> CreateProjectMaterialGroup(int projectId, ProjectMaterialGroup projectInfo)
         {
-            return await _projectMaterialGroupRepository.CreateProjectMaterialGroup(projectId, projectInfo);
+            var result = await _projectMaterialGroupRepository.CreateProjectMaterialGroup(projectId, projectInfo);
+            int maxOrder = 0;
+            if (result.ParentGroupId.GetValueOrDefault(0) > 0)
+            {
+                var parentGroup = await GetProjectMaterialGroup(result.ParentGroupId.GetValueOrDefault(0));
+                if (parentGroup.ChildGroups.Count() == 1)
+                    return await UpdateProjectMaterialSubGroupOrder(result.Id, parentGroup.Order, 0);
+                else
+                {
+                    maxOrder = parentGroup.ChildGroups.Max(m => m.Order);
+                    return await UpdateProjectMaterialSubGroupOrder(result.Id, parentGroup.Order, maxOrder + 1);
+                }
+            }
+            else
+            {
+                var materialGroups = await GetAllProjectMaterial(projectId);
+                if (materialGroups.Count() == 1)
+                    return await UpdateProjectMaterialGroupOrder(result.Id, 0);
+                else
+                {
+                    maxOrder = materialGroups.Max(m => m.Order);
+                    return await UpdateProjectMaterialGroupOrder(result.Id, maxOrder + 1);
+                }
+
+                
+            }
+            
         }
 
         /// <summary>
@@ -110,11 +136,14 @@ namespace Estimation.Services
             }).ToList();
             Collection<ProjectMaterialGroup> results = new Collection<ProjectMaterialGroup>(projectMaterialGroups
                 .Where(e => e.ParentGroupId.GetValueOrDefault(0) == 0)
+                .OrderBy(e => e.Order)
                 .ToList());
             projectMaterialGroups = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) > 0);
             for(int i = 0; i<results.Count; i++)
             {
-                var projectMaterialGroupChild = projectMaterialGroups.Where(e => e.ParentGroupId.GetValueOrDefault(0) == results[i].Id);
+                var projectMaterialGroupChild = projectMaterialGroups
+                    .Where(e => e.ParentGroupId.GetValueOrDefault(0) == results[i].Id)
+                    .OrderBy(e => e.Order);
                 results[i].ChildGroups = new Collection<ProjectMaterialGroup>(projectMaterialGroupChild.ToList());
                 results[i] = CalculateMaterialFields(results[i], projectInfo);
             }
