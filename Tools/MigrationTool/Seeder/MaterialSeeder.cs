@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using DbfReader;
 using Newtonsoft.Json;
 
-namespace MigrationTool
+namespace MigrationTool.Seeder
 {
     public class MaterialSeeder
     {

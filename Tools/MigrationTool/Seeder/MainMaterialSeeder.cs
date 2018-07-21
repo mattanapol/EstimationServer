@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DbfReader;
 using Newtonsoft.Json;
+using MigrationTool.Dto;
 
-namespace MigrationTool
+namespace MigrationTool.Seeder
 {
     public class MainMaterialSeeder
     {

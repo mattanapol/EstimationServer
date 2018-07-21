@@ -1,4 +1,4 @@
-﻿namespace MigrationTool
+﻿namespace MigrationTool.DbModel
 {
     public enum MaterialClass
     {

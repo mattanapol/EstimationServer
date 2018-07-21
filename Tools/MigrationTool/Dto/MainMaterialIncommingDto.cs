@@ -1,6 +1,7 @@
 ﻿using System;
+using MigrationTool.DbModel;
 
-namespace MigrationTool
+namespace MigrationTool.Dto
 {
     /// <summary>
     /// Main material incomming dto

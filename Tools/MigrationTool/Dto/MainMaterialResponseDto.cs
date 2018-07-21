@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MigrationTool
+﻿namespace MigrationTool.Dto
 {
     public class MainMaterialResponseDto
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MigrationTool
+namespace MigrationTool.Dto
 {
     public class SubMaterialIncommingDto
     {

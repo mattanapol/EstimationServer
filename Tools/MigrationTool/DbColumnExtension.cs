@@ -13,5 +13,12 @@ namespace MigrationTool
                 ? 0
                 : column.GetDecimal();
         }
+
+        public static int ForceInt(this IDbfColumn column)
+        {
+            return string.IsNullOrWhiteSpace(column.ForceString())
+                ? 0
+                : column.GetInt();
+        }
     }
 }

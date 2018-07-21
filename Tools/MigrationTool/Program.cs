@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define project
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DbfReader;
+using MigrationTool.Seeder;
 using Newtonsoft.Json;
 
 namespace MigrationTool
@@ -20,6 +22,7 @@ namespace MigrationTool
         {
             string baseUrl = "http://localhost:8989/";
 
+#if material
             // Electric
             //const int mainLimit = int.MaxValue;
             //string materialType = "Electric";
@@ -58,6 +61,20 @@ namespace MigrationTool
                 Console.WriteLine(e);
                 throw;
             }
+#endif
+#if project
+            string projectFilePath = @"C:\Estimate2\DATA\ELECTRIC\SAMPLE.DBF";
+            try
+            {
+                ProjectSeeder projectSeeder = new ProjectSeeder(baseUrl);
+                var mainMaterials = await projectSeeder.Seed(projectFilePath, 1, "Electric");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+#endif
             Console.WriteLine("Finish!! Press any key to exit...");
             Console.ReadKey();
         }
