@@ -105,7 +105,7 @@ namespace Estimation.Domain.Models
         /// <inheritdoc />
         public override string TargetClass => ProjectMaterialGroupInfo == null
             ? "group-summary"
-            : ProjectMaterialGroupInfo.ParentGroupId == 0
+            : ProjectMaterialGroupInfo.ParentGroupId.GetValueOrDefault(0) == 0
                 ? "group-summary"
                 : "sub-group-summary";
 

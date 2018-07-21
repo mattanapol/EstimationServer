@@ -16,6 +16,11 @@
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Material tags
         /// </summary>
         public string Tags { get; private set; }

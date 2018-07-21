@@ -34,6 +34,7 @@ namespace Estimation.Common.AutoMapper.Profiles
                 .ForMember(dest => dest.Miscellaneous, opts => opts.MapFrom(src => new Cost() { Percentage = src.MiscellaneousPercentage, Manual = src.MiscellaneousManual, IsUsePercentage = src.MiscellaneousIsUsePercentage }))
                 .ForMember(dest => dest.Transportation, opts => opts.MapFrom(src => new Cost() { Percentage = src.TransportationPercentage, Manual = src.TransportationManual, IsUsePercentage = src.TransportationIsUsePercentage }));
 
+            CreateMap<ProjectMaterialGroup, ProjectMaterialGroupOutgoingDto>().ReverseMap();
         }
     }
 }

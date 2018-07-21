@@ -54,7 +54,8 @@ namespace Estimation.WebApi.Controllers
         public async Task<IActionResult> GetProject(int id)
         {
             var result = await _projectService.GetProject(id);
-            return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(result));
+            var projectInfo = TypeMappingService.Map<ProjectInfo, ProjectInfoOutgoingDto>(result);
+            return Ok(OutgoingResult<ProjectInfoOutgoingDto>.SuccessResponse(projectInfo));
         }
 
         /// <summary>
@@ -91,6 +92,22 @@ namespace Estimation.WebApi.Controllers
         {
             await _projectRepository.DeleteProjectInfo(id);
             return Ok(OutgoingResult<string>.SuccessResponse("Deleted"));
+        }
+
+        /// <summary>
+        /// Create duplicate project.
+        /// </summary>
+        [HttpPost("{id}/duplicate")]
+        public async Task<IActionResult> DuplicateProject()
+        {
+            ProjectInfo projectInfo = new ProjectInfo()
+            {
+                Id = 10000,
+                Name = "Duplicated Project Name",
+                CreatedDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now
+            };
+            return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(projectInfo));
         }
     }
 }

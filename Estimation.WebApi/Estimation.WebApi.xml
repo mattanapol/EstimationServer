@@ -344,6 +344,11 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="M:Estimation.WebApi.Controllers.ProjectsController.DuplicateProject">
+            <summary>
+            Create duplicate project.
+            </summary>
+        </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectSummaryController">
             <summary>
             Project summary controller
