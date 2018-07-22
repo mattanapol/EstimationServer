@@ -53,6 +53,7 @@ namespace Estimation.DataAccess.Repositories
             projectInfo.Miscellaneous = project.Miscellaneous;
             projectInfo.Transportation = project.Transportation;
             var materialGroupDb = TypeMappingService.Map<ProjectMaterialGroup, MaterialGroupDb>(projectInfo);
+            materialGroupDb.Id = 0;
             materialGroupDb.ProjectId = projectId;
             var entity = DbContext.MaterialGroup.Add(materialGroupDb);
 

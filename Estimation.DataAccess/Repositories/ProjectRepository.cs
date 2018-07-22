@@ -37,6 +37,7 @@ namespace Estimation.DataAccess.Repositories
         {
             // Add main material record
             var projectDb = TypeMappingService.Map<ProjectInfo, ProjectInfoDb>(projectInfo);
+            projectDb.Id = 0;
 
             DbContext.ProjectInfo.Add(projectDb);
 

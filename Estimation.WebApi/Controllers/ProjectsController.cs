@@ -97,16 +97,10 @@ namespace Estimation.WebApi.Controllers
         /// <summary>
         /// Create duplicate project.
         /// </summary>
-        [HttpPost("{id}/duplicate")]
-        public async Task<IActionResult> DuplicateProject()
+        [HttpPost("{projectId}/duplicate")]
+        public async Task<IActionResult> DuplicateProject(int projectId)
         {
-            ProjectInfo projectInfo = new ProjectInfo()
-            {
-                Id = 10000,
-                Name = "Duplicated Project Name",
-                CreatedDate = DateTime.Now,
-                LastModifiedDate = DateTime.Now
-            };
+            ProjectInfo projectInfo = await _projectService.Clone(projectId);
             return Ok(OutgoingResult<ProjectInfo>.SuccessResponse(projectInfo));
         }
     }

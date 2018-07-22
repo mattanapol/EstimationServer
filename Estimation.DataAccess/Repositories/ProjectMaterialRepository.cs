@@ -37,6 +37,7 @@ namespace Estimation.DataAccess.Repositories
                 throw new ArgumentOutOfRangeException($"Project material group id = {materialGroupId} is not exist.");
             
             var projectMaterialDb = TypeMappingService.Map<ProjectMaterial, ProjectMaterialDb>(material);
+            projectMaterialDb.Id = 0;
             projectMaterialDb.MaterialGroupId = projectMaterialGroup.Id;
             projectMaterialDb.MaterialType = projectMaterialGroup.MaterialType;
             DbContext.Material.Add(projectMaterialDb);
