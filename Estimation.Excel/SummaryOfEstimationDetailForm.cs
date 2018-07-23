@@ -13,13 +13,14 @@ namespace Estimation.Excel
 {
     public class SummaryOfEstimationDetailForm
     {
-        private static readonly string _excelFormPath = @"Forms/SummaryOfEstimation_DetailForm.xlsx";
+        protected virtual string ExcelFormPath => @"Forms/SummaryOfEstimation_DetailForm.xlsx";
+        protected virtual int TemplateRowNumber => 10;
 
-        public static byte[] ExportToExcel(ProjectSummary projectSummary)
+        public byte[] ExportToExcel(ProjectSummary projectSummary)
         {
             byte[] excelBytes;
 
-            using (var originalFileStream = new FileStream(_excelFormPath, FileMode.Open, FileAccess.Read))
+            using (var originalFileStream = new FileStream(ExcelFormPath, FileMode.Open, FileAccess.Read))
             {
                 IWorkbook originalWorkbook = new XSSFWorkbook(originalFileStream);
                 var summarySheet = originalWorkbook.GetSheetAt(0);
@@ -53,7 +54,7 @@ namespace Estimation.Excel
             return excelBytes;
         }
 
-        private static void ParseProjectSummary(ProjectSummary projectSummary, IRow projectNameRow,
+        private void ParseProjectSummary(ProjectSummary projectSummary, IRow projectNameRow,
             IRow grandTotalRow)
         {
             var projectDataDictionary = projectSummary.GetDataDictionary();
@@ -66,7 +67,7 @@ namespace Estimation.Excel
             grandTotalRow.GetCell(6).ParseData(projectDataDictionary);
         }
 
-        private static void ParseContentsBody(ProjectSummary projectSummary, IRow materialTypeTemplateRow,
+        private void ParseContentsBody(ProjectSummary projectSummary, IRow materialTypeTemplateRow,
             IWorkbook originalWorkbook, ISheet summarySheet, IRow mainMaterialTemplateRow, IRow subMaterialTemplateRow,
             IRow subTotalTemplateRow, IRow sumMaterialTypeTemplateRow, IRow blankTemplateRow)
         {
@@ -75,13 +76,13 @@ namespace Estimation.Excel
             foreach (var materialTypeGroup in materialTypeGroups)
             {
                 var materialTypeDataDict = materialTypeGroup.GetDataDictionary();
-                var materialTypeRow = materialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
+                var materialTypeRow = materialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
                 materialTypeRow.GetCell(1).ParseData(materialTypeDataDict);
 
                 rowCount = ParseMainMaterial(originalWorkbook, summarySheet, mainMaterialTemplateRow, subMaterialTemplateRow, subTotalTemplateRow, materialTypeGroup, rowCount);
 
-                var sumMaterialTypeRow = sumMaterialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
-                var blankRow = blankTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
+                var sumMaterialTypeRow = sumMaterialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
+                var blankRow = blankTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
                 
                 sumMaterialTypeRow.GetCell(2).ParseData(materialTypeDataDict);
                 sumMaterialTypeRow.GetCell(4).ParseData(materialTypeDataDict);
@@ -92,14 +93,14 @@ namespace Estimation.Excel
             }
         }
 
-        private static int ParseMainMaterial(IWorkbook originalWorkbook, ISheet summarySheet, IRow mainMaterialTemplateRow,
+        private int ParseMainMaterial(IWorkbook originalWorkbook, ISheet summarySheet, IRow mainMaterialTemplateRow,
             IRow subMaterialTemplateRow, IRow subTotalTemplateRow, IPrintable materialTypeGroup, int rowCount)
         {
             var mainMaterials = materialTypeGroup.Child;
             foreach (var mainMaterial in mainMaterials)
             {
                 var mainMaterialDataDict = mainMaterial.GetDataDictionary();
-                var contentMainMaterialRow = mainMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
+                var contentMainMaterialRow = mainMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
                 contentMainMaterialRow.GetCell(0).ParseData(mainMaterialDataDict);
                 contentMainMaterialRow.GetCell(1).ParseData(mainMaterialDataDict);
                 contentMainMaterialRow.GetCell(4).ParseData(mainMaterialDataDict);
@@ -112,7 +113,7 @@ namespace Estimation.Excel
 
                 rowCount = ParseSubMaterial(originalWorkbook, summarySheet, subMaterialTemplateRow, rowCount, mainMaterial);
 
-                var contentSubTotalRow = subTotalTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
+                var contentSubTotalRow = subTotalTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
 
                 contentSubTotalRow.GetCell(4).ParseData(mainMaterialDataDict);
                 contentSubTotalRow.GetCell(5).ParseData(mainMaterialDataDict);
@@ -124,13 +125,13 @@ namespace Estimation.Excel
             return rowCount;
         }
 
-        private static int ParseSubMaterial(IWorkbook originalWorkbook, ISheet summarySheet, IRow subMaterialTemplateRow,
+        private int ParseSubMaterial(IWorkbook originalWorkbook, ISheet summarySheet, IRow subMaterialTemplateRow,
             int rowCount, IPrintable mainMaterial)
         {
             foreach (var subMaterial in mainMaterial.Child)
             {
                 var subMaterialDataDict = subMaterial.GetDataDictionary();
-                var contentSubMaterialRow = subMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, 10 + rowCount++);
+                var contentSubMaterialRow = subMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
 
                 contentSubMaterialRow.GetCell(1).ParseData(subMaterialDataDict);
                 contentSubMaterialRow.GetCell(4).ParseData(subMaterialDataDict);

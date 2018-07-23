@@ -19,29 +19,21 @@ namespace Estimation.Services
         private const string NetFormPath = "Forms/SummaryOfEstimation_NetForm.html";
         private readonly IPdfGeneratorService _pdfGeneratorService;
         private readonly IProjectSummaryService _projectSummaryService;
+        private readonly SummaryOfEstimationForm _summaryOfEstimationForm;
 
         public PrintProjectSummaryReportService(IPdfGeneratorService pdfGeneratorService, IProjectSummaryService projectSummaryService)
         {
             _pdfGeneratorService = pdfGeneratorService ?? throw new ArgumentNullException(nameof(pdfGeneratorService));
             _projectSummaryService = projectSummaryService ?? throw new ArgumentNullException(nameof(projectSummaryService));
+            _summaryOfEstimationForm = new SummaryOfEstimationForm();
         }
 
         /// <inheritdoc />
         public async Task<byte[]> GetProjectSummaryAsExcel(int projectId, ProjectExportRequest printOrder)
         {
             var projectDetails = await _projectSummaryService.GetProjectSummary(projectId);
-            switch (printOrder.SubmitForm)
-            {
-                case SubmitForm.SubmitForm:
-                    return SummaryOfEstimationSubmitForm.ExportToExcel(projectDetails);
-                case SubmitForm.MaterialAndLabourCostForm:
-                    return SummaryOfEstimationDetailForm.ExportToExcel(projectDetails);
-                case SubmitForm.NetForm:
-                    return SummaryOfEstimationNetForm.ExportToExcel(projectDetails);
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
+            var excelFileAsByteArray = _summaryOfEstimationForm.ExportToExcel(projectDetails, printOrder);
+            return excelFileAsByteArray;
         }
         
         /// <inheritdoc />
