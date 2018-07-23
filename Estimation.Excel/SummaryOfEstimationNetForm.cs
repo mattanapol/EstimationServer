@@ -13,43 +13,27 @@ namespace Estimation.Excel
 {
     public class SummaryOfEstimationNetForm
     {
-        protected virtual string ExcelFormPath => @"Forms/SummaryOfEstimation_NetForm.xlsx";
         protected virtual int TemplateRowNumber => 9;
 
-        public byte[] ExportToExcel(ProjectSummary projectSummary)
+        public void ExportToExcel(ProjectSummary projectSummary, IWorkbook templateWorkbook, ISheet templateSheet)
         {
-            byte[] excelBytes;
+            var projectNameRow = templateSheet.GetRow(1);
+            var materialTypeTemplateRow = templateSheet.GetRow(4);
+            var mainMaterialTemplateRow = templateSheet.GetRow(5);
+            var subMaterialTemplateRow = templateSheet.GetRow(6);
+            var sumMaterialTypeTemplateRow = templateSheet.GetRow(7);
+            var blankTemplateRow = templateSheet.GetRow(8);
+            var grandTotalRow = templateSheet.GetRow(9);
 
-            using (var originalFileStream = new FileStream(ExcelFormPath, FileMode.Open, FileAccess.Read))
-            {
-                IWorkbook originalWorkbook = new XSSFWorkbook(originalFileStream);
-                var summarySheet = originalWorkbook.GetSheetAt(0);
-                var projectNameRow = summarySheet.GetRow(1);
-                var materialTypeTemplateRow = summarySheet.GetRow(4);
-                var mainMaterialTemplateRow = summarySheet.GetRow(5);
-                var subMaterialTemplateRow = summarySheet.GetRow(6);
-                var sumMaterialTypeTemplateRow = summarySheet.GetRow(7);
-                var blankTemplateRow = summarySheet.GetRow(8);
-                var grandTotalRow = summarySheet.GetRow(9);
+            ParseProjectSummary(projectSummary, projectNameRow, grandTotalRow);
 
-                ParseProjectSummary(projectSummary, projectNameRow, grandTotalRow);
+            ParseContentsBody(projectSummary, materialTypeTemplateRow, templateWorkbook, templateSheet, mainMaterialTemplateRow, subMaterialTemplateRow, sumMaterialTypeTemplateRow, blankTemplateRow);
 
-                ParseContentsBody(projectSummary, materialTypeTemplateRow, originalWorkbook, summarySheet, mainMaterialTemplateRow, subMaterialTemplateRow, sumMaterialTypeTemplateRow, blankTemplateRow);
-
-                summarySheet.RemoveAndShiftUp(materialTypeTemplateRow);
-                summarySheet.RemoveAndShiftUp(mainMaterialTemplateRow);
-                summarySheet.RemoveAndShiftUp(subMaterialTemplateRow);
-                summarySheet.RemoveAndShiftUp(sumMaterialTypeTemplateRow);
-                summarySheet.RemoveAndShiftUp(blankTemplateRow);
-
-                using (var newFileStream = new MemoryStream())
-                {
-                    originalWorkbook.Write(newFileStream);
-                    excelBytes = newFileStream.ToArray();
-                }
-            }
-
-            return excelBytes;
+            templateSheet.RemoveAndShiftUp(materialTypeTemplateRow);
+            templateSheet.RemoveAndShiftUp(mainMaterialTemplateRow);
+            templateSheet.RemoveAndShiftUp(subMaterialTemplateRow);
+            templateSheet.RemoveAndShiftUp(sumMaterialTypeTemplateRow);
+            templateSheet.RemoveAndShiftUp(blankTemplateRow);
         }
 
         private void ParseProjectSummary(ProjectSummary projectSummary, IRow projectNameRow,

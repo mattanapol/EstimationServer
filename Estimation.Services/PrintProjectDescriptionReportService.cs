@@ -21,13 +21,11 @@ namespace Estimation.Services
         private const string NetFormPath = "Forms/DescriptionOfEstimation_NetForm.html";
         private readonly IPdfGeneratorService _pdfGeneratorService;
         private readonly IProjectSummaryService _projectSummaryService;
-        private readonly DescriptionOfEstimationForm _descriptionOfEstimationForm;
 
         public PrintProjectDescriptionReportService(IProjectSummaryService projectSummaryService, IPdfGeneratorService pdfGeneratorService)
         {
             _projectSummaryService = projectSummaryService ?? throw new ArgumentNullException(nameof(projectSummaryService));
             _pdfGeneratorService = pdfGeneratorService ?? throw new ArgumentNullException(nameof(pdfGeneratorService));
-            _descriptionOfEstimationForm = new DescriptionOfEstimationForm();
         }
 
         public async Task<byte[]> GetProjectDescriptionAsPdf(int projectId, ProjectExportRequest printOrder)
@@ -71,13 +69,6 @@ namespace Estimation.Services
             HtmlParser.ParseHtmlNodeByClass(root, projectDetails);
 
             return html.DocumentNode.OuterHtml;
-        }
-
-        public async Task<byte[]> GetProjectDescriptionAsExcel(int projectId, ProjectExportRequest printOrder)
-        {
-            var projectDetails = await _projectSummaryService.GetProjectSummary(projectId);
-            var excelFileAsByteArray = _descriptionOfEstimationForm.ExportToExcel(projectDetails, printOrder);
-            return excelFileAsByteArray;
         }
     }
 }

@@ -58,6 +58,15 @@
     <None Update="Forms\DescriptionOfEstimation_SubmitForm.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Forms\Estimation_DetailForm.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Forms\Estimation_NetForm.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Forms\Estimation_SubmitForm.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Forms\MaterialList.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -13,7 +13,6 @@ namespace Estimation.Excel
 {
     public class SummaryOfEstimationSubmitForm: SummaryOfEstimationNetForm
     {
-        protected override string ExcelFormPath => @"Forms/SummaryOfEstimation_SubmitForm.xlsx";
         protected override int TemplateRowNumber => 9;
     }
 }

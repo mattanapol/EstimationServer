@@ -16,20 +16,23 @@ namespace Estimation.Services
         private readonly IPrintProjectDatasheetService _printProjectDatasheetService;
         private readonly IPrintProjectSummaryReportService _printProjectSummaryReportService;
         private readonly IPrintProjectDescriptionReportService _printProjectDescriptionReportService;
+        private readonly IProjectSummaryService _projectSummaryService;
 
         public ExportProjectService(IPdfService exportService, 
             IPrintProjectDatasheetService printProjectDatasheetService,
             IPrintProjectSummaryReportService printProjectSummaryReportService,
-            IPrintProjectDescriptionReportService printProjectDescriptionReportService)
+            IPrintProjectDescriptionReportService printProjectDescriptionReportService, IProjectSummaryService projectSummaryService)
         {
             _exportService = exportService ?? throw new ArgumentNullException(nameof(exportService));
             _printProjectDatasheetService = printProjectDatasheetService ?? throw new ArgumentNullException(nameof(printProjectDatasheetService));
             _printProjectSummaryReportService = printProjectSummaryReportService ?? throw new ArgumentNullException(nameof(printProjectSummaryReportService));
             _printProjectDescriptionReportService = printProjectDescriptionReportService ?? throw new ArgumentNullException(nameof(printProjectDescriptionReportService));
+            _projectSummaryService = projectSummaryService ?? throw new ArgumentNullException(nameof(projectSummaryService));
         }
 
         public async Task<byte[]> ExportProjectEstimation(int projectId, ProjectExportRequest printOrder)
         {
+            var projectSummary = await _projectSummaryService.GetProjectSummary(projectId);
             if (printOrder.ExportFileType == ExportFileType.Pdf)
             {
                 if (printOrder.DataSheetReport)
@@ -54,19 +57,21 @@ namespace Estimation.Services
             }
             else if (printOrder.ExportFileType == ExportFileType.Excel)
             {
-                var workBooks = new List<byte[]>();
-
-                if (printOrder.DataSheetReport)
-                    return null;
-
-                if (printOrder.SummaryReport)
-                    workBooks.Add(await _printProjectSummaryReportService.GetProjectSummaryAsExcel(projectId, printOrder));
-
-                if (printOrder.DescriptionReport)
-                    workBooks.Add(await _printProjectDescriptionReportService.GetProjectDescriptionAsExcel(projectId, printOrder));
-
-                if (workBooks.Any())
-                    return SheetMerger.Merge(workBooks);
+                switch (printOrder.SubmitForm)
+                {
+                    case SubmitForm.SubmitForm:
+                        var estimationSubmitForm = new EstimationSubmitForm();
+                        return estimationSubmitForm.ExportToExcel(projectSummary, printOrder);
+                    case SubmitForm.MaterialAndLabourCostForm:
+                        var estimationDetailForm = new EstimationDetailForm();
+                        return estimationDetailForm.ExportToExcel(projectSummary, printOrder);
+                    case SubmitForm.NetForm:
+                        var estimationNetForm = new EstimationNetForm();
+                        return estimationNetForm.ExportToExcel(projectSummary, printOrder);
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
             }
 
             return null;

@@ -14,132 +14,117 @@ namespace Estimation.Excel
         protected virtual int TemplateRowNumber => 16;
         protected virtual string ExcelFormPath => @"Forms/DescriptionOfEstimation_DetailForm.xlsx";
 
-        public byte[] ExportToExcel(ProjectSummary projectSummary)
+        public void ExportToExcel(ProjectSummary projectSummary, IWorkbook templateWorkbook, ISheet templateSheet)
         {
-            byte[] excelBytes;
+            var projectNameRow = templateSheet.GetRow(1);
+            var materialTypeTemplateRow = templateSheet.GetRow(5);
+            var mainMaterialTemplateRow = templateSheet.GetRow(6);
+            var materialTemplateRow = templateSheet.GetRow(7);
+            var blankTemplateRow2 = templateSheet.GetRow(8);
+            var supportingMaterialTemplateRow = templateSheet.GetRow(9);
+            var paintingTemplateRow = templateSheet.GetRow(10);
+            var miscellaneousTemplateRow = templateSheet.GetRow(11);
+            var transportationTemplateRow = templateSheet.GetRow(12);
+            var sumMainMaterialGroupTemplateRow = templateSheet.GetRow(13);
+            var blankTemplateRow = templateSheet.GetRow(14);
+            var sumMaterialTypeTemplateRow = templateSheet.GetRow(15);
 
-            using (var originalFileStream = new FileStream(ExcelFormPath, FileMode.Open, FileAccess.Read))
+
+            ParseProjectSummary(projectSummary, projectNameRow);
+
+            var materialTypeGroups = projectSummary.Child;
+            int rowCount = 0;
+            foreach (var materialTypeGroup in materialTypeGroups)
             {
-                IWorkbook originalWorkbook = new XSSFWorkbook(originalFileStream);
-                var summarySheet = originalWorkbook.GetSheetAt(0);
-                var projectNameRow = summarySheet.GetRow(1);
-                var materialTypeTemplateRow = summarySheet.GetRow(5);
-                var mainMaterialTemplateRow = summarySheet.GetRow(6);
-                var materialTemplateRow = summarySheet.GetRow(7);
-                var blankTemplateRow2 = summarySheet.GetRow(8);
-                var supportingMaterialTemplateRow = summarySheet.GetRow(9);
-                var paintingTemplateRow = summarySheet.GetRow(10);
-                var miscellaneousTemplateRow = summarySheet.GetRow(11);
-                var transportationTemplateRow = summarySheet.GetRow(12);
-                var sumMainMaterialGroupTemplateRow = summarySheet.GetRow(13);
-                var blankTemplateRow = summarySheet.GetRow(14);
-                var sumMaterialTypeTemplateRow = summarySheet.GetRow(15);
+                var materialTypeDataDict = materialTypeGroup.GetDataDictionary();
 
+                var materialTypeRow = materialTypeTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
+                materialTypeRow.GetCell(0).ParseData(materialTypeDataDict);
 
-                ParseProjectSummary(projectSummary, projectNameRow);
-
-                var materialTypeGroups = projectSummary.Child;
-                int rowCount = 0;
-                foreach (var materialTypeGroup in materialTypeGroups)
+                foreach (var mainMaterial in materialTypeGroup.Child)
                 {
-                    var materialTypeDataDict = materialTypeGroup.GetDataDictionary();
+                    var mainMaterialDataDict = mainMaterial.GetDataDictionary();
+                    var contentMainMaterialRow = mainMaterialTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
+                    contentMainMaterialRow.GetCell(0).ParseData(mainMaterialDataDict);
+                    contentMainMaterialRow.GetCell(9).ParseData(mainMaterialDataDict);
 
-                    var materialTypeRow = materialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
-                    materialTypeRow.GetCell(0).ParseData(materialTypeDataDict);
-
-                    foreach (var mainMaterial in materialTypeGroup.Child)
+                    if (mainMaterial.Child?.FirstOrDefault()?.TargetClass == "sub-group-summary")
                     {
-                        var mainMaterialDataDict = mainMaterial.GetDataDictionary();
-                        var contentMainMaterialRow = mainMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
-                        contentMainMaterialRow.GetCell(0).ParseData(mainMaterialDataDict);
-                        contentMainMaterialRow.GetCell(9).ParseData(mainMaterialDataDict);
-
-                        if (mainMaterial.Child?.FirstOrDefault()?.TargetClass == "sub-group-summary")
+                        foreach (var subMaterial in mainMaterial.Child)
                         {
-                            foreach (var subMaterial in mainMaterial.Child)
+                            var subMaterialDataDict = subMaterial.GetDataDictionary();
+
+                            var contentSubMaterialRow =
+                                mainMaterialTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
+                            contentSubMaterialRow.GetCell(0).ParseData(subMaterialDataDict);
+                            contentSubMaterialRow.GetCell(9).ParseData(subMaterialDataDict);
+
+                            if (subMaterial.Child?.FirstOrDefault()?.TargetClass == "material")
                             {
-                                var subMaterialDataDict = subMaterial.GetDataDictionary();
-
-                                var contentSubMaterialRow =
-                                    mainMaterialTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
-                                contentSubMaterialRow.GetCell(0).ParseData(subMaterialDataDict);
-                                contentSubMaterialRow.GetCell(9).ParseData(subMaterialDataDict);
-
-                                if (subMaterial.Child?.FirstOrDefault()?.TargetClass == "material")
+                                foreach (var material in subMaterial.Child)
                                 {
-                                    foreach (var material in subMaterial.Child)
-                                    {
-                                        var materialDataDict = material.GetDataDictionary();
-                                        var materialRow = materialTemplateRow.CopyRow(originalWorkbook, summarySheet,
-                                            TemplateRowNumber + rowCount++);
-                                        materialRow.Cells.ForEach(c => c.ParseData(materialDataDict));
-                                    }
+                                    var materialDataDict = material.GetDataDictionary();
+                                    var materialRow = materialTemplateRow.CopyRow(templateWorkbook, templateSheet,
+                                        TemplateRowNumber + rowCount++);
+                                    materialRow.Cells.ForEach(c => c.ParseData(materialDataDict));
                                 }
-
-                                rowCount = ParseDetailOfMaterialGroup(supportingMaterialTemplateRow,
-                                    originalWorkbook,
-                                    summarySheet,
-                                    rowCount,
-                                    subMaterialDataDict,
-                                    paintingTemplateRow,
-                                    miscellaneousTemplateRow,
-                                    transportationTemplateRow,
-                                    sumMainMaterialGroupTemplateRow,
-                                    blankTemplateRow);
-                            }
-                        }
-                        else if (mainMaterial.Child?.FirstOrDefault()?.TargetClass == "material")
-                        {
-                            foreach (var material in mainMaterial.Child)
-                            {
-                                var materialDataDict = material.GetDataDictionary();
-                                var materialRow = materialTemplateRow.CopyRow(originalWorkbook, summarySheet,
-                                    TemplateRowNumber + rowCount++);
-                                materialRow.Cells.ForEach(c => c.ParseData(materialDataDict));
                             }
 
                             rowCount = ParseDetailOfMaterialGroup(supportingMaterialTemplateRow,
-                                originalWorkbook,
-                                summarySheet,
+                                templateWorkbook,
+                                templateSheet,
                                 rowCount,
-                                mainMaterialDataDict,
+                                subMaterialDataDict,
                                 paintingTemplateRow,
                                 miscellaneousTemplateRow,
                                 transportationTemplateRow,
                                 sumMainMaterialGroupTemplateRow,
                                 blankTemplateRow);
                         }
-                        //rowCount += ParseSubMaterial(originalWorkbook, summarySheet, mainMaterial, subMaterialRow);
                     }
+                    else if (mainMaterial.Child?.FirstOrDefault()?.TargetClass == "material")
+                    {
+                        foreach (var material in mainMaterial.Child)
+                        {
+                            var materialDataDict = material.GetDataDictionary();
+                            var materialRow = materialTemplateRow.CopyRow(templateWorkbook, templateSheet,
+                                TemplateRowNumber + rowCount++);
+                            materialRow.Cells.ForEach(c => c.ParseData(materialDataDict));
+                        }
 
-                    var sumMaterialTypeRow = sumMaterialTypeTemplateRow.CopyRow(originalWorkbook, summarySheet, TemplateRowNumber + rowCount++);
-                    sumMaterialTypeRow.GetCell(2).ParseData(materialTypeDataDict);
-                    sumMaterialTypeRow.GetCell(7).ParseData(materialTypeDataDict);
-                    sumMaterialTypeRow.GetCell(8).ParseData(materialTypeDataDict);
-                    summarySheet.Autobreaks = false;
-                    summarySheet.SetRowBreak(sumMaterialTypeRow.RowNum);
+                        rowCount = ParseDetailOfMaterialGroup(supportingMaterialTemplateRow,
+                            templateWorkbook,
+                            templateSheet,
+                            rowCount,
+                            mainMaterialDataDict,
+                            paintingTemplateRow,
+                            miscellaneousTemplateRow,
+                            transportationTemplateRow,
+                            sumMainMaterialGroupTemplateRow,
+                            blankTemplateRow);
+                    }
+                    //rowCount += ParseSubMaterial(originalWorkbook, summarySheet, mainMaterial, subMaterialRow);
                 }
 
-                summarySheet.RemoveAndShiftUp(materialTypeTemplateRow);
-                summarySheet.RemoveAndShiftUp(mainMaterialTemplateRow);
-                summarySheet.RemoveAndShiftUp(materialTemplateRow);
-                summarySheet.RemoveAndShiftUp(supportingMaterialTemplateRow);
-                summarySheet.RemoveAndShiftUp(paintingTemplateRow);
-                summarySheet.RemoveAndShiftUp(miscellaneousTemplateRow);
-                summarySheet.RemoveAndShiftUp(transportationTemplateRow);
-                summarySheet.RemoveAndShiftUp(sumMainMaterialGroupTemplateRow);
-                summarySheet.RemoveAndShiftUp(blankTemplateRow);
-                summarySheet.RemoveAndShiftUp(blankTemplateRow2);
-                summarySheet.RemoveAndShiftUp(sumMaterialTypeTemplateRow);
-
-                using (var newFileStream = new MemoryStream())
-                {
-                    originalWorkbook.Write(newFileStream);
-                    excelBytes = newFileStream.ToArray();
-                }
+                var sumMaterialTypeRow = sumMaterialTypeTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
+                sumMaterialTypeRow.GetCell(2).ParseData(materialTypeDataDict);
+                sumMaterialTypeRow.GetCell(7).ParseData(materialTypeDataDict);
+                sumMaterialTypeRow.GetCell(8).ParseData(materialTypeDataDict);
+                templateSheet.Autobreaks = false;
+                templateSheet.SetRowBreak(sumMaterialTypeRow.RowNum);
             }
 
-            return excelBytes;
+            templateSheet.RemoveAndShiftUp(materialTypeTemplateRow);
+            templateSheet.RemoveAndShiftUp(mainMaterialTemplateRow);
+            templateSheet.RemoveAndShiftUp(materialTemplateRow);
+            templateSheet.RemoveAndShiftUp(supportingMaterialTemplateRow);
+            templateSheet.RemoveAndShiftUp(paintingTemplateRow);
+            templateSheet.RemoveAndShiftUp(miscellaneousTemplateRow);
+            templateSheet.RemoveAndShiftUp(transportationTemplateRow);
+            templateSheet.RemoveAndShiftUp(sumMainMaterialGroupTemplateRow);
+            templateSheet.RemoveAndShiftUp(blankTemplateRow);
+            templateSheet.RemoveAndShiftUp(blankTemplateRow2);
+            templateSheet.RemoveAndShiftUp(sumMaterialTypeTemplateRow);
         }
 
         private int ParseDetailOfMaterialGroup(IRow supportingMaterialTemplateRow, IWorkbook originalWorkbook,
