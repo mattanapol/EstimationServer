@@ -26,17 +26,24 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.HtmlToPdf.Test", "Kaewsai.HtmlToPdf.Test\Kaewsai.HtmlToPdf.Test.csproj", "{177BCAF2-498F-41E3-B735-5185A700B5AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C9AFDC9D-98FC-424C-BD3D-537251432F68}"
-	ProjectSection(SolutionItems) = preProject
-		Libraries\libwkhtmltox.dll = Libraries\libwkhtmltox.dll
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{8E5B0292-14BA-4D4C-BDB6-874373C6E29F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationTool", "Tools\MigrationTool\MigrationTool.csproj", "{184B8410-6D3C-4CDD-B2DC-8CA1DF448354}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaewsai.Excel", "Kaewsai.Excel\Kaewsai.Excel.csproj", "{05E0DC21-3592-45D7-B24E-32D4EC8A0225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaewsai.Excel", "Kaewsai.Excel\Kaewsai.Excel.csproj", "{05E0DC21-3592-45D7-B24E-32D4EC8A0225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimation.Excel", "Estimation.Excel\Estimation.Excel.csproj", "{069563DF-2D56-42EF-B7DC-2902C3232C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimation.Excel", "Estimation.Excel\Estimation.Excel.csproj", "{069563DF-2D56-42EF-B7DC-2902C3232C32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x86", "x86", "{9FC0DE61-5F3F-4374-86E4-6A0B5C315B10}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\x86\libwkhtmltox.dll = Libraries\x86\libwkhtmltox.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x64", "x64", "{91872EBD-6328-476D-8532-ED38F901C049}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\x64\libwkhtmltox.dll = Libraries\x64\libwkhtmltox.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +113,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{184B8410-6D3C-4CDD-B2DC-8CA1DF448354} = {8E5B0292-14BA-4D4C-BDB6-874373C6E29F}
+		{9FC0DE61-5F3F-4374-86E4-6A0B5C315B10} = {C9AFDC9D-98FC-424C-BD3D-537251432F68}
+		{91872EBD-6328-476D-8532-ED38F901C049} = {C9AFDC9D-98FC-424C-BD3D-537251432F68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E0F3AA9-705A-4DAE-9B3A-07E721170CBD}

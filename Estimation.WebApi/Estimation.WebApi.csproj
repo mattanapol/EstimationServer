@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Libraries\libwkhtmltox.dll" Link="libwkhtmltox.dll">
+    <None Include="..\Libraries\x64\libwkhtmltox.dll" Link="libwkhtmltox.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

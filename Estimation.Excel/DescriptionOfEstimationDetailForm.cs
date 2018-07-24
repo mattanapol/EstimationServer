@@ -39,13 +39,14 @@ namespace Estimation.Excel
                 var materialTypeDataDict = materialTypeGroup.GetDataDictionary();
 
                 var materialTypeRow = materialTypeTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
-                materialTypeRow.GetCell(0).ParseData(materialTypeDataDict);
+                materialTypeRow.GetCell(1).ParseData(materialTypeDataDict);
 
                 foreach (var mainMaterial in materialTypeGroup.Child)
                 {
                     var mainMaterialDataDict = mainMaterial.GetDataDictionary();
                     var contentMainMaterialRow = mainMaterialTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
                     contentMainMaterialRow.GetCell(0).ParseData(mainMaterialDataDict);
+                    contentMainMaterialRow.GetCell(1).ParseData(mainMaterialDataDict);
                     contentMainMaterialRow.GetCell(9).ParseData(mainMaterialDataDict);
 
                     if (mainMaterial.Child?.FirstOrDefault()?.TargetClass == "sub-group-summary")
@@ -57,6 +58,7 @@ namespace Estimation.Excel
                             var contentSubMaterialRow =
                                 mainMaterialTemplateRow.CopyRow(templateWorkbook, templateSheet, TemplateRowNumber + rowCount++);
                             contentSubMaterialRow.GetCell(0).ParseData(subMaterialDataDict);
+                            contentSubMaterialRow.GetCell(1).ParseData(subMaterialDataDict);
                             contentSubMaterialRow.GetCell(9).ParseData(subMaterialDataDict);
 
                             if (subMaterial.Child?.FirstOrDefault()?.TargetClass == "material")

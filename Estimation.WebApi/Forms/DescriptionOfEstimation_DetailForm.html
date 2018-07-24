@@ -212,7 +212,7 @@
             <table class="content-table">
                 <thead>
                     <tr class="row-header">
-                        <th rowspan="2">Material</th>
+                        <th rowspan="2">Item</th>
                         <th rowspan="2">Description</th>
                         <th rowspan="2">Quantity</th>
                         <th rowspan="2">Unit</th>
@@ -228,8 +228,8 @@
                     <th style="border-right: 1px solid lightgray;">Amount</th>
                 </tr>
                 <tr class="material-type-row material-type-group-summary contents">
-                    <td class="text-align-left">##MaterialType## Work</td>
                     <td></td>
+                    <td class="text-align-left">##MaterialType## Work</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -243,8 +243,8 @@
                 <tbody>
                 <tbody class="group-summary template">
                     <tr class="group-summary contents">
-                        <td class="text-align-left">##GROUPCODE##) ##GROUPNAME##</td>
-                        <td class="text-align-left"></td>
+                        <td class="text-align-center">##GROUPCODE##</td>
+                        <td class="text-align-left">##GROUPNAME##</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-center"></td>
                         <td class="text-align-center"></td>
@@ -255,8 +255,8 @@
                         <td class="text-align-left">##REMARKS##</td>
                     </tr>
                     <tr class="material template contents hide-if-has-child">
-                        <td class="text-align-left">##NAME##</td>
-                        <td class="text-align-left">##DESCRIPTION##</td>
+                        <td class="text-align-left"></td>
+                        <td class="text-align-left">##NAME## - ##DESCRIPTION##</td>
                         <td class="text-align-right">##QUANTITY##</td>
                         <td class="text-align-center">##UNIT##</td>
                         <td class="text-align-right">##OFFERPRICE##</td>
@@ -279,8 +279,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="group-summary contents hide-if-has-child" id="supporting">
-                        <td class="text-align-left">Supporting Materials</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Supporting Materials</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -291,8 +291,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="group-summary contents hide-if-has-child" id="painting">
-                        <td class="text-align-left">Painting</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Painting</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -303,8 +303,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="group-summary contents hide-if-has-child" id="miscellaneous">
-                        <td class="text-align-left">Miscellaneous</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Miscellaneous</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -315,8 +315,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="group-summary contents hide-if-has-child" id="transportation">
-                        <td class="text-align-left">Transportation</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Transportation</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -338,8 +338,8 @@
                     </tr>
                 <tbody class="sub-group-summary template">
                     <tr class="sub-group-summary contents">
-                        <td class="text-align-left">##GROUPCODE##) ##GROUPNAME##</td>
-                        <td class="text-align-left"></td>
+                        <td class="text-align-center">##GROUPCODE##</td>
+                        <td class="text-align-left">##GROUPNAME##</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-center"></td>
                         <td class="text-align-center"></td>
@@ -350,8 +350,8 @@
                         <td class="text-align-left">##REMARKS##</td>
                     </tr>
                     <tr class="material template contents">
-                        <td class="text-align-left">##NAME##</td>
-                        <td class="text-align-left">##DESCRIPTION##</td>
+                        <td class="text-align-left"></td>
+                        <td class="text-align-left">##NAME## - ##DESCRIPTION##</td>
                         <td class="text-align-right">##QUANTITY##</td>
                         <td class="text-align-center">##UNIT##</td>
                         <td class="text-align-right">##OFFERPRICE##</td>
@@ -374,8 +374,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="sub-group-summary contents" id="supporting">
-                        <td class="text-align-left">Supporting Materials</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Supporting Materials</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -386,8 +386,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="sub-group-summary contents" id="painting">
-                        <td class="text-align-left">Painting</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Painting</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -398,8 +398,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="sub-group-summary contents" id="miscellaneous">
-                        <td class="text-align-left">Miscellaneous</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Miscellaneous</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
@@ -410,8 +410,8 @@
                         <td class="text-align-left"></td>
                     </tr>
                     <tr class="sub-group-summary contents" id="transportation">
-                        <td class="text-align-left">Transportation</td>
                         <td class="text-align-left"></td>
+                        <td class="text-align-left">Transportation</td>
                         <td class="text-align-right">1</td>
                         <td class="text-align-center">LOT</td>
                         <td class="text-align-center"></td>
