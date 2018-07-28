@@ -8,7 +8,8 @@
   },
   "devDependencies": {
     "electron": "^2.0.5",
-    "electron-builder": "^20.26.0"
+    "electron-builder": "^20.26.0",
+    "electron-icon-maker": "0.0.4"
   },
   "dependencies": {
     "angular": "^1.6.1"

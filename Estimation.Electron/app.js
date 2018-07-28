@@ -4,6 +4,7 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+const globalShortcut = electron.globalShortcut
 
 const path = require('path');
 const url = require('url');
@@ -11,6 +12,7 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let splashScreen;
 
 function createWindow() {
     // Create the browser window.
@@ -38,15 +40,48 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+    
+    globalShortcut.register('CommandOrControl+R', function () {
+        mainWindow.reload()
+    });
 
     // Start with full screen.
     mainWindow.maximize();
 }
 
+function createSplashScreen() {
+    // Create the browser window.
+    splashScreen = new BrowserWindow({
+        //icon: path.join(__dirname, './/assets//icons/icon.png')
+        autoHideMenuBar: true
+    });
+
+    // and load the index.html of the app.
+    //splashScreen.loadURL(url.format({
+    //    pathname: 'localhost:8989/', //path.join(__dirname, 'index.html'),
+    //    protocol: 'http:',
+    //    slashes: true
+    //}));
+
+    // Open the DevTools.
+    //mainWindow.webContents.openDevTools();
+
+    // Emitted when the window is closed.
+    splashScreen.on('closed', function () {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        splashScreen = null;
+    });
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', startApi);
+app.on('ready', () => {
+    createSplashScreen();
+    startApi();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -87,8 +122,12 @@ function startApi() {
 
     apiProcess.stdout.on('data', (data) => {
         writeLog(`stdout: ${data}`);
+        
         if (mainWindow == null) {
             createWindow();
+        }
+        if (splashScreen != null) {
+            splashScreen.close();
         }
     });
 }
