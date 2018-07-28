@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Estimation.Ioc;
 using Estimation.Services.Logger;
 using Estimation.WebApi.Infrastructure;
+using Kaewsai.Utilities.WebApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -57,8 +58,9 @@ namespace Estimation.WebApi
             services.AddMvc(options => { })
                     .AddJsonOptions(options =>
                     {
-                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                        //options.SerializerSettings.Converters.Add(new StringEnumConverter());
                         options.SerializerSettings.Converters.Add(new KeyValuePairConverter());
+                        options.SerializerSettings.Converters.Add(new TolerantEnumConverter());
                         options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                         options.SerializerSettings.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;
                         options.SerializerSettings.ContractResolver = new DefaultContractResolver

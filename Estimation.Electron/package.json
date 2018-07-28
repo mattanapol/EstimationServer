@@ -7,8 +7,8 @@
     "name": "Mattanapol.K"
   },
   "devDependencies": {
-    "electron": "^1.7.11",
-    "electron-builder": "^19.56.2"
+    "electron": "^2.0.5",
+    "electron-builder": "^20.26.0"
   },
   "dependencies": {
     "angular": "^1.6.1"
