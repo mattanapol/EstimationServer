@@ -1,0 +1,44 @@
+{
+  "name": "Estimation",
+  "version": "0.0.1",
+  "description": "Estimation program",
+  "main": "app.js",
+  "author": {
+    "name": "Mattanapol.K"
+  },
+  "devDependencies": {
+    "electron": "^1.7.11",
+    "electron-builder": "^19.56.2"
+  },
+  "dependencies": {
+    "angular": "^1.6.1"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "Estimation",
+    "directories": {
+      "buildResources": "./assets",
+      "output": "./dist"
+    },
+    "extraResources": {
+      "from": "../Publish/win-x86/",
+      "to": "server/",
+      "filter": [
+        "**/*"
+      ]
+    },
+    "mac": {
+      "category": "Estimation.App",
+      "target": "dmg"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "asar": false
+  }
+}

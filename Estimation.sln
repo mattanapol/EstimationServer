@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x64", "x64", "{91872EBD-632
 		Libraries\x64\libwkhtmltox.dll = Libraries\x64\libwkhtmltox.dll
 	EndProjectSection
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Estimation.Electron", "Estimation.Electron\Estimation.Electron.njsproj", "{02C4F40C-FD84-4B7F-8084-18E43EF09F11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{069563DF-2D56-42EF-B7DC-2902C3232C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C4F40C-FD84-4B7F-8084-18E43EF09F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C4F40C-FD84-4B7F-8084-18E43EF09F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C4F40C-FD84-4B7F-8084-18E43EF09F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C4F40C-FD84-4B7F-8084-18E43EF09F11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
