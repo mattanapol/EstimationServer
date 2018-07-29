@@ -4,7 +4,7 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-const globalShortcut = electron.globalShortcut
+const globalShortcut = electron.globalShortcut;
 
 const path = require('path');
 const url = require('url');
@@ -52,16 +52,15 @@ function createWindow() {
 function createSplashScreen() {
     // Create the browser window.
     splashScreen = new BrowserWindow({
-        //icon: path.join(__dirname, './/assets//icons/icon.png')
         autoHideMenuBar: true
     });
 
     // and load the index.html of the app.
-    //splashScreen.loadURL(url.format({
-    //    pathname: 'localhost:8989/', //path.join(__dirname, 'index.html'),
-    //    protocol: 'http:',
-    //    slashes: true
-    //}));
+    splashScreen.loadURL(url.format({
+        pathname: path.join(__dirname, '..\\server\\wwwroot\\loading.html'),
+        protocol: 'file',
+        slashes: true
+    }));
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
@@ -113,10 +112,6 @@ function startApi() {
         cwd: path.join(__dirname, '..\\server'),
         env: process.env
     };
-    if (os.platform() === 'darwin') {
-        apipath = path.join(__dirname, '..//server//osx//MiniWing');
-        options.cwd = path.join(__dirname, '..//server//osx');
-    }
 
     apiProcess = proc(apipath, [], options);
 

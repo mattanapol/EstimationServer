@@ -105,7 +105,7 @@ namespace Estimation.WebApi
         {
             ConfigureLog(loggerFactory);
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-#if DEBUG || ADMIN || CLOUD
+#if DEBUG || CLOUD
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -143,7 +143,7 @@ namespace Estimation.WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            loggerFactory.AddFile(Path.Combine(CurrentPath, @"Logs/ts-{Date}.txt"));
+            loggerFactory.AddFile(Path.Combine(@"%ProgramData%/Estimation/Logs/ts-{Date}.txt"));
             AppLogger.LoggerFactory = loggerFactory;
         }
 

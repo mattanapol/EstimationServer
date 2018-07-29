@@ -20,7 +20,7 @@ namespace Estimation.Services
         /// Constructor of project service.
         /// </summary>
         public ProjectService(IProjectRepository projectRepository,
-            IProjectMaterialGroupService projectMaterialGroupService, IProjectMaterialRepository projectMaterialRepository, ITypeMappingService typeMappingService)
+            IProjectMaterialGroupService projectMaterialGroupService, IProjectMaterialRepository projectMaterialRepository)
         {
             _projectRepository = projectRepository ?? throw new ArgumentNullException(nameof(projectRepository));
             _projectMaterialGroupService = projectMaterialGroupService ?? throw new ArgumentNullException(nameof(projectMaterialGroupService));
@@ -69,10 +69,16 @@ namespace Estimation.Services
         {
             var originalProject = await GetProject(projectId);
 
+            return await CreateProjectFromProjectInfo(originalProject);
+        }
+
+        public async Task<ProjectInfo> CreateProjectFromProjectInfo(ProjectInfo originalProject)
+        {
             var newProject = await _projectRepository.CreateProjectInfo(originalProject);
             foreach (var originalProjectMaterialGroup in originalProject.MaterialGroups)
             {
-                var newMainProjectMaterialGroup = await _projectMaterialGroupService.CreateProjectMaterialGroup(newProject.Id, originalProjectMaterialGroup);
+                var newMainProjectMaterialGroup =
+                    await _projectMaterialGroupService.CreateProjectMaterialGroup(newProject.Id, originalProjectMaterialGroup);
 
                 if (originalProjectMaterialGroup.ChildGroups != null && originalProjectMaterialGroup.ChildGroups.Count() != 0)
                 {

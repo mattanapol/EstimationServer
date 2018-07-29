@@ -18,5 +18,12 @@ namespace Estimation.Interface
         /// <param name="projectId">The project identifier.</param>
         /// <returns></returns>
         Task<ProjectInfo> Clone(int projectId);
+
+        /// <summary>
+        /// Creates the project from project information.
+        /// </summary>
+        /// <param name="originalProject">The original project.</param>
+        /// <returns></returns>
+        Task<ProjectInfo> CreateProjectFromProjectInfo(ProjectInfo originalProject);
     }
 }
