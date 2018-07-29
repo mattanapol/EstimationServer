@@ -5,6 +5,7 @@ using Estimation.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,7 +38,7 @@ namespace Estimation.DataAccess.Repositories
 
             // Add main material record
             if (material.Code <= 0)
-                material.Code = await GetNextCode();
+                material.Code = await GetNextCode(material.MaterialType);
             var mainMaterialDb = TypeMappingService.Map<MaterialInfo, MainMaterialDb>(material);
             //mainMaterialDb.CodeAsString = mainMaterialDb.Code.ToString();
 
@@ -117,11 +118,11 @@ namespace Estimation.DataAccess.Repositories
         /// Get next main material code
         /// </summary>
         /// <returns></returns>
-        private async Task<int> GetNextCode()
+        private async Task<int> GetNextCode(string materialType)
         {
             var queryable = DbContext.MainMaterials;
             int maxCode = await queryable.AnyAsync() 
-                ? await queryable.MaxAsync(m => m.Code) : 0;
+                ? await queryable.Where(m => m.MaterialType == materialType).MaxAsync(m => m.Code) : 0;
             return maxCode + 1;
         }
     }
