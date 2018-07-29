@@ -120,9 +120,11 @@ namespace Estimation.DataAccess.Repositories
         /// <returns></returns>
         private async Task<int> GetNextCode(string materialType)
         {
-            var queryable = DbContext.MainMaterials;
+            var queryable = DbContext.MainMaterials
+                .AsNoTracking()
+                .Where(m => m.MaterialType == materialType);
             int maxCode = await queryable.AnyAsync() 
-                ? await queryable.Where(m => m.MaterialType == materialType).MaxAsync(m => m.Code) : 0;
+                ? await queryable.MaxAsync(m => m.Code) : 0;
             return maxCode + 1;
         }
     }
