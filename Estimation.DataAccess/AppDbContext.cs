@@ -20,7 +20,7 @@ namespace Estimation.DataAccess
         /// <param name="connectionString">Connection string.</param>
         public AppDbContext(string connectionString) : base()
         {
-            _connectionString = connectionString;
+            _connectionString = Environment.ExpandEnvironmentVariables(connectionString);
         }
 
         /// <summary>

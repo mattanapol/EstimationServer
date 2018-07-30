@@ -35,6 +35,8 @@ namespace Estimation.WebApi
                    .UseKestrel()
 #if DEBUG || CLOUD
                    .UseEnvironment("Development")
+#else
+                   .UseEnvironment("Production")
 #endif
                    .UseContentRoot(Directory.GetCurrentDirectory())
                    .UseUrls("http://*:8989")

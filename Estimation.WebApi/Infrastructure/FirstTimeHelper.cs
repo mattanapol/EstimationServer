@@ -7,6 +7,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Estimation.WebApi.Infrastructure
 {
+    /// <summary>
+    /// First time helper class
+    /// </summary>
     public class FirstTimeHelper
     {
         private readonly IConfiguration _configuration;
@@ -46,9 +49,9 @@ namespace Estimation.WebApi.Infrastructure
         /// </summary>
         public void FirstTimeConfig()
         {
-            string pathToConfigurationDb = _configuration.GetConnectionString("ConfigurationDb").Split('=')[1];
-            string pathToMaterialDb = _configuration.GetConnectionString("MaterialDb").Split('=')[1];
-            string pathToProjectDb = _configuration.GetConnectionString("ProjectDb").Split('=')[1];
+            string pathToConfigurationDb = Environment.ExpandEnvironmentVariables(_configuration.GetConnectionString("ConfigurationDb").Split('=')[1]);
+            string pathToMaterialDb = Environment.ExpandEnvironmentVariables(_configuration.GetConnectionString("MaterialDb").Split('=')[1]);
+            string pathToProjectDb = Environment.ExpandEnvironmentVariables(_configuration.GetConnectionString("ProjectDb").Split('=')[1]);
 
             if (!File.Exists(pathToConfigurationDb))
             {

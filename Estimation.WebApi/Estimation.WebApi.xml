@@ -520,6 +520,11 @@
             <returns>The invoke.</returns>
             <param name="context">Context.</param>
         </member>
+        <member name="T:Estimation.WebApi.Infrastructure.FirstTimeHelper">
+            <summary>
+            First time helper class
+            </summary>
+        </member>
         <member name="P:Estimation.WebApi.Infrastructure.FirstTimeHelper.TemplateConfigurationDbPath">
             <summary>
             Gets the template configuration database path.
