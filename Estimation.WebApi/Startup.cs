@@ -105,6 +105,11 @@ namespace Estimation.WebApi
         {
             ConfigureLog(loggerFactory);
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+            // Perform first time configuration
+            FirstTimeHelper firstTimeHelper = new FirstTimeHelper(Configuration);
+            firstTimeHelper.FirstTimeConfig();
+
 #if DEBUG || CLOUD
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -115,7 +120,7 @@ namespace Estimation.WebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 #endif
-
+            
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
@@ -143,7 +148,12 @@ namespace Estimation.WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+#if DEBUG
+            loggerFactory.AddFile(Path.Combine(@"Logs/ts-{Date}.txt"));
+#else
             loggerFactory.AddFile(Path.Combine(@"%ProgramData%/Estimation/Logs/ts-{Date}.txt"));
+#endif
+
             AppLogger.LoggerFactory = loggerFactory;
         }
 

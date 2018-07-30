@@ -520,6 +520,41 @@
             <returns>The invoke.</returns>
             <param name="context">Context.</param>
         </member>
+        <member name="P:Estimation.WebApi.Infrastructure.FirstTimeHelper.TemplateConfigurationDbPath">
+            <summary>
+            Gets the template configuration database path.
+            </summary>
+            <value>
+            The template configuration database path.
+            </value>
+        </member>
+        <member name="P:Estimation.WebApi.Infrastructure.FirstTimeHelper.TemplateMaterialDbPath">
+            <summary>
+            Gets the template material database path.
+            </summary>
+            <value>
+            The template material database path.
+            </value>
+        </member>
+        <member name="P:Estimation.WebApi.Infrastructure.FirstTimeHelper.TemplateProjectDbPath">
+            <summary>
+            Gets the template project database path.
+            </summary>
+            <value>
+            The template project database path.
+            </value>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.FirstTimeHelper.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Estimation.WebApi.Infrastructure.FirstTimeHelper"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:Estimation.WebApi.Infrastructure.FirstTimeHelper.FirstTimeConfig">
+            <summary>
+            Firsts the time configuration.
+            </summary>
+        </member>
         <member name="T:Estimation.WebApi.Infrastructure.ValidateModelAttribute">
             <summary>
             Validate model
