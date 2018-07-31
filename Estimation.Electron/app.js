@@ -8,6 +8,9 @@ const globalShortcut = electron.globalShortcut;
 
 const path = require('path');
 const url = require('url');
+var temp = require('temp'),
+    fs = require('fs'),
+    util = require('util');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,9 +20,8 @@ let splashScreen;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        //icon: path.join(__dirname, './/assets//icons/icon.png')
         webPreferences: {
-            plugins: true
+            devTools: true
         }
     });
 
@@ -42,8 +44,67 @@ function createWindow() {
     });
     
     globalShortcut.register('CommandOrControl+R', function () {
-        mainWindow.reload()
+        mainWindow.reload();
     });
+
+    globalShortcut.register('F12', function () {
+        mainWindow.webContents.openDevTools();
+    });
+
+    mainWindow.webContents.on('new-window',
+        (event, url, frameName, disposition, options, additionalFeatures) => {
+            event.preventDefault();
+            if (url.startsWith('blob')) {
+                Object.assign(options,
+                    {
+                        title: 'Preview',
+                        modal: true,
+                        parent: mainWindow,
+                        extraHeaders: 'pragma: no-cache\n',
+                        show: false
+                    });
+                event.newGuest = new BrowserWindow(options);
+                event.newGuest.on('closed', function () {
+                    event.newGuest = null;
+                });
+                temp.track();
+                temp.mkdir('previewPdf',
+                    function(err, dirPath) {
+                        var inputPath = path.join(dirPath, 'preview.pdf');
+                        var willDownloadAction = function (downloadEvent, item, webContents) {
+                            item.setSavePath(inputPath);
+                            item.once('done',
+                                (doneEvent, state) => {
+                                    if (state === 'completed') {
+                                        event.newGuest.close();
+                                        Object.assign(options,
+                                            {
+                                                title: 'Preview',
+                                                modal: true,
+                                                parent: mainWindow,
+                                                width: 800,
+                                                height: 800,
+                                                extraHeaders: 'pragma: no-cache\n',
+                                                webPreferences: {
+                                                    plugins: true
+                                                }
+                                            });
+                                        event.newGuest = new BrowserWindow(options);
+                                        event.newGuest.loadURL(inputPath);
+                                        event.newGuest.maximize();
+                                    } else {
+                                        console.log(`Download failed: ${state}`);
+                                    }
+                                });
+                        };
+                        event.newGuest.webContents.session.once('will-download', willDownloadAction);
+
+                        event.newGuest.loadURL(url);
+                    });
+            } else {
+                console.log('New windows from not blob');
+            }
+        });
 
     // Start with full screen.
     mainWindow.maximize();
@@ -52,7 +113,8 @@ function createWindow() {
 function createSplashScreen() {
     // Create the browser window.
     splashScreen = new BrowserWindow({
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
+        frame: false
     });
 
     // and load the index.html of the app.

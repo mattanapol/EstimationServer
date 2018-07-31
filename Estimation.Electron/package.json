@@ -12,11 +12,13 @@
     "electron-icon-maker": "0.0.4"
   },
   "dependencies": {
-    "angular": "^1.6.1"
+    "angular": "^1.6.1",
+    "temp": "^0.8.3"
   },
   "scripts": {
     "start": "electron .",
-    "dist": "build"
+    "dist": "build",
+    "pack": "electron-builder --dir"
   },
   "build": {
     "appId": "Estimation",
