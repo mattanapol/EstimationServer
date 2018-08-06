@@ -110,5 +110,13 @@ namespace Estimation.DataAccess.Models
         /// Ceiling summary up to n place.
         /// </summary>
         public int CeilingSummary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the scope of work group.
+        /// </summary>
+        /// <value>
+        /// The scope of work group.
+        /// </value>
+        public IEnumerable<ProjectScopeOfWorkGroupDb> ScopeOfWorkGroups { get; set; }
     }
 }

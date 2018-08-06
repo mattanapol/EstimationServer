@@ -33,6 +33,22 @@ namespace Estimation.DataAccess
         public DbSet<ProjectMaterialDb> Material { get; set; }
 
         /// <summary>
+        /// Gets or sets the scope of work.
+        /// </summary>
+        /// <value>
+        /// The scope of work.
+        /// </value>
+        //public DbSet<ProjectScopeOfWorkDb> ScopeOfWork { get; set; }
+
+        /// <summary>
+        /// Gets or sets the scope of work group.
+        /// </summary>
+        /// <value>
+        /// The scope of work group.
+        /// </value>
+        //public DbSet<ProjectScopeOfWorkGroupDb> ScopeOfWorkGroup { get; set; }
+
+        /// <summary>
         /// Project database context
         /// </summary>
         /// <param name="connectionString"></param>
@@ -51,6 +67,8 @@ namespace Estimation.DataAccess
             modelBuilder.ApplyConfiguration(new ProjectInfoEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialGroupEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectMaterialEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProjectScopeOfWorkEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProjectScopeOfWorkGroupEntityTypeConfiguration());
         }
     }
 }

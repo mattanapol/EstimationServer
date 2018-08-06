@@ -33,7 +33,8 @@ namespace Estimation.Common.AutoMapper.Profiles
                     opts => opts.MapFrom(src => src.Transportation.Percentage))
                 .ForMember(dest => dest.TransportationIsUsePercentage,
                     opts => opts.MapFrom(src => src.Transportation.IsUsePercentage))
-                .ForMember(dest => dest.MaterialGroups, opts => opts.Ignore());
+                .ForMember(dest => dest.MaterialGroups, opts => opts.Ignore())
+                .ForMember(dest => dest.ScopeOfWorkGroups, opts => opts.Ignore());
             CreateMap<ProjectInfoDb, ProjectInfo>()
                 .ForMember(dest => dest.Miscellaneous, opts => opts.MapFrom(src => new Cost() { Percentage = src.MiscellaneousPercentage, Manual = src.MiscellaneousManual, IsUsePercentage = src.MiscellaneousIsUsePercentage }))
                 .ForMember(dest => dest.Transportation, opts => opts.MapFrom(src => new Cost() { Percentage = src.TransportationPercentage, Manual = src.TransportationManual, IsUsePercentage = src.TransportationIsUsePercentage }));
