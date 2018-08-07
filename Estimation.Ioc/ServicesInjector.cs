@@ -31,6 +31,7 @@ namespace Estimation.Ioc
             services.AddScoped<IPdfService, PdfService>();
             services.AddScoped<IGroupSortingService, GroupSortingService>();
             services.AddScoped<IExportProjectService, ExportProjectService>();
+            services.AddScoped<IProjectScopeService, ProjectScopeService>();
         }
 
         private static void InjectConfigurationServices(IServiceCollection services)

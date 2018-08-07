@@ -1,0 +1,28 @@
+﻿Electrical incoming work
+Electrical incoming fee
+Telephone incoming work
+Telephone incoming fee
+Substation
+Emergency generator
+Special power supply
+General feeder
+General panel board
+Production feeder
+Production panel board
+Lighting and Receptacle power supply
+General power supply (A/C, V/T, SS, pump, crane, etc
+Production power supply
+Lighting fixture
+Receptacle
+Outdoor lighting
+Emergency lighting
+Emergency exit sign lighting
+Fire alarm system
+Public address and Paging system
+Telephone system
+LAN system
+MATV system
+CCTV system
+Lightning protection system
+Security system
+Central monitoring and Control system

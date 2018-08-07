@@ -1,0 +1,32 @@
+﻿Water incoming work
+Water incoming fee
+Water supply work
+Drainage connection work
+Drainage work
+Sanitary fixture work
+Kitchen equipment & LPG supply work
+Fire protection work
+Fire extinguisher
+Septic tank
+Water cooler
+Air conditioning work
+Ventilation work
+Automatic control work
+Water treatment work
+Waste water treatment work
+Compressed air work
+Cooling water work
+Chilled water work
+Boiler work
+Scrubber system
+Gas system
+Vacuum system
+Clean room system
+Air shower
+Pass box
+Production exhaust work
+Secondary work for production M/C
+RO system
+Lift work
+Crane work
+Civil work for M&E
