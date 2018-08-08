@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Estimation.Domain.Models;
 
 namespace Estimation.Interface
@@ -21,6 +22,6 @@ namespace Estimation.Interface
         /// </summary>
         /// <param name="projectScopeOfWorkGroup">The project scope of work group.</param>
         /// <returns></returns>
-        byte[] GetProjectScopeOfWorkReport(ProjectScopeOfWorkGroup projectScopeOfWorkGroup);
+        Task<byte[]> GetProjectScopeOfWorkReport(ProjectScopeOfWorkGroup projectScopeOfWorkGroup);
     }
 }

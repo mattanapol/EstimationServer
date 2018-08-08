@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Estimation.Domain.Models;
 using Estimation.Interface;
+using Estimation.Services.Helpers;
+using HtmlAgilityPack;
+using Kaewsai.HtmlToPdf.Domain;
 
 namespace Estimation.Services
 {
@@ -17,9 +21,13 @@ namespace Estimation.Services
 
         private string MechanicScopeOfWorkTemplatePath => @".\ProgramData\ScopeOfWork_Mechanical.txt";
 
-        public ProjectScopeService()
-        {
+        private string ScopeOfWorkFormPath => "Forms/ScopeOfWork.html";
 
+        private readonly IPdfService _pdfService;
+
+        public ProjectScopeService(IPdfService pdfService)
+        {
+            _pdfService = pdfService ?? throw new ArgumentNullException(nameof(pdfService));
         }
 
         /// <inheritdoc />
@@ -41,9 +49,17 @@ namespace Estimation.Services
         }
 
         /// <inheritdoc />
-        public byte[] GetProjectScopeOfWorkReport(ProjectScopeOfWorkGroup projectScopeOfWorkGroup)
+        public async Task<byte[]> GetProjectScopeOfWorkReport(ProjectScopeOfWorkGroup projectScopeOfWorkGroup)
         {
-            return null;
+            string htmlTemplate = File.ReadAllText(ScopeOfWorkFormPath);
+            var html = new HtmlDocument();
+            html.LoadHtml(htmlTemplate);
+            var root = html.DocumentNode;
+
+            HtmlParser.ParseHtmlNodeByClass(root, projectScopeOfWorkGroup);
+
+            var printOrder = new PrintOrderRequest(){IsPortrait = true, Paper = PaperKind.A4};
+            return await _pdfService.ExportProjectToPdf(new string[]{ root.OuterHtml }, printOrder);
         }
 
         private ProjectScopeOfWorkGroup GetElectricProjectScopeTemplate()

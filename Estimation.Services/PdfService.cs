@@ -24,7 +24,7 @@ namespace Estimation.Services
         /// <param name="htmls"></param>
         /// <param name="exportRequest"></param>
         /// <returns></returns>
-        public async Task<byte[]> ExportProjectToPdf(IEnumerable<string> htmls, ProjectExportRequest exportRequest)
+        public async Task<byte[]> ExportProjectToPdf(IEnumerable<string> htmls, PrintOrderRequest exportRequest)
         {
             PdfGeneratorInputContent pdfContents = new PdfGeneratorInputContent(htmls)
             {

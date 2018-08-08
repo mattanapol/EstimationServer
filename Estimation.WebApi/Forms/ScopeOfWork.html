@@ -1,10 +1,180 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <style>
+        /*For print tables*/
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group
+        }
+
+        tr {
+            page-break-inside: avoid;
+        }
+
+        body {
+            font-family: AngsanaUPC, MS Sans Serif;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: none;
+            border-bottom: none;
+        }
+
+            .content-table tfoot td, .content-table tfoot tr {
+                height: 0px;
+                padding: 0px;
+                border-bottom: none;
+                border-top: 1px solid black;
+            }
+
+            .content-table tr {
+                border-top: 1px solid gray;
+            }
+
+                .content-table tr + tr {
+                    border-top: 1px solid gray;
+                }
+
+            .content-table td {
+                border-left: 1px solid black;
+                font-size: 13pt;
+                padding: 3pt 5pt 3pt 5pt;
+                word-wrap: break-word;
+            }
+
+                .content-table td + td {
+                    border-left: 1px solid gray;
+                }
+
+                .content-table td:first-child {
+                    border-left: 1px solid black;
+                }
+
+                .content-table td:last-child {
+                    border-right: 1px solid black;
+                }
+
+            .content-table th {
+                border-left: 1px solid black;
+                text-align: center;
+                padding: 4pt 0pt 4pt 0pt;
+                font-size: 14pt;
+                font-weight: bold;
+            }
+
+                .content-table th + th {
+                    border-left: 1px solid gray;
+                }
+
+                .content-table th:first-child {
+                    border-left: 1px solid black;
+                }
+
+                .content-table th:last-child {
+                    border-right: 1px solid black;
+                }
+
+            .content-table thead tr:first-child {
+                border-top: 1px solid black;
+            }
+
+            .content-table thead tr:last-child {
+                border-bottom: 1px solid black;
+            }
+
+            .content-table .grand-total-row {
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+
+            .content-table .section-row {
+                border-bottom: 1px solid gray;
+            }
+
+            .content-table .subtotal {
+                border-bottom: 1px solid gray;
+            }
+
+        .header {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 15pt 0pt 15pt 0pt;
+        }
+
+            .header p {
+                margin: 5pt 0pt 5pt 0pt;
+            }
+
+        .text-align-right {
+            text-align: right;
+        }
+
+        .text-align-left {
+            text-align: left;
+        }
+
+        .text-align-center {
+            text-align: center;
+        }
+
+        .scope-of-work[IsInclude="True"] > #included:after {
+            content: "O"
+        }
+
+        .scope-of-work[IsInclude="False"] > #excluded:after {
+            content: "O"
+        }
+    </style>
 </head>
 <body>
-
+    <div class="scope-of-work-group template">
+        <div class="header scope-of-work-group contents">
+            <p style="text-transform: uppercase">##MaterialType## SCOPE OF WORK</p>
+        </div>
+        <div class="header">
+            <table class="full-width scope-of-work-group contents">
+                <tr>
+                    <td class="text-align-left"></td>
+                    <td class="text-align-right">Date: ##DATE##</td>
+                </tr>
+            </table>
+        </div>
+        <table class="content-table">
+            <thead>
+                <tr class="row-header">
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Included</th>
+                    <th>Excluded</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class ="scope-of-work template contents">
+                    <td class="text-align-center">##Order##</td>
+                    <td class="text-align-left">##Description##</td>
+                    <td class="text-align-center" id="included"></td>
+                    <td class="text-align-center" id="excluded"></td>
+                    <td class="text-align-center">##Remarks##</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </body>
 </html>

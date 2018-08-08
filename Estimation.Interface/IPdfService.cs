@@ -14,6 +14,6 @@ namespace Estimation.Interface
         /// <param name="htmls"></param>
         /// <param name="exportRequest"></param>
         /// <returns></returns>
-        Task<byte[]> ExportProjectToPdf(IEnumerable<string> htmls,ProjectExportRequest exportRequest);
+        Task<byte[]> ExportProjectToPdf(IEnumerable<string> htmls, PrintOrderRequest exportRequest);
     }
 }

@@ -62,11 +62,11 @@ namespace Estimation.WebApi.Controllers
         /// <param name="projectScopeOfWorkGroupDto">The project scope of work group.</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult GetProjectScopeOfWorkReport([FromBody]ProjectScopeOfWorkGroupDto projectScopeOfWorkGroupDto)
+        public async Task<IActionResult> GetProjectScopeOfWorkReport([FromBody]ProjectScopeOfWorkGroupDto projectScopeOfWorkGroupDto)
         {
             var projectScopeOfWorkGroup =
                 TypeMappingService.Map<ProjectScopeOfWorkGroupDto, ProjectScopeOfWorkGroup>(projectScopeOfWorkGroupDto);
-            var result = _projectScopeService.GetProjectScopeOfWorkReport(projectScopeOfWorkGroup);
+            var result = await _projectScopeService.GetProjectScopeOfWorkReport(projectScopeOfWorkGroup);
             string contentType = "application/pdf";
             var dataSheetStreamResult = File(result, contentType, "ProjectScope.pdf");
             return dataSheetStreamResult;

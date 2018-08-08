@@ -374,11 +374,11 @@
             <param name="materialType">Type of the material.</param>
             <returns></returns>
         </member>
-        <member name="M:Estimation.WebApi.Controllers.ProjectsScopeController.GetProjectScopeOfWorkReport(Estimation.Domain.Models.ProjectScopeOfWorkGroup)">
+        <member name="M:Estimation.WebApi.Controllers.ProjectsScopeController.GetProjectScopeOfWorkReport(Estimation.Domain.Dtos.ProjectScopeOfWorkGroupDto)">
             <summary>
             Gets the project scope of work report.
             </summary>
-            <param name="projectScopeOfWorkGroup">The project scope of work group.</param>
+            <param name="projectScopeOfWorkGroupDto">The project scope of work group.</param>
             <returns></returns>
         </member>
         <member name="T:Estimation.WebApi.Controllers.ProjectSummaryController">
