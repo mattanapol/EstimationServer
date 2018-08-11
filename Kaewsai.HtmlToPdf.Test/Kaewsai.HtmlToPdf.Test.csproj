@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Libraries\libwkhtmltox.dll" Link="libwkhtmltox.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Kaewsai.HtmlToPdf\Kaewsai.HtmlToPdf.csproj" />
   </ItemGroup>
 
