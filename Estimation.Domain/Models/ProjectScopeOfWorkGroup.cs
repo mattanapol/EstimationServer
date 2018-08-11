@@ -39,7 +39,11 @@ namespace Estimation.Domain.Models
                 }
             };
 
-            return dataDict;
+            GeneralPrintable generalPrintable = new GeneralPrintable();
+            var generalDataDict = generalPrintable.GetDataDictionary();
+            var result = dataDict.Combine(generalDataDict);
+
+            return result;
         }
 
         public string TargetClass => "scope-of-work-group";
