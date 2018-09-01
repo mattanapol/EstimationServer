@@ -37,7 +37,7 @@ namespace Kaewsai.Utilities.Configurations
         /// <param name="connectionString">Connection string.</param>
         public ConfigurationDbContext(string connectionString) : base()
         {
-            _connectionString = connectionString;
+            _connectionString = Environment.ExpandEnvironmentVariables(connectionString);
         }
 
         /// <summary>
