@@ -53,7 +53,7 @@ namespace Kaewsai.HtmlToPdf
                     PagesCount = true,
                     HtmlContent = html,
                     WebSettings = {DefaultEncoding = "utf-8"},
-                    FooterSettings = { FontSize = 8, Center = "Page [page]/[toPage]", Spacing = 2.812 }
+                    FooterSettings = { FontSize = 8, Center = "Page [page] / [toPage]", Spacing = 2.812 }
                 });
             }
 
