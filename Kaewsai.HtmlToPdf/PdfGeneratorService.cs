@@ -4,6 +4,7 @@ using Kaewsai.HtmlToPdf.Domain;
 using Kaewsai.HtmlToPdf.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,14 +46,14 @@ namespace Kaewsai.HtmlToPdf
                 doc.GlobalSettings.PaperSize =
                     new PechkinPaperSize(inputContent.Width.ToString(), inputContent.Height.ToString());
             }
-
             foreach (string html in inputContent.Html)
             {
                 doc.Objects.Add(new ObjectSettings()
                 {
                     PagesCount = true,
                     HtmlContent = html,
-                    WebSettings = {DefaultEncoding = "utf-8"}
+                    WebSettings = {DefaultEncoding = "utf-8"},
+                    FooterSettings = { FontSize = 8, Center = "Page [page]/[toPage]", Spacing = 2.812 }
                 });
             }
 
