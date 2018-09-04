@@ -202,55 +202,55 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "MATERIALPRICE", MaterialPrice.ToString("N")
+                    "MATERIALPRICE", MaterialPrice.ToCostString()
                 },
                 {
-                    "NETPRICE", NetPrice.ToString("N")
+                    "NETPRICE", NetPrice.ToCostString()
                 },
                 {
-                    "LISTPRICE", ListPrice.ToString("N")
+                    "LISTPRICE", ListPrice.ToCostString()
                 },
                 {
-                    "ACCESSORIES", Accessories.ToString("N")
+                    "ACCESSORIES", Accessories.ToCostString()
                 },
                 {
-                    "FITTINGS", Fittings.ToString("N")
+                    "FITTINGS", Fittings.ToCostString()
                 },
                 {
-                    "PAINTING", Painting.ToString("N")
+                    "PAINTING", Painting.ToCostString()
                 },
                 {
-                    "SUPPORTING", Supporting.ToString("N")
+                    "SUPPORTING", Supporting.ToCostString()
                 },
                 {
-                    "INSTALLATION", Installation.ToString("N")
+                    "INSTALLATION", Installation.ToCostString()
                 },
                 {
-                    "TRANSPORTATION", Transportation.ToString("N")
+                    "TRANSPORTATION", Transportation.ToCostString()
                 },
                 {
-                    "MISCELLANEOUS", Miscellaneous.ToString("N")
+                    "MISCELLANEOUS", Miscellaneous.ToCostString()
                 },
                 {
-                    "GRANDTOTAL", GrandTotal.ToString("N")
+                    "GRANDTOTAL", GrandTotal.ToCostString()
                 },
                 {
-                    "NETGRANDTOTAL", NetGrandTotal.ToString("N")
+                    "NETGRANDTOTAL", NetGrandTotal.ToCostString()
                 },
                 {
-                    "MANPOWER", Manpower.ToString("N")
+                    "MANPOWER", Manpower.ToCostString()
                 },
                 {
-                    "TotalMaterialCost", TotalMaterialCost.ToString("N")
+                    "TotalMaterialCost", TotalMaterialCost.ToCostString()
                 },
                 {
-                    "subTotal", SubTotal.ToString("N")
+                    "subTotal", SubTotal.ToCostString()
                 },
                 {
-                    "NetSubTotal", NetSubTotal.ToString("N")
+                    "NetSubTotal", NetSubTotal.ToCostString()
                 },
                 {
-                    "NetMiscellaneous", NetMiscellaneous.ToString("N")
+                    "NetMiscellaneous", NetMiscellaneous.ToCostString()
                 }
             };
             var projectInfoDataDict = ProjectInfo?.GetDataDictionary();

@@ -150,7 +150,7 @@ namespace Estimation.Domain.Models
                     "SubmitBy", SubmitBy
                 },
                 {
-                    "LabourCost", LabourCost.ToString("N")
+                    "LabourCost", LabourCost.ToCostString()
                 },
                 {
                     "CurrencyUnit", CurrencyUnit

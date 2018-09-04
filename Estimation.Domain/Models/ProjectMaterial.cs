@@ -99,46 +99,46 @@ namespace Estimation.Domain.Models
             var dataDict = new Dictionary<string, string>
             {
                 {
-                    "LABOURCOST", LabourCost.ToString("N")
+                    "LABOURCOST", LabourCost.ToCostString()
                 },
                 {
-                    "INSTALLATION", Installation.ToString("N")
+                    "INSTALLATION", Installation.ToCostString()
                 },
                 {
                     "QUANTITY", Quantity.ToString()
                 },
                 {
-                    "TOTALCOST", TotalCost.ToString("N")
+                    "TOTALCOST", TotalCost.ToCostString()
                 },
                 {
-                    "TOTALNETCOST", TotalNetCost.ToString("N")
+                    "TOTALNETCOST", TotalNetCost.ToCostString()
                 },
                 {
-                    "TOTALOFFERPRICE", TotalOfferPrice.ToString("N")
+                    "TOTALOFFERPRICE", TotalOfferPrice.ToCostString()
                 },
                 {
-                    "TOTALNETPRICE", TotalNetPrice.ToString("N")
+                    "TOTALNETPRICE", TotalNetPrice.ToCostString()
                 },
                 {
-                    "TOTALLISTPRICE", TotalListPrice.ToString("N")
+                    "TOTALLISTPRICE", TotalListPrice.ToCostString()
                 },
                 {
-                    "TOTALACCESSORY", TotalAccessory.ToString("N")
+                    "TOTALACCESSORY", TotalAccessory.ToCostString()
                 },
                 {
-                    "TOTALFITTING", TotalFitting.ToString("N")
+                    "TOTALFITTING", TotalFitting.ToCostString()
                 },
                 {
-                    "TOTALSUPPORT", TotalSupport.ToString("N")
+                    "TOTALSUPPORT", TotalSupport.ToCostString()
                 },
                 {
-                    "TOTALPAINTING", TotalPainting.ToString("N")
+                    "TOTALPAINTING", TotalPainting.ToCostString()
                 },
                 {
-                    "TOTALMANPOWER", TotalManpower.ToString("N")
+                    "TOTALMANPOWER", TotalManpower.ToCostString()
                 },
                 {
-                    "TotalOfferPriceAndInstallation", TotalOfferPriceAndInstallation.ToString("N")
+                    "TotalOfferPriceAndInstallation", TotalOfferPriceAndInstallation.ToCostString()
                 },
             };
 
