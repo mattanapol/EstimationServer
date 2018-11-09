@@ -136,51 +136,51 @@
             display: none;
         }
 
-        .group-summary[painting="0.00"] > #painting {
+        .group-summary[painting=""] > #painting {
             display: none;
         }
 
-        .group-summary[supporting="0.00"] > #supporting {
+        .group-summary[supporting=""] > #supporting {
             display: none;
         }
 
-        .group-summary[installation="0.00"] > #installation {
+        .group-summary[installation=""] > #installation {
             display: none;
         }
 
-        .group-summary[transportation="0.00"] > #transportation {
+        .group-summary[transportation=""] > #transportation {
             display: none;
         }
 
-        .group-summary[miscellaneous="0.00"] > #miscellaneous {
+        .group-summary[miscellaneous=""] > #miscellaneous {
             display: none;
         }
 
-        .group-summary[subtotal="0.00"] > #subtotal {
+        .group-summary[subtotal=""] > #subtotal {
             display: none;
         }
 
-        .sub-group-summary[painting="0.00"] > #painting {
+        .sub-group-summary[painting=""] > #painting {
             display: none;
         }
 
-        .sub-group-summary[supporting="0.00"] > #supporting {
+        .sub-group-summary[supporting=""] > #supporting {
             display: none;
         }
 
-        .sub-group-summary[installation="0.00"] > #installation {
+        .sub-group-summary[installation=""] > #installation {
             display: none;
         }
 
-        .sub-group-summary[transportation="0.00"] > #transportation {
+        .sub-group-summary[transportation=""] > #transportation {
             display: none;
         }
 
-        .sub-group-summary[miscellaneous="0.00"] > #miscellaneous {
+        .sub-group-summary[miscellaneous=""] > #miscellaneous {
             display: none;
         }
 
-        .sub-group-summary[subtotal="0.00"] > #subtotal {
+        .sub-group-summary[subtotal=""] > #subtotal {
             display: none;
         }
 
@@ -308,7 +308,7 @@
                         <td class="text-align-left"></td>
                         <td class="text-align-left">Supporting Materials</td>
                         <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
+                        <td class="text-align-center">Lot</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-right">##SUPPORTING##</td>
                         <td class="text-align-center"></td>
@@ -320,7 +320,7 @@
                         <td class="text-align-left"></td>
                         <td class="text-align-left">Painting</td>
                         <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
+                        <td class="text-align-center">Lot</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-right">##PAINTING##</td>
                         <td class="text-align-center"></td>
@@ -332,7 +332,7 @@
                         <td class="text-align-left"></td>
                         <td class="text-align-left">Miscellaneous</td>
                         <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
+                        <td class="text-align-center">Lot</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-right">##MISCELLANEOUS##</td>
                         <td class="text-align-center"></td>
@@ -344,7 +344,7 @@
                         <td class="text-align-left"></td>
                         <td class="text-align-left">Transportation</td>
                         <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
+                        <td class="text-align-center">Lot</td>
                         <td class="text-align-center"></td>
                         <td class="text-align-right">##TRANSPORTATION##</td>
                         <td class="text-align-center"></td>
@@ -362,115 +362,127 @@
                         <td class="text-align-right subtotal">##GRANDTOTAL##</td>
                         <td class="text-align-left"></td>
                     </tr>
-                <tbody class="sub-group-summary template">
-                    <tr class="sub-group-summary contents">
-                        <td class="text-align-center">##GROUPCODE##</td>
-                        <td class="text-align-left">##GROUPNAME##</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-left">##REMARKS##</td>
-                    </tr>
-                    <tr class="material template contents">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left">##NAME## - ##DESCRIPTION##</td>
-                        <td class="text-align-right">##QUANTITY##</td>
-                        <td class="text-align-center">##UNIT##</td>
-                        <td class="text-align-right">##OFFERPRICE##</td>
-                        <td class="text-align-right">##TOTALOFFERPRICE##</td>
-                        <td class="text-align-right">##LabourCost##</td>
-                        <td class="text-align-right">##INSTALLATION##</td>
-                        <td class="text-align-right">##TotalOfferPriceAndInstallation##</td>
-                        <td class="text-align-left">##REMARK##</td>
-                    </tr>
-                    <tr>
+                    <tr class="hide-if-has-child">
                         <td class="text-align-center">&nbsp;</td>
                         <td class="text-align-left"></td>
                         <td class="text-align-center"></td>
                         <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
                         <td class="text-align-right"></td>
                         <td class="text-align-right"></td>
+                        <td class="text-align-right"></td>
+                        <td class="text-align-right"></td>
+                        <td class="text-align-right"></td>
                         <td class="text-align-left"></td>
                     </tr>
-                    <tr class="sub-group-summary contents" id="supporting">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left">Supporting Materials</td>
-                        <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##SUPPORTING##</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##SUPPORTING##</td>
-                        <td class="text-align-left"></td>
-                    </tr>
-                    <tr class="sub-group-summary contents" id="painting">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left">Painting</td>
-                        <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##PAINTING##</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##PAINTING##</td>
-                        <td class="text-align-left"></td>
-                    </tr>
-                    <tr class="sub-group-summary contents" id="miscellaneous">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left">Miscellaneous</td>
-                        <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##MISCELLANEOUS##</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##MISCELLANEOUS##</td>
-                        <td class="text-align-left"></td>
-                    </tr>
-                    <tr class="sub-group-summary contents" id="transportation">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left">Transportation</td>
-                        <td class="text-align-right">1</td>
-                        <td class="text-align-center">LOT</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##TRANSPORTATION##</td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-center"></td>
-                        <td class="text-align-right">##TRANSPORTATION##</td>
-                        <td class="text-align-left"></td>
-                    </tr>
-                    <tr class="sub-group-summary contents">
-                        <td class="text-align-left"></td>
-                        <td class="text-align-left"></td>
-                        <td class="text-align-center subtotal" colspan="3">Total of ##GROUPCODE##</td>
-                        <td class="text-align-right subtotal">##TotalMaterialCost##</td>
-                        <td class="text-align-right subtotal"></td>
-                        <td class="text-align-right subtotal">##INSTALLATION##</td>
-                        <td class="text-align-right subtotal">##GRANDTOTAL##</td>
-                        <td class="text-align-left"></td>
-                    </tr>
+                    <tbody class="sub-group-summary template">
+                        <tr class="sub-group-summary contents">
+                            <td class="text-align-center">##GROUPCODE##</td>
+                            <td class="text-align-left">##GROUPNAME##</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-left">##REMARKS##</td>
+                        </tr>
+                        <tr class="material template contents">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left">##NAME## - ##DESCRIPTION##</td>
+                            <td class="text-align-right">##QUANTITY##</td>
+                            <td class="text-align-center">##UNIT##</td>
+                            <td class="text-align-right">##OFFERPRICE##</td>
+                            <td class="text-align-right">##TOTALOFFERPRICE##</td>
+                            <td class="text-align-right">##LabourCost##</td>
+                            <td class="text-align-right">##INSTALLATION##</td>
+                            <td class="text-align-right">##TotalOfferPriceAndInstallation##</td>
+                            <td class="text-align-left">##REMARK##</td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-center">&nbsp;</td>
+                            <td class="text-align-left"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr class="sub-group-summary contents" id="supporting">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left">Supporting Materials</td>
+                            <td class="text-align-right">1</td>
+                            <td class="text-align-center">Lot</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##SUPPORTING##</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##SUPPORTING##</td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr class="sub-group-summary contents" id="painting">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left">Painting</td>
+                            <td class="text-align-right">1</td>
+                            <td class="text-align-center">Lot</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##PAINTING##</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##PAINTING##</td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr class="sub-group-summary contents" id="miscellaneous">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left">Miscellaneous</td>
+                            <td class="text-align-right">1</td>
+                            <td class="text-align-center">Lot</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##MISCELLANEOUS##</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##MISCELLANEOUS##</td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr class="sub-group-summary contents" id="transportation">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left">Transportation</td>
+                            <td class="text-align-right">1</td>
+                            <td class="text-align-center">Lot</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##TRANSPORTATION##</td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right">##TRANSPORTATION##</td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr class="sub-group-summary contents">
+                            <td class="text-align-left"></td>
+                            <td class="text-align-left"></td>
+                            <td class="text-align-center subtotal" colspan="3">Total of ##GROUPCODE##</td>
+                            <td class="text-align-right subtotal">##TotalMaterialCost##</td>
+                            <td class="text-align-right subtotal"></td>
+                            <td class="text-align-right subtotal">##INSTALLATION##</td>
+                            <td class="text-align-right subtotal">##GRANDTOTAL##</td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-center">&nbsp;</td>
+                            <td class="text-align-left"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-center"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-right"></td>
+                            <td class="text-align-left"></td>
+                        </tr>
+                    </tbody>
                 </tbody>
-                </tbody>
-                <tr>
-                    <td class="text-align-center">&nbsp;</td>
-                    <td class="text-align-left"></td>
-                    <td class="text-align-center"></td>
-                    <td class="text-align-center"></td>
-                    <td class="text-align-right"></td>
-                    <td class="text-align-right"></td>
-                    <td class="text-align-right"></td>
-                    <td class="text-align-right"></td>
-                    <td class="text-align-right"></td>
-                    <td class="text-align-left"></td>
-                </tr>
                 <tr class="material-type-group-summary contents material-type-total-row grand-total-row">
                     <td class="text-align-center"></td>
                     <td class="text-align-right"></td>
