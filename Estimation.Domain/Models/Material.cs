@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Estimation.Domain.Models
@@ -99,7 +100,7 @@ namespace Estimation.Domain.Models
                     "REMARK", Remark
                 },
                 {
-                    "UNIT", Unit
+                    "UNIT", Unit.ToTitleCase()
                 }
             };
 

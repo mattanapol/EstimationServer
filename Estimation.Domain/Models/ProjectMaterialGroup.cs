@@ -99,7 +99,7 @@ namespace Estimation.Domain.Models
                     "GROUPCODE", GroupCode
                 },
                 {
-                    "GROUPNAME", GroupName
+                    "GROUPNAME", GroupName.ToTitleCase()
                 },
                 {
                     "REMARKS", Remarks

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Estimation.Domain.Models
 {
@@ -54,10 +55,10 @@ namespace Estimation.Domain.Models
                     "CODE", CodeAsString
                 },
                 {
-                    "NAME", Name
+                    "NAME", Name.ToTitleCase()
                 },
                 {
-                    "DESCRIPTION", Description
+                    "DESCRIPTION", Description.ToTitleCase()
                 },
                 {
                     "TYPE", MaterialType
